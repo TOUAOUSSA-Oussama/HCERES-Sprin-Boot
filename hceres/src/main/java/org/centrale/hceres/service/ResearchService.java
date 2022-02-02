@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import lombok.Data;
 
-// permet de traiter la requete HTTP puis donner l'associer a la fonction qui va donner une reponse
+// permet de traiter la requete HTTP puis l'associer a la fonction de repository qui va donner une reponse
 @Data
 @Service
 public class ResearchService {

@@ -18,9 +18,9 @@ public class ResearchController {
 	private ResearchService rs;
 	
 	/**
-	 * pour un requete GET dans localhost/researchs => fournir la liste des chercheurs
+	 * pour une requete GET dans localhost/researchs => fournir la liste des chercheurs
 	 * le resultat est traduit automatiquement en JSON
-	 * @return
+	 * @return : liste des chercheurs
 	 */
 	@GetMapping("/researchs")
 	public Iterable<Researcher> getResearchers() {

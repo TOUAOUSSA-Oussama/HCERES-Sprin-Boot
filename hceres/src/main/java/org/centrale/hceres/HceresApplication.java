@@ -11,12 +11,6 @@ public class HceresApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(HceresApplication.class, args);
 	}
-	
-//	@Override
-//	public void run(String... args) throws Exception {
-//		Iterable<Researcher> researchs = researchRepo.findAll();
-//		researchs.forEach(System.out :: println);
-//	}
 
 }
 
