@@ -1,4 +1,4 @@
-package org.centrale.hceres.Controller;
+package org.centrale.hceres.controller;
 
 import org.centrale.hceres.model.Researcher;
 import org.centrale.hceres.service.ResearchService;
@@ -22,7 +22,7 @@ public class ResearchController {
 	 * le resultat est traduit automatiquement en JSON
 	 * @return : liste des chercheurs
 	 */
-	@GetMapping("/researchs")
+	@GetMapping("/Researchers")
 	public Iterable<Researcher> getResearchers() {
 		return rs.getResearchers();
 	}
