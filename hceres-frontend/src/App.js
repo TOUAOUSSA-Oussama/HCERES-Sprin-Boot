@@ -1,26 +1,33 @@
-import './App.css';
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Home from './Home'
-import Navigation from './Navigation'
-import About from './About'
-import Contact from './Contact';
-import Footer from './Footer';
-import Connection from './Connection';
+import React from 'react';
+import {GlobaleStyle} from './AppElements';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import Navbar from './components/Navbar/Navbar';
+import Home from './components/Home/Home';
+import Researcher from './components/Researcher/Researcher';
+import Activity from './components/Activity/Activity';
+import Footer from './components/Footer/Footer';
+import About from './components/About/About';
 
 function App() {
   return (
-    <Router>
-    <div>
-        <Navigation />
-        <Routes>
-          <Route path="/" element = {<Home/>} />
-          <Route path="/About" element = {<About/>} />
-          <Route path="/Contact" element = {<Contact/>} />
-          <Route path="/Connection" element = {<Connection/>} />
-        </Routes>
-        <Footer />
-    </div>
-    </Router>
+    <>
+      <Router>
+      <GlobaleStyle />
+
+      <Navbar />
+
+      <Routes>
+          <Route path='/Home' exact  element={<Home/>} />
+          <Route path='/Researcher' exact  element={<Researcher/>} />
+          <Route path='/Activity' exact  element={<Activity/>} />
+          <Route path='/About' exact  element={<About/>} />
+      </Routes> 
+
+      <Footer />
+
+      </Router>
+    </>
+
   );
 }
 
