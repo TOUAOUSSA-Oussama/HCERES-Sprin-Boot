@@ -1,5 +1,6 @@
 // Cette component est pour definir Home
-import '../../App.css';
+//import '../../App.css';
+import './Home.css';
 import React from 'react';
 import welcomImage from '../../assets/welcomImg.png';
 //import { HomeContainer,leftside,rightside } from './HomeElements';

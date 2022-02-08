@@ -1,12 +1,5 @@
-// Cette component est pour definir les styles liees a Home
-
-import styled  from 'styled-components';
-import { Link } from 'react-router-dom';
-import { Container } from '../../AppElements'
-
-// style pour la page home
-export const HomeContainer = styled(Container)`
-    border-color: rgb(7, 7, 6);
+.container1{
+    border-color: rgb(15, 15, 0);
     border-style: solid;
     width: 100vw;
     display: flex;
@@ -15,34 +8,38 @@ export const HomeContainer = styled(Container)`
     background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(0,0,0,1) 80%);
     height: 100vh;
     align-items: center;
-`
-export const leftside = styled(Container)`
+  }
+  
+  .left-side {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-`
-
-export const rightside = styled(Container)`
+  }
+  
+  .right-side {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-`
-export const title = styled.p`
+  }
+  
+  .title{
     font-family: Roboto;
     font-style: normal;
     font-weight: bold;
     font-size: 70px;
     line-height: 112px;
-`
-export const pg = styled.pg`
+  }
+  
+  .pg {
     font-family: Roboto;
     font-style: normal;
     font-weight: normal;
     font-size: 30px;
     line-height: 84px;
-`
-export const labo = styled(Link)`
+  }
+  
+  .labo {
     width: 650px;
-`
+  }
+  

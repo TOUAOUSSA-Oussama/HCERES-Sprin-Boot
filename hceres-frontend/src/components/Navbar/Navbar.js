@@ -24,7 +24,7 @@ const Navbar = () => {
 
     const handleClick = () => setClick(!click);
 
-    // pour n'afficher le grand boutton que pour les garndes ecrans
+    // pour n'afficher le grand boutton que pour les grandes ecrans
     const showButton = () => {
         if (window.innerWidth <= 960) {
             setButton(false);
