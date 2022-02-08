@@ -17,7 +17,7 @@ export default function Activity() {
             </div>
             <div className='activityList'>
                 <ul>
-                    <li>
+                    <li onClick={setShowForm}>
                         <a>Education</a>
                     </li>
                     <li>
@@ -31,5 +31,6 @@ export default function Activity() {
                     </li>
                 </ul>
             </div>
+            {showForm && (<Education onClick = {showForm}> </Education>)}
         </div>)
 }
