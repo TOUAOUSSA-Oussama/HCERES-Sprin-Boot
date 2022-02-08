@@ -50,9 +50,13 @@ outline: 0;
 border: 1px solid #ccc;
 }
 
+.input-container:focus {
+    border: 1px solid #1180ff;
+    box-shadow: 0 0 0 0.2rem rgba(47, 161, 255, 0.25);
+}
+
 .textarea {
     resize: vertical;
-    border: 1px solid #525252;
     width: 100%;
     padding: 15px;
     border: 1px solid #ccc;

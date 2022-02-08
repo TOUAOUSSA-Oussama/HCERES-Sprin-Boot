@@ -1,0 +1,71 @@
+.activity-container {
+    display: block;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    flex-direction: column;
+    height: fit-content;
+}
+
+.header {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    align-items: center;
+    text-align: center;
+    padding: 15px;
+}
+
+.header h1 {
+    font-size: 40px;
+}
+.header h3 {
+    padding-top: 20px;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.activityList {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.activityList ul {
+    list-style: none;
+    width: 40vw;
+    margin-top: 50px;
+}
+
+.activityList ul li {
+    display: flex;
+    align-items: center;
+    background-color: #cfcfcf;
+    margin-bottom: 7px;
+    padding: 10px;
+}
+
+.activityList ul :hover {
+    background-color: #08d ;
+    cursor: pointer;
+}
+.activityList ul li span div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: solid 3px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border-color: black;
+    margin-right: 12px;
+}
+
+.activityList ul li span a {
+    font-size: 20px;
+    text-decoration: none;
+    color: black;
+}
+
+.activityList ul li span a:hover {
+    text-decoration: underline;
+}
