@@ -1,9 +1,10 @@
 import React from 'react';
+import welcomImage from '../../assets/welcomImg.png';
 
 const Home = () => {
     return (
         <div>
-            je suis Home
+            Je suis page d'acceuil
         </div>
     );
 };
