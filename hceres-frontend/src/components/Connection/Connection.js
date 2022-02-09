@@ -9,7 +9,7 @@ export default function Login() {
     <div className="login">
     <form className="login_form">
       <div className="header_login">
-      <Link to="/Home"><img src={Logo} alt="Logo" width="100"/></Link>
+      <img src={Logo} alt="Logo" width="100"/>
           <h1> Connexion </h1>
       </div>
       
@@ -22,7 +22,7 @@ export default function Login() {
         <input type="password" placeholder="Mot de passe"/>
       </label>
       <div className="button_login">
-      <input type="submit" value="Connexion"/>
+      <Link to="/Home"><input type="submit" value="Connexion"/></Link>
       </div>
     </form>
     </div>

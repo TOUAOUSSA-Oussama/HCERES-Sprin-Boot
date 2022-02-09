@@ -15,14 +15,14 @@ function App() {
       <Router>
       <GlobaleStyle />
 
-      <Navbar />
+      {/* <Navbar /> */}
 
       <Routes>
+          <Route path='' exact  element={<Connection/>} />
           <Route path='/Home' exact  element={<Home/>} />
           <Route path='/Researcher' exact  element={<Researcher/>} />
           <Route path='/Activity' exact  element={<Activity/>} />
           <Route path='/About' exact  element={<About/>} />
-          <Route path='/Connection' exact  element={<Connection/>} />
       </Routes> 
 
       <Footer />

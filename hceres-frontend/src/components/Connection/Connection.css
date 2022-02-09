@@ -54,7 +54,7 @@
     height: 60vh;
     align-items: center;
     text-align: center;
-    border: 1px solid;
+    border-radius: 1%;
     box-shadow: 0px 0px 5px 2px grey;
     width: 30vw;
 }
@@ -64,7 +64,6 @@
     justify-content: center;
     background-color: #fff;
     padding-bottom: 1.5em;
-    border-bottom-left-radius: var(--loginBorderRadius);
-    border-bottom-right-radius: var(--loginBorderRadius);
+    border-radius: 1%;
 
   }
