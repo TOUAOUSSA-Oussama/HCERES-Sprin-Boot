@@ -63,8 +63,8 @@ public class Team implements Serializable {
     @Column(name = "team_last_report")
     @Temporal(TemporalType.DATE)
     private Date teamLastReport;
-    @ManyToMany(mappedBy = "teamCollection")
-    private Collection<Activity> activityCollection;
+//    @ManyToMany(mappedBy = "teamCollection")
+//    private Collection<Activity> activityCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "teamId")
     private Collection<TeamReferent> teamReferentCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "team")
@@ -169,21 +169,21 @@ public class Team implements Serializable {
         this.teamLastReport = teamLastReport;
     }
 
-    /**
-     *
-     * @return
-     */
-    public Collection<Activity> getActivityCollection() {
-        return activityCollection;
-    }
-
-    /**
-     *
-     * @param activityCollection
-     */
-    public void setActivityCollection(Collection<Activity> activityCollection) {
-        this.activityCollection = activityCollection;
-    }
+//    /**
+//     *
+//     * @return
+//     */
+//    public Collection<Activity> getActivityCollection() {
+//        return activityCollection;
+//    }
+//
+//    /**
+//     *
+//     * @param activityCollection
+//     */
+//    public void setActivityCollection(Collection<Activity> activityCollection) {
+//        this.activityCollection = activityCollection;
+//    }
 
     /**
      *

@@ -7,7 +7,8 @@
  * Avril 2021
  * L LETERTRE, S LIMOUX, JY MARTIN
  * -------------------------------------------------------------------------------- */
-package org.centrale.hceres.model;
+/*
+ package org.centrale.hceres.model;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -29,12 +30,9 @@ import javax.validation.constraints.Size;
  *
  * @author kwyhr
  */
+/*
 @Entity
 @Table(name = "education_involvment")
-@NamedQueries({
-    @NamedQuery(name = "EducationInvolvment.findAll", query = "SELECT e FROM EducationInvolvment e"),
-    @NamedQuery(name = "EducationInvolvment.findByEducationInvolvmentId", query = "SELECT e FROM EducationInvolvment e WHERE e.educationInvolvmentId = :educationInvolvmentId"),
-    @NamedQuery(name = "EducationInvolvment.findByEducationInvolvmentName", query = "SELECT e FROM EducationInvolvment e WHERE e.educationInvolvmentName = :educationInvolvmentName")})
 public class EducationInvolvment implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -43,17 +41,18 @@ public class EducationInvolvment implements Serializable {
     @Basic(optional = false)
     @Column(name = "education_involvment_id")
     private Integer educationInvolvmentId;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 256)
     @Column(name = "education_involvment_name")
     private String educationInvolvmentName;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "educationInvolvmentId")
-    private Collection<Education> educationCollection;
-
+    
+    // constructeurs :
     /**
      *
      */
+    /*
     public EducationInvolvment() {
     }
 
@@ -61,6 +60,7 @@ public class EducationInvolvment implements Serializable {
      *
      * @param educationInvolvmentId
      */
+    /*
     public EducationInvolvment(Integer educationInvolvmentId) {
         this.educationInvolvmentId = educationInvolvmentId;
     }
@@ -70,15 +70,18 @@ public class EducationInvolvment implements Serializable {
      * @param educationInvolvmentId
      * @param educationInvolvmentName
      */
+    /*
     public EducationInvolvment(Integer educationInvolvmentId, String educationInvolvmentName) {
         this.educationInvolvmentId = educationInvolvmentId;
         this.educationInvolvmentName = educationInvolvmentName;
     }
-
+    
+    // getters et setters :
     /**
      *
      * @return
      */
+    /*
     public Integer getEducationInvolvmentId() {
         return educationInvolvmentId;
     }
@@ -87,6 +90,7 @@ public class EducationInvolvment implements Serializable {
      *
      * @param educationInvolvmentId
      */
+    /*
     public void setEducationInvolvmentId(Integer educationInvolvmentId) {
         this.educationInvolvmentId = educationInvolvmentId;
     }
@@ -95,6 +99,7 @@ public class EducationInvolvment implements Serializable {
      *
      * @return
      */
+    /*
     public String getEducationInvolvmentName() {
         return educationInvolvmentName;
     }
@@ -103,30 +108,17 @@ public class EducationInvolvment implements Serializable {
      *
      * @param educationInvolvmentName
      */
+    /*
     public void setEducationInvolvmentName(String educationInvolvmentName) {
         this.educationInvolvmentName = educationInvolvmentName;
     }
 
-    /**
-     *
-     * @return
-     */
-    public Collection<Education> getEducationCollection() {
-        return educationCollection;
-    }
-
-    /**
-     *
-     * @param educationCollection
-     */
-    public void setEducationCollection(Collection<Education> educationCollection) {
-        this.educationCollection = educationCollection;
-    }
 
     /**
      *
      * @return
      */
+    /*
     @Override
     public int hashCode() {
         int hash = 0;
@@ -139,6 +131,7 @@ public class EducationInvolvment implements Serializable {
      * @param object
      * @return
      */
+    /*
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
@@ -156,9 +149,11 @@ public class EducationInvolvment implements Serializable {
      *
      * @return
      */
+    /*
     @Override
     public String toString() {
         return "org.centrale.hceres.items.EducationInvolvment[ educationInvolvmentId=" + educationInvolvmentId + " ]";
     }
     
 }
+*/

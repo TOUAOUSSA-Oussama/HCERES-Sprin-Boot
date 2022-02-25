@@ -15,10 +15,10 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
+//import javax.persistence.JoinColumn;
+//import javax.persistence.NamedQueries;
+//import javax.persistence.NamedQuery;
+//import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -31,13 +31,15 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "sr_award")
+/*
 @NamedQueries({
     @NamedQuery(name = "SrAward.findAll", query = "SELECT s FROM SrAward s"),
     @NamedQuery(name = "SrAward.findByIdActivity", query = "SELECT s FROM SrAward s WHERE s.idActivity = :idActivity"),
     @NamedQuery(name = "SrAward.findByAwardeeName", query = "SELECT s FROM SrAward s WHERE s.awardeeName = :awardeeName"),
     @NamedQuery(name = "SrAward.findByAwardDate", query = "SELECT s FROM SrAward s WHERE s.awardDate = :awardDate"),
     @NamedQuery(name = "SrAward.findByDescription", query = "SELECT s FROM SrAward s WHERE s.description = :description")})
-public class SrAward implements Serializable {
+*/
+    public class SrAward implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -54,9 +56,9 @@ public class SrAward implements Serializable {
     @Size(max = 2147483647)
     @Column(name = "description")
     private String description;
-    @JoinColumn(name = "id_activity", referencedColumnName = "id_activity", insertable = false, updatable = false)
-    @OneToOne(optional = false)
-    private Activity activity;
+    //@JoinColumn(name = "id_activity", referencedColumnName = "id_activity", insertable = false, updatable = false)
+    //@OneToOne(optional = false)
+    //private Activity activity;
 
     /**
      *
@@ -134,22 +136,6 @@ public class SrAward implements Serializable {
      */
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Activity getActivity() {
-        return activity;
-    }
-
-    /**
-     *
-     * @param activity
-     */
-    public void setActivity(Activity activity) {
-        this.activity = activity;
     }
 
     /**

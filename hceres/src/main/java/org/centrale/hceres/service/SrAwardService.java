@@ -49,9 +49,8 @@ public class SrAwardService {
 	 * @return : l'elemt ajouter a la base de donnees
 	 */
 	public SrAward saveAward(SrAward awardTosave) {
-		
 		// generer une id qui n'existe pas avant : 
-		Integer idAward = awardRepo.findAll().size() + 2;
+		Integer idAward = awardRepo.findAll().size()-1;
 		awardTosave.setIdActivity(idAward);
 		// ajouter award :
 		SrAward saveAward = awardRepo.save(awardTosave);
