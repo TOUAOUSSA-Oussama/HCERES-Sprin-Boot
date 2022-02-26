@@ -7,7 +7,7 @@
  * Avril 2021
  * L LETERTRE, S LIMOUX, JY MARTIN
  * -------------------------------------------------------------------------------- */
-package org.centrale.hceres.model;
+package org.centrale.hceres.items;
 
 import java.io.Serializable;
 import java.util.Date;

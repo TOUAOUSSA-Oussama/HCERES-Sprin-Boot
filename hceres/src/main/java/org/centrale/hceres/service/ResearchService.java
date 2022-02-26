@@ -1,6 +1,6 @@
 package org.centrale.hceres.service;
 
-import org.centrale.hceres.model.Researcher;
+import org.centrale.hceres.items.Researcher;
 import org.centrale.hceres.repository.ResearchRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
