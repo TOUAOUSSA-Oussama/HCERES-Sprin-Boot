@@ -2,35 +2,18 @@ import React from 'react';
 import './Education.css';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { useNavigate  } from "react-router-dom";
-import axios from 'axios';
 
 function Education() {
-  const [researcherId, setChercheur] = React.useState("");
-  const [educationCourseName, setCours] = React.useState("");
-  const [educationFormation, setFormation] = React.useState("");
-  const [educationDescription, setDescritption] = React.useState("");
-  const [educationInvolvmentText, setEducationInvolvmentText] = React.useState("");
-  const [educationLevelText, setEducationLevelText] = React.useState("");
-  const [educationCompletion, setDate] = React.useState("");
+  const [chercheur, setChercheur] = React.useState("");
+  const [cours, setCours] = React.useState("");
+  const [formation, setFormation] = React.useState("");
+  const [description, setDescritption] = React.useState("");
+  const [date, setDate] = React.useState(null);
 
-  const navigate  = useNavigate();
-  const faireRedirection = () => { 
-    navigate('/Activity');
+  const handleSubmit = (event) => {
+    console.log("Submitted");
+    event.preventDefault();
   }
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const blog = { researcherId, educationCourseName,  educationCompletion, educationFormation, educationDescription, educationInvolvmentText, educationLevelText  };
- 
-    fetch("http://localhost:9000/AddEducation", {
-      mode: 'no-cors',
-      method: "POST",
-      body: blog,
-    }).then(() => {
-      navigate('/Activity');
-    });
-  };
 
   return (
     <div className='form-container'>
@@ -43,9 +26,9 @@ function Education() {
         <input
           placeholder='Nom'
           className='input-container'
-          name="researcherId"
+          name="chercheur"
           type="chercheur"
-          value={researcherId}
+          value={chercheur}
           onChange={e => setChercheur(e.target.value)}
           required />
 
@@ -56,9 +39,9 @@ function Education() {
         <input
           placeholder='Cours'
           className='input-container'
-          name="educationCourseName"
+          name="cours"
           type="cours"
-          value={educationCourseName}
+          value={cours}
           onChange={e => setCours(e.target.value)}
           required />
 
@@ -66,12 +49,10 @@ function Education() {
         <label className='label'>
           Date de completion
         </label>
-        <input
+        <DatePicker
           className='datePicker'
-          name="educationCompletion"
-          type="date"
-          selected={educationCompletion}
-          onChange={e => setDate(e.target.value)}
+          selected={date}
+          onChange={date => setDate(date)}
           withPortal
           placeholderText="Choix de date" />
 
@@ -82,9 +63,9 @@ function Education() {
         <input
           placeholder='Formation'
           className='input-container'
-          name="educationFormation"
+          name="formation"
           type="formation"
-          value={educationFormation}
+          value={formation}
           onChange={e => setFormation(e.target.value)}
           required />
 
@@ -94,34 +75,10 @@ function Education() {
         <textarea
           placeholder='Description'
           className='textarea'
-          name="educationDescription"
+          name="description"
           type="description"
-          value={educationDescription}
+          value={description}
           onChange={e => setDescritption(e.target.value)}
-          required />
-
-        <label className='label' >
-          education Involvment
-        </label>
-        <textarea
-          placeholder='Description'
-          className='textarea'
-          name="educationInvolvmentText"
-          type="description"
-          value={educationInvolvmentText}
-          onChange={e => setEducationInvolvmentText(e.target.value)}
-          required />
-
-        <label className='label' >
-          education LevelText
-        </label>
-        <textarea
-          placeholder='Description'
-          className='textarea'
-          name="educationLevelText"
-          type="description"
-          value={educationLevelText}
-          onChange={e => setEducationLevelText(e.target.value)}
           required />
 
         <button className='submit'>Valider</button>
