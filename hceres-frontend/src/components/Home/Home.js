@@ -3,12 +3,14 @@
 import './Home.css';
 import React from 'react';
 import welcomImage from '../../assets/welcomImg.png';
+import Navbar from '../Navbar/Navbar';
 //import { HomeContainer,leftside,rightside } from './HomeElements';
 //style={{ backgroundColor: "#" + `${randomColor}` }}
 //let randomColor = Math.floor(Math.random() * 16777215).toString(16);
 function Home(){
     return (
         <div>
+            <Navbar />
             <div class="container1" >
                 <div class="left-side">
                     <div class="title">

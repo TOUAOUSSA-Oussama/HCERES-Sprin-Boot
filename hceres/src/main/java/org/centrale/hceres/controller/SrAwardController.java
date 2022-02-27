@@ -3,7 +3,9 @@ package org.centrale.hceres.controller;
 import java.util.Date;
 import java.util.Optional;
 
-import org.centrale.hceres.model.SrAward;
+import javax.servlet.http.HttpServletRequest;
+
+import org.centrale.hceres.items.SrAward;
 import org.centrale.hceres.service.SrAwardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 // Controller permet de receptionner la requete http depuis le client, envoyer cette requete a service pour la traiter, puis retouner la reponse
@@ -23,15 +27,15 @@ public class SrAwardController {
 	 * instanciation
 	 */
 	@Autowired
-	private SrAwardService awardService;
+	private SrAwardService eduService;
 	
 	/**
 	 * pour une requete GET pour fournir la liste 
 	 * @return : la liste
 	 */
-	@GetMapping("/Awards")
-	public Iterable<SrAward> getAward() {
-		return awardService.getAwards();
+	@GetMapping("/SrAwards")
+	public Iterable<SrAward> getSrAwards() {
+		return eduService.getSrAwards();
 	}
 	
 	/**
@@ -39,9 +43,9 @@ public class SrAwardController {
 	 * @param id : id de l'elmt
 	 * @return : l'elmt 
 	 */
-	@GetMapping("/Awards/{id}")
+	@GetMapping("/SrAward/{id}")
 	public SrAward getSrAward(@PathVariable("id") final Integer id) {
-		Optional<SrAward> SrAward = awardService.getAward(id);
+		Optional<SrAward> SrAward = eduService.getSrAward(id);
 		if(SrAward.isPresent()) {
 			return SrAward.get();
 		} else {
@@ -54,43 +58,9 @@ public class SrAwardController {
 	 * @param SrAward : l'elmt a ajouter
 	 * @return l'elmt ajoute
 	 */
-	@PostMapping("/AddSrAward")
-	public SrAward createSrAward(@RequestBody SrAward SrAward) {
-		return awardService.saveAward(SrAward);
-	}
-	
-	/**
-	 * Update - Update an existing element
-	 * @param id - The id of the element
-	 * @param SrAward - The element
-	 * @return
-	 */
-	@PutMapping("/updateSrAward/{id}")
-	public SrAward updateSrAward(@PathVariable("id") final Integer id, @RequestBody SrAward SrAward) {
-		Optional<SrAward> e = awardService.getAward(id);
-		if(e.isPresent()) {
-			SrAward currentSrAward = e.get();
-			
-			String SrAwardCourseName = SrAward.getAwardeeName();
-			if(SrAwardCourseName != null) {
-				currentSrAward.setAwardeeName(SrAwardCourseName);
-			}
-			
-			Date SrAwardCompletion = SrAward.getAwardDate();
-			if(SrAwardCompletion != null) {
-				currentSrAward.setAwardDate(SrAwardCompletion);
-			}
-			
-			String SrAwardDescription = SrAward.getDescription();
-			if(SrAwardDescription != null) {
-				currentSrAward.setDescription(SrAwardDescription);
-			}
-			
-			awardService.saveAward(currentSrAward);
-			return currentSrAward;
-		} else {
-			return null;
-		}
+	@RequestMapping(value = "/AddSrAward", method=RequestMethod.POST)
+	public SrAward createSrAward(HttpServletRequest request) {
+		return eduService.saveSrAward(request);
 	}
 	
 	
@@ -100,6 +70,7 @@ public class SrAwardController {
 	 */
 	@DeleteMapping("/deleteSrAward/{id}")
 	public void deleteSrAward(@PathVariable("id") final Integer id) {
-		awardService.deleteAward(id);
+		eduService.deleteSrAward(id);
 	}
 }
+

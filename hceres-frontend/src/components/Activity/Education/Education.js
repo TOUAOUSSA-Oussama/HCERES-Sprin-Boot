@@ -2,22 +2,25 @@ import React from 'react';
 import './Education.css';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { useNavigate  } from "react-router-dom";
 
 function Education() {
-  const [chercheur, setChercheur] = React.useState("");
+  const [researcherId, setChercheur] = React.useState("");
   const [cours, setCours] = React.useState("");
   const [formation, setFormation] = React.useState("");
   const [description, setDescritption] = React.useState("");
-  const [date, setDate] = React.useState(null);
+  const [educationInvolvmentText, setEducationInvolvmentText] = React.useState("");
+  const [educationLevelText, setEducationLevelText] = React.useState("");
+  const [date, setDate] = React.useState("");
 
-  const handleSubmit = (event) => {
-    console.log("Submitted");
-    event.preventDefault();
+  const navigate  = useNavigate();
+  const faireRedirection = () => { 
+    navigate('/Activity');
   }
 
   return (
     <div className='form-container'>
-      <form className='form' onSubmit={handleSubmit}>
+      <form className='form' action="http://localhost:9000/AddEducation" method="POST">
         <a href="/Activity" class="close-button">&#10006;</a>
         <h3 className='title'>EDUCATION</h3>
         <label className='label'>
@@ -26,9 +29,9 @@ function Education() {
         <input
           placeholder='Nom'
           className='input-container'
-          name="chercheur"
+          name="researcherId"
           type="chercheur"
-          value={chercheur}
+          value={researcherId}
           onChange={e => setChercheur(e.target.value)}
           required />
 
@@ -39,7 +42,7 @@ function Education() {
         <input
           placeholder='Cours'
           className='input-container'
-          name="cours"
+          name="educationCourseName"
           type="cours"
           value={cours}
           onChange={e => setCours(e.target.value)}
@@ -49,8 +52,10 @@ function Education() {
         <label className='label'>
           Date de completion
         </label>
-        <DatePicker
+        <input
           className='datePicker'
+          name="educationCompletion"
+          type="date"
           selected={date}
           onChange={date => setDate(date)}
           withPortal
@@ -63,7 +68,7 @@ function Education() {
         <input
           placeholder='Formation'
           className='input-container'
-          name="formation"
+          name="educationFormation"
           type="formation"
           value={formation}
           onChange={e => setFormation(e.target.value)}
@@ -75,13 +80,37 @@ function Education() {
         <textarea
           placeholder='Description'
           className='textarea'
-          name="description"
+          name="educationDescription"
           type="description"
           value={description}
           onChange={e => setDescritption(e.target.value)}
           required />
 
-        <button className='submit'>Valider</button>
+        <label className='label' >
+          education Involvment
+        </label>
+        <textarea
+          placeholder='Description'
+          className='textarea'
+          name="educationInvolvmentText"
+          type="description"
+          value={educationInvolvmentText}
+          onChange={e => setEducationInvolvmentText(e.target.value)}
+          required />
+
+        <label className='label' >
+          education LevelText
+        </label>
+        <textarea
+          placeholder='Description'
+          className='textarea'
+          name="educationLevelText"
+          type="description"
+          value={educationLevelText}
+          onChange={e => setEducationLevelText(e.target.value)}
+          required />
+
+        <button className='submit' onClick={faireRedirection}>Valider</button>
       </form>
     </div>
   );

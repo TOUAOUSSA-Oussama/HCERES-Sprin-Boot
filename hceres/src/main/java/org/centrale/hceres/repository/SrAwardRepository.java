@@ -1,5 +1,5 @@
 package org.centrale.hceres.repository;
-import org.centrale.hceres.model.SrAward;
+import org.centrale.hceres.items.SrAward;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -8,4 +8,3 @@ import org.springframework.stereotype.Repository;
 public interface SrAwardRepository extends JpaRepository<SrAward, Integer> {
 
 }
-

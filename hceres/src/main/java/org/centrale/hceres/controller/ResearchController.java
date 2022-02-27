@@ -1,6 +1,6 @@
 package org.centrale.hceres.controller;
 
-import org.centrale.hceres.model.Researcher;
+import org.centrale.hceres.items.Researcher;
 import org.centrale.hceres.service.ResearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

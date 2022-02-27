@@ -24,7 +24,7 @@ const Navbar = () => {
 
     const handleClick = () => setClick(!click);
 
-    // pour n'afficher le grand boutton que pour les grandes ecrans
+    // pour n'afficher le grand boutton que pour les garndes ecrans
     const showButton = () => {
         if (window.innerWidth <= 960) {
             setButton(false);
@@ -71,11 +71,11 @@ const Navbar = () => {
                     {/* ajouter bouton de deconnexion */}
                     <NavItemBtn>
                         {button ? (
-                            <NavBtnLink to='/Sign-out'>
+                            <NavBtnLink to='/'>
                                 <Button primary>Deconnexion</Button>
                             </NavBtnLink>
                         ) : (
-                            <NavBtnLink to='/Sign-out'>
+                            <NavBtnLink to='/'>
                                 <Button fontBig primary>
                                     Deconnexion
                                 </Button>
