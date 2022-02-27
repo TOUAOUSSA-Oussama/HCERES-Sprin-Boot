@@ -9,6 +9,8 @@
  * -------------------------------------------------------------------------------- */
 package org.centrale.hceres.items;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;

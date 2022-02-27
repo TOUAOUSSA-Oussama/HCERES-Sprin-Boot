@@ -13,6 +13,7 @@ function Education() {
   const handleSubmit = (event) => {
     console.log("Submitted");
     event.preventDefault();
+
   }
 
   return (

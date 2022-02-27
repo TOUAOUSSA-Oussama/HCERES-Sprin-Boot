@@ -42,7 +42,6 @@ public class PostDocService {
 
 
     public PostDoc savePostDoc(HttpServletRequest request) {
-
         PostDoc postDocToSave = new PostDoc();
 
         // PostDocName :
@@ -60,7 +59,7 @@ public class PostDocService {
         postDocToSave.setDepartureDate(getDateFromString(departureDate, "yyyy-MM-dd"));
 
         // Duration:
-        postDocToSave.setDuration(Integer.valueOf(request.getParameter("duration")));
+        postDocToSave.setDuration(Integer.parseInt(request.getParameter("duration")));
 
         // Nationality:
         postDocToSave.setNationality(request.getParameter("nationality"));
@@ -82,7 +81,14 @@ public class PostDocService {
         // Add activity to researchers list :
         String researcherIdStr = request.getParameter("researcherId");
         int researcherId = -1;
-        researcherId = Integer.parseInt(researcherIdStr);
+        if(researcherIdStr!=null) {
+            try {
+                researcherId = Integer.parseInt(researcherIdStr);
+            } catch (Exception e) {
+                System.out.print("Hello Error I caught you!!");
+            }
+        }
+
         Optional<Researcher> researcherOp = researchRepo.findById(researcherId);
         Researcher researcher = researcherOp.get();
 
@@ -102,10 +108,10 @@ public class PostDocService {
         postDocToSave.setActivity(savedActivity);
 
 
-        /* Added PostDoc Id :
+        // Added PostDoc Id :
         Integer idPostDoc = activity.getIdActivity();
         postDocToSave.setIdActivity(idPostDoc);
-         */
+
 
         // Persist PostDoc object to the data base :
         PostDoc savePostDoc = postDocRepository.save(postDocToSave);

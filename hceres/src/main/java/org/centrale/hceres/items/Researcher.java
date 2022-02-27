@@ -9,6 +9,8 @@
  * -------------------------------------------------------------------------------- */
 package org.centrale.hceres.items;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
@@ -78,10 +80,11 @@ public class Researcher implements Serializable {
     @Size(max = 1024)
     @Column(name = "researcher_password")
     private String researcherPassword;
-    
+
+
     @ManyToMany(mappedBy = "researcherCollection")
     private Collection<Nationality> nationalityCollection;
-    
+
     @ManyToMany(mappedBy = "researcherCollection")
     private Collection<Activity> activityCollection;
     
