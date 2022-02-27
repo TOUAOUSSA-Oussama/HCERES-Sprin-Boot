@@ -2,6 +2,7 @@ package org.centrale.hceres.service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
@@ -109,8 +110,6 @@ public class EducationService {
 		Activity activity = new Activity();
 		TypeActivity typeActivity = typeActivityLevelRepo.getById(12);
 		activity.setIdTypeActivity(typeActivity);
-		Activity savedActivity = activityRepo.save(activity);
-		educationTosave.setActivity(savedActivity);
 		
 		// ajouter cette activité à la liste de ce chercheur :
 		String researcherIdStr = request.getParameter("researcherId");
@@ -118,9 +117,23 @@ public class EducationService {
 		researcherId = Integer.parseInt(researcherIdStr);
 		Optional<Researcher> researcherOp = researchRepo.findById(researcherId);
 		Researcher researcher = researcherOp.get();
+		
 		Collection<Activity> activityCollection = researcher.getActivityCollection();
 		activityCollection.add(activity);
-
+		researcher.setActivityCollection(activityCollection);
+		
+		// Ajouter cette activité au chercheur :
+		Collection<Researcher> activityResearch = activity.getResearcherCollection();
+		if (activityResearch == null) {
+			activityResearch = new ArrayList<Researcher>();
+		}
+		activityResearch.add(researcher);
+		activity.setResearcherCollection(activityResearch);
+		
+		Activity savedActivity = activityRepo.save(activity);
+		educationTosave.setActivity(savedActivity);
+		
+		
 		// Id de l'education :
 		Integer idEducation = activity.getIdActivity();
 		educationTosave.setIdActivity(idEducation);

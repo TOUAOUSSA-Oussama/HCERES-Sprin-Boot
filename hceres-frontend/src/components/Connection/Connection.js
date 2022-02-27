@@ -22,7 +22,7 @@ export default function Login() {
         <input type="password" placeholder="Mot de passe"/>
       </label>
       <div className="button_login">
-      <Link to="/Home"><input type="submit" value="Connexion"/></Link>
+        <Link to="/Home"><input type="submit" value="Connexion"/></Link>
       </div>
     </form>
     </div>
