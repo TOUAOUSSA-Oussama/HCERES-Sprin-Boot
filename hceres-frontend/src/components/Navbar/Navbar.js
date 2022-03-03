@@ -71,11 +71,11 @@ const Navbar = () => {
                     {/* ajouter bouton de deconnexion */}
                     <NavItemBtn>
                         {button ? (
-                            <NavBtnLink to='/'>
+                            <NavBtnLink to='/Sign-out'>
                                 <Button primary>Deconnexion</Button>
                             </NavBtnLink>
                         ) : (
-                            <NavBtnLink to='/'>
+                            <NavBtnLink to='/Sign-out'>
                                 <Button fontBig primary>
                                     Deconnexion
                                 </Button>

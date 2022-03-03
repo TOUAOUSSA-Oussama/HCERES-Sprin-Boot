@@ -1,12 +1,13 @@
 import React from 'react';
-import Education from './Education/Education';
-import PostDoctorat from './PostDoctorat/PostDoctorat'
+import Education from './Education';
+import PostDoctorat from './PostDoctorat'
 import './Activity.css'
 
 export default function Activity() {
     const [showForm, setShowForm] = React.useState(false);
     const [showPostDoctorat, setPostDoctorat] = React.useState(false);
-
+    
+    
     return (
         <div className='activity-container'>
             <div className='header'>
@@ -31,7 +32,50 @@ export default function Activity() {
                     <li>
                         <a>Production</a>
                     </li>
+                    <li>
+                            <a>Platform</a>
+                        </li>
+                        <li>
+                            <a>Edition</a>
+                        </li>
+                        <li>
+                            <a>Revue</a>
+                        </li>
+                        <li>
+                            <a>Publication</a>
+                        </li>
+                        <li>
+                            <a>Livre</a>
+                        </li>
+                        <li>
+                            <a>Séminaire</a>
+                        </li>
+                        <li>
+                            <a>Communication orale</a>
+                        </li>
+                        <li>
+                            <a>Signature d'une contrat industrielle</a>
+                        </li>
+                        <li>
+                            <a>Collaboration internationale</a>
+                        </li>
+                        <li>
+                            <a>Expertise scientifique</a>
+                        </li>
+                        <li>
+                            <a>Essai clinique</a>
+                        </li>
+                        <li>
+                            <a>Mobilité entrante</a>
+                        </li>
+                        <li>
+                            <a>Mobilité sortante</a>
+                        </li>
+                        <li>
+                            <a>Création d'entreprise</a>
+                        </li>
                 </ul>
+
             </div>
             {showForm && (<Education> </Education>)}
             {showPostDoctorat && (<PostDoctorat> </PostDoctorat>)}
