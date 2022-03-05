@@ -9,26 +9,51 @@ function PostDoctorat() {
   const [superviseur, setSuperviseur] = React.useState("");
   const [titre, setTitre] = React.useState("");
   const [duree, setDuree] = React.useState("");
-  const [nationalite, setNationalite] = React.useState("");
+  const [nationality, setNationalite] = React.useState("");
   const [labo, setLabo] = React.useState("");
-  const [date, setDate] = React.useState(null);
+  const [associatedFunding, setAssociatedFunding] = React.useState("");
+  const [associatedPubliRef, setAssociatedPubliRef] = React.useState("");
+  const [arrivalDate, setArrivalDate] = React.useState(null);
+  const [departureDate, setDepartureDate] = React.useState(null);
+  const [formattedArrivalDate, setFormattedArrivalDate] = React.useState(null);
+  const [formattedDepartureDate, setFormattedDepartureDate] = React.useState(null);
+
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    Axios.post("http://localhost:9000/api/postDoctorat", {
-      nom: chercheur,
-      titre: titre,
-      duree: duree,
-      nationalite: nationalite,
-      labo: labo,
-      date: date
-    })
+    let data = {
+      researcherId: chercheur,
+      postDocName: titre,
+      supervisorName: superviseur,
+      arrivalDate: formattedArrivalDate,
+      departureDate: formattedDepartureDate,
+      duration: duree,
+      nationality: nationality,
+      originalLab: labo,
+      associationFunding: associatedFunding,
+      associatedPubliRef: associatedPubliRef,
+    };
+
+    console.log(data);
+    Axios.post("http://localhost:9000/Api/AddPostDoc", data)
       .then(res => {
         console.log(res.data)
-      })
-
+      }).catch(err => alert(err))
   }
 
+  const handleArrivalDate = (event) => {
+    let formattedArrivalDate = `${event.getFullYear()}-${event.getMonth() + 1
+      }-${event.getDate()}`;
+    setFormattedArrivalDate(formattedArrivalDate);
+    setArrivalDate(event);
+  }
+
+  const handleDepartureDate = (event) => {
+    let formattedDepartureDate = `${event.getFullYear()}-${event.getMonth() + 1
+      }-${event.getDate()}`;
+    setFormattedDepartureDate(formattedDepartureDate);
+    setDepartureDate(event);
+  }
 
   return (
     <div className='form-container'>
@@ -79,8 +104,8 @@ function PostDoctorat() {
         </label>
         <DatePicker
           className='datePicker'
-          selected={date}
-          onChange={date => setDate(date)}
+          selected={arrivalDate}
+          onChange={handleArrivalDate}
           withPortal
           placeholderText="Choix de date" />
 
@@ -89,8 +114,8 @@ function PostDoctorat() {
         </label>
         <DatePicker
           className='datePicker'
-          selected={date}
-          onChange={date => setDate(date)}
+          selected={departureDate}
+          onChange={handleDepartureDate}
           withPortal
           placeholderText="Choix de date" />
 
@@ -116,7 +141,7 @@ function PostDoctorat() {
           className='input-container'
           name="nationalite"
           type="nationalite"
-          value={nationalite}
+          value={nationality}
           onChange={e => setNationalite(e.target.value)}
           required />
 
@@ -131,6 +156,31 @@ function PostDoctorat() {
           value={labo}
           onChange={e => setLabo(e.target.value)}
           required />
+
+        <label className='label' >
+          Les financements associées
+        </label>
+        <input
+          placeholder='Nom du laboratoire'
+          className='input-container'
+          name="associatedFunding"
+          type="associatedFunding"
+          value={associatedFunding}
+          onChange={e => setAssociatedFunding(e.target.value)}
+          required />
+
+        <label className='label' >
+          les références des publications associées
+        </label>
+        <input
+          placeholder='Nom du laboratoire'
+          className='input-container'
+          name="labo"
+          type="labo"
+          value={associatedPubliRef}
+          onChange={e => setAssociatedPubliRef(e.target.value)}
+          required />
+
         <button className='submit'>Valider</button>
       </form>
     </div>

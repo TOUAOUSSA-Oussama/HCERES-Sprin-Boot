@@ -15,7 +15,6 @@ function Platform() {
     const [formattedDate, setFormatted] = React.useState("")
 
     const handleSubmit = (event) => {
-        console.log(formattedDate);
         event.preventDefault();
         let data = {
             researcherId: chercheur,

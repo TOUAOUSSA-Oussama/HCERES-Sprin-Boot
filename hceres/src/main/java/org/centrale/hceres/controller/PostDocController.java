@@ -5,22 +5,23 @@ import org.centrale.hceres.service.PostDocService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class PostDocController {
 
     @Autowired
     private PostDocService postDocService;
 
-    @GetMapping("/PostDocs")
+    @GetMapping("Api/PostDocs")
     public Iterable<PostDoc> getPostDocs() {
         return postDocService.getPostDocs();
     }
 
 
-    @GetMapping("/PostDocs/{id}")
+    @GetMapping("Api/PostDocs/{id}")
     public PostDoc getPostDoc(@PathVariable("id") final Integer id) {
         Optional<PostDoc> postDoc = postDocService.getPostDoc(id);
         if(postDoc.isPresent()) {
@@ -30,12 +31,12 @@ public class PostDocController {
         }
     }
 
-    @RequestMapping(value = "/AddPostDoc", method= RequestMethod.POST)
-    public PostDoc createPostDoc(HttpServletRequest request) {
+    @PostMapping(value = "Api/AddPostDoc")
+    public PostDoc createPostDoc(@RequestBody Map<String, Object> request) {
         return postDocService.savePostDoc(request);
     }
 
-    @DeleteMapping("/deletPostDoc/{id}")
+    @DeleteMapping("Api/DeletPostDoc/{id}")
     public void deletePostDoc(@PathVariable("id") final Integer id) {
         postDocService.deletePostDoc(id);
     }

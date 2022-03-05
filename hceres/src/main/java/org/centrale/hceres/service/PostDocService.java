@@ -6,6 +6,7 @@ import org.centrale.hceres.repository.PostDocRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
@@ -41,37 +42,37 @@ public class PostDocService {
     }
 
 
-    public PostDoc savePostDoc(HttpServletRequest request) {
+    public PostDoc savePostDoc(@RequestBody Map<String, Object> request) {
         PostDoc postDocToSave = new PostDoc();
 
         // PostDocName :
-        postDocToSave.setNamePostDoc(request.getParameter("postDocName"));
+        postDocToSave.setNamePostDoc((String)request.get("postDocName"));
 
         // Supervisor Name
-        postDocToSave.setNameSupervisor(request.getParameter("supervisorName"));
+        postDocToSave.setNameSupervisor((String)request.get("supervisorName"));
 
         // Arrival Date :
-        String arrivalDate = request.getParameter("arrivalDate");
+        String arrivalDate = (String)request.get("arrivalDate");
         postDocToSave.setArrivalDate(getDateFromString(arrivalDate, "yyyy-MM-dd"));
 
         // Departure Date :
-        String departureDate = request.getParameter("departureDate");
+        String departureDate = (String)request.get("departureDate");
         postDocToSave.setDepartureDate(getDateFromString(departureDate, "yyyy-MM-dd"));
 
         // Duration:
-        postDocToSave.setDuration(Integer.parseInt(request.getParameter("duration")));
+        postDocToSave.setDuration(Integer.parseInt((String)request.get("duration")));
 
         // Nationality:
-        postDocToSave.setNationality(request.getParameter("nationality"));
+        postDocToSave.setNationality((String)request.get("nationality"));
 
         // Original Lab:
-        postDocToSave.setOriginalLab(request.getParameter("originalLab"));
+        postDocToSave.setOriginalLab((String)request.get("originalLab"));
 
         // Associated Funding:
-        postDocToSave.setAssociatedFunding(request.getParameter("associatedFunding"));
+        postDocToSave.setAssociatedFunding((String)request.get("associatedFunding"));
 
         // Associated Publication Ref:
-        postDocToSave.setAssociatedPubliRef(request.getParameter("associatedPubliRef"));
+        postDocToSave.setAssociatedPubliRef((String)request.get("associatedPubliRef"));
 
         // Activity :
         Activity activity = new Activity();
@@ -79,7 +80,7 @@ public class PostDocService {
         activity.setIdTypeActivity(typeActivity);
 
         // Add activity to researchers list :
-        String researcherIdStr = request.getParameter("researcherId");
+        String researcherIdStr = (String)request.get("researcherId");
         int researcherId = -1;
         if(researcherIdStr!=null) {
             try {
