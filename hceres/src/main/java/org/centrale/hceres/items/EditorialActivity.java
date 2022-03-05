@@ -32,14 +32,13 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 @Table(name = "editorial_activity")
-@NamedQueries({
+/*@NamedQueries({
     @NamedQuery(name = "EditorialActivity.findAll", query = "SELECT e FROM EditorialActivity e"),
     @NamedQuery(name = "EditorialActivity.findByIdActivity", query = "SELECT e FROM EditorialActivity e WHERE e.idActivity = :idActivity"),
     @NamedQuery(name = "EditorialActivity.findByStartDate", query = "SELECT e FROM EditorialActivity e WHERE e.startDate = :startDate"),
     @NamedQuery(name = "EditorialActivity.findByEndDate", query = "SELECT e FROM EditorialActivity e WHERE e.endDate = :endDate"),
-    @NamedQuery(name = "EditorialActivity.findByImpactFactor", query = "SELECT e FROM EditorialActivity e WHERE e.impactFactor = :impactFactor")})
+ */
 public class EditorialActivity implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
