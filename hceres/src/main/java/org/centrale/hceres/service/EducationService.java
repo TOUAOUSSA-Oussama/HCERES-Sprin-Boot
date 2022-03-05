@@ -83,8 +83,11 @@ public class EducationService {
 		educationTosave.setEducationCourseName(request.getParameter("educationCourseName"));
 		
 		// EducationCompletion :
-		String dateString = request.getParameter("educationCompletion");
-		educationTosave.setEducationCompletion(getDateFromString(dateString, "yyyy-MM-dd"));
+		try {
+			educationTosave.setEducationCompletion(getDateFromString((String)request.getParameter("educationCompletion"), "yyyy-MM-dd"));}
+        catch (Exception e){
+        	//educationTosave.setEducationCompletion(getDateFromString("2022-03-05", "yyyy-MM-dd"));
+        }
 		
 		// EducationDescription :
 		educationTosave.setEducationDescription(request.getParameter("educationDescription"));

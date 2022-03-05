@@ -12,6 +12,7 @@ package org.centrale.hceres.items;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -56,43 +57,58 @@ public class NationalInternationalCollaboration implements Serializable {
     @NotNull
     @Column(name = "id_activity")
     private Integer idActivity;
+    
     @Column(name = "date_project_start")
     @Temporal(TemporalType.DATE)
     private Date dateProjectStart;
+    
     @Size(max = 256)
     @Column(name = "partner_entity")
     private String partnerEntity;
+    
     @Size(max = 256)
     @Column(name = "country_state_city")
     private String countryStateCity;
+    
     @Size(max = 256)
     @Column(name = "pi_partners")
     private String piPartners;
+    
     @Size(max = 256)
     @Column(name = "mail_partners")
     private String mailPartners;
+    
     @Size(max = 256)
     @Column(name = "projetc_title")
     private String projetcTitle;
+    
     @Column(name = "strategic_recurring_collab")
-    private Boolean strategicRecurringCollab;
+    private String strategicRecurringCollab;
+    
     @Column(name = "active_project")
-    private Boolean activeProject;
+    private String activeProject;
+    
     @Size(max = 256)
     @Column(name = "associated_funding")
     private String associatedFunding;
+    
     @Column(name = "number_resulting_publications")
     private Integer numberResultingPublications;
+    
     @Size(max = 256)
     @Column(name = "ref_joint_publication")
     private String refJointPublication;
+    
     @Column(name = "umr_coordinated")
-    private Boolean umrCoordinated;
+    private String umrCoordinated;
+    
     @Column(name = "agreement_signed")
-    private Boolean agreementSigned;
+    private String agreementSigned;
+    
     @JoinColumn(name = "id_activity", referencedColumnName = "id_activity", insertable = false, updatable = false)
-    @OneToOne(optional = false)
+    @OneToOne(optional = false, cascade = CascadeType.ALL)
     private Activity activity;
+    
     @JoinColumn(name = "type_collab_id", referencedColumnName = "type_collab_id")
     @ManyToOne(optional = false)
     private TypeCollab typeCollabId;
@@ -227,7 +243,7 @@ public class NationalInternationalCollaboration implements Serializable {
      *
      * @return
      */
-    public Boolean getStrategicRecurringCollab() {
+    public String getStrategicRecurringCollab() {
         return strategicRecurringCollab;
     }
 
@@ -235,7 +251,7 @@ public class NationalInternationalCollaboration implements Serializable {
      *
      * @param strategicRecurringCollab
      */
-    public void setStrategicRecurringCollab(Boolean strategicRecurringCollab) {
+    public void setStrategicRecurringCollab(String strategicRecurringCollab) {
         this.strategicRecurringCollab = strategicRecurringCollab;
     }
 
@@ -243,7 +259,7 @@ public class NationalInternationalCollaboration implements Serializable {
      *
      * @return
      */
-    public Boolean getActiveProject() {
+    public String getActiveProject() {
         return activeProject;
     }
 
@@ -251,7 +267,7 @@ public class NationalInternationalCollaboration implements Serializable {
      *
      * @param activeProject
      */
-    public void setActiveProject(Boolean activeProject) {
+    public void setActiveProject(String activeProject) {
         this.activeProject = activeProject;
     }
 
@@ -307,7 +323,7 @@ public class NationalInternationalCollaboration implements Serializable {
      *
      * @return
      */
-    public Boolean getUmrCoordinated() {
+    public String getUmrCoordinated() {
         return umrCoordinated;
     }
 
@@ -315,7 +331,7 @@ public class NationalInternationalCollaboration implements Serializable {
      *
      * @param umrCoordinated
      */
-    public void setUmrCoordinated(Boolean umrCoordinated) {
+    public void setUmrCoordinated(String umrCoordinated) {
         this.umrCoordinated = umrCoordinated;
     }
 
@@ -323,7 +339,7 @@ public class NationalInternationalCollaboration implements Serializable {
      *
      * @return
      */
-    public Boolean getAgreementSigned() {
+    public String getAgreementSigned() {
         return agreementSigned;
     }
 
@@ -331,7 +347,7 @@ public class NationalInternationalCollaboration implements Serializable {
      *
      * @param agreementSigned
      */
-    public void setAgreementSigned(Boolean agreementSigned) {
+    public void setAgreementSigned(String agreementSigned) {
         this.agreementSigned = agreementSigned;
     }
 

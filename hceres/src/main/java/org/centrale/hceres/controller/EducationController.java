@@ -1,6 +1,5 @@
 package org.centrale.hceres.controller;
 
-import java.util.Date;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
@@ -8,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.centrale.hceres.items.Education;
 import org.centrale.hceres.service.EducationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 // Controller permet de receptionner la requete http depuis le client, envoyer cette requete a service pour la traiter, puis retouner la reponse
 // la reponse sera sous format JSON (il s'agit d'une REST API)
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class EducationController {
 	
 	/**

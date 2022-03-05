@@ -43,11 +43,13 @@ public class TypeOralCommunication implements Serializable {
     @Basic(optional = false)
     @Column(name = "type_oral_communication_id")
     private Integer typeOralCommunicationId;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 256)
     @Column(name = "type_oral_communication_name")
     private String typeOralCommunicationName;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "typeOralCommunicationId")
     private Collection<OralCommunication> oralCommunicationCollection;
 

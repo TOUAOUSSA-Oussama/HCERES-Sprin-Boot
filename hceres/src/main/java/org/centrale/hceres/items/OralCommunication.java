@@ -12,6 +12,7 @@ package org.centrale.hceres.items;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -25,6 +26,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.persistence.CascadeType;
+
 
 /**
  *
@@ -46,25 +49,31 @@ public class OralCommunication implements Serializable {
     @NotNull
     @Column(name = "id_activity")
     private Integer idActivity;
+    
     @Size(max = 512)
     @Column(name = "oral_communication_title")
     private String oralCommunicationTitle;
+    
     @Basic(optional = false)
     @NotNull
     @Column(name = "oral_communication_dat")
     @Temporal(TemporalType.DATE)
     private Date oralCommunicationDat;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 2147483647)
     @Column(name = "authors")
     private String authors;
+    
     @JoinColumn(name = "id_activity", referencedColumnName = "id_activity", insertable = false, updatable = false)
-    @OneToOne(optional = false)
+    @OneToOne(optional = false, cascade = CascadeType.ALL)
     private Activity activity;
+    
     @JoinColumn(name = "meeting_id", referencedColumnName = "meeting_id")
     @ManyToOne(optional = false)
     private Meeting meetingId;
+    
     @JoinColumn(name = "type_oral_communication_id", referencedColumnName = "type_oral_communication_id")
     @ManyToOne(optional = false)
     private TypeOralCommunication typeOralCommunicationId;

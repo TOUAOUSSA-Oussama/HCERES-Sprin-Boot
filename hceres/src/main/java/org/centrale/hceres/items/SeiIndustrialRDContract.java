@@ -12,6 +12,7 @@ package org.centrale.hceres.items;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -48,25 +49,32 @@ public class SeiIndustrialRDContract implements Serializable {
     @NotNull
     @Column(name = "id_activity")
     private Integer idActivity;
+    
     @Column(name = "start_date")
     @Temporal(TemporalType.DATE)
     private Date startDate;
+    
     @Size(max = 256)
     @Column(name = "name_company_involved")
     private String nameCompanyInvolved;
+    
     @Size(max = 256)
     @Column(name = "project_title")
     private String projectTitle;
+    
     @Column(name = "agreement_amount")
     private Integer agreementAmount;
+    
     @Column(name = "end_date")
     @Temporal(TemporalType.DATE)
     private Date endDate;
+    
     @Size(max = 256)
     @Column(name = "associated_publi_ref")
     private String associatedPubliRef;
+    
     @JoinColumn(name = "id_activity", referencedColumnName = "id_activity", insertable = false, updatable = false)
-    @OneToOne(optional = false)
+    @OneToOne(optional = false, cascade = CascadeType.ALL)
     private Activity activity;
 
     /**
