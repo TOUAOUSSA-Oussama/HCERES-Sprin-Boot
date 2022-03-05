@@ -259,7 +259,6 @@ public class Activity implements Serializable {
     public void setNationalInternationalCollaboration(NationalInternationalCollaboration nationalInternationalCollaboration) {
         this.nationalInternationalCollaboration = nationalInternationalCollaboration;
     }
-
     /**
      *
      * @return
