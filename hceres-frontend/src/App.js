@@ -8,6 +8,7 @@ import Activity from './components/Activity/Activity';
 import Footer from './components/Footer/Footer';
 import About from './components/About/About';
 import Connection from './components/Connection/Connection';
+import Brevet from './components/Activity/Brevet/Brevet';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path='/Researcher' exact  element={<Researcher/>} />
           <Route path='/Activity' exact  element={<Activity/>} />
           <Route path='/About' exact  element={<About/>} />
+          <Route path='/Brevet' exact  element={<Brevet/>} />
       </Routes> 
 
       <Footer />
