@@ -14,25 +14,39 @@ function Education() {
     const [date, setDate] = React.useState(null);
     const [formattedDate, setFormatted] = React.useState("")
 
-    const handleSubmit = (event) => {
-        console.log(formattedDate);
-        event.preventDefault();
-        let data = {
-            researcherId: researcherId,
-            educationCourseName: educationCourseName,
-            educationFormation: educationFormation,
-            educationDescription: educationDescription,
-            educationInvolvmentText: educationInvolvmentText,
-            educationLevelText: educationLevelText,
-            educationCompletion:formattedDate};
+    // const handleSubmit = (event) => {
+    //     console.log(formattedDate);
+    //     event.preventDefault();
+    //     let data = {
+    //         "researcherId": researcherId,
+    //         "educationCourseName": educationCourseName,
+    //         "educationFormation": educationFormation,
+    //         "educationDescription": educationDescription,
+    //         "educationInvolvmentText": educationInvolvmentText,
+    //         "educationLevelText": educationLevelText,
+    //         "educationCompletion":formattedDate};
         
-        console.log(data);
-        Axios.post("http://localhost:9000/AddEducation", data)
-            .then(res => {
-                console.log(res.data)
-            }).catch(err => alert(err))
-    }
+    //     console.log(data);
+    //     Axios.post("http://localhost:9000/AddEducation", data)
+    //         .then(res => {
+    //             console.log(res.data)
+    //         }).catch(err => alert(err))
+    // }
 
+    const handleSubmit = () => {
+      const response =
+         Axios.post("http://localhost:9000/AddEducation",
+            { params: {"researcherId": researcherId,
+                    "educationCourseName": educationCourseName,
+                     "educationFormation": educationFormation,
+                     "educationDescription": educationDescription,
+                     "educationInvolvmentText": educationInvolvmentText,
+                     "educationLevelText": educationLevelText,
+                     "educationCompletion":formattedDate} },
+                     { headers: { 'Content-Type': 'application/json' }}
+        )
+      console.log(response.data)
+    }
 
     const handleDate = (event) =>{
         let formattedDate = `${event.getFullYear()}-${
@@ -44,12 +58,12 @@ function Education() {
 
     return (
         <div className='form-container'>
-            <form className='form' onSubmit={handleSubmit}>
+            <form className='form' action="http://localhost:9000/AddEducation" method="POST">
                 <a href="/Activity" class="close-button">&#10006;</a>
                 <h3 className='title'>EDUCATION :</h3>
 
                 <label className='label' >
-                  Researcher Id
+                  Researcher
                 </label>
                 <input
                     placeholder='researcherId'
@@ -166,6 +180,7 @@ export default Education;
 //     this.handleEducationLevelText = this.handleEducationLevelText.bind(this);
 //     this.handleEducationCompletion = this.handleEducationCompletion.bind(this);
 //     this.checkIsCompleted = this.checkIsCompleted.bind(this);
+//     this.handleSubmit = this.handleSubmit.bind(this);
 //   }
 
 //   handleReseatcherId(event){
@@ -209,13 +224,17 @@ export default Education;
 //       educationCompletion: this.state.educationCompletion,
 //     };
 
-//     axios.post(`http://localhost:9000/AddEducation`, { data })
+//     console.log(data);
+
+//     axios.post(`http://localhost:9000/Api/AddEducation`, { data })
 //       .then(res => {
 //         console.log(res);
 //         console.log(res.data);
 //         this.checkIsCompleted();
 //       })
+
 //   }
+  
 
 //   render(){
 //     if(this.state.IsCompleted){
