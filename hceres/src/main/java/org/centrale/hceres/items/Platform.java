@@ -12,6 +12,7 @@ package org.centrale.hceres.items;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -31,6 +32,7 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "platform")
+/*
 @NamedQueries({
     @NamedQuery(name = "Platform.findAll", query = "SELECT p FROM Platform p"),
     @NamedQuery(name = "Platform.findByIdActivity", query = "SELECT p FROM Platform p WHERE p.idActivity = :idActivity"),
@@ -40,6 +42,7 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Platform.findByAffiliation", query = "SELECT p FROM Platform p WHERE p.affiliation = :affiliation"),
     @NamedQuery(name = "Platform.findByLabellisation", query = "SELECT p FROM Platform p WHERE p.labellisation = :labellisation"),
     @NamedQuery(name = "Platform.findByOpenPrivateResearchers", query = "SELECT p FROM Platform p WHERE p.openPrivateResearchers = :openPrivateResearchers")})
+    */
 public class Platform implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -66,7 +69,7 @@ public class Platform implements Serializable {
     @Column(name = "open_private_researchers")
     private Boolean openPrivateResearchers;
     @JoinColumn(name = "id_activity", referencedColumnName = "id_activity", insertable = false, updatable = false)
-    @OneToOne(optional = false)
+    @OneToOne(optional = false, cascade = CascadeType.ALL)
     private Activity activity;
 
     /**

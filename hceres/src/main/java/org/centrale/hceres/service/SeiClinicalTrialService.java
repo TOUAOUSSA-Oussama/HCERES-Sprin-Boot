@@ -9,11 +9,11 @@ import java.util.Date;
 import java.util.Map;
 import java.util.Optional;
 import org.centrale.hceres.items.Activity;
-import org.centrale.hceres.items.SrAward;
+import org.centrale.hceres.items.SeiClinicalTrial;
 import org.centrale.hceres.items.Researcher;
 import org.centrale.hceres.items.TypeActivity;
 import org.centrale.hceres.repository.ActivityRepository;
-import org.centrale.hceres.repository.SrAwardRepository;
+import org.centrale.hceres.repository.SeiClinicalTrialRepository;
 import org.centrale.hceres.repository.ResearchRepository;
 import org.centrale.hceres.repository.TypeActivityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ import lombok.Data;
 // permet de traiter la requete HTTP puis l'associer a la fonction de repository qui va donner une reponse
 @Data
 @Service
-public class SrAwardService {
+public class SeiClinicalTrialService {
 	
 	/**
 	 * Instanciation
@@ -33,7 +33,7 @@ public class SrAwardService {
 	@Autowired
 	private ResearchRepository researchRepo;
 	@Autowired
-	private SrAwardRepository SrAwardRepo;
+	private SeiClinicalTrialRepository SeiClinicalTrialRepo;
 	@Autowired
 	private ActivityRepository activityRepo;
 	@Autowired
@@ -42,8 +42,8 @@ public class SrAwardService {
 	/**
 	 * permet de retourner la liste
 	 */
-	public Iterable<SrAward> getSrAwards(){
-		return SrAwardRepo.findAll();
+	public Iterable<SeiClinicalTrial> getSeiClinicalTrials(){
+		return SeiClinicalTrialRepo.findAll();
 	}
 	
 	/**
@@ -51,39 +51,59 @@ public class SrAwardService {
 	 * @param id : id de l'elmt
 	 * @return : elmt a retourner
 	 */
-	public Optional<SrAward> getSrAward(final Integer id) { 
-		return SrAwardRepo.findById(id); 
+	public Optional<SeiClinicalTrial> getSeiClinicalTrial(final Integer id) { 
+		return SeiClinicalTrialRepo.findById(id); 
 	}
 	
 	/**
 	 * supprimer l'elmt selon son id
 	 * @param id : id de l'elmt
 	 */
-	public void deleteSrAward(final Integer id) {
-		SrAwardRepo.deleteById(id);
+	public void deleteSeiClinicalTrial(final Integer id) {
+		SeiClinicalTrialRepo.deleteById(id);
 	}
 	
 	/**
 	 * permet d'ajouter un elmt
 	 * @return : l'elemt ajouter a la base de donnees
 	 */
-	public SrAward saveSrAward(@RequestBody Map<String, Object>  request) {
+	public SeiClinicalTrial saveSeiClinicalTrial(@RequestBody Map<String, Object> request) {
 		
-		SrAward SrAwardTosave = new SrAward();
+		SeiClinicalTrial SeiClinicalTrialTosave = new SeiClinicalTrial();
 		
-		// SrAwardCourseName :
-		SrAwardTosave.setAwardeeName((String)request.get("awardeeName"));
 		
-		// SrAwardCompletion :
-		String dateString = (String)request.get("awardDate");
-		SrAwardTosave.setAwardDate(getDateFromString(dateString, "yyyy-MM-dd"));
+		// setStartDate :
+		String dateString = (String)request.get("startDate");
+		SeiClinicalTrialTosave.setStartDate(getDateFromString(dateString, "yyyy-MM-dd"));
+
+        // setEndDate :
+		String dateString2 = (String)request.get("endDate");
+		SeiClinicalTrialTosave.setEndDate(getDateFromString(dateString2, "yyyy-MM-dd"));
 		
-		// SrAwardDescription :
-		SrAwardTosave.setDescription((String)request.get("description"));
+		// setCoordinatorPartner :
+		SeiClinicalTrialTosave.setCoordinatorPartner(Boolean.parseBoolean((String)request.get("coordinatorPartner")));
 		
+        // setTitleClinicalTrial :
+		SeiClinicalTrialTosave.setTitleClinicalTrial((String)request.get("titleClinicalTrial"));
+
+         // setRegistrationNb :
+		SeiClinicalTrialTosave.setRegistrationNb((String)request.get("registrationNb"));
+          
+        // setSponsorName :
+		SeiClinicalTrialTosave.setSponsorName((String)request.get("sponsorName"));
+
+        // setIncludedPatientsNb :
+		SeiClinicalTrialTosave.setIncludedPatientsNb(Integer.parseInt((String)request.get("includedPatientsNb")));
+
+        // setFunding :
+		SeiClinicalTrialTosave.setFunding((String)request.get("funding"));
+
+        // setFundingAmount :
+		SeiClinicalTrialTosave.setFundingAmount(Integer.parseInt((String)request.get("fundingAmount")));
+
 	    // Activity : 
 		Activity activity = new Activity();
-		TypeActivity typeActivity = typeActivityLevelRepo.getById(29);
+		TypeActivity typeActivity = typeActivityLevelRepo.getById(41);
 		activity.setIdTypeActivity(typeActivity);
 		
 		// ajouter cette activité à la liste de ce chercheur :
@@ -106,16 +126,16 @@ public class SrAwardService {
 		activity.setResearcherCollection(activityResearch);
 		
 		Activity savedActivity = activityRepo.save(activity);
-		SrAwardTosave.setActivity(savedActivity);
+		SeiClinicalTrialTosave.setActivity(savedActivity);
 		
-		// Id de l'SrAward :
-		Integer idSrAward = activity.getIdActivity();
-		SrAwardTosave.setIdActivity(idSrAward);
+		// Id de l'SeiClinicalTrial :
+		Integer idSeiClinicalTrial = activity.getIdActivity();
+		SeiClinicalTrialTosave.setIdActivity(idSeiClinicalTrial);
 				
-		// Enregistrer SrAward dans la base de données :
-		SrAward saveSrAward = SrAwardRepo.save(SrAwardTosave);
+		// Enregistrer SeiClinicalTrial dans la base de données :
+		SeiClinicalTrial saveSeiClinicalTrial = SeiClinicalTrialRepo.save(SeiClinicalTrialTosave);
 		
-		return saveSrAward;
+		return saveSeiClinicalTrial;
 	}
 	
 	// Convertir une date string en Date
@@ -135,16 +155,3 @@ public class SrAwardService {
         return returnedValue;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

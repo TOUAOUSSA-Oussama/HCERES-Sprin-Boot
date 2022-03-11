@@ -1,8 +1,9 @@
 import React from 'react';
-import './SrAward.css';
+import './Activity.css';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useNavigate  } from "react-router-dom";
+import Axios from 'axios'
 
 function SrAward() {
   const [researcherId, setChercheur] = React.useState("");
@@ -10,16 +11,38 @@ function SrAward() {
   const [description, setDescritption] = React.useState("");
   const [awardDate, setDate] = React.useState("");
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    let data = {
+
+        researcherId: researcherId,
+        awardeeName: awardeeName,
+        description: description,
+        awardDate: awardDate};
+    console.log(data);
+    Axios.post("http://localhost:9000/Api/AddSrAward", data)
+        .then(res => {
+            console.log(res.data)
+        }).catch(err => alert(err))
+}
+
+  const handleDate = (event) =>{
+  let awardDate = `${event.getFullYear()}-${
+      event.getMonth() +1
+    }-${event.getDate()}`;
+    setDate(awardDate);
+    setDate(event);
+  }
+
   const navigate  = useNavigate();
   const faireRedirection = () => { 
     navigate('/Activity');
   }
-
   return (
     <div className='form-container'>
-      <form className='form' action="http://localhost:9000/AddSrAward" method="POST">
+      <form className='form' onSubmit={handleSubmit}>
         <a href="/Activity" class="close-button">&#10006;</a>
-        <h3 className='title'>SrAward</h3>
+        <h3 className='title'>Prix</h3>
         <label className='label'>
           Chercheur
         </label>
@@ -47,14 +70,12 @@ function SrAward() {
         <label className='label'>
           Date d'optention
         </label>
-        <input
-          className='datePicker'
-          name="SrAwardCompletion"
-          type="date"
-          selected={awardDate}
-          onChange={awardDate => setDate(awardDate)}
-          withPortal
-          placeholderText="Choix de date" />
+        <DatePicker
+                    className='datePicker'
+                    selected={awardDate}
+                    onChange={handleDate}
+                    withPortal
+                    placeholderText="Choix de date" />
 
         <label className='label' >
           Description

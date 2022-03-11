@@ -6,26 +6,26 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
-import java.util.Map;
 import java.util.Optional;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.centrale.hceres.items.Activity;
-import org.centrale.hceres.items.SrAward;
+import org.centrale.hceres.items.Network;
 import org.centrale.hceres.items.Researcher;
 import org.centrale.hceres.items.TypeActivity;
 import org.centrale.hceres.repository.ActivityRepository;
-import org.centrale.hceres.repository.SrAwardRepository;
+import org.centrale.hceres.repository.NetworkRepository;
 import org.centrale.hceres.repository.ResearchRepository;
 import org.centrale.hceres.repository.TypeActivityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
-
 import lombok.Data;
 
 // permet de traiter la requete HTTP puis l'associer a la fonction de repository qui va donner une reponse
 @Data
 @Service
-public class SrAwardService {
+public class NetworkService {
 	
 	/**
 	 * Instanciation
@@ -33,7 +33,7 @@ public class SrAwardService {
 	@Autowired
 	private ResearchRepository researchRepo;
 	@Autowired
-	private SrAwardRepository SrAwardRepo;
+	private NetworkRepository NetworkRepo;
 	@Autowired
 	private ActivityRepository activityRepo;
 	@Autowired
@@ -42,8 +42,8 @@ public class SrAwardService {
 	/**
 	 * permet de retourner la liste
 	 */
-	public Iterable<SrAward> getSrAwards(){
-		return SrAwardRepo.findAll();
+	public Iterable<Network> getNetworks(){
+		return NetworkRepo.findAll();
 	}
 	
 	/**
@@ -51,43 +51,58 @@ public class SrAwardService {
 	 * @param id : id de l'elmt
 	 * @return : elmt a retourner
 	 */
-	public Optional<SrAward> getSrAward(final Integer id) { 
-		return SrAwardRepo.findById(id); 
+	public Optional<Network> getNetwork(final Integer id) { 
+		return NetworkRepo.findById(id); 
 	}
 	
 	/**
 	 * supprimer l'elmt selon son id
 	 * @param id : id de l'elmt
 	 */
-	public void deleteSrAward(final Integer id) {
-		SrAwardRepo.deleteById(id);
+	public void deleteNetwork(final Integer id) {
+		NetworkRepo.deleteById(id);
 	}
 	
 	/**
 	 * permet d'ajouter un elmt
 	 * @return : l'elemt ajouter a la base de donnees
 	 */
-	public SrAward saveSrAward(@RequestBody Map<String, Object>  request) {
+	public Network saveNetwork(HttpServletRequest request) {
 		
-		SrAward SrAwardTosave = new SrAward();
+		Network NetworkTosave = new Network();
 		
-		// SrAwardCourseName :
-		SrAwardTosave.setAwardeeName((String)request.get("awardeeName"));
+		// NetworkCourseName :
+		NetworkTosave.setNameNetwork(request.getParameter("networkName"));
 		
-		// SrAwardCompletion :
-		String dateString = (String)request.get("awardDate");
-		SrAwardTosave.setAwardDate(getDateFromString(dateString, "yyyy-MM-dd"));
+		// NetworkStartDate :
+		String dateString = request.getParameter("startDate");
+		NetworkTosave.setStartDate(getDateFromString(dateString, "yyyy-MM-dd"));
 		
-		// SrAwardDescription :
-		SrAwardTosave.setDescription((String)request.get("description"));
+		// ActiveNetwork :
+		NetworkTosave.setActiveNetwork(Boolean.parseBoolean(request.getParameter("activeNetwork")));
+
+        // setAssociatedFunding :
+		NetworkTosave.setAssociatedFunding(request.getParameter("associatedFunding"));
+
+        // setNbResultingPublications :
+		NetworkTosave.setNbResultingPublications(Integer.parseInt(request.getParameter("nbResultingPublications")));
+
+        // setRefResultingPublications :
+		NetworkTosave.setRefResultingPublications(request.getParameter("ref_resulting_publications"));
+
+        // setUmrCoordinated :
+		NetworkTosave.setUmrCoordinated(Boolean.parseBoolean(request.getParameter("umr_coordinated")));
+
+           // setAgreementSigned :
+		NetworkTosave.setAgreementSigned(Boolean.parseBoolean(request.getParameter("agreement_signed")));
 		
 	    // Activity : 
 		Activity activity = new Activity();
-		TypeActivity typeActivity = typeActivityLevelRepo.getById(29);
+		TypeActivity typeActivity = typeActivityLevelRepo.getById(14);
 		activity.setIdTypeActivity(typeActivity);
 		
 		// ajouter cette activité à la liste de ce chercheur :
-		String researcherIdStr = (String)request.get("researcherId");
+		String researcherIdStr = request.getParameter("researcherId");
 		int researcherId = -1;
 		researcherId = Integer.parseInt(researcherIdStr);
 		Optional<Researcher> researcherOp = researchRepo.findById(researcherId);
@@ -106,16 +121,16 @@ public class SrAwardService {
 		activity.setResearcherCollection(activityResearch);
 		
 		Activity savedActivity = activityRepo.save(activity);
-		SrAwardTosave.setActivity(savedActivity);
+		NetworkTosave.setActivity(savedActivity);
 		
-		// Id de l'SrAward :
-		Integer idSrAward = activity.getIdActivity();
-		SrAwardTosave.setIdActivity(idSrAward);
+		// Id de l'Network :
+		Integer idNetwork = activity.getIdActivity();
+		NetworkTosave.setIdActivity(idNetwork);
 				
-		// Enregistrer SrAward dans la base de données :
-		SrAward saveSrAward = SrAwardRepo.save(SrAwardTosave);
+		// Enregistrer Network dans la base de données :
+		Network saveNetwork = NetworkRepo.save(NetworkTosave);
 		
-		return saveSrAward;
+		return saveNetwork;
 	}
 	
 	// Convertir une date string en Date
@@ -135,6 +150,7 @@ public class SrAwardService {
         return returnedValue;
     }
 }
+
 
 
 

@@ -24,6 +24,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.persistence.CascadeType;
 
 /**
  *
@@ -71,7 +72,7 @@ public class Network implements Serializable {
     @Column(name = "agreement_signed")
     private Boolean agreementSigned;
     @JoinColumn(name = "id_activity", referencedColumnName = "id_activity", insertable = false, updatable = false)
-    @OneToOne(optional = false)
+    @OneToOne(optional = false, cascade = CascadeType.ALL)
     private Activity activity;
 
     /**
@@ -178,10 +179,10 @@ public class Network implements Serializable {
 
     /**
      *
-     * @param nbResultingPublications
+     * @param string
      */
-    public void setNbResultingPublications(Integer nbResultingPublications) {
-        this.nbResultingPublications = nbResultingPublications;
+    public void setNbResultingPublications(Integer string) {
+        this.nbResultingPublications = string;
     }
 
     /**

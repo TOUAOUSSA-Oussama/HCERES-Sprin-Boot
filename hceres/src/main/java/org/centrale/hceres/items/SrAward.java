@@ -24,6 +24,9 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.CascadeType;
 
 import org.hibernate.engine.internal.CascadePoint;
@@ -57,6 +60,7 @@ public class SrAward implements Serializable {
     @Size(max = 2147483647)
     @Column(name = "description")
     private String description;
+    @JsonIgnore
     @JoinColumn(name = "id_activity", referencedColumnName = "id_activity", insertable = false, updatable = false)
     @OneToOne(optional = false, cascade = CascadeType.ALL)
     private Activity activity;
