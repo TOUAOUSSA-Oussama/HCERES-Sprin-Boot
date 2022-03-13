@@ -10,17 +10,9 @@
 package org.centrale.hceres.items;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.math.BigInteger;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -29,12 +21,12 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 @Table(name = "reviewing_journal_articles")
-@NamedQueries({
+/*@NamedQueries({
     @NamedQuery(name = "ReviewingJournalArticles.findAll", query = "SELECT r FROM ReviewingJournalArticles r"),
     @NamedQuery(name = "ReviewingJournalArticles.findByIdActivity", query = "SELECT r FROM ReviewingJournalArticles r WHERE r.idActivity = :idActivity"),
     @NamedQuery(name = "ReviewingJournalArticles.findByYear", query = "SELECT r FROM ReviewingJournalArticles r WHERE r.year = :year"),
     @NamedQuery(name = "ReviewingJournalArticles.findByNbReviewedArticles", query = "SELECT r FROM ReviewingJournalArticles r WHERE r.nbReviewedArticles = :nbReviewedArticles"),
-    @NamedQuery(name = "ReviewingJournalArticles.findByImpactFactor", query = "SELECT r FROM ReviewingJournalArticles r WHERE r.impactFactor = :impactFactor")})
+    @NamedQuery(name = "ReviewingJournalArticles.findByImpactFactor", query = "SELECT r FROM ReviewingJournalArticles r WHERE r.impactFactor = :impactFactor")})*/
 public class ReviewingJournalArticles implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -48,12 +40,12 @@ public class ReviewingJournalArticles implements Serializable {
     @Column(name = "nb_reviewed_articles")
     private Integer nbReviewedArticles;
     @Column(name = "impact_factor")
-    private BigInteger impactFactor;
+    private BigDecimal impactFactor;
     @JoinColumn(name = "id_activity", referencedColumnName = "id_activity", insertable = false, updatable = false)
-    @OneToOne(optional = false)
+    @OneToOne(optional = false, cascade = CascadeType.ALL)
     private Activity activity;
     @JoinColumn(name = "journal_id", referencedColumnName = "journal_id")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, cascade = CascadeType.ALL)
     private Journal journalId;
 
     /**
@@ -122,7 +114,7 @@ public class ReviewingJournalArticles implements Serializable {
      *
      * @return
      */
-    public BigInteger getImpactFactor() {
+    public BigDecimal getImpactFactor() {
         return impactFactor;
     }
 
@@ -130,7 +122,7 @@ public class ReviewingJournalArticles implements Serializable {
      *
      * @param impactFactor
      */
-    public void setImpactFactor(BigInteger impactFactor) {
+    public void setImpactFactor(BigDecimal impactFactor) {
         this.impactFactor = impactFactor;
     }
 
