@@ -7,6 +7,7 @@ import Researcher from './components/Researcher/Researcher';
 import Footer from './components/Footer/Footer';
 import About from './components/About/About';
 import Activity from './components/Activity/Activity';
+import Connection from './components/Connection/Connection';
 
 function App() {
   return (
