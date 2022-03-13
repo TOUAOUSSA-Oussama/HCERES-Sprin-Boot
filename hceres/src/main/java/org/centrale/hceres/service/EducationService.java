@@ -8,7 +8,6 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.Optional;
 
-import javax.servlet.http.HttpServletRequest;
 
 import org.centrale.hceres.items.Activity;
 import org.centrale.hceres.items.Education;
@@ -25,6 +24,9 @@ import org.centrale.hceres.repository.TypeActivityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import lombok.Data;
+import javax.transaction.Transactional;
+import org.springframework.web.bind.annotation.RequestBody;
+import java.util.Map;
 
 // permet de traiter la requete HTTP puis l'associer a la fonction de repository qui va donner une reponse
 @Data
@@ -75,37 +77,35 @@ public class EducationService {
 	 * permet d'ajouter un elmt
 	 * @return : l'elemt ajouter a la base de donnees
 	 */
-	public Education saveEducation(HttpServletRequest request) {
+	@Transactional
+	public Education saveEducation(@RequestBody Map<String, Object> request) {
 		
 		Education educationTosave = new Education();
 		
 		// EducationCourseName :
-		educationTosave.setEducationCourseName(request.getParameter("educationCourseName"));
+		educationTosave.setEducationCourseName((String)request.get("educationCourseName"));
 		
 		// EducationCompletion :
-		try {
-			educationTosave.setEducationCompletion(getDateFromString((String)request.getParameter("educationCompletion"), "yyyy-MM-dd"));}
-        catch (Exception e){
-        	//educationTosave.setEducationCompletion(getDateFromString("2022-03-05", "yyyy-MM-dd"));
-        }
+		String dateString = (String)request.get("educationCompletion");
+		educationTosave.setEducationCompletion(getDateFromString(dateString, "yyyy-MM-dd"));
 		
 		// EducationDescription :
-		educationTosave.setEducationDescription(request.getParameter("educationDescription"));
+		educationTosave.setEducationDescription((String)request.get("educationDescription"));
 		
 		// EducationFormation :
-		educationTosave.setEducationFormation(request.getParameter("educationFormation"));
+		educationTosave.setEducationFormation((String)request.get("educationFormation"));
 		
 				
 		// EducationInvolvment
 		EducationInvolvment educationInvolvment = new EducationInvolvment();
-		educationInvolvment.setEducationInvolvmentName(request.getParameter("educationInvolvmentText"));
+		educationInvolvment.setEducationInvolvmentName((String)request.get("educationInvolvmentText"));
 		EducationInvolvment savedEducationInvolvment = educationInvolvmentRepo.save(educationInvolvment);
 		educationTosave.setEducationInvolvmentId(savedEducationInvolvment);
 		
 		
 		// EducationLevel : 
 		EducationLevel educationLevel = new EducationLevel();
-		educationLevel.setEducationLevelName(request.getParameter("educationLevelText"));
+		educationLevel.setEducationLevelName((String)request.get("educationLevelText"));
 		EducationLevel saveEducationLevel = educationLevelRepo.save(educationLevel);
 		educationTosave.setEducationLevelId(saveEducationLevel);
 		
@@ -115,7 +115,7 @@ public class EducationService {
 		activity.setIdTypeActivity(typeActivity);
 		
 		// ajouter cette activité à la liste de ce chercheur :
-		String researcherIdStr = request.getParameter("researcherId");
+		String researcherIdStr = (String)request.get("researcherId");
 		int researcherId = -1;
 		researcherId = Integer.parseInt(researcherIdStr);
 		Optional<Researcher> researcherOp = researchRepo.findById(researcherId);

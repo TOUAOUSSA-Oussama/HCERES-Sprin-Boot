@@ -26,6 +26,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  *
@@ -83,10 +84,10 @@ public class NationalInternationalCollaboration implements Serializable {
     private String projetcTitle;
     
     @Column(name = "strategic_recurring_collab")
-    private String strategicRecurringCollab;
+    private Boolean strategicRecurringCollab;
     
     @Column(name = "active_project")
-    private String activeProject;
+    private Boolean activeProject;
     
     @Size(max = 256)
     @Column(name = "associated_funding")
@@ -100,15 +101,15 @@ public class NationalInternationalCollaboration implements Serializable {
     private String refJointPublication;
     
     @Column(name = "umr_coordinated")
-    private String umrCoordinated;
+    private Boolean umrCoordinated;
     
     @Column(name = "agreement_signed")
-    private String agreementSigned;
-    
+    private Boolean agreementSigned;
+    @JsonIgnore
     @JoinColumn(name = "id_activity", referencedColumnName = "id_activity", insertable = false, updatable = false)
     @OneToOne(optional = false, cascade = CascadeType.ALL)
     private Activity activity;
-    
+    @JsonIgnore
     @JoinColumn(name = "type_collab_id", referencedColumnName = "type_collab_id")
     @ManyToOne(optional = false)
     private TypeCollab typeCollabId;
@@ -243,7 +244,7 @@ public class NationalInternationalCollaboration implements Serializable {
      *
      * @return
      */
-    public String getStrategicRecurringCollab() {
+    public Boolean getStrategicRecurringCollab() {
         return strategicRecurringCollab;
     }
 
@@ -251,7 +252,7 @@ public class NationalInternationalCollaboration implements Serializable {
      *
      * @param strategicRecurringCollab
      */
-    public void setStrategicRecurringCollab(String strategicRecurringCollab) {
+    public void setStrategicRecurringCollab(Boolean strategicRecurringCollab) {
         this.strategicRecurringCollab = strategicRecurringCollab;
     }
 
@@ -259,7 +260,7 @@ public class NationalInternationalCollaboration implements Serializable {
      *
      * @return
      */
-    public String getActiveProject() {
+    public Boolean getActiveProject() {
         return activeProject;
     }
 
@@ -267,7 +268,7 @@ public class NationalInternationalCollaboration implements Serializable {
      *
      * @param activeProject
      */
-    public void setActiveProject(String activeProject) {
+    public void setActiveProject(Boolean activeProject) {
         this.activeProject = activeProject;
     }
 
@@ -323,7 +324,7 @@ public class NationalInternationalCollaboration implements Serializable {
      *
      * @return
      */
-    public String getUmrCoordinated() {
+    public Boolean getUmrCoordinated() {
         return umrCoordinated;
     }
 
@@ -331,7 +332,7 @@ public class NationalInternationalCollaboration implements Serializable {
      *
      * @param umrCoordinated
      */
-    public void setUmrCoordinated(String umrCoordinated) {
+    public void setUmrCoordinated(Boolean umrCoordinated) {
         this.umrCoordinated = umrCoordinated;
     }
 
@@ -339,7 +340,7 @@ public class NationalInternationalCollaboration implements Serializable {
      *
      * @return
      */
-    public String getAgreementSigned() {
+    public Boolean getAgreementSigned() {
         return agreementSigned;
     }
 
@@ -347,7 +348,7 @@ public class NationalInternationalCollaboration implements Serializable {
      *
      * @param agreementSigned
      */
-    public void setAgreementSigned(String agreementSigned) {
+    public void setAgreementSigned(Boolean agreementSigned) {
         this.agreementSigned = agreementSigned;
     }
 

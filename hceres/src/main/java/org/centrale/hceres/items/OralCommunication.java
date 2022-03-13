@@ -27,6 +27,7 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.persistence.CascadeType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 /**
@@ -65,15 +66,15 @@ public class OralCommunication implements Serializable {
     @Size(min = 1, max = 2147483647)
     @Column(name = "authors")
     private String authors;
-    
+    @JsonIgnore
     @JoinColumn(name = "id_activity", referencedColumnName = "id_activity", insertable = false, updatable = false)
     @OneToOne(optional = false, cascade = CascadeType.ALL)
     private Activity activity;
-    
+    @JsonIgnore
     @JoinColumn(name = "meeting_id", referencedColumnName = "meeting_id")
     @ManyToOne(optional = false)
     private Meeting meetingId;
-    
+    @JsonIgnore
     @JoinColumn(name = "type_oral_communication_id", referencedColumnName = "type_oral_communication_id")
     @ManyToOne(optional = false)
     private TypeOralCommunication typeOralCommunicationId;

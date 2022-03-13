@@ -5,10 +5,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.centrale.hceres.items.OralCommunication;
 import org.centrale.hceres.service.OralCommunicationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import java.util.Map;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
@@ -25,8 +23,8 @@ public class OralCommunicationController {
 	 * @param education : l'elmt a ajouter
 	 * @return l'elmt ajoute
 	 */
-	@RequestMapping(value = "/AddOralCommunication", method=RequestMethod.POST)
-	public OralCommunication createOralCommunication(HttpServletRequest request) {
+	@PostMapping(value ="/AddOralCommunication")
+	public OralCommunication createOralCommunication(@RequestBody Map<String, Object> request) {
 		return communicationService.saveOralCommunication(request);
 	}
 }

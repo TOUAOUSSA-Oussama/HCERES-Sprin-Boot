@@ -27,6 +27,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.Data;
+import javax.transaction.Transactional;
+import org.springframework.web.bind.annotation.RequestBody;
+import java.util.Map;
 
 @Data
 @Service
@@ -60,19 +63,20 @@ public class OralCommunicationService {
 	 * permet d'ajouter un elmt
 	 * @return : l'elemt ajouter a la base de donnees
 	 */
-	public OralCommunication saveOralCommunication(HttpServletRequest request) {
+	@Transactional
+	public OralCommunication saveOralCommunication(@RequestBody Map<String, Object> request) {
 		
 		OralCommunication oralCommunicationTosave = new OralCommunication();
 		
 		// OralCommunicationTitle :
-		oralCommunicationTosave.setOralCommunicationTitle(request.getParameter("OralCommunicationTitle"));
+		oralCommunicationTosave.setOralCommunicationTitle((String)request.get("OralCommunicationTitle"));
 		
 		// OralCommunicationDat :
-		String dateString = request.getParameter("OralCommunicationDate");
+		String dateString = (String)request.get("OralCommunicationDate");
 		oralCommunicationTosave.setOralCommunicationDat(getDateFromString(dateString, "yyyy-MM-dd"));
 		
 		// Authors :
-		oralCommunicationTosave.setAuthors(request.getParameter("Authors"));
+		oralCommunicationTosave.setAuthors((String)request.get("Authors"));
 		
 		// Activity : 
 		Activity activity = new Activity();
@@ -81,13 +85,13 @@ public class OralCommunicationService {
 		
 		// Meeting
 		Meeting meeting = new Meeting();
-		meeting.setNeetingName(request.getParameter("MeetingName"));
-		String meetingYearString = request.getParameter("MeetingYear");
+		meeting.setNeetingName((String)request.get("MeetingName"));
+		String meetingYearString = (String)request.get("MeetingYear");
 		meeting.setMeetingYear(Integer.parseInt(meetingYearString));
-		meeting.setMeetingLocation(request.getParameter("MeetingLocation"));
-		String dateStringStart = request.getParameter("MeetingStart");
+		meeting.setMeetingLocation((String)request.get("MeetingLocation"));
+		String dateStringStart = (String)request.get("MeetingStart");
 		meeting.setMeetingStart(getDateFromString(dateStringStart, "yyyy-MM-dd"));
-		String dateStringEnd = request.getParameter("MeetingEnd");
+		String dateStringEnd = (String)request.get("MeetingEnd");
 		meeting.setMeetingEnd(getDateFromString(dateStringEnd, "yyyy-MM-dd"));
 		
 		Meeting savedMeeting = meetingRepo.save(meeting);
@@ -96,12 +100,12 @@ public class OralCommunicationService {
 		
 		// TypeOralCommunication : 
 		TypeOralCommunication typeOralCommunication = new TypeOralCommunication();
-		typeOralCommunication.setTypeOralCommunicationName(request.getParameter("TypeOralCommunicationName"));
+		typeOralCommunication.setTypeOralCommunicationName((String)request.get("TypeOralCommunicationName"));
 		TypeOralCommunication savetypeOralCommunication = typeOralCommunicationRepo.save(typeOralCommunication);
 		oralCommunicationTosave.setTypeOralCommunicationId(savetypeOralCommunication);
 		
 		// ajouter cette activité à la liste de ce chercheur :
-		String researcherIdStr = request.getParameter("researcherId");
+		String researcherIdStr = (String)request.get("researcherId");
 		int researcherId = -1;
 		researcherId = Integer.parseInt(researcherIdStr);
 		Optional<Researcher> researcherOp = researchRepo.findById(researcherId);

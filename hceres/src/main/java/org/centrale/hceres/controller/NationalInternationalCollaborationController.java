@@ -1,14 +1,11 @@
 package org.centrale.hceres.controller;
 
-import javax.servlet.http.HttpServletRequest;
 
 import org.centrale.hceres.items.NationalInternationalCollaboration;
 import org.centrale.hceres.service.NationalInternationalCollaborationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import java.util.Map;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
@@ -25,8 +22,8 @@ public class NationalInternationalCollaborationController {
 	 * @param education : l'elmt a ajouter
 	 * @return l'elmt ajoute
 	 */
-	@RequestMapping(value = "/AddNationalInternationalCollaboration", method=RequestMethod.POST)
-	public NationalInternationalCollaboration createNationalInternationalCollaboration(HttpServletRequest request) {
+	@PostMapping(value ="/AddNationalInternationalCollaboration")
+	public NationalInternationalCollaboration createNationalInternationalCollaboration(@RequestBody Map<String, Object> request) {
 		return nationalInternationalCollaborationService.saveNationalInternationalCollaboration(request);
 	}
 }

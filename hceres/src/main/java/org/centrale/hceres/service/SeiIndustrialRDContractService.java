@@ -22,6 +22,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.Data;
+import javax.transaction.Transactional;
+import org.springframework.web.bind.annotation.RequestBody;
+import java.util.Map;
 
 @Data
 @Service
@@ -45,29 +48,30 @@ public class SeiIndustrialRDContractService {
 	 * permet d'ajouter un elmt
 	 * @return : l'elemt ajouter a la base de donnees
 	 */
-	public SeiIndustrialRDContract saveSeiIndustrialRDContract(HttpServletRequest request) {
+	@Transactional
+	public SeiIndustrialRDContract saveSeiIndustrialRDContract(@RequestBody Map<String, Object> request) {
 		
 		SeiIndustrialRDContract seiIndustrialRDContractToSave = new SeiIndustrialRDContract();
 		
 		// StartDate :
-		String startDate = request.getParameter("StartDate");
+		String startDate = (String)request.get("StartDate");
 		seiIndustrialRDContractToSave.setStartDate(getDateFromString(startDate, "yyyy-MM-dd"));
 		
 		// NameCompanyInvolved :
-		seiIndustrialRDContractToSave.setNameCompanyInvolved(request.getParameter("NameCompanyInvolved"));
+		seiIndustrialRDContractToSave.setNameCompanyInvolved((String)request.get("NameCompanyInvolved"));
 		
 		// ProjectTitle :
-		seiIndustrialRDContractToSave.setProjectTitle(request.getParameter("ProjectTitle"));
+		seiIndustrialRDContractToSave.setProjectTitle((String)request.get("ProjectTitle"));
 		
 		// AgreementAmount :
-		seiIndustrialRDContractToSave.setAgreementAmount(Integer.parseInt(request.getParameter("AgreementAmount")));
+		seiIndustrialRDContractToSave.setAgreementAmount(Integer.parseInt((String)request.get("AgreementAmount")));
 		
 		// EndDate :
-		String endDate = request.getParameter("EndDate");
+		String endDate = (String)request.get("EndDate");
 		seiIndustrialRDContractToSave.setEndDate(getDateFromString(endDate, "yyyy-MM-dd"));
 		
 		// AssociatedPubliRef
-		seiIndustrialRDContractToSave.setAssociatedPubliRef(request.getParameter("AssociatedPubliRef"));
+		seiIndustrialRDContractToSave.setAssociatedPubliRef((String)request.get("AssociatedPubliRef"));
 		
 		// Activity : 
 		Activity activity = new Activity();
@@ -75,7 +79,7 @@ public class SeiIndustrialRDContractService {
 		activity.setIdTypeActivity(typeActivity);
 		
 		// ajouter cette activité à la liste de ce chercheur :
-		String researcherIdStr = request.getParameter("researcherId");
+		String researcherIdStr = (String)request.get("researcherId");
 		int researcherId = -1;
 		researcherId = Integer.parseInt(researcherIdStr);
 		Optional<Researcher> researcherOp = researchRepo.findById(researcherId);

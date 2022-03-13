@@ -25,6 +25,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  *
@@ -72,7 +73,7 @@ public class SeiIndustrialRDContract implements Serializable {
     @Size(max = 256)
     @Column(name = "associated_publi_ref")
     private String associatedPubliRef;
-    
+    @JsonIgnore
     @JoinColumn(name = "id_activity", referencedColumnName = "id_activity", insertable = false, updatable = false)
     @OneToOne(optional = false, cascade = CascadeType.ALL)
     private Activity activity;

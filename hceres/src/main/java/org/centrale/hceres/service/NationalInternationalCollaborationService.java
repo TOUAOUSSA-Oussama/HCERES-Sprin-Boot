@@ -25,6 +25,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.Data;
+import javax.transaction.Transactional;
+import org.springframework.web.bind.annotation.RequestBody;
+import java.util.Map;
 
 @Data
 @Service
@@ -52,55 +55,56 @@ public class NationalInternationalCollaborationService {
 	 * permet d'ajouter un elmt
 	 * @return : l'elemt ajouter a la base de donnees
 	 */
-	public NationalInternationalCollaboration saveNationalInternationalCollaboration(HttpServletRequest request) {
+	@Transactional
+	public NationalInternationalCollaboration saveNationalInternationalCollaboration(@RequestBody Map<String, Object> request) {
 		
 		NationalInternationalCollaboration nationalInternationalCollaborationTosave = new NationalInternationalCollaboration();
 		
 		// DateProjectStart :
-		String dateProjectStart = request.getParameter("DateProjectStart");
+		String dateProjectStart = (String)request.get("DateProjectStart");
 		nationalInternationalCollaborationTosave.setDateProjectStart(getDateFromString(dateProjectStart, "yyyy-MM-dd"));
 		
 		// PartnerEntity :
-		nationalInternationalCollaborationTosave.setPartnerEntity(request.getParameter("PartnerEntity"));
+		nationalInternationalCollaborationTosave.setPartnerEntity((String)request.get("PartnerEntity"));
 		
 		// CountryStateCity :
-		nationalInternationalCollaborationTosave.setCountryStateCity(request.getParameter("CountryStateCity"));
+		nationalInternationalCollaborationTosave.setCountryStateCity((String)request.get("CountryStateCity"));
 		
 		// setPiPartners :
-		nationalInternationalCollaborationTosave.setPiPartners(request.getParameter("PiPartners"));
+		nationalInternationalCollaborationTosave.setPiPartners((String)request.get("PiPartners"));
 		
 		// MailPartners
-		nationalInternationalCollaborationTosave.setMailPartners(request.getParameter("MailPartners"));
+		nationalInternationalCollaborationTosave.setMailPartners((String)request.get("MailPartners"));
 		
 		// setProjetcTitle
-		nationalInternationalCollaborationTosave.setProjetcTitle(request.getParameter("ProjetcTitle"));
+		nationalInternationalCollaborationTosave.setProjetcTitle((String)request.get("ProjetcTitle"));
 		
 		// StrategicRecurringCollab : probleme => boolean n'est pas de type bit
-		nationalInternationalCollaborationTosave.setStrategicRecurringCollab(request.getParameter("StrategicRecurringCollab"));
+		nationalInternationalCollaborationTosave.setStrategicRecurringCollab(Boolean.valueOf((String)request.get("StrategicRecurringCollab")));
 		
 		// ActiveProject
-		nationalInternationalCollaborationTosave.setActiveProject(request.getParameter("ActiveProject"));
+		nationalInternationalCollaborationTosave.setActiveProject(Boolean.valueOf((String)request.get("ActiveProject")));
 		
 		// AssociatedFunding
-		nationalInternationalCollaborationTosave.setAssociatedFunding(request.getParameter("AssociatedFunding"));
+		nationalInternationalCollaborationTosave.setAssociatedFunding((String)request.get("AssociatedFunding"));
 
 		// NumberResultingPublications
-		nationalInternationalCollaborationTosave.setNumberResultingPublications(Integer.parseInt(request.getParameter("NumberResultingPublications")));
+		nationalInternationalCollaborationTosave.setNumberResultingPublications(Integer.parseInt((String)request.get("NumberResultingPublications")));
 		
 		// RefJointPublication
-		nationalInternationalCollaborationTosave.setRefJointPublication(request.getParameter("RefJointPublication"));
+		nationalInternationalCollaborationTosave.setRefJointPublication((String)request.get("RefJointPublication"));
 
 		// UmrCoordinated
-		nationalInternationalCollaborationTosave.setUmrCoordinated(request.getParameter("UmrCoordinated"));
+		nationalInternationalCollaborationTosave.setUmrCoordinated(Boolean.valueOf((String)request.get("UmrCoordinated")));
 		
 		
 		// AgreementSigned
-		nationalInternationalCollaborationTosave.setAgreementSigned(request.getParameter("AgreementSigned"));
+		nationalInternationalCollaborationTosave.setAgreementSigned(Boolean.valueOf((String)request.get("AgreementSigned")));
 		
 		
 		// TypeCollab :
 		TypeCollab typeCollab = new TypeCollab();
-		typeCollab.setNameChoice(request.getParameter("NameChoice"));
+		typeCollab.setNameChoice((String)request.get("NameChoice"));
 		TypeCollab savedTypeCollab = typeCollabRepo.save(typeCollab);
 		nationalInternationalCollaborationTosave.setTypeCollabId(savedTypeCollab);
 		
@@ -110,7 +114,7 @@ public class NationalInternationalCollaborationService {
 		activity.setIdTypeActivity(typeActivity);
 		
 		// ajouter cette activité à la liste de ce chercheur :
-		String researcherIdStr = request.getParameter("researcherId");
+		String researcherIdStr = (String)request.get("researcherId");
 		int researcherId = -1;
 		researcherId = Integer.parseInt(researcherIdStr);
 		Optional<Researcher> researcherOp = researchRepo.findById(researcherId);
