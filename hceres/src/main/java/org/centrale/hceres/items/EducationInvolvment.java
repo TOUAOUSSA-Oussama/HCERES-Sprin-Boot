@@ -38,16 +38,19 @@ import javax.validation.constraints.Size;
 public class EducationInvolvment implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "education_involvment_id")
     private Integer educationInvolvmentId;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 256)
     @Column(name = "education_involvment_name")
     private String educationInvolvmentName;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "educationInvolvmentId")
     private Collection<Education> educationCollection;
 

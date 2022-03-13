@@ -4,15 +4,22 @@ import PostDoctorat from './PostDoctorat';
 import Platform from './Platform';
 import Editorial from './Editorial';
 import Review from './Review';
+import SeiIndustrialRDContract from './SeiIndustrialRDContract';
+import NationalInternationalCollaboration from './NationalInternationalCollaboration';
+import OralCommunication from './OralCommunication';
 import './Activity.css';
 
 
 export default function Activity() {
+    const [DateProjectStart, setDateProjectStart] = React.useState(null);
     const [showForm, setShowForm] = React.useState(false);
     const [showPostDoctorat, setShowPostDoctorat] = React.useState(false);
     const [showPlatform, setShowPlatform] = React.useState(false);
     const [showEditorial, setShowEditorial] = React.useState(false);
     const [showReview, setShowReview] = React.useState(false);
+    const [showSeiIndustrialRDContract, setShowSeiIndustrialRDContract] = React.useState(false);
+    const [showNationalInternationalCollaboration, setShowNationalInternationalCollaboration] = React.useState(false);
+    const [showOralCommunication, setShowOralCommunication] = React.useState(false);
 
     return (
         <div className='activity-container'>
@@ -56,13 +63,13 @@ export default function Activity() {
                     <li>
                         <a>Séminaire</a>
                     </li>
-                    <li>
+                    <li onClick={setShowOralCommunication}>
                         <a>Communication orale</a>
                     </li>
-                    <li>
+                    <li onClick={setShowSeiIndustrialRDContract}>
                         <a>Signature d'une contrat industrielle</a>
                     </li>
-                    <li>
+                    <li onClick={setShowNationalInternationalCollaboration}>
                         <a>Collaboration internationale</a>
                     </li>
                     <li>
@@ -88,5 +95,9 @@ export default function Activity() {
             {showPlatform && (<Platform></Platform>)}
             {showEditorial && (<Editorial></Editorial>)}
             {showReview && (<Review></Review>)}
+            {showSeiIndustrialRDContract && (<SeiIndustrialRDContract></SeiIndustrialRDContract>)}
+            {showNationalInternationalCollaboration && (<NationalInternationalCollaboration></NationalInternationalCollaboration>)}
+            {showOralCommunication && (<OralCommunication></OralCommunication>)}
+            
         </div>)
 }
