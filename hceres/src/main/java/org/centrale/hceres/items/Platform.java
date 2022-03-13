@@ -11,18 +11,7 @@ package org.centrale.hceres.items;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -32,17 +21,6 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "platform")
-/*
-@NamedQueries({
-    @NamedQuery(name = "Platform.findAll", query = "SELECT p FROM Platform p"),
-    @NamedQuery(name = "Platform.findByIdActivity", query = "SELECT p FROM Platform p WHERE p.idActivity = :idActivity"),
-    @NamedQuery(name = "Platform.findByCreationDate", query = "SELECT p FROM Platform p WHERE p.creationDate = :creationDate"),
-    @NamedQuery(name = "Platform.findByDescription", query = "SELECT p FROM Platform p WHERE p.description = :description"),
-    @NamedQuery(name = "Platform.findByManagers", query = "SELECT p FROM Platform p WHERE p.managers = :managers"),
-    @NamedQuery(name = "Platform.findByAffiliation", query = "SELECT p FROM Platform p WHERE p.affiliation = :affiliation"),
-    @NamedQuery(name = "Platform.findByLabellisation", query = "SELECT p FROM Platform p WHERE p.labellisation = :labellisation"),
-    @NamedQuery(name = "Platform.findByOpenPrivateResearchers", query = "SELECT p FROM Platform p WHERE p.openPrivateResearchers = :openPrivateResearchers")})
-    */
 public class Platform implements Serializable {
 
     private static final long serialVersionUID = 1L;

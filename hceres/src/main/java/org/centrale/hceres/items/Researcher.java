@@ -8,7 +8,7 @@
  * L LETERTRE, S LIMOUX, JY MARTIN
  * -------------------------------------------------------------------------------- */
 package org.centrale.hceres.items;
-
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
@@ -28,9 +28,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 //import org.centrale.tools.Utilities;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 /**
  *
  * @author kwyhr
@@ -101,7 +99,6 @@ public class Researcher implements Serializable {
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "researcherId")
     private Collection<PhdStudent> phdStudentCollection;
-    
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "researcher")
     private Admin admin;
     @JsonIgnore

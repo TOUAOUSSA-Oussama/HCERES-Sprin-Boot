@@ -8,7 +8,7 @@
  * L LETERTRE, S LIMOUX, JY MARTIN
  * -------------------------------------------------------------------------------- */
 package org.centrale.hceres.items;
-
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
@@ -257,7 +257,6 @@ public class Activity implements Serializable {
     public void setNationalInternationalCollaboration(NationalInternationalCollaboration nationalInternationalCollaboration) {
         this.nationalInternationalCollaboration = nationalInternationalCollaboration;
     }
-
     /**
      *
      * @return

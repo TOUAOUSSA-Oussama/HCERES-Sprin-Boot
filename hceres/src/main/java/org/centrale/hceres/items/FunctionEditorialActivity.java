@@ -30,10 +30,12 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "function_editorial_activity")
+/*
 @NamedQueries({
     @NamedQuery(name = "FunctionEditorialActivity.findAll", query = "SELECT f FROM FunctionEditorialActivity f"),
     @NamedQuery(name = "FunctionEditorialActivity.findByFunctionEditorialActivityId", query = "SELECT f FROM FunctionEditorialActivity f WHERE f.functionEditorialActivityId = :functionEditorialActivityId"),
     @NamedQuery(name = "FunctionEditorialActivity.findByFunctionEditorialActivityName", query = "SELECT f FROM FunctionEditorialActivity f WHERE f.functionEditorialActivityName = :functionEditorialActivityName")})
+*/
 public class FunctionEditorialActivity implements Serializable {
 
     private static final long serialVersionUID = 1L;

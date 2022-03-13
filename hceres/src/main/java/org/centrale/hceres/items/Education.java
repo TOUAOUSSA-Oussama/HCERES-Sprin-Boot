@@ -26,7 +26,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 /**
  *
  * @author kwyhr
@@ -64,15 +64,15 @@ public class Education implements Serializable {
     @Size(max = 256)
     @Column(name = "education_formation")
     private String educationFormation;
-    
+    @JsonIgnore
     @JoinColumn(name = "id_activity", referencedColumnName = "id_activity", insertable = false, updatable = false)
     @OneToOne(optional = false, cascade = CascadeType.ALL)
     private Activity activity;
-    
+    @JsonIgnore
     @JoinColumn(name = "education_involvment_id", referencedColumnName = "education_involvment_id")
     @ManyToOne(optional = false)
     private EducationInvolvment educationInvolvmentId;
-    
+    @JsonIgnore
     @JoinColumn(name = "education_level_id", referencedColumnName = "education_level_id")
     @ManyToOne(optional = false)
     private EducationLevel educationLevelId;
