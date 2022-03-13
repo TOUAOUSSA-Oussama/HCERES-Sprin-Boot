@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.persistence.criteria.CriteriaBuilder;
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -53,7 +54,9 @@ public class EditorialService {
         editorialToSave.setEndDate(getDateFromString((String)request.get("endDate"), "yyyy-MM-dd"));
 
         // Impact Factor
-        editorialToSave.setImpactFactor((BigInteger)request.get("description"));
+        String impactFactor = (String)request.get("impactFactor");
+        BigDecimal impactFactorInt = new BigDecimal(impactFactor);
+        editorialToSave.setImpactFactor(impactFactorInt);
 
         // Activity :
         Activity activity = new Activity();
@@ -81,10 +84,9 @@ public class EditorialService {
         Activity savedActivity = activityRepo.save(activity);
         editorialToSave.setActivity(savedActivity);
 
-
         // Created Editorial id :
-        Integer idPlatform = activity.getIdActivity();
-        editorialToSave.setIdActivity(idPlatform);
+        Integer idEditorial = activity.getIdActivity();
+        editorialToSave.setIdActivity(idEditorial);
 
         // Creating journal object with given name in form (must include in future the possibility to select among the existing journals)
         String journalName = (String)request.get("journalName") ;
@@ -106,15 +108,21 @@ public class EditorialService {
         if (functionEditorialActivityRepository.findByName(functionName)==null){
             FunctionEditorialActivity functionEditorialActivity = new FunctionEditorialActivity();
 
+            // Setting the function Name
+            functionEditorialActivity.setFunctionEditorialActivityName(functionName);
+
             // Getting existing collection of editorial activities
             Collection<EditorialActivity> collection = functionEditorialActivity.getEditorialActivityCollection();
 
             // Adding the new editorial activity to the collection
+            if (collection == null) {
+                collection = new ArrayList<EditorialActivity>();
+            }
             collection.add(editorialToSave);
             functionEditorialActivity.setEditorialActivityCollection(collection);
 
             // Persist Function editorial activity
-            functionEditorialActivityRepository.save(functionEditorialActivity);
+            //functionEditorialActivityRepository.save(functionEditorialActivity);
 
             // Adding id to editorial activity
             editorialToSave.setFunctionEditorialActivityId(functionEditorialActivity);
@@ -127,16 +135,16 @@ public class EditorialService {
             Collection<EditorialActivity> collection = functionEditorialActivity.getEditorialActivityCollection();
 
             // Adding the new editorial activity to the collection
+
             collection.add(editorialToSave);
             functionEditorialActivity.setEditorialActivityCollection(collection);
 
             // Persist Function editorial activity
-            functionEditorialActivityRepository.save(functionEditorialActivity);
+            //functionEditorialActivityRepository.save(functionEditorialActivity);
 
             // Adding id to editorial activity
             editorialToSave.setFunctionEditorialActivityId(functionEditorialActivity);
         }
-
 
         // Persist Platform to database :
         EditorialActivity saveEditorial = editorialRepository.save(editorialToSave);

@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 public interface JournalRepository extends JpaRepository<Journal, Integer> {
-    @Query(value = "SELECT * FROM journal WHERE LTRIM(RTRIM(LOWER(journal_name))) LIKE LTRIM(TRTIM(LOWER(?1)))", nativeQuery = true)
+    @Query(value = "SELECT * FROM journal WHERE LOWER(journal_name) LIKE LOWER(?1)", nativeQuery = true)
     Journal findByName(String name);
 }

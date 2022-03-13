@@ -2,6 +2,8 @@ import React from 'react';
 import Education from './Education';
 import PostDoctorat from './PostDoctorat';
 import Platform from './Platform';
+import Editorial from './Editorial';
+import Review from './Review';
 import './Activity.css';
 
 
@@ -9,7 +11,8 @@ export default function Activity() {
     const [showForm, setShowForm] = React.useState(false);
     const [showPostDoctorat, setShowPostDoctorat] = React.useState(false);
     const [showPlatform, setShowPlatform] = React.useState(false);
-
+    const [showEditorial, setShowEditorial] = React.useState(false);
+    const [showReview, setShowReview] = React.useState(false);
 
     return (
         <div className='activity-container'>
@@ -38,10 +41,10 @@ export default function Activity() {
                     <li onClick={setShowPlatform}>
                         <a>Platform</a>
                     </li>
-                    <li>
+                    <li onClick={setShowEditorial}>
                         <a>Edition</a>
                     </li>
-                    <li>
+                    <li onClick={setShowReview}>
                         <a>Revue</a>
                     </li>
                     <li>
@@ -83,5 +86,7 @@ export default function Activity() {
             {showForm && (<Education> </Education>)}
             {showPostDoctorat && (<PostDoctorat> </PostDoctorat>)}
             {showPlatform && (<Platform></Platform>)}
+            {showEditorial && (<Editorial></Editorial>)}
+            {showReview && (<Review></Review>)}
         </div>)
 }
