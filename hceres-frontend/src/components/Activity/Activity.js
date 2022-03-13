@@ -1,6 +1,5 @@
 import React from 'react';
-import Education from './Education/Education';
-import PostDoctorat from './PostDoctorat/PostDoctorat';
+import Education from './Education';
 import SeiIndustrialRDContract from './SeiIndustrialRDContract';
 import NationalInternationalCollaboration from './NationalInternationalCollaboration';
 import OralCommunication from './OralCommunication';
@@ -25,12 +24,13 @@ export default function Activity() {
                     Choisissez une activité à ajouter parmi les activités suivantes. Si vous nous trouvez pas l'activité recherchée, contactez le support.
                 </h3>
             </div>
+            
             <div className='activityList'>
                 <ul>
                     <li onClick={setShowForm}>
                         <a>Education</a>
                     </li>
-                    <li onClick={setShowPostDoctorat}>
+                    <li>
                         <a>PostDoctorat</a>
                     </li>
                     <li>
@@ -85,7 +85,6 @@ export default function Activity() {
 
             </div>
             {showForm && (<Education> </Education>)}
-            {showPostDoctorat && (<PostDoctorat> </PostDoctorat>)}
             {showSeiIndustrialRDContract && (<SeiIndustrialRDContract></SeiIndustrialRDContract>)}
             {showNationalInternationalCollaboration && (<NationalInternationalCollaboration></NationalInternationalCollaboration>)}
             {showOralCommunication && (<OralCommunication></OralCommunication>)}
