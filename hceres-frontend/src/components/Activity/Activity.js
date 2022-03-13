@@ -1,7 +1,4 @@
 import React from 'react';
-import Education from './Education';
-import Platform from './Platform';
-import PostDoctorat from './PostDoctorat'
 import EssaiClinique from './EssaiClinique';
 import IncomingMobility from './IncomingMobility';
 import ScientificExpertise from './ScientificExpertise';
@@ -9,10 +6,7 @@ import './Activity.css'
 import Navbar from '../Navbar/Navbar';
 import SrAward from './SrAward';
 export default function Activity() {
-    const [showForm, setShowForm] = React.useState(false);
     const [showPrix, setPrix] = React.useState(false);
-    const [showPlatform, setShowPlatform] = React.useState(false);
-    const [showPostDoctorat, setPostDoctorat] = React.useState(false);
     const [showEssaiClinique, setEssaiClinique] = React.useState(false);
     const [showIncomingMobility, setIncomingMobility] = React.useState(false);
     const [showScientificExpertise, setScientificExpertise] = React.useState(false);
@@ -32,10 +26,10 @@ export default function Activity() {
             </div>
             <div className='activityList'>
                 <ul>
-                    <li onClick={setShowForm}>
+                    <li >
                         <a>Education</a>
                     </li>
-                    <li onClick={setPostDoctorat}>
+                    <li >
                         <a>PostDoctorat</a>
                     </li>
                     <li>
@@ -47,7 +41,7 @@ export default function Activity() {
                     <li>
                         <a>Production</a>
                     </li>
-                    <li onClick={setShowPlatform}>
+                    <li >
                             <a>Platform</a>
                         </li>
                         <li>
@@ -92,10 +86,7 @@ export default function Activity() {
                 </ul>
 
             </div>
-            {showForm && (<Education> </Education>)}
             {showPrix && (<SrAward> </SrAward>)}
-            {showPostDoctorat && (<PostDoctorat> </PostDoctorat>)}
-            {showPlatform && (<Platform> </Platform>)}
             {showEssaiClinique && (<EssaiClinique> </EssaiClinique>)}
             {showIncomingMobility && (<IncomingMobility> </IncomingMobility>)}
             {showScientificExpertise && (<ScientificExpertise> </ScientificExpertise>)}

@@ -6,7 +6,6 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react/cjs/react.development";
-import EssaiCliniqueService from "../../services/EssaiClinique.service";
 import Axios from 'axios'
 
 const EssaiClinique = () => {

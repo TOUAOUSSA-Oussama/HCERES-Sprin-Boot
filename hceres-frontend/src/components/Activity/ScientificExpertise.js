@@ -5,7 +5,6 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react/cjs/react.development";
-import ScientificExpertiseService from "../../services/ScientificExpertise.service";
 import Axios from 'axios'
 
 const ScientificExpertise = () => {
