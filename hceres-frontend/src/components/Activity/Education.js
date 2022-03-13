@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import './Education.css';
+import React from 'react';
+import './Activity.css';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Axios from 'axios'
