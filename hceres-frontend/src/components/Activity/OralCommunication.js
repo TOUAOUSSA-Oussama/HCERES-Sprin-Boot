@@ -39,7 +39,7 @@ function OralCommunication() {
 
     return (
         <div className='form-container'>
-            <form className='form' action="http://localhost:9000/AddOralCommunication" method="POST">
+            <form className='form' onSubmit={handleSubmit}>
                 <a href="/Activity" class="close-button">&#10006;</a>
                 <h3 className='title'>Communication orale</h3>
                 <label className='label' >

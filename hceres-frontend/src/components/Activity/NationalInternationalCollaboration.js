@@ -1,6 +1,7 @@
 import React from 'react';
 import './Activity.css';
 import 'react-datepicker/dist/react-datepicker.css';
+import DatePicker from 'react-datepicker';
 import Axios from 'axios'
 
 function NationalInternationalCollaboration() {
@@ -14,12 +15,11 @@ function NationalInternationalCollaboration() {
     const [ActiveProject, setActiveProject] = React.useState("");
     const [AssociatedFunding, setAssociatedFunding] = React.useState("");
     const [NumberResultingPublications, setNumberResultingPublications] = React.useState("");
-    const [RefJointPublication, setRefJointPublication] = React.useState("");
+    const [RefJointPublication,  setRefJointPublication] = React.useState("");
     const [UmrCoordinated, setUmrCoordinated] = React.useState("");
     const [AgreementSigned, setAgreementSigned] = React.useState("");
     const [NameChoice, setNameChoice] = React.useState("");
     const [researcherId, setresearcherId] = React.useState("");
-
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -49,8 +49,8 @@ function NationalInternationalCollaboration() {
 
     return (
         <div className='form-container'>
-            <form className='form' action="http://localhost:9000/AddNationalInternationalCollaboration" method="POST">
-                <a href="/Activity" class="close-button">&#10006;</a>
+            <form className='form' onSubmit={handleSubmit}>
+            <a href="/Activity" class="close-button">&#10006;</a>
                 <h3 className='title'>Collaboration internationale</h3>
                 <label className='label' >
                     chercheur
@@ -143,8 +143,7 @@ function NationalInternationalCollaboration() {
                  <input
                     placeholder='StrategicRecurringCollab '
                     className='input-container'
-                    name="StrategicRecurringCollab"
-                    type="StrategicRecurringCollab"
+                    name="boolean-parameter" type="checkbox"
                     value={StrategicRecurringCollab}
                     onChange={e => setStrategicRecurringCollab(e.target.value)}
                     required />
@@ -156,7 +155,7 @@ function NationalInternationalCollaboration() {
                     placeholder='ActiveProject '
                     className='input-container'
                     name="ActiveProject"
-                    type="ActiveProject"
+                    type="checkbox"
                     value={ActiveProject}
                     onChange={e => setActiveProject(e.target.value)}
                     required />
@@ -204,7 +203,7 @@ function NationalInternationalCollaboration() {
                     placeholder='UmrCoordinated '
                     className='input-container'
                     name="UmrCoordinated"
-                    type="UmrCoordinated"
+                    type="checkbox"
                     value={UmrCoordinated}
                     onChange={e => setUmrCoordinated(e.target.value)}
                     required />
@@ -216,7 +215,7 @@ function NationalInternationalCollaboration() {
                     placeholder='AgreementSigned '
                     className='input-container'
                     name="AgreementSigned"
-                    type="AgreementSigned"
+                    type="checkbox"
                     value={AgreementSigned}
                     onChange={e => setAgreementSigned(e.target.value)}
                     required />

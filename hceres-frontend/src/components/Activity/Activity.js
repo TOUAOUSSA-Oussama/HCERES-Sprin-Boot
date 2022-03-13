@@ -1,7 +1,6 @@
 import React from 'react';
 import Education from './Education/Education';
 import PostDoctorat from './PostDoctorat/PostDoctorat';
-import Platform from './Platform/Platform';
 import SeiIndustrialRDContract from './SeiIndustrialRDContract';
 import NationalInternationalCollaboration from './NationalInternationalCollaboration';
 import OralCommunication from './OralCommunication';
@@ -9,9 +8,9 @@ import './Activity.css';
 
 
 export default function Activity() {
+    const [DateProjectStart, setDateProjectStart] = React.useState(null);
     const [showForm, setShowForm] = React.useState(false);
     const [showPostDoctorat, setShowPostDoctorat] = React.useState(false);
-    const [showPlatform, setShowPlatform] = React.useState(false);
     const [showSeiIndustrialRDContract, setShowSeiIndustrialRDContract] = React.useState(false);
     const [showNationalInternationalCollaboration, setShowNationalInternationalCollaboration] = React.useState(false);
     const [showOralCommunication, setShowOralCommunication] = React.useState(false);
@@ -40,7 +39,7 @@ export default function Activity() {
                     <li>
                         <a>Production</a>
                     </li>
-                    <li onClick={setShowPlatform}>
+                    <li>
                         <a>Platform</a>
                     </li>
                     <li>
@@ -87,9 +86,9 @@ export default function Activity() {
             </div>
             {showForm && (<Education> </Education>)}
             {showPostDoctorat && (<PostDoctorat> </PostDoctorat>)}
-            {showPlatform && (<Platform></Platform>)}
             {showSeiIndustrialRDContract && (<SeiIndustrialRDContract></SeiIndustrialRDContract>)}
             {showNationalInternationalCollaboration && (<NationalInternationalCollaboration></NationalInternationalCollaboration>)}
             {showOralCommunication && (<OralCommunication></OralCommunication>)}
+            
         </div>)
 }
