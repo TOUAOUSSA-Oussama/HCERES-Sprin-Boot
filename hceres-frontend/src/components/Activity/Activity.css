@@ -1,22 +1,95 @@
+activity-container {
+    display: block;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    flex-direction: column;
+    height: fit-content;
+}
+
+.header {
+    margin-top: 25px;
+    margin-bottom: 40px;
+    align-items: center;
+    text-align: center;
+    padding: 15px;
+}
+
+.header h1 {
+    font-size: 40px;
+}
+.header h3 {
+    padding-top: 20px;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.activityList {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.activityList ul {
+    list-style: none;
+    width: 40vw;
+    margin-top: 50px;
+}
+
+.activityList ul li {
+    display: flex;
+    align-items: center;
+    background-color: #cfcfcf;
+    margin-bottom: 7px;
+    padding: 10px;
+}
+
+.activityList ul :hover {
+    background-color: #08d ;
+    cursor: pointer;
+}
+.activityList ul li span div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: solid 3px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border-color: black;
+    margin-right: 12px;
+}
+
+.activityList ul li span a {
+    font-size: 20px;
+    text-decoration: none;
+    color: black;
+}
+
+.activityList ul li span a:hover {
+    text-decoration: underline;
+}
+
+
+/* Form */
 .form-container {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 80%;
+    height: 100%;
 }
 
 .form {
-position: fixed;
-max-height: 100%;
-overflow-y: scroll;
-margin-top: 50%;
+position: relative;
+margin-top: 20vh;
+margin-bottom: 10vh;
 padding: 20px;
-width: 40%;
+width: 40vw;
 background-color: white;
 border-radius: 10px;
 box-sizing: border-box;
-
 box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+overflow-y: scroll;
 }
 
 
@@ -37,6 +110,7 @@ border-left: solid #08d ;
     font-weight: 550;
     margin-top: 20px;
     margin-bottom: 10px;
+    border: none;
     border-left: solid #08d ;
     padding-left: 10px;
 }
@@ -112,6 +186,7 @@ background-color: #06b;
     padding: 1.5px 7px;
     border-radius: 50%;
     border: 2px solid #fff;
+    text-decoration: none;
     color: white;
     -webkit-box-shadow: -4px -2px 6px 0px rgba(0,0,0,0.1);
     -moz-box-shadow: -4px -2px 6px 0px rgba(0,0,0,0.1);

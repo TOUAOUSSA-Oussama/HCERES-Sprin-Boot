@@ -8,16 +8,14 @@ import Activity from './components/Activity/Activity';
 import Footer from './components/Footer/Footer';
 import About from './components/About/About';
 import Connection from './components/Connection/Connection';
-import Brevet from './components/Activity/Brevet/Brevet';
+import Brevet from './components/Activity/Brevet';
 
 function App() {
   return (
     <>
       <Router>
       <GlobaleStyle />
-
-      {/* <Navbar /> */}
-
+      <Navbar />
       <Routes>
           <Route path='' exact  element={<Connection/>} />
           <Route path='/Home' exact  element={<Home/>} />
@@ -26,9 +24,7 @@ function App() {
           <Route path='/About' exact  element={<About/>} />
           <Route path='/Brevet' exact  element={<Brevet/>} />
       </Routes> 
-
-      <Footer />
-
+      <Footer/>
       </Router>
     </>
 
