@@ -1,5 +1,5 @@
 package org.centrale.hceres.repository;
-import org.centrale.hceres.model.Researcher;
+import org.centrale.hceres.items.Researcher;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -70,7 +70,6 @@ function Education() {
                         return (<option key={item.researcherId} value={item.researcherId}>{item.researcherName} {item.researcherSurname}</option>);
                     })}
                 </select>
-                
 
                 <label className='label' >
                 Nom du cours d'éducation
