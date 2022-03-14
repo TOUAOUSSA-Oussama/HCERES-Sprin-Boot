@@ -11,7 +11,19 @@ function SeiIndustrialRDContract() {
     const [AgreementAmount, setAgreementAmount] = React.useState("");
     const [EndDate, setEndDate] = React.useState(null);
     const [AssociatedPubliRef, setAssociatedPubliRef] = React.useState("");
-    const [researcherId, setresearcherId] = React.useState("");
+    const [researcherId, setResearcherId] = React.useState("");
+    const [researchers, setResearchers] = React.useState([]);
+
+    async function componentDidMount() {
+
+        const url = "http://localhost:9000/Researchers";
+        const response = await fetch(url);
+
+        const listeChercheurs = await response.json();
+        
+        setResearchers(listeChercheurs)
+        console.log(researchers);
+    }
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -31,6 +43,8 @@ function SeiIndustrialRDContract() {
             }).catch(err => alert(err))
     }
 
+    const handleChange = e => setResearcherId(e.target.value);
+
     return (
         <div className='form-container'>
             <form className='form' onSubmit={handleSubmit}>
@@ -39,14 +53,11 @@ function SeiIndustrialRDContract() {
                 <label className='label' >
                     chercheur
                 </label>
-                <input
-                    placeholder='Nom'
-                    className='input-container'
-                    name="nom"
-                    type="nom"
-                    value={researcherId}
-                    onChange={e => setresearcherId(e.target.value)}
-                    required />
+                <select onClick={componentDidMount} onChange={handleChange}>
+                    {researchers.map(item => {
+                        return (<option key={item.researcherId} value={item.researcherId}>{item.researcherName} {item.researcherSurname}</option>);
+                    })}
+                </select>
 
                 <label className='label'>
                     Date de début

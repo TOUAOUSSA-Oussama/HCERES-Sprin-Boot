@@ -31,7 +31,6 @@ export default function Activity() {
     const [showOralCommunication, setShowOralCommunication] = React.useState(false);
 
     return (
-
         <div> 
         <Navbar />
         <div className='activity-container'>
@@ -121,3 +120,4 @@ export default function Activity() {
     </div>
 )
     }
+
