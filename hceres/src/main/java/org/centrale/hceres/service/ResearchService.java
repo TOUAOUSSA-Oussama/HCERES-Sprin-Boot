@@ -1,6 +1,6 @@
 package org.centrale.hceres.service;
 
-import org.centrale.hceres.model.Researcher;
+import org.centrale.hceres.items.Researcher;
 import org.centrale.hceres.repository.ResearchRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,5 +23,13 @@ public class ResearchService {
 	 */
 	public Iterable<Researcher> getResearchers(){
 		return researchRepo.findAll();
+	}
+	
+	/**
+	 * supprimer l'elmt selon son id
+	 * @param id : id de l'elmt
+	 */
+	public void deleteResearcher(final Integer id) {
+		researchRepo.deleteById(id);
 	}
 }
