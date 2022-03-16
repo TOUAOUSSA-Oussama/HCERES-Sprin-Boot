@@ -32,13 +32,13 @@ class Researcher extends Component {
         if (this.state.researchers && this.state.researchers.length) {
             //return this.state.researchers.map((chercheur, index) => {
 
-                return (
-                    <div>
-                        <Navbar/>
-                        
-                        <div className="container">
+            return (
+                <div>
+                    <Navbar />
+
+                    <div className="container">
                         <h3>Liste des chercheurs </h3>
-                        <hr/>
+                        <hr />
                         <table className="table table-bordered table-striped" > <thead className="thead-dark">
                             <tr>
                                 <th>Nom</th>
@@ -49,25 +49,31 @@ class Researcher extends Component {
                         </thead>
                             <tbody>
                                 {
-                            this.state.researchers.map((chercheur,index) => 
+                                    this.state.researchers.map((chercheur, index) =>
                                         <tr key={index} >
                                             <td>{chercheur.researcherSurname}</td>
                                             <td>{chercheur.researcherName}</td>
                                             <td>{chercheur.researcherEmail}</td>
                                             <td>
-                                        <button className="btn btn-info" >Update</button>
+                                                <button className="btn btn-info" >Update</button>
 
-                                        <button className="btn btn-danger ml-2">Delete</button>
-                                    </td>
+                                                <button className="btn btn-danger ml-2">Delete</button>
+                                            </td>
                                         </tr>
-                )}
+                                    )}
+                                <tr>
+                                    <th>----</th>
+                                    <th>----</th>
+                                    <th>----</th>
+                                    <th>----</th>
+                                </tr>
                             </tbody>
                         </table>
-                        </div>
                     </div>
-                );
+                </div>
+            );
 
-            
+
 
 
 
@@ -96,6 +102,7 @@ class Researcher extends Component {
             //);
 
         }
+
         return (
             <div>
                 <h1>Telechargement data</h1>

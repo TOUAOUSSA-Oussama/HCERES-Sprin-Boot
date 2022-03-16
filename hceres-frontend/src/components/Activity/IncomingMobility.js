@@ -8,7 +8,7 @@ import { useEffect } from "react/cjs/react.development";
 import Axios from 'axios'
 
 const IncomingMobility = () => {
-    const [chercheur, setChercheur] = useState("");
+    const [researcherId, setResearcherId] = React.useState("");
     const [nameSeniorScientist, setnameSeniorScientist] = useState("");
     const [arrivalDate, setarrivalDate] = useState(null);
     const [departureDate, setdepartureDate] = useState(null);
@@ -25,12 +25,24 @@ const IncomingMobility = () => {
     const [umrCoordinated, setumrCoordinated] = useState("");
     const [agreementSigned, setagreementSigned] = useState("");
     const navigate = useNavigate();
+    
+    const [researchers, setResearchers] = React.useState([]);
+    async function componentDidMount() {
+
+        const url = "http://localhost:9000/Researchers";
+        const response = await fetch(url);
+
+        const listeChercheurs = await response.json();
+        
+        setResearchers(listeChercheurs)
+        console.log(researchers);
+    }
 
     const handleSubmit = (event) => {
         event.preventDefault();
         let data = {
 
-            researcherId: chercheur,
+            researcherId: researcherId,
             nameSeniorScientist: nameSeniorScientist,
             arrivalDate: arrivalDate,
             departureDate: departureDate,
@@ -52,6 +64,7 @@ const IncomingMobility = () => {
         Axios.post("http://localhost:9000/Api/AddIncomingMobility", data)
             .then(res => {
                 console.log(res.data)
+                navigate('/Home');
             }).catch(err => alert(err))
     }
 
@@ -70,7 +83,7 @@ const IncomingMobility = () => {
               setdepartureDate(departureDate);
               setdepartureDate(event);
             }
-
+            const handleChange = e => setResearcherId(e.target.value); 
     return (
         <div className='form-container'>
             <form className='form' onSubmit={handleSubmit}>
@@ -79,14 +92,11 @@ const IncomingMobility = () => {
                 <label className='label'>
                     Chercheur
                 </label>
-                <input
-                    placeholder='Nom'
-                    className='input-container'
-                    name="chercheur"
-                    id="chercheur"
-                    value={chercheur}
-                    onChange={(e) => setChercheur(e.target.value)}
-                    required />
+                <select onClick={componentDidMount} onChange={handleChange}>
+                    {researchers.map(item => {
+                        return (<option key={item.researcherId} value={item.researcherId}>{item.researcherName} {item.researcherSurname}</option>);
+                    })}
+                </select>
                 <label className='label'>
                     Nom du Senior Scientist
                 </label>

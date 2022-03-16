@@ -9,7 +9,7 @@ import { useEffect } from "react/cjs/react.development";
 import Axios from 'axios'
 
 const EssaiClinique = () => {
-    const [chercheur, setChercheur] = useState("");
+    const [researcherId, setResearcherId] = React.useState("");
     const [startDate, setStartDate] = useState(null);
     const [partenaireCoordinateur, setPartenaireCoordinateur] = useState("");
     const [titreEssaiClinique, setTitreEssaiClinique] = useState("");
@@ -21,11 +21,22 @@ const EssaiClinique = () => {
     const [montantFinancement, setMontantFinancement] = useState("");
     const navigate = useNavigate();
 
+    const [researchers, setResearchers] = React.useState([]);
+    async function componentDidMount() {
+
+        const url = "http://localhost:9000/Researchers";
+        const response = await fetch(url);
+
+        const listeChercheurs = await response.json();
+        
+        setResearchers(listeChercheurs)
+        console.log(researchers);
+    }
     const handleSubmit = (event) => {
         event.preventDefault();
         let data = {
 
-            researcherId: chercheur,
+            researcherId: researcherId,
             startDate: startDate,
             endDate: endDate,
             coordinatorPartner: partenaireCoordinateur,
@@ -41,6 +52,7 @@ const EssaiClinique = () => {
         Axios.post("http://localhost:9000/Api/AddSeiClinicalTrial", data)
             .then(res => {
                 console.log(res.data)
+                navigate('/Home');
             }).catch(err => alert(err))
     }
     const handleDate1 = (event) =>{
@@ -58,26 +70,8 @@ const EssaiClinique = () => {
               setEndDate(endDate);
               setEndDate(event);
             }
-/*
-            const faireRedirection=()=> {
-                let navigate = useNavigate();
-                navigate('/Activity');
-              }
-    
-    
-    const saveEssaiClinique = (e) => {
-        e.preventDefault();
-        const EssaiClinique = { chercheur, startDate, partenaireCoordinateur, titreEssaiClinique, endDate, nbEnregistrement, nomSponsor, nbPatients, financement, montantFinancement };
-        EssaiCliniqueService.create(EssaiClinique)
-            .then(response => {
-                console.log("EssaiClinique added successfully", response.data);
-                navigate("/Home");
-            })
-            .catch(error => {
-                console.log('something went wrong', error);
-            })
-    }
-    */
+
+    const handleChange = e => setResearcherId(e.target.value); 
     return (
         <div className='form-container'>
             <form className='form' onSubmit={handleSubmit}>
@@ -86,14 +80,13 @@ const EssaiClinique = () => {
                 <label className='label'>
                     Chercheur
                 </label>
-                <input
-                    placeholder='Nom'
-                    className='input-container'
-                    name="chercheur"
-                    id="chercheur"
-                    value={chercheur}
-                    onChange={(e) => setChercheur(e.target.value)}
-                    required />
+                <select onClick={componentDidMount} onChange={handleChange}>
+                    {researchers.map(item => {
+                        return (<option key={item.researcherId} value={item.researcherId}>{item.researcherName} {item.researcherSurname}</option>);
+                    })}
+                </select>
+             
+            
                 <label className='label'>
                     Date de début
                 </label>

@@ -6,16 +6,27 @@ import { useNavigate  } from "react-router-dom";
 import Axios from 'axios'
 
 function SrAward() {
-  const [researcherId, setChercheur] = React.useState("");
+  const [researcherId, setResearcherId] = React.useState("");
   const [awardeeName, setAwardeeName] = React.useState("");
   const [description, setDescritption] = React.useState("");
   const [awardDate, setDate] = React.useState("");
+  const navigate = useNavigate();
+  const [researchers, setResearchers] = React.useState([]);
+    async function componentDidMount() {
 
+        const url = "http://localhost:9000/Researchers";
+        const response = await fetch(url);
+
+        const listeChercheurs = await response.json();
+        
+        setResearchers(listeChercheurs)
+        console.log(researchers);
+    }
   const handleSubmit = (event) => {
     event.preventDefault();
     let data = {
 
-        researcherId: researcherId,
+        "researcherId": researcherId,
         awardeeName: awardeeName,
         description: description,
         awardDate: awardDate};
@@ -23,6 +34,7 @@ function SrAward() {
     Axios.post("http://localhost:9000/Api/AddSrAward", data)
         .then(res => {
             console.log(res.data)
+            navigate('/Home');
         }).catch(err => alert(err))
 }
 
@@ -34,10 +46,10 @@ function SrAward() {
     setDate(event);
   }
 
-  const navigate  = useNavigate();
   const faireRedirection = () => { 
     navigate('/Activity');
   }
+  const handleChange = e => setResearcherId(e.target.value); 
   return (
     <div className='form-container'>
       <form className='form' onSubmit={handleSubmit}>
@@ -46,15 +58,11 @@ function SrAward() {
         <label className='label'>
           Chercheur
         </label>
-        <input
-          placeholder='Nom'
-          className='input-container'
-          name="researcherId"
-          type="chercheur"
-          value={researcherId}
-          onChange={e => setChercheur(e.target.value)}
-          required />
-        
+        <select onClick={componentDidMount} onChange={handleChange}>
+                    {researchers.map(item => {
+                        return (<option key={item.researcherId} value={item.researcherId}>{item.researcherName} {item.researcherSurname}</option>);
+                    })}
+                </select>
         <label className='label' >
           Nom du prix
         </label>

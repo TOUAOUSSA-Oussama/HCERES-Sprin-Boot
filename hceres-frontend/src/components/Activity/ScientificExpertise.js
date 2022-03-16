@@ -8,18 +8,29 @@ import { useEffect } from "react/cjs/react.development";
 import Axios from 'axios'
 
 const ScientificExpertise = () => {
-    const [chercheur, setChercheur] = useState("");
+    const [researcherId, setResearcherId] = React.useState("");
     const [typeName, settypeName] = useState("");
     const [startDate, setstartDate] = useState(null);
     const [endDate, setendDate] = useState(null);
     const [description, setdescription] = useState("");
     const navigate = useNavigate();
+    
+    const [researchers, setResearchers] = React.useState([]);
+    async function componentDidMount() {
 
+        const url = "http://localhost:9000/Researchers";
+        const response = await fetch(url);
+
+        const listeChercheurs = await response.json();
+        
+        setResearchers(listeChercheurs)
+        console.log(researchers);
+    }
     const handleSubmit = (event) => {
         event.preventDefault();
         let data = {
 
-            researcherId: chercheur,
+            researcherId: researcherId,
             ScientificExpertiseTypeName: typeName,
             ScientificExpertiseDescription: description,
             ScientificExpertiseStartDate: startDate,
@@ -29,6 +40,7 @@ const ScientificExpertise = () => {
         Axios.post("http://localhost:9000/Api/AddScientificExpertise", data)
             .then(res => {
                 console.log(res.data)
+                navigate('/Home');
             }).catch(err => alert(err))
     }
     const handleDate1 = (event) =>{
@@ -47,20 +59,7 @@ const ScientificExpertise = () => {
               setendDate(event);
             }
     
-    /*
-    const saveScientificExpertise = (e) => {
-        e.preventDefault();
-        const ScientificExpertise = { chercheur,typeName,startDate,endDate,description};
-        ScientificExpertiseService.create(ScientificExpertise)
-            .then(response => {
-                console.log("ScientificExpertise added successfully", response.data);
-                navigate("/Home");
-            })
-            .catch(error => {
-                console.log('something went wrong', error);
-            })
-    }
-    */
+    const handleChange = e => setResearcherId(e.target.value); 
     return (
         <div className='form-container'>
             <form className='form' onSubmit={handleSubmit}>
@@ -69,14 +68,11 @@ const ScientificExpertise = () => {
                 <label className='label'>
                     Chercheur
                 </label>
-                <input
-                    placeholder='Nom'
-                    className='input-container'
-                    name="chercheur"
-                    id="chercheur"
-                    value={chercheur}
-                    onChange={(e) => setChercheur(e.target.value)}
-                    required />
+                <select onClick={componentDidMount} onChange={handleChange}>
+                    {researchers.map(item => {
+                        return (<option key={item.researcherId} value={item.researcherId}>{item.researcherName} {item.researcherSurname}</option>);
+                    })}
+                </select>
                 <label className='label'>
                     Nom du Type
                 </label>
