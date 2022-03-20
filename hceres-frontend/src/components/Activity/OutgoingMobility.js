@@ -39,6 +39,12 @@ function MobiliteSortante() {
         umrCoordinated:umrCoordinated,
         agreementSigned:agreementSigned
     };
+    console.log(data);
+    Axios.post("http://localhost:9000/AddOutgoingMobility", data)
+        .then(res => {
+            console.log(res.data)
+            navigate('/Home');
+        }).catch(err => alert(err))
   }
 
   const handleDate = (event) =>{
