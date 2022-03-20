@@ -9,6 +9,8 @@
  * -------------------------------------------------------------------------------- */
 package org.centrale.hceres.items;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
@@ -48,6 +50,7 @@ public class ToolProductType implements Serializable {
     @Size(min = 1, max = 256)
     @Column(name = "tool_product_type_name")
     private String toolProductTypeName;
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "toolProductTypeId")
     private Collection<ToolProduct> toolProductCollection;
 

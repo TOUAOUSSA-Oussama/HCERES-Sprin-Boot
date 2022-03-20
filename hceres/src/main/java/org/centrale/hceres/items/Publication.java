@@ -9,21 +9,13 @@
  * -------------------------------------------------------------------------------- */
 package org.centrale.hceres.items;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Date;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -68,10 +60,12 @@ public class Publication implements Serializable {
     @Column(name = "pmid")
     private String pmid;
     @Column(name = "impact_factor")
-    private BigInteger impactFactor;
+    private BigDecimal impactFactor;
+    @JsonIgnore
     @JoinColumn(name = "id_activity", referencedColumnName = "id_activity", insertable = false, updatable = false)
-    @OneToOne(optional = false)
+    @OneToOne(optional = false, cascade = CascadeType.ALL)
     private Activity activity;
+    @JsonIgnore
     @JoinColumn(name = "publication_type_id", referencedColumnName = "publication_type_id")
     @ManyToOne(optional = false)
     private PublicationType publicationTypeId;
@@ -200,7 +194,7 @@ public class Publication implements Serializable {
      *
      * @return
      */
-    public BigInteger getImpactFactor() {
+    public BigDecimal getImpactFactor() {
         return impactFactor;
     }
 
@@ -208,7 +202,7 @@ public class Publication implements Serializable {
      *
      * @param impactFactor
      */
-    public void setImpactFactor(BigInteger impactFactor) {
+    public void setImpactFactor(BigDecimal impactFactor) {
         this.impactFactor = impactFactor;
     }
 
