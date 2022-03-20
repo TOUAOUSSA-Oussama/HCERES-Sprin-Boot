@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import Navbar from '../Navbar/Navbar';
 //import {Table} from "antd";
-import { Link } from "react-router-dom";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { generatePath } from "react-router-dom";
+//import 'bootstrap/dist/css/bootstrap.min.css';
+import Axios from 'axios'
+import { Link, useNavigate, useParams } from "react-router-dom";
+
 
 class Researcher extends Component {
     constructor() {
@@ -20,11 +23,18 @@ class Researcher extends Component {
         const response = await fetch(url);
 
         const listeChercheurs = await response.json();
-        console.log("hello")
         this.setState({
             researchers: listeChercheurs,
         })
-        console.log(this.state.researchers);
+    }
+
+    deleteResearcher(id) {
+       
+        console.log(id);
+        Axios.delete(`http://localhost:9000/deleteResearcher/${id}`)
+            .then(res => {
+                window.location.reload(false);
+            })
     }
 
     render() {
@@ -57,10 +67,34 @@ class Researcher extends Component {
                                             <td>
                                                 <button className="btn btn-info" >Update</button>
 
-                                                <button className="btn btn-danger ml-2">Delete</button>
+                                                <button className="btn btn-danger ml-2" onClick={() => {this.deleteResearcher(chercheur.researcherId)}}>Delete</button>
                                             </td>
                                         </tr>
                                     )}
+                                <tr>
+                                    <th>----</th>
+                                    <th>----</th>
+                                    <th>----</th>
+                                    <th>----</th>
+                                </tr>
+                                <tr>
+                                    <th>----</th>
+                                    <th>----</th>
+                                    <th>----</th>
+                                    <th>----</th>
+                                </tr>
+                                <tr>
+                                    <th>----</th>
+                                    <th>----</th>
+                                    <th>----</th>
+                                    <th>----</th>
+                                </tr>
+                                <tr>
+                                    <th>----</th>
+                                    <th>----</th>
+                                    <th>----</th>
+                                    <th>----</th>
+                                </tr>
                                 <tr>
                                     <th>----</th>
                                     <th>----</th>
