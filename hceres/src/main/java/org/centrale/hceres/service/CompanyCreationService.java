@@ -6,8 +6,8 @@ import org.centrale.hceres.repository.CompanyCreationRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
-import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -21,38 +21,38 @@ public class CompanyCreationService {
     @Autowired
     private ResearchRepository researchRepo;
     @Autowired
-    private CompanyCreationRepository CompanyCreationRepository;
+    private CompanyCreationRepository companyCreationRepository;
     @Autowired
     private ActivityRepository activityRepo;
     @Autowired
     private TypeActivityRepository typeActivityLevelRepo;
 
     public List<org.centrale.hceres.items.CompanyCreation> getCompanyCreations(){
-        return CompanyCreationRepository.findAll();
+        return companyCreationRepository.findAll();
     }
 
 
     public Optional<CompanyCreation> getCompanyCreation(final Integer id) {
-        return CompanyCreationRepository.findById(id);
+        return companyCreationRepository.findById(id);
     }
 
     public void deleteCompanyCreation(final Integer id) {
-        CompanyCreationRepository.deleteById(id);
+        companyCreationRepository.deleteById(id);
     }
 
 
-    public CompanyCreation saveCompanyCreation(HttpServletRequest request) {
-        CompanyCreation CompanyCreationToSave = new CompanyCreation();
+    public CompanyCreation saveCompanyCreation( @RequestBody Map<String, Object> request) {
+        CompanyCreation companyCreationToSave = new CompanyCreation();
 
         // CompanyCreationTitle :
-        CompanyCreationToSave.setCompanyCreationName(request.getParameter("CompanyCreationName"));
+        companyCreationToSave.setCompanyCreationName((String)request.get("companyCreationName"));
 
         // Creation date
-        String creationDate = request.getParameter("creation_date");
-        CompanyCreationToSave.setCompanyCreationDate(getDateFromString(creationDate, "yyyy-MM-dd"));
+        String creationDate = (String)request.get("companyCreationDate");
+        companyCreationToSave.setCompanyCreationDate(getDateFromString(creationDate, "yyyy-MM-dd"));
 
         // is the Company active:
-        CompanyCreationToSave.setCompanyCreationActive(Boolean.parseBoolean(request.getParameter("status")));
+        companyCreationToSave.setCompanyCreationActive(Boolean.parseBoolean((String)request.get("companyCreationActive")));
 
         // Activity :
         Activity activity = new Activity();
@@ -60,7 +60,7 @@ public class CompanyCreationService {
         activity.setIdTypeActivity(typeActivity);
 
         // Add activity to researchers list :
-        String researcherIdStr = request.getParameter("researcherId");
+        String researcherIdStr = (String)request.get("researcherId");
         int researcherId = -1;
         if(researcherIdStr!=null) {
             try {
@@ -86,16 +86,16 @@ public class CompanyCreationService {
         activity.setResearcherCollection(activityResearch);
 
         Activity savedActivity = activityRepo.save(activity);
-        CompanyCreationToSave.setActivity(savedActivity);
+        companyCreationToSave.setActivity(savedActivity);
 
 
         // Added CompanyCreation Id :
         Integer idCompanyCreation = activity.getIdActivity();
-        CompanyCreationToSave.setIdActivity(idCompanyCreation);
+        companyCreationToSave.setIdActivity(idCompanyCreation);
 
 
         // Persist CompanyCreation object to the data base :
-        CompanyCreation saveCompanyCreation = CompanyCreationRepository.save(CompanyCreationToSave);
+        CompanyCreation saveCompanyCreation = companyCreationRepository.save(companyCreationToSave);
 
         return saveCompanyCreation;
     }
@@ -108,6 +108,7 @@ public class CompanyCreationService {
             SimpleDateFormat aFormater = new SimpleDateFormat(format);
             returnedValue = aFormater.parse(aDate);
         } catch (ParseException ex) {
+            ex.printStackTrace();
         }
 
         if (returnedValue != null) {

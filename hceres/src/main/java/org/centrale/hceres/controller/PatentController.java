@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin(origins = "http://localhos:3000")
 public class PatentController {
 
     @Autowired
@@ -35,7 +36,7 @@ public class PatentController {
         return patentService.savePatent(request);
     }
 
-    @DeleteMapping("/deletPatent/{id}")
+    @DeleteMapping("/deletePatent/{id}")
     public void deletePatent(@PathVariable("id") final Integer id) {
         patentService.deletePatent(id);
     }

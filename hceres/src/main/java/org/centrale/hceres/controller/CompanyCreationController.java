@@ -4,8 +4,7 @@ import org.centrale.hceres.items.CompanyCreation;
 import org.centrale.hceres.service.CompanyCreationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -30,10 +29,11 @@ public class CompanyCreationController {
         }
     }
 
-    @RequestMapping(value = "/AddCompanyCreation", method= RequestMethod.POST)
-    public CompanyCreation createCompanyCreation(HttpServletRequest request) {
+    @PostMapping(value = "/AddCompanyCreation")
+    public CompanyCreation createCompanyCreation(@RequestBody Map<String, Object> request) {
         return companyCreationService.saveCompanyCreation(request);
     }
+
 
     @DeleteMapping("/deleteCompanyCreation/{id}")
     public void deleteCompanyCreation(@PathVariable("id") final Integer id) {

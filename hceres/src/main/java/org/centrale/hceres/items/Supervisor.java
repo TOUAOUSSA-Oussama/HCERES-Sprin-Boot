@@ -10,7 +10,7 @@
 package org.centrale.hceres.items;
 
 import java.io.Serializable;
-import java.math.BigInteger;
+import java.math.BigDecimal;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -42,7 +42,7 @@ public class Supervisor implements Serializable {
     @Column(name = "supervisor_id")
     private Integer supervisorId;
     @Column(name = "supervisor_percentage")
-    private BigInteger supervisorPercentage;
+    private BigDecimal supervisorPercentage;
     @JoinColumn(name = "phd_student_id", referencedColumnName = "phd_student_id")
     @ManyToOne(optional = false)
     private PhdStudent phdStudentId;
@@ -84,7 +84,7 @@ public class Supervisor implements Serializable {
      *
      * @return
      */
-    public BigInteger getSupervisorPercentage() {
+    public BigDecimal getSupervisorPercentage() {
         return supervisorPercentage;
     }
 
@@ -92,7 +92,7 @@ public class Supervisor implements Serializable {
      *
      * @param supervisorPercentage
      */
-    public void setSupervisorPercentage(BigInteger supervisorPercentage) {
+    public void setSupervisorPercentage(BigDecimal supervisorPercentage) {
         this.supervisorPercentage = supervisorPercentage;
     }
 

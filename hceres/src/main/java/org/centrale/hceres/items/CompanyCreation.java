@@ -9,6 +9,8 @@
  * -------------------------------------------------------------------------------- */
 package org.centrale.hceres.items;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -55,6 +57,8 @@ public class CompanyCreation implements Serializable {
     @NotNull
     @Column(name = "company_creation_active")
     private boolean companyCreationActive;
+
+    @JsonIgnore
     @JoinColumn(name = "id_activity", referencedColumnName = "id_activity", insertable = false, updatable = false)
     @OneToOne(optional = false)
     private Activity activity;

@@ -10,7 +10,7 @@
 package org.centrale.hceres.items;
 
 import java.io.Serializable;
-import java.math.BigInteger;
+import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -68,7 +68,7 @@ public class Publication implements Serializable {
     @Column(name = "pmid")
     private String pmid;
     @Column(name = "impact_factor")
-    private BigInteger impactFactor;
+    private BigDecimal impactFactor;
     @JoinColumn(name = "id_activity", referencedColumnName = "id_activity", insertable = false, updatable = false)
     @OneToOne(optional = false)
     private Activity activity;
@@ -200,7 +200,7 @@ public class Publication implements Serializable {
      *
      * @return
      */
-    public BigInteger getImpactFactor() {
+    public BigDecimal getImpactFactor() {
         return impactFactor;
     }
 
@@ -208,7 +208,7 @@ public class Publication implements Serializable {
      *
      * @param impactFactor
      */
-    public void setImpactFactor(BigInteger impactFactor) {
+    public void setImpactFactor(BigDecimal impactFactor) {
         this.impactFactor = impactFactor;
     }
 
