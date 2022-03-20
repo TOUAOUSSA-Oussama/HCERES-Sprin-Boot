@@ -2,9 +2,10 @@ import React from 'react';
 import './Activity.css';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 function Brevet() {
-  const [chercheur, setChercheur] = React.useState("");
+  const [researcherId, setResearcherId] = React.useState("");
   const [titre, settitre] = React.useState("");
   const [inventeurs, setInventeurs] = React.useState("");
   const [coowners, setCoOwners] = React.useState("");
@@ -18,12 +19,61 @@ function Brevet() {
   const [ContractRef, setContractRef] = React.useState("");
   const [CompanyName, setCompanyName] = React.useState("");
   const [date, setDate] = React.useState(null);
+  const navigate = useNavigate();
 
+  const [researchers, setResearchers] = React.useState([]);
+    async function componentDidMount() {
+
+        const url = "http://localhost:9000/Researchers";
+        const response = await fetch(url);
+
+        const listeChercheurs = await response.json();
+        
+        setResearchers(listeChercheurs)
+        console.log(researchers);
+    }
+  
   const handleSubmit = (event) => {
-    console.log("Submitted");
     event.preventDefault();
+    let data = {
+        researcherId: chercheur,
+        title: titre,
+        inventors: inventeurs,
+        coOwners: coowners,
+        priorityNumber: priority_number,
+        filingDate: date,
+        registrationDate: date,
+        acceptationDate: date,
+        licensingDate: date,
+        publicationNumber: pub_number,
+        publicationDate: date,
+        status: status,
+        pctExtensionObtained: extensionPCT,
+        publicationNumberPctExtension: extensionPCTnumber,
+        publicationDatePctExtension: date,
+        internationalExtension: extensionInternationale,
+        publicationNumberInternationalExtension: extensionInternationalNumber,
+        publicationDateInternationalExtension: date,
+        refTransferContract: ContractRef,
+        nameCompanyInvolved: CompanyName};
+    
+    console.log(data);
+    Axios.post("http://localhost:9000/AddPatent", data)
+        .then(res => {
+            console.log(res.data)
+            navigate('/Home');
+        }).catch(err => alert(err))
   }
 
+  const handleDate = (event) =>{
+    let date = `${event.getFullYear()}-${
+        event.getMonth() +1
+      }-${event.getDate()}`;
+      setDate(date);
+      setDate(event);
+    }
+  
+  const handleChange = e => setResearcherId(e.target.value);
   return (
     <div className='form-container'>
       <form className='form' onSubmit={handleSubmit}>
@@ -32,14 +82,11 @@ function Brevet() {
         <label className='label'>
           Chercheur
         </label>
-        <input
-          placeholder='Nom Chercheur'
-          className='input-container'
-          name="chercheur"
-          type="chercheur"
-          value={chercheur}
-          onChange={e => setChercheur(e.target.value)}
-          required />
+        <select onClick={componentDidMount} onChange={handleChange}>
+                    {researchers.map(item => {
+                        return (<option key={item.researcherId} value={item.researcherId}>{item.researcherName} {item.researcherSurname}</option>);
+                    })}
+                </select>
 
 
         <label className='label' >

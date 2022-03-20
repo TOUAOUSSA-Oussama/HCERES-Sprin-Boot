@@ -8,10 +8,30 @@ function CompanyCreation() {
   const [companyActive, setCompanyActive] = React.useState("");
   const [date, setDate] = React.useState(null);
 
+  
   const handleSubmit = (event) => {
-    console.log("Submitted");
     event.preventDefault();
+    let data = {
+        companytitle: companytitle,
+        companyActive: companyActive,
+        companyCreationDate: date};
+    
+    console.log(data);
+    Axios.post("http://localhost:9000/AddCompanyCreation", data)
+        .then(res => {
+            console.log(res.data)
+            navigate('/Home');
+        }).catch(err => alert(err))
   }
+
+  const handleDate = (event) =>{
+    let date = `${event.getFullYear()}-${
+        event.getMonth() +1
+      }-${event.getDate()}`;
+      setDate(date);
+      setDate(event);
+    }
+
 
   return (
     <div className='form-container'>

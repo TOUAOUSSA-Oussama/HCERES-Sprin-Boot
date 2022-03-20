@@ -5,24 +5,49 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 function MobiliteSortante() {
   const [personConcerned, setpersonConcerned] = React.useState("");
-  const [Duration, setDuration] = React.useState("");
-  const [HostLabName, setHostLabName] = React.useState("");
-  const [HostLabLocation, setHostLabLocation] = React.useState("");
+  const [duration, setDuration] = React.useState("");
+  const [hostLabName, setHostLabName] = React.useState("");
+  const [hostLabLocation, setHostLabLocation] = React.useState("");
   const [piPartner, setPiPartner] = React.useState("");
-  const [ProjectTitle, setProjectTitle] = React.useState("");
-  const [AssociatedFunding, setAssociatedFunding] = React.useState("");
-  const [PublicationReference, setPublicationReference] = React.useState("");
-  const [NumberOfPublication, setPublicationNumber] = React.useState("");
-  const [StrategicReccuringCollab, setStrategicReccuringCollab] = React.useState("");
+  const [projectTitle, setProjectTitle] = React.useState("");
+  const [associatedFunding, setAssociatedFunding] = React.useState("");
+  const [publicationReference, setPublicationReference] = React.useState("");
+  const [numberOfPublication, setPublicationNumber] = React.useState("");
+  const [strategicReccuringCollab, setStrategicReccuringCollab] = React.useState("");
   const [projectActive, setProjectActive] = React.useState("");
   const [umrCoordinated, setumrCoordinated] = React.useState("");
   const [agreementSigned, setagreementSigned] = React.useState("");
   const [date, setDate] = React.useState(null);
 
   const handleSubmit = (event) => {
-    console.log("Submitted");
     event.preventDefault();
+    let data = {
+
+        namePersonConcerned: personConcerned,
+        arrivalDate: date,
+        departureDate: date,
+        duration: duration,
+        HostLabName: hostLabName,
+        HostLabLocation: hostLabLocation,
+        piPartner:piPartner,
+        projectTitle: projectTitle,
+        associatedFunding:associatedFunding,
+        publicationReference:publicationReference,
+        nbPublications: numberOfPublication,
+        strategicRecurringCollab: strategicReccuringCollab,
+        activeProject: projectActive,
+        umrCoordinated:umrCoordinated,
+        agreementSigned:agreementSigned
+    };
   }
+
+  const handleDate = (event) =>{
+    let date = `${event.getFullYear()}-${
+        event.getMonth() +1
+      }-${event.getDate()}`;
+      setDate(date);
+      setDate(event);
+    }
 
   return (
     <div className='form-container'>
@@ -50,7 +75,7 @@ function MobiliteSortante() {
           className='input-container'
           name="Duration"
           type="Duration"
-          value={Duration}
+          value={duration}
           onChange={e => setDuration(e.target.value)}
           required />
 
@@ -84,7 +109,7 @@ function MobiliteSortante() {
           className='input-container'
           name="HostLabName"
           type="HostLabName"
-          value={HostLabName}
+          value={hostLabName}
           onChange={e => setHostLabName(e.target.value)}
           required />
         
@@ -108,7 +133,7 @@ function MobiliteSortante() {
           className='input-container'
           name="HostLabLocation"
           type="HostLabLocation"
-          value={HostLabLocation}
+          value={hostLabLocation}
           onChange={e => setHostLabLocation(e.target.value)}
           required />
 
@@ -120,7 +145,7 @@ function MobiliteSortante() {
           className='input-container'
           name="publicationNumber"
           type="Le nom de projet"
-          value={ProjectTitle}
+          value={projectTitle}
           onChange={e => setProjectTitle(e.target.value)}
           required />
         
@@ -133,7 +158,7 @@ function MobiliteSortante() {
           className='input-container'
           name="AssociatedFunding"
           type="AssociatedFunding"
-          value={AssociatedFunding}
+          value={associatedFunding}
           onChange={e => setAssociatedFunding(e.target.value)}
           required />
 
@@ -145,7 +170,7 @@ function MobiliteSortante() {
           className='input-container'
           name="PublicationReference"
           type="Numéro de propriété"
-          value={PublicationReference}
+          value={publicationReference}
           onChange={e => setPublicationReference(e.target.value)}
           required />
 
@@ -157,7 +182,7 @@ function MobiliteSortante() {
           className='input-container'
           name="NumberOfPublication"
           type="Numéro de la publication"
-          value={NumberOfPublication}
+          value={numberOfPublication}
           onChange={e => setPublicationNumber(e.target.value)}
           required />
         
@@ -170,7 +195,7 @@ function MobiliteSortante() {
           className='input-container'
           name="StrategicReccuringCollab"
           type="StrategicReccuringCollab"
-          value={StrategicReccuringCollab}
+          value={strategicReccuringCollab}
           onChange={e => setStrategicReccuringCollab(e.target.value)}
           required />
 
