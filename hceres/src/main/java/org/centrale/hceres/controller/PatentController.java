@@ -5,7 +5,9 @@ import org.centrale.hceres.service.PatentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
+
+
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -31,8 +33,8 @@ public class PatentController {
         }
     }
 
-    @RequestMapping(value = "/AddPatent", method= RequestMethod.POST)
-    public Patent createPatent(HttpServletRequest request) {
+    @PostMapping(value = "/AddPatent")
+    public Patent createPatent(@RequestBody Map<String, Object> request) {
         return patentService.savePatent(request);
     }
 

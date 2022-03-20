@@ -6,8 +6,8 @@ import org.centrale.hceres.repository.PatentRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
-import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -41,66 +41,66 @@ public class PatentService {
     }
 
 
-    public Patent savePatent(HttpServletRequest request) {
+    public Patent savePatent(@RequestBody Map<String, Object> request) {
         Patent PatentToSave = new Patent();
 
         // PatentTitle :
-        PatentToSave.setTitle(request.getParameter("PatentName"));
+        PatentToSave.setTitle((String)request.get("PatentName"));
 
         // registration date
-        String registrationDate = request.getParameter("registration_date");
+        String registrationDate = (String)request.get("registration_date");
         PatentToSave.setRegistrationDate(getDateFromString(registrationDate, "yyyy-MM-dd"));
 
         // Filing Date :
-        String filingDate = request.getParameter("filing_date");
+        String filingDate = (String)request.get("filing_date");
         PatentToSave.setFilingDate(getDateFromString(filingDate, "yyyy-MM-dd"));
 
         // Acceptation Date :
-        String acceptationDate = request.getParameter("acceptation_date");
+        String acceptationDate = (String)request.get("acceptation_date");
         PatentToSave.setFilingDate(getDateFromString(acceptationDate, "yyyy-MM-dd"));
 
         // Licensing Date :
-        String licensingDate = request.getParameter("licensing_date");
+        String licensingDate = (String)request.get("licensing_date");
         PatentToSave.setFilingDate(getDateFromString(licensingDate, "yyyy-MM-dd"));
 
         // Inventors:
-        PatentToSave.setInventors(request.getParameter("inventors"));
+        PatentToSave.setInventors((String)request.get("inventors"));
 
         // CoOwners:
-        PatentToSave.setCoOwners(request.getParameter("co_owners"));
+        PatentToSave.setCoOwners((String)request.get("co_owners"));
 
         // Priority number:
-        PatentToSave.setPriorityNumber(Float. parseFloat(request.getParameter("priority_number")));
+        PatentToSave.setPriorityNumber(Float. parseFloat((String)request.get("priority_number")));
 
         // Publication number:
-        PatentToSave.setPublicationNumber(request.getParameter("publication_number"));
+        PatentToSave.setPublicationNumber((String)request.get("publication_number"));
 
         // Publication date:
-        String publicationDate = request.getParameter("publication_date");
+        String publicationDate = (String)request.get("publication_date");
         PatentToSave.setPublicationDate(getDateFromString(publicationDate, "yyyy-MM-dd"));
 
         // Status:
-        PatentToSave.setStatus(Boolean.parseBoolean(request.getParameter("status")));
+        PatentToSave.setStatus(Boolean.parseBoolean((String)request.get("status")));
 
         // PCT Extension Obtained:
-        PatentToSave.setPctExtensionObtained(Boolean.parseBoolean(request.getParameter("pct_extension_obtained")));
+        PatentToSave.setPctExtensionObtained(Boolean.parseBoolean((String)request.get("pct_extension_obtained")));
 
         // PCT extension publication number:
-        PatentToSave.setPriorityNumber(Float. parseFloat(request.getParameter("publication_number_pct_extension")));
+        PatentToSave.setPriorityNumber(Float. parseFloat((String)request.get("publication_number_pct_extension")));
 
         // PCT extension publication date:
-        String publicationDatePctExtension = request.getParameter("publication_date_pct_extension");
+        String publicationDatePctExtension = (String)request.get("publication_date_pct_extension");
         PatentToSave.setPublicationDatePctExtension(getDateFromString(publicationDatePctExtension, "yyyy-MM-dd"));
         
         // International extension Publication date:
-        String publicationDateInternationalExtension = request.getParameter("publication_date_international_extension");
+        String publicationDateInternationalExtension = (String)request.get("publication_date_international_extension");
         PatentToSave.setPublicationDateInternationalExtension(getDateFromString(publicationDateInternationalExtension, "yyyy-MM-dd"));
         
         // Transfer Contract REF:
-        PatentToSave.setRefTransferContract(request.getParameter("ref_transfer_contract"));
+        PatentToSave.setRefTransferContract((String)request.get("ref_transfer_contract"));
 
         // Company involved name:
-        PatentToSave.setNameCompanyInvolved(request.getParameter("name_company_involved"));
+        PatentToSave.setNameCompanyInvolved((String)request.get("name_company_involved"));
 
         // Activity :
         Activity activity = new Activity();
@@ -108,7 +108,7 @@ public class PatentService {
         activity.setIdTypeActivity(typeActivity);
 
         // Add activity to researchers list :
-        String researcherIdStr = request.getParameter("researcherId");
+        String researcherIdStr = (String)request.get("researcherId");
         int researcherId = -1;
         if(researcherIdStr!=null) {
             try {

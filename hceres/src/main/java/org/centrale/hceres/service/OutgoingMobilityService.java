@@ -6,8 +6,8 @@ import org.centrale.hceres.repository.OutgoingMobilityRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
-import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -41,55 +41,55 @@ public class OutgoingMobilityService {
     }
 
 
-    public OutgoingMobility saveOutgoingMobility(HttpServletRequest request) {
+    public OutgoingMobility saveOutgoingMobility(@RequestBody Map<String, Object> request) {
         OutgoingMobility OutgoingMobilityToSave = new OutgoingMobility();
 
         // The person concerned :
-        OutgoingMobilityToSave.setNamePersonConcerned(request.getParameter("OutgoingMobilityName"));
+        OutgoingMobilityToSave.setNamePersonConcerned((String)request.get("OutgoingMobilityName"));
 
         // Arrival date
-        String arrivalDate = request.getParameter("arrival_date");
+        String arrivalDate = (String)request.get("arrival_date");
         OutgoingMobilityToSave.setArrivalDate(getDateFromString(arrivalDate, "yyyy-MM-dd"));
 
         // Departure Date :
-        String departureDate = request.getParameter("departure_date");
+        String departureDate = (String)request.get("departure_date");
         OutgoingMobilityToSave.setDepartureDate(getDateFromString(departureDate, "yyyy-MM-dd"));
 
         // Duration :
-        OutgoingMobilityToSave.setDuration(Integer.parseInt(request.getParameter("duration")));
+        OutgoingMobilityToSave.setDuration(Integer.parseInt((String)request.get("duration")));
 
         // Host lab Name:
-        OutgoingMobilityToSave.setHostLabName(request.getParameter("host_lab_name"));
+        OutgoingMobilityToSave.setHostLabName((String)request.get("host_lab_name"));
 
         // Host lab Location:
-        OutgoingMobilityToSave.setHostLabLocation(request.getParameter("host_lab_location"));
+        OutgoingMobilityToSave.setHostLabLocation((String)request.get("host_lab_location"));
 
         // Pi partner:
-        OutgoingMobilityToSave.setPiPartner(request.getParameter("pi_partner"));
+        OutgoingMobilityToSave.setPiPartner((String)request.get("pi_partner"));
 
         // Project Title:
-        OutgoingMobilityToSave.setProjectTitle(request.getParameter("project_title"));
+        OutgoingMobilityToSave.setProjectTitle((String)request.get("project_title"));
 
         // Associated Funding:
-        OutgoingMobilityToSave.setAssociatedFunding(request.getParameter("associated_funding"));
+        OutgoingMobilityToSave.setAssociatedFunding((String)request.get("associated_funding"));
 
         // Number of publication:
-        OutgoingMobilityToSave.setNbPublications(Integer. parseInt(request.getParameter("nb_publications")));
+        OutgoingMobilityToSave.setNbPublications(Integer. parseInt((String)request.get("nb_publications")));
 
         // Publication Reference:
-        OutgoingMobilityToSave.setPublicationReference(request.getParameter("publication_reference"));
+        OutgoingMobilityToSave.setPublicationReference((String)request.get("publication_reference"));
 
         // Strategic Reccuring Collab:
-        OutgoingMobilityToSave.setStrategicRecurringCollab(Boolean.parseBoolean(request.getParameter("strategic_recurring_collab")));
+        OutgoingMobilityToSave.setStrategicRecurringCollab(Boolean.parseBoolean((String)request.get("strategic_recurring_collab")));
 
         // Status:
-        OutgoingMobilityToSave.setActiveProject(Boolean.parseBoolean(request.getParameter("active_project")));
+        OutgoingMobilityToSave.setActiveProject(Boolean.parseBoolean((String)request.get("active_project")));
 
         // Status:
-        OutgoingMobilityToSave.setUmrCoordinated(Boolean.parseBoolean(request.getParameter("umr_coordinated")));
+        OutgoingMobilityToSave.setUmrCoordinated(Boolean.parseBoolean((String)request.get("umr_coordinated")));
 
         // Status:
-        OutgoingMobilityToSave.setAgreementSigned(Boolean.parseBoolean(request.getParameter("agreement_signed")));
+        OutgoingMobilityToSave.setAgreementSigned(Boolean.parseBoolean((String)request.get("agreement_signed")));
 
         // Activity :
         Activity activity = new Activity();
@@ -97,7 +97,7 @@ public class OutgoingMobilityService {
         activity.setIdTypeActivity(typeActivity);
 
         // Add activity to researchers list :
-        String researcherIdStr = request.getParameter("researcherId");
+        String researcherIdStr = (String)request.get("researcherId");
         int researcherId = -1;
         if(researcherIdStr!=null) {
             try {
