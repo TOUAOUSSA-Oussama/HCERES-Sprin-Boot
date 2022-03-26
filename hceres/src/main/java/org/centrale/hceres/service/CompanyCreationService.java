@@ -48,11 +48,8 @@ public class CompanyCreationService {
         companyCreationToSave.setCompanyCreationName((String)request.get("companyCreationName"));
 
         // Creation date
-        try {
-            companyCreationToSave.setCompanyCreationDate(getDateFromString((String)request.get("companyCreationDate"), "yyyy-MM-dd"));}
-            catch (Exception e){
-                companyCreationToSave.setCompanyCreationDate(getDateFromString("2022-03-05", "yyyy-MM-dd"));
-            }
+        String creationDate = (String)request.get("companyCreationDate");
+        companyCreationToSave.setCompanyCreationDate(getDateFromString(creationDate, "yyyy-MM-dd"));
 
         // is the Company active:
         companyCreationToSave.setCompanyCreationActive(Boolean.parseBoolean((String)request.get("companyCreationActive")));

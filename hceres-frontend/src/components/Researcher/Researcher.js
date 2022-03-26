@@ -117,5 +117,4 @@ class Researcher extends Component {
     }
 
 };
-
 export default Researcher;

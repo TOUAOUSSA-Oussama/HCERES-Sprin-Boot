@@ -1,11 +1,13 @@
 import React from 'react';
+import Brevet from './Brevet'
+import CompanyCreation from './CompanyCreation';
+import OutgoingMobility from './OutgoingMobility';
 import EssaiClinique from './EssaiClinique';
 import IncomingMobility from './IncomingMobility';
 import ScientificExpertise from './ScientificExpertise';
 import './Activity.css'
 import Navbar from '../Navbar/Navbar';
 import SrAward from './SrAward';
-
 import Education from './Education';
 import PostDoctorat from './PostDoctorat';
 import Platform from './Platform';
@@ -29,6 +31,9 @@ export default function Activity() {
     const [showSeiIndustrialRDContract, setShowSeiIndustrialRDContract] = React.useState(false);
     const [showNationalInternationalCollaboration, setShowNationalInternationalCollaboration] = React.useState(false);
     const [showOralCommunication, setShowOralCommunication] = React.useState(false);
+    const [showBrevet, setShowBrevet] = React.useState(false);
+    const [showCompanyCreation, setShowCompanyCreation] = React.useState(false);
+    const [showOutgoingMobility, setShowOutgoingMobility] = React.useState(false);
 
     return (
         <div> 
@@ -50,7 +55,7 @@ export default function Activity() {
                     <li onClick={setShowPostDoctorat}>
                         <a>PostDoctorat</a>
                     </li>
-                    <li>
+                    <li  onClick={setShowBrevet}>
                         <a>Brevet</a>
                     </li>
                     <li onClick={setPrix} >
@@ -95,10 +100,10 @@ export default function Activity() {
                     <li onClick={setIncomingMobility} >
                         <a>Mobilité entrante</a>
                     </li>
-                    <li>
+                    <li onClick={setShowOutgoingMobility}>
                         <a>Mobilité sortante</a>
                     </li>
-                    <li>
+                    <li onClick={setShowCompanyCreation}>
                         <a>Création d'entreprise</a>
                     </li>
                 </ul>
@@ -116,8 +121,10 @@ export default function Activity() {
             {showSeiIndustrialRDContract && (<SeiIndustrialRDContract></SeiIndustrialRDContract>)}
             {showNationalInternationalCollaboration && (<NationalInternationalCollaboration></NationalInternationalCollaboration>)}
             {showOralCommunication && (<OralCommunication></OralCommunication>)}
+            {showBrevet && (<Brevet> </Brevet>)}
+            {showCompanyCreation && (<CompanyCreation> </CompanyCreation>)}
+            {showOutgoingMobility && (<OutgoingMobility> </OutgoingMobility>)}
         </div>
     </div>
 )
     }
-

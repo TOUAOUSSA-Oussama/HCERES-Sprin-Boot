@@ -6,6 +6,7 @@ import Home from './components/Home/Home';
 import Researcher from './components/Researcher/Researcher';
 import Footer from './components/Footer/Footer';
 import About from './components/About/About';
+
 import Activity from './components/Activity/Activity';
 import Connection from './components/Connection/Connection';
 
@@ -25,9 +26,7 @@ function App() {
           <Route path='/About' exact  element={<About/>} />
           <Route path='/Brevet' exact  element={<Brevet/>} />
       </Routes> 
-
-      <Footer />
-
+      <Footer/>
       </Router>
     </>
 
