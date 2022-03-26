@@ -12,6 +12,7 @@ package org.centrale.hceres.items;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -24,6 +25,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  *
@@ -97,8 +100,9 @@ public class IncomingMobility implements Serializable {
     private Boolean umrCoordinated;
     @Column(name = "agreement_signed")
     private Boolean agreementSigned;
+    @JsonIgnore
     @JoinColumn(name = "id_activity", referencedColumnName = "id_activity", insertable = false, updatable = false)
-    @OneToOne(optional = false)
+    @OneToOne(optional = false, cascade = CascadeType.ALL)
     private Activity activity;
 
     /**

@@ -1,0 +1,15 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-HceresApplication<hceres>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "org.centrale.hceres.HceresApplication",
+            "projectName": "hceres",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

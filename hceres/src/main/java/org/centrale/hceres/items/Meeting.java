@@ -50,28 +50,35 @@ public class Meeting implements Serializable {
     @Basic(optional = false)
     @Column(name = "meeting_id")
     private Integer meetingId;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 256)
     @Column(name = "neeting_name")
     private String neetingName;
+    
     @Basic(optional = false)
     @NotNull
     @Column(name = "meeting_year")
     private int meetingYear;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 256)
     @Column(name = "meeting_location")
     private String meetingLocation;
+    
     @Column(name = "meeting_start")
     @Temporal(TemporalType.DATE)
     private Date meetingStart;
+    
     @Column(name = "meeting_end")
     @Temporal(TemporalType.DATE)
     private Date meetingEnd;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "meetingId")
     private Collection<MeetingCongressOrg> meetingCongressOrgCollection;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "meetingId")
     private Collection<OralCommunication> oralCommunicationCollection;
 

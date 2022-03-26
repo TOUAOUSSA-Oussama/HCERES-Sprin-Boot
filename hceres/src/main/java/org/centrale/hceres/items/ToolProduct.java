@@ -9,6 +9,8 @@
  * -------------------------------------------------------------------------------- */
 package org.centrale.hceres.items;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
@@ -68,12 +70,15 @@ public class ToolProduct implements Serializable {
     @Size(min = 1, max = 2147483647)
     @Column(name = "tool_product_description")
     private String toolProductDescription;
+    @JsonIgnore
     @JoinColumn(name = "id_activity", referencedColumnName = "id_activity", insertable = false, updatable = false)
-    @OneToOne(optional = false)
+    @OneToOne(optional = false, cascade = CascadeType.ALL)
     private Activity activity;
+    @JsonIgnore
     @JoinColumn(name = "tool_product_type_id", referencedColumnName = "tool_product_type_id")
     @ManyToOne(optional = false)
     private ToolProductType toolProductTypeId;
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "toolProduct")
     private Collection<ToolProductInvolvment> toolProductInvolvmentCollection;
 

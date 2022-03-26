@@ -22,6 +22,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
@@ -42,6 +43,8 @@ public class ScientificExpertiseType implements Serializable {
     @Basic(optional = false)
     @Column(name = "scientific_expertise_type_id")
     private Integer scientificExpertiseTypeId;
+    @Basic(optional = false)
+    @NotNull
     @Size(max = 256)
     @Column(name = "name_choice")
     private String nameChoice;

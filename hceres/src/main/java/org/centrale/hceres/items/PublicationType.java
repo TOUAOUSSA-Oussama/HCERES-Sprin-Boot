@@ -9,6 +9,8 @@
  * -------------------------------------------------------------------------------- */
 package org.centrale.hceres.items;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
@@ -45,6 +47,7 @@ public class PublicationType implements Serializable {
     @Size(max = 256)
     @Column(name = "publication_type_name")
     private String publicationTypeName;
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "publicationTypeId")
     private Collection<Publication> publicationCollection;
 

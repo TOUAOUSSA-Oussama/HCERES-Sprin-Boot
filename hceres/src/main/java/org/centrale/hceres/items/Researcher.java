@@ -8,9 +8,7 @@
  * L LETERTRE, S LIMOUX, JY MARTIN
  * -------------------------------------------------------------------------------- */
 package org.centrale.hceres.items;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
@@ -30,7 +28,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 //import org.centrale.tools.Utilities;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 /**
  *
  * @author kwyhr
@@ -80,32 +78,30 @@ public class Researcher implements Serializable {
     @Size(max = 1024)
     @Column(name = "researcher_password")
     private String researcherPassword;
-
-
+    @JsonIgnore
     @ManyToMany(mappedBy = "researcherCollection")
     private Collection<Nationality> nationalityCollection;
-
+    @JsonIgnore
     @ManyToMany(mappedBy = "researcherCollection")
     private Collection<Activity> activityCollection;
-    
+    @JsonIgnore
     @OneToMany(mappedBy = "researcherId")
     private Collection<Connection> connectionCollection;
-    
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "researcherId")
     private Collection<Contract> contractCollection;
-    
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "researcherId")
     private Collection<TeamReferent> teamReferentCollection;
-    
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "researcherId")
     private Collection<Supervisor> supervisorCollection;
-    
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "researcherId")
     private Collection<PhdStudent> phdStudentCollection;
-    
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "researcher")
     private Admin admin;
-    
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "researcherId")
     private Collection<BelongsTeam> belongsTeamCollection;
 

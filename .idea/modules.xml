@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/HCERES-Spring-Boot.iml" filepath="$PROJECT_DIR$/.idea/HCERES-Spring-Boot.iml" />
-      <module fileurl="file://$PROJECT_DIR$/hceres/hceres.iml" filepath="$PROJECT_DIR$/hceres/hceres.iml" />
     </modules>
   </component>
 </project>

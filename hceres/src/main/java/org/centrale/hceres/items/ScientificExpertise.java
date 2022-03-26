@@ -12,6 +12,7 @@ package org.centrale.hceres.items;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -25,6 +26,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  *
@@ -57,9 +60,11 @@ public class ScientificExpertise implements Serializable {
     @Size(min = 1, max = 2147483647)
     @Column(name = "description")
     private String description;
+    @JsonIgnore
     @JoinColumn(name = "id_activity", referencedColumnName = "id_activity", insertable = false, updatable = false)
-    @OneToOne(optional = false)
+    @OneToOne(optional = false, cascade = CascadeType.ALL)
     private Activity activity;
+    @JsonIgnore
     @JoinColumn(name = "scientific_expertise_type_id", referencedColumnName = "scientific_expertise_type_id")
     @ManyToOne(optional = false)
     private ScientificExpertiseType scientificExpertiseTypeId;
