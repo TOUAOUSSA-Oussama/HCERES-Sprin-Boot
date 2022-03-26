@@ -24,7 +24,7 @@ import java.util.Optional;
 public class ResearchController {
 	
 	/**
-	 * instanciation de ResearchService
+	 * instantiation de ResearchService
 	 */
 	@Autowired
 	private ResearchService rs;
