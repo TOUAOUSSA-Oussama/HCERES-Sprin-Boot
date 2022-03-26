@@ -11,19 +11,9 @@ package org.centrale.hceres.items;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Date;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -32,14 +22,13 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 @Table(name = "editorial_activity")
-@NamedQueries({
+/*@NamedQueries({
     @NamedQuery(name = "EditorialActivity.findAll", query = "SELECT e FROM EditorialActivity e"),
     @NamedQuery(name = "EditorialActivity.findByIdActivity", query = "SELECT e FROM EditorialActivity e WHERE e.idActivity = :idActivity"),
     @NamedQuery(name = "EditorialActivity.findByStartDate", query = "SELECT e FROM EditorialActivity e WHERE e.startDate = :startDate"),
     @NamedQuery(name = "EditorialActivity.findByEndDate", query = "SELECT e FROM EditorialActivity e WHERE e.endDate = :endDate"),
-    @NamedQuery(name = "EditorialActivity.findByImpactFactor", query = "SELECT e FROM EditorialActivity e WHERE e.impactFactor = :impactFactor")})
+ */
 public class EditorialActivity implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -57,10 +46,10 @@ public class EditorialActivity implements Serializable {
     @Column(name = "impact_factor")
     private BigDecimal impactFactor;
     @JoinColumn(name = "id_activity", referencedColumnName = "id_activity", insertable = false, updatable = false)
-    @OneToOne(optional = false)
+    @OneToOne(optional = false, cascade = CascadeType.ALL)
     private Activity activity;
     @JoinColumn(name = "function_editorial_activity_id", referencedColumnName = "function_editorial_activity_id")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, cascade = CascadeType.ALL)
     private FunctionEditorialActivity functionEditorialActivityId;
     @JoinColumn(name = "journal_id", referencedColumnName = "journal_id")
     @ManyToOne(optional = false)

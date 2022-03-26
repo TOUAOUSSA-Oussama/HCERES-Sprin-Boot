@@ -8,7 +8,7 @@
  * L LETERTRE, S LIMOUX, JY MARTIN
  * -------------------------------------------------------------------------------- */
 package org.centrale.hceres.items;
-
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
@@ -45,20 +45,25 @@ public class Activity implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_activity")
     private Integer idActivity;
+    
     @JoinTable(name = "activity_team", joinColumns = {
         @JoinColumn(name = "id_activity", referencedColumnName = "id_activity")}, inverseJoinColumns = {
         @JoinColumn(name = "team_id", referencedColumnName = "team_id")})
     @ManyToMany
     private Collection<Team> teamCollection;
+    
     @JoinTable(name = "activity_researcher", joinColumns = {
         @JoinColumn(name = "id_activity", referencedColumnName = "id_activity")}, inverseJoinColumns = {
         @JoinColumn(name = "researcher_id", referencedColumnName = "researcher_id")})
     @ManyToMany
     private Collection<Researcher> researcherCollection;
+    
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "activity")
     private IncomingMobility incomingMobility;
+    
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "activity")
     private Education education;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idActivity")
     private Collection<MailActivity> mailActivityCollection;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "activity")
@@ -231,7 +236,7 @@ public class Activity implements Serializable {
 
     /**
      *
-     * @param mailActivityCollection
+     * @param mailActivityCollectionf
      */
     public void setMailActivityCollection(Collection<MailActivity> mailActivityCollection) {
         this.mailActivityCollection = mailActivityCollection;
@@ -252,7 +257,6 @@ public class Activity implements Serializable {
     public void setNationalInternationalCollaboration(NationalInternationalCollaboration nationalInternationalCollaboration) {
         this.nationalInternationalCollaboration = nationalInternationalCollaboration;
     }
-
     /**
      *
      * @return

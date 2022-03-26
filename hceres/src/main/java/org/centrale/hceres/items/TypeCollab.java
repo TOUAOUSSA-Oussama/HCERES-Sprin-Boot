@@ -42,9 +42,11 @@ public class TypeCollab implements Serializable {
     @Basic(optional = false)
     @Column(name = "type_collab_id")
     private Integer typeCollabId;
+    
     @Size(max = 256)
     @Column(name = "name_choice")
     private String nameChoice;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "typeCollabId")
     private Collection<NationalInternationalCollaboration> nationalInternationalCollaborationCollection;
 

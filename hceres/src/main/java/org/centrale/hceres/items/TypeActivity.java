@@ -42,9 +42,11 @@ public class TypeActivity implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_type_activity")
     private Integer idTypeActivity;
+    
     @Size(max = 256)
     @Column(name = "name_type")
     private String nameType;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTypeActivity")
     private Collection<Activity> activityCollection;
 

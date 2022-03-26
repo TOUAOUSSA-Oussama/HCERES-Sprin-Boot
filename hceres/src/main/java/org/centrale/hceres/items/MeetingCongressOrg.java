@@ -39,9 +39,11 @@ public class MeetingCongressOrg implements Serializable {
     @NotNull
     @Column(name = "id_activity")
     private Integer idActivity;
+    
     @JoinColumn(name = "id_activity", referencedColumnName = "id_activity", insertable = false, updatable = false)
     @OneToOne(optional = false)
     private Activity activity;
+    
     @JoinColumn(name = "meeting_id", referencedColumnName = "meeting_id")
     @ManyToOne(optional = false)
     private Meeting meetingId;

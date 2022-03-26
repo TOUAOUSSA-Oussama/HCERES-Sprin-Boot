@@ -9,6 +9,8 @@
  * -------------------------------------------------------------------------------- */
 package org.centrale.hceres.items;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
@@ -43,9 +45,11 @@ public class ToolProductInvolvment implements Serializable {
     @Size(max = 2147483647)
     @Column(name = "tool_product_involvment_researchers")
     private String toolProductInvolvmentResearchers;
+    @JsonIgnore
     @JoinColumn(name = "id_activity", referencedColumnName = "id_activity", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private ToolProduct toolProduct;
+    @JsonIgnore
     @JoinColumn(name = "tool_product_role_id", referencedColumnName = "tool_product_role_id", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private ToolProductRole toolProductRole;
