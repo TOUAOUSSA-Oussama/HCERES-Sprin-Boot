@@ -3,9 +3,10 @@ import './Activity.css';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { Navigate, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function Brevet() {
-  const [researcherId, setResearcherId] = React.useState("");
+  const [chercheur, setResearcherId] = React.useState("");
   const [titre, settitre] = React.useState("");
   const [inventeurs, setInventeurs] = React.useState("");
   const [coowners, setCoOwners] = React.useState("");
@@ -58,7 +59,7 @@ function Brevet() {
         nameCompanyInvolved: CompanyName};
     
     console.log(data);
-    Axios.post("http://localhost:9000/AddPatent", data)
+    axios.post("http://localhost:9000/AddPatent", data)
         .then(res => {
             console.log(res.data)
             navigate('/Home');

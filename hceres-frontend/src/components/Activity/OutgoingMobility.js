@@ -2,8 +2,10 @@ import React from 'react';
 import './Activity.css';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-
+import { Navigate, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 function MobiliteSortante() {
+  const [chercheur, setResearcherId] = React.useState("");
   const [personConcerned, setpersonConcerned] = React.useState("");
   const [duration, setDuration] = React.useState("");
   const [hostLabName, setHostLabName] = React.useState("");
@@ -18,11 +20,24 @@ function MobiliteSortante() {
   const [umrCoordinated, setumrCoordinated] = React.useState("");
   const [agreementSigned, setagreementSigned] = React.useState("");
   const [date, setDate] = React.useState(null);
+  const navigate = useNavigate();
 
+  const [researchers, setResearchers] = React.useState([]);
+    async function componentDidMount() {
+
+        const url = "http://localhost:9000/Researchers";
+        const response = await fetch(url);
+
+        const listeChercheurs = await response.json();
+        
+        setResearchers(listeChercheurs)
+        console.log(researchers);
+    }
+    
   const handleSubmit = (event) => {
     event.preventDefault();
     let data = {
-
+        researcherId: chercheur,
         namePersonConcerned: personConcerned,
         arrivalDate: date,
         departureDate: date,
@@ -40,10 +55,10 @@ function MobiliteSortante() {
         agreementSigned:agreementSigned
     };
     console.log(data);
-    Axios.post("http://localhost:9000/AddOutgoingMobility", data)
+    axios.post("http://localhost:9000/AddOutgoingMobility", data)
         .then(res => {
             console.log(res.data)
-            navigate('/Home');
+            navigate('/OutgoingMobility');
         }).catch(err => alert(err))
   }
 
@@ -54,12 +69,20 @@ function MobiliteSortante() {
       setDate(date);
       setDate(event);
     }
-
+  const handleChange = e => setResearcherId(e.target.value);
   return (
     <div className='form-container'>
       <form className='form' onSubmit={handleSubmit}>
         <a href="/Activity" class="close-button">&#10006;</a>
         <h3 className='title'>Mobilité sortante</h3>
+        <label className='label'>
+          Chercheur
+        </label>
+        <select onClick={componentDidMount} onChange={handleChange}>
+                    {researchers.map(item => {
+                        return (<option key={item.researcherId} value={item.researcherId}>{item.researcherName} {item.researcherSurname}</option>);
+                    })}
+                </select>
         <label className='label'>
           La personne concernée
         </label>
