@@ -6,6 +6,8 @@ import Axios from 'axios'
 
 function Platform() {
     const [chercheur, setChercheur] = React.useState("");
+    //const [researcherId, setResearcherId] = React.useState("");
+    const [researchers, setResearchers] = React.useState([]);
     const [labellisation, setLabellisation] = React.useState("");
     const [description, setDescritption] = React.useState("");
     const [managers, setManagers] = React.useState("");
@@ -13,6 +15,17 @@ function Platform() {
     const [date, setDate] = React.useState(null);
     const [checkbox, setCheckBox] = React.useState(false);
     const [formattedDate, setFormatted] = React.useState("")
+
+    async function componentDidMount() {
+
+        const url = "http://localhost:9000/Researchers";
+        const response = await fetch(url);
+
+        const listeChercheurs = await response.json();
+        
+        setResearchers(listeChercheurs)
+        console.log(researchers);
+    }
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -24,12 +37,12 @@ function Platform() {
             affiliation: affiliation,
             creationDate: formattedDate,
             openPrivateResearchers:checkbox};
-        
-        console.log(data);
         Axios.post("http://localhost:9000/Api/AddPlatform", data)
-            .then(res => {
-                console.log(res.data)
-            }).catch(err => alert(err))
+        .then(res => {
+            console.log(res.data)
+           
+        })
+        window.location.reload();
     }
 
 
@@ -40,7 +53,7 @@ function Platform() {
           setFormatted(formattedDate);
           setDate(event);
         }
-
+const handleChange = e => setChercheur(e.target.value);
     return (
         <div className='form-container'>
             <form className='form' onSubmit={handleSubmit}>
@@ -49,14 +62,11 @@ function Platform() {
                 <label className='label' >
                     chercheur
                 </label>
-                <input
-                    placeholder='Nom'
-                    className='input-container'
-                    name="nom"
-                    type="nom"
-                    value={chercheur}
-                    onChange={e => setChercheur(e.target.value)}
-                    required />
+               <select onClick={componentDidMount} onChange={handleChange}>
+                    {researchers.map(item => {
+                        return (<option key={item.researcherId} value={item.researcherId}>{item.researcherName} {item.researcherSurname}</option>);
+                    })}
+                </select>
 
                 <label className='label'>
                     Date de création

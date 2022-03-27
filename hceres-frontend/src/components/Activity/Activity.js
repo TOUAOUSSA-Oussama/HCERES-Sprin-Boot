@@ -32,7 +32,6 @@ export default function Activity() {
 
     return (
         <div> 
-        <Navbar />
         <div className='activity-container'>
             <div className='header'>
                 <h1>
@@ -44,38 +43,18 @@ export default function Activity() {
             </div>
             <div className='activityList'>
                 <ul>
-                <li onClick={setShowForm}>
+                    <li onClick={setShowForm}>
                         <a>Education</a>
                     </li>
-                    <li onClick={setShowPostDoctorat}>
-                        <a>PostDoctorat</a>
-                    </li>
-                    <li>
-                        <a>Brevet</a>
-                    </li>
+                    
                     <li onClick={setPrix} >
                         <a>Prix</a>
-                    </li>
-                    <li>
-                        <a>Production</a>
                     </li>
                     <li onClick={setShowPlatform}>
                         <a>Platform</a>
                     </li>
                     <li onClick={setShowEditorial}>
                         <a>Edition</a>
-                    </li>
-                    <li onClick={setShowReview}>
-                        <a>Revue</a>
-                    </li>
-                    <li>
-                        <a>Publication</a>
-                    </li>
-                    <li>
-                        <a>Livre</a>
-                    </li>
-                    <li>
-                        <a>Séminaire</a>
                     </li>
                     <li onClick={setShowOralCommunication}>
                         <a>Communication orale</a>
@@ -100,6 +79,15 @@ export default function Activity() {
                     </li>
                     <li>
                         <a>Création d'entreprise</a>
+                    </li>
+                    <li onClick={setShowPostDoctorat}>
+                        <a>PostDoctorat</a>
+                    </li>
+                    <li>
+                        <a>Brevet</a>
+                    </li>
+                    <li onClick={setShowReview}>
+                        <a>Revue</a>
                     </li>
                 </ul>
 

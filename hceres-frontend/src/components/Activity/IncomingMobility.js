@@ -64,8 +64,8 @@ const IncomingMobility = () => {
         Axios.post("http://localhost:9000/Api/AddIncomingMobility", data)
             .then(res => {
                 console.log(res.data)
-                navigate('/Home');
-            }).catch(err => alert(err))
+                window.location.reload();
+            })
     }
 
 

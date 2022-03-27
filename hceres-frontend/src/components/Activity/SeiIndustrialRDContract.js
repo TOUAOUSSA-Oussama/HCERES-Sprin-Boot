@@ -40,7 +40,8 @@ function SeiIndustrialRDContract() {
         Axios.post("http://localhost:9000/AddSeiIndustrialRDContract", data)
             .then(res => {
                 console.log(res.data)
-            }).catch(err => alert(err))
+                window.location.reload();
+            })
     }
 
     const handleChange = e => setResearcherId(e.target.value);

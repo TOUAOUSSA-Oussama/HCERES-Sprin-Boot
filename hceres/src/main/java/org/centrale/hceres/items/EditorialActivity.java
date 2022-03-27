@@ -16,6 +16,8 @@ import java.util.Date;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  *
  * @author kwyhr
@@ -45,12 +47,15 @@ public class EditorialActivity implements Serializable {
     @NotNull
     @Column(name = "impact_factor")
     private BigDecimal impactFactor;
+    @JsonIgnore
     @JoinColumn(name = "id_activity", referencedColumnName = "id_activity", insertable = false, updatable = false)
     @OneToOne(optional = false, cascade = CascadeType.ALL)
     private Activity activity;
+    @JsonIgnore
     @JoinColumn(name = "function_editorial_activity_id", referencedColumnName = "function_editorial_activity_id")
     @ManyToOne(optional = false, cascade = CascadeType.ALL)
     private FunctionEditorialActivity functionEditorialActivityId;
+    @JsonIgnore
     @JoinColumn(name = "journal_id", referencedColumnName = "journal_id")
     @ManyToOne(optional = false)
     private Journal journalId;

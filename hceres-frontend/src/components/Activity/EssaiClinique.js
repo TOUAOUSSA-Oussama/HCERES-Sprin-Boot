@@ -52,8 +52,9 @@ const EssaiClinique = () => {
         Axios.post("http://localhost:9000/Api/AddSeiClinicalTrial", data)
             .then(res => {
                 console.log(res.data)
-                navigate('/Home');
-            }).catch(err => alert(err))
+                
+            })
+            window.location.reload();
     }
     const handleDate1 = (event) =>{
         let startDate = `${event.getFullYear()}-${

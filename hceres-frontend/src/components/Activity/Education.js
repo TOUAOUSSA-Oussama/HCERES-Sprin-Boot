@@ -31,19 +31,20 @@ function Education() {
          console.log(formattedDate);
          event.preventDefault();
          let data = {
-             "researcherId": researcherId,
-             "educationCourseName": educationCourseName,
-             "educationFormation": educationFormation,
-             "educationDescription": educationDescription,
-             "educationInvolvmentText": educationInvolvmentText,
-             "educationLevelText": educationLevelText,
-             "educationCompletion":formattedDate};
+             researcherId: researcherId,
+             educationCourseName: educationCourseName,
+             educationFormation: educationFormation,
+             educationDescription: educationDescription,
+             educationInvolvmentText: educationInvolvmentText,
+             educationLevelText: educationLevelText,
+             educationCompletion:formattedDate};
         
          console.log(data);
          Axios.post("http://localhost:9000/AddEducation", data)
              .then(res => {
                  console.log(res.data)
-             }).catch(err => alert(err))
+                 window.location.reload();
+             })
      }
 
     const handleDate = (event) =>{

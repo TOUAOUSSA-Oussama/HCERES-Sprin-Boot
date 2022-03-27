@@ -56,7 +56,8 @@ function NationalInternationalCollaboration() {
         Axios.post("http://localhost:9000/AddNationalInternationalCollaboration", data)
             .then(res => {
                 console.log(res.data)
-            }).catch(err => alert(err))
+                window.location.reload();
+            })
     }
 
     const handleChange = e => setResearcherId(e.target.value); 

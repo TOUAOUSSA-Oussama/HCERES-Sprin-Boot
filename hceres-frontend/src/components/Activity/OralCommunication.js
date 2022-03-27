@@ -46,6 +46,7 @@ function OralCommunication() {
         Axios.post("http://localhost:9000/AddOralCommunication", data)
             .then(res => {
                 console.log(res.data)
+                window.location.reload();
             }).catch(err => alert(err))
     }
 

@@ -6,7 +6,7 @@ import org.centrale.hceres.repository.ActivityRepository;
 import org.centrale.hceres.repository.ResearchRepository;
 import org.centrale.hceres.repository.TypeActivityRepository;
 import org.centrale.hceres.repository.PublicationRepository;
-import org.centrale.hceres.repository.publication.PublicationTypeRepository;
+import org.centrale.hceres.repository.PublicationTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Service;

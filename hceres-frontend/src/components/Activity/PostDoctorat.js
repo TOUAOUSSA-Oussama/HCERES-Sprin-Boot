@@ -5,7 +5,8 @@ import 'react-datepicker/dist/react-datepicker.css';
 import Axios from 'axios'
 
 function PostDoctorat() {
-  const [chercheur, setChercheur] = React.useState("");
+  //const [chercheur, setChercheur] = React.useState("");
+  const [chercheur, setResearcherId] = React.useState("");
   const [superviseur, setSuperviseur] = React.useState("");
   const [titre, setTitre] = React.useState("");
   const [duree, setDuree] = React.useState("");
@@ -18,11 +19,23 @@ function PostDoctorat() {
   const [formattedArrivalDate, setFormattedArrivalDate] = React.useState(null);
   const [formattedDepartureDate, setFormattedDepartureDate] = React.useState(null);
 
+  const [researchers, setResearchers] = React.useState([]);
+
+  async function componentDidMount() {
+
+    const url = "http://localhost:9000/Researchers";
+    const response = await fetch(url);
+
+    const listeChercheurs = await response.json();
+
+    setResearchers(listeChercheurs)
+    console.log(researchers);
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault();
     let data = {
-      researcherId: chercheur,
+      chercheur: chercheur,
       postDocName: titre,
       supervisorName: superviseur,
       arrivalDate: formattedArrivalDate,
@@ -38,7 +51,8 @@ function PostDoctorat() {
     Axios.post("http://localhost:9000/Api/AddPostDoc", data)
       .then(res => {
         console.log(res.data)
-      }).catch(err => alert(err))
+        window.location.reload();
+      })
   }
 
   const handleArrivalDate = (event) => {
@@ -55,25 +69,21 @@ function PostDoctorat() {
     setDepartureDate(event);
   }
 
+  const handleChange = e => setResearcherId(e.target.value);
+
   return (
     <div className='form-container'>
       <form className='form' onSubmit={handleSubmit}>
         <a href="/Activity" class="close-button">&#10006;</a>
         <h3 className='title'>POST DOCTORAT</h3>
-
         <label className='label' >
-          chercheur
+          Chercheur
         </label>
-        <input
-          placeholder='Nom'
-          className='input-container'
-          name="nom"
-          type="nom"
-          value={chercheur}
-          onChange={e => setChercheur(e.target.value)}
-          required />
-
-
+        <select onClick={componentDidMount} onChange={handleChange}>
+          {researchers.map(item => {
+            return (<option key={item.researcherId} value={item.researcherId}>{item.researcherName} {item.researcherSurname}</option>);
+          })}
+        </select>
         <label className='label' >
           Titre du post-doctorat
         </label>

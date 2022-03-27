@@ -21,15 +21,15 @@ function Editorial() {
             impactFactor: impactFactor,
             startDate: formattedStartDate,
             endDate: formattedEndDate,
-            journalName: journalName,
+            journalName: "monde",
             functionName: functionName
         };
 
         console.log(data);
         Axios.post("http://localhost:9000/Api/AddEditorial", data)
             .then(res => {
-                console.log(res.data)
-            }).catch(err => alert(err))
+            })
+            window.location.reload();
     }
 
 
