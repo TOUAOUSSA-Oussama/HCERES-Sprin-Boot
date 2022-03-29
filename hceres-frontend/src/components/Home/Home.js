@@ -10,7 +10,6 @@ import Navbar from '../Navbar/Navbar';
 function Home(){
     return (
         <div>
-            <Navbar />
             <div class="container1" >
                 <div class="left-side">
                     <div class="title">

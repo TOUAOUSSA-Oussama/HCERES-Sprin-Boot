@@ -10,7 +10,6 @@ import Navbar from '../Navbar/Navbar';
 function About(){
     return (
         <div>
-             <Navbar />
             <div class="container2" >
                 <div class="left-side1">
                   <img class="labo1" src={welcomImage} alt= "Hello" />
