@@ -7,6 +7,7 @@ import Researcher from './components/Researcher/Researcher';
 import Activity from './components/Activity/Activity';
 import Footer from './components/Footer/Footer';
 import About from './components/About/About';
+import Connection from './components/Connection/Connection';
 import AddResearcher from './components/Researcher/AddResearcher';
 import UpdateResearcher from './components/Researcher/UpdateResearcher';
 
@@ -25,6 +26,7 @@ function App() {
           <Route path='/UpdateResearcher' exact  element={<UpdateResearcher/>} />
           <Route path='/Activity' exact  element={<Activity/>} />
           <Route path='/About' exact  element={<About/>} />
+          <Route path='' exact  element={<Connection/>} />
       </Routes> 
 
       <Footer />

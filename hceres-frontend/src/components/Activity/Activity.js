@@ -53,9 +53,6 @@ export default function Activity() {
                     <li onClick={setShowPlatform}>
                         <a>Platform</a>
                     </li>
-                    <li onClick={setShowEditorial}>
-                        <a>Edition</a>
-                    </li>
                     <li onClick={setShowOralCommunication}>
                         <a>Communication orale</a>
                     </li>
@@ -76,6 +73,9 @@ export default function Activity() {
                     </li>
                     <li>
                         <a>Mobilité sortante</a>
+                    </li>
+                    <li onClick={setShowEditorial}>
+                        <a>Edition</a>
                     </li>
                     <li>
                         <a>Création d'entreprise</a>
