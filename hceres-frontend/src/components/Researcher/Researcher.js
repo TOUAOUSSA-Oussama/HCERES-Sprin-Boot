@@ -96,9 +96,9 @@ class Researcher extends Component {
                                                 <div className="btn-group" role="group">
                                                     <button onClick={() => {
                                                         this.handleUpdate(chercheur.researcherId)
-                                                    }} className="btn btn-info" role="button" data-bs-toggle="button">
-                                                        <FaEdit fill={"white"}/></button>
-                                                    <button className="btn btn-danger ml-2" onClick={() => { this.deleteResearcher(chercheur.researcherId) }} ><AiFillDelete/></button>
+                                                    }} className="btn btn-outline-info" role="button" data-bs-toggle="button">
+                                                        <FaEdit/></button>
+                                                    <button className="btn btn-outline-danger ml-2" onClick={() => { this.deleteResearcher(chercheur.researcherId) }} ><AiFillDelete/></button>
                                                 </div>
                                             </td>
                                         </tr>
