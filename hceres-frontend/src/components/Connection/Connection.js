@@ -1,19 +1,22 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import "./Connection.css";
 import Logo from '../../assets/logo.png';
 import {Link} from 'react-router-dom';
 import {FaUserAlt} from 'react-icons/fa';
 import {FaKey} from 'react-icons/fa';
-import { Navigate } from "react-router-dom";
+import {Navigate} from "react-router-dom";
+import Button from "react-bootstrap/Button";
+import {Alert} from "react-bootstrap";
 
 class Login extends Component {
-  constructor(props){
+  constructor(props) {
     super(props)
 
     this.state = {
       login: "",
       pass: "",
       canLogin: false,
+      errorLogin: null,
     }
     
     this.handleLogin = this.handleLogin.bind(this);
@@ -31,9 +34,13 @@ class Login extends Component {
   }
 
   checkLogin(event){
-      if(this.state.login==="admin" && this.state.pass==="admin") {
-        this.setState({canLogin: true});
-      }
+    event.preventDefault();
+    if (this.state.login === "admin" && this.state.pass === "admin") {
+      this.setState({canLogin: true});
+      this.setState({errorLogin: null});
+    } else {
+      this.setState({errorLogin: "Login ou mot de passe Incorrecte!"});
+    }
   }
 
   render() {
@@ -47,18 +54,17 @@ class Login extends Component {
         <img src={Logo} alt="Logo" width="100"/>
             <h1> Connexion </h1>
         </div>
-        
+
         <label className="username_label">
           <i><FaUserAlt/></i>
           <input type="username" placeholder="Nom d'utilisateur" value={this.state.login} onChange={this.handleLogin}/>
         </label>
         <label className="password_label">
-        <i><FaKey/></i>
+          <i><FaKey/></i>
           <input type="password" placeholder="Mot de passe" value={this.state.pass} onChange={this.handlePass}/>
         </label>
-        <div className="button_login">
-          <button type="submit" value="Connexion">Connexion</button>
-        </div>
+        {this.state.errorLogin && <Alert className={"alert-danger"}>{this.state.errorLogin}</Alert>}
+        <Button variant={"primary"} className={"btn-primary"} value={"connection"} type={"submit"}> Connexion</Button>
       </form>
       </div>
     );
