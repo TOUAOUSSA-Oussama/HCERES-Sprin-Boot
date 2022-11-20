@@ -48,23 +48,23 @@ class Login extends Component {
       return <Navigate push to="/Home" />;
     }
     return (
-      <div className="login">
+      <div className="login fadeInDown">
       <form className="login_form" onSubmit={this.checkLogin}>
         <div className="header_login">
-        <img src={Logo} alt="Logo" width="100"/>
-            <h1> Connexion </h1>
+        <img src={Logo} alt="Logo" width="100" className={"fadeIn first"}/>
+            <h1 className={"fadeIn first"}> Connexion </h1>
         </div>
 
-        <label className="username_label">
+        <label className="username_label fadeIn second">
           <i><FaUserAlt/></i>
           <input type="username" placeholder="Nom d'utilisateur" value={this.state.login} onChange={this.handleLogin}/>
         </label>
-        <label className="password_label">
+        <label className="password_label fadeIn third">
           <i><FaKey/></i>
           <input type="password" placeholder="Mot de passe" value={this.state.pass} onChange={this.handlePass}/>
         </label>
         {this.state.errorLogin && <Alert className={"alert-danger"}>{this.state.errorLogin}</Alert>}
-        <Button variant={"primary"} className={"btn-primary"} value={"connection"} type={"submit"}> Connexion</Button>
+        <Button variant={"primary"} className={"btn-primary fadeIn fourth"} value={"connection"} type={"submit"}> Connexion</Button>
       </form>
       </div>
     );
