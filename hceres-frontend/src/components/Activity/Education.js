@@ -44,7 +44,8 @@ function Education(props) {
             educationDescription: educationDescription,
             educationInvolvmentText: educationInvolvmentText,
             educationLevelText: educationLevelText,
-            educationCompletion:formattedDate};
+            educationCompletion: formattedDate
+        };
 
         Axios.post("http://localhost:9000/AddEducation", data)
             .then(res => {
@@ -52,9 +53,9 @@ function Education(props) {
             })
     }
 
-    const handleDate = (event) =>{
+    const handleDate = (event) => {
         let formattedDate = `${event.getFullYear()}-${
-            event.getMonth() +1
+            event.getMonth() + 1
         }-${event.getDate()}`;
         setFormatted(formattedDate);
         setDate(event);
@@ -163,4 +164,5 @@ function Education(props) {
         </div>
     );
 }
+
 export default Education;

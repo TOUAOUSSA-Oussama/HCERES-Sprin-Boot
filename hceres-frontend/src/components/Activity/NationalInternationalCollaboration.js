@@ -15,7 +15,7 @@ function NationalInternationalCollaboration() {
     const [ActiveProject, setActiveProject] = React.useState("");
     const [AssociatedFunding, setAssociatedFunding] = React.useState("");
     const [NumberResultingPublications, setNumberResultingPublications] = React.useState("");
-    const [RefJointPublication,  setRefJointPublication] = React.useState("");
+    const [RefJointPublication, setRefJointPublication] = React.useState("");
     const [UmrCoordinated, setUmrCoordinated] = React.useState("");
     const [AgreementSigned, setAgreementSigned] = React.useState("");
     const [NameChoice, setNameChoice] = React.useState("");
@@ -28,7 +28,7 @@ function NationalInternationalCollaboration() {
         const response = await fetch(url);
 
         const listeChercheurs = await response.json();
-        
+
         setResearchers(listeChercheurs)
     }
 
@@ -49,27 +49,29 @@ function NationalInternationalCollaboration() {
             PiPartners: PiPartners,
             CountryStateCity: CountryStateCity,
             PartnerEntity: PartnerEntity,
-            DateProjectStart: DateProjectStart };
-        
+            DateProjectStart: DateProjectStart
+        };
+
         Axios.post("http://localhost:9000/AddNationalInternationalCollaboration", data)
             .then(res => {
                 window.location.reload();
             })
     }
 
-    const handleChange = e => setResearcherId(e.target.value); 
+    const handleChange = e => setResearcherId(e.target.value);
 
     return (
         <div className='form-container'>
             <form className='form' onSubmit={handleSubmit}>
-            <a href="/Activity" class="close-button">&#10006;</a>
+                <a href="/Activity" class="close-button">&#10006;</a>
                 <h3 className='title'>Collaboration internationale</h3>
-                <label className='label' >
+                <label className='label'>
                     chercheur
                 </label>
                 <select onClick={componentDidMount} onChange={handleChange}>
                     {researchers.map(item => {
-                        return (<option key={item.researcherId} value={item.researcherId}>{item.researcherName} {item.researcherSurname}</option>);
+                        return (<option key={item.researcherId}
+                                        value={item.researcherId}>{item.researcherName} {item.researcherSurname}</option>);
                     })}
                 </select>
 
@@ -83,9 +85,9 @@ function NationalInternationalCollaboration() {
                     type="date"
                     value={DateProjectStart}
                     onChange={e => setDateProjectStart(e.target.value)}
-                    required />
+                    required/>
 
-                <label className='label' >
+                <label className='label'>
                     Partner Entity
                 </label>
                 <input
@@ -95,10 +97,10 @@ function NationalInternationalCollaboration() {
                     type="PartnerEntity"
                     value={PartnerEntity}
                     onChange={e => setPartnerEntity(e.target.value)}
-                    required />
+                    required/>
 
 
-                <label className='label' >
+                <label className='label'>
                     Country State City
                 </label>
                 <input
@@ -108,9 +110,9 @@ function NationalInternationalCollaboration() {
                     type="CountryStateCity"
                     value={CountryStateCity}
                     onChange={e => setCountryStateCity(e.target.value)}
-                    required />
+                    required/>
 
-                <label className='label' >
+                <label className='label'>
                     Pi Partners
                 </label>
                 <input
@@ -120,9 +122,9 @@ function NationalInternationalCollaboration() {
                     name="PiPartners"
                     value={PiPartners}
                     onChange={e => setPiPartners(e.target.value)}
-                    required />
+                    required/>
 
-                <label className='label' >
+                <label className='label'>
                     Mail Partners
                 </label>
                 <input
@@ -132,119 +134,120 @@ function NationalInternationalCollaboration() {
                     type="MailPartners"
                     value={MailPartners}
                     onChange={e => setMailPartners(e.target.value)}
-                    required />
+                    required/>
 
                 <label className='label'>
                     Project Title
                 </label>
-                 <input
+                <input
                     placeholder='ProjetcTitle '
                     className='input-container'
                     name="ProjetcTitle"
                     type="ProjetcTitle"
                     value={ProjetcTitle}
                     onChange={e => setProjetcTitle(e.target.value)}
-                    required />
+                    required/>
 
                 <label className='label'>
                     StrategicRecurringCollab
                 </label>
-                 <input
+                <input
                     placeholder='StrategicRecurringCollab '
                     className='input-container'
                     name="boolean-parameter" type="checkbox"
                     value={StrategicRecurringCollab}
                     onChange={e => setStrategicRecurringCollab(e.target.value)}
-                    required />
+                    required/>
 
                 <label className='label'>
                     Active Project
                 </label>
-                 <input
+                <input
                     placeholder='ActiveProject '
                     className='input-container'
                     name="ActiveProject"
                     type="checkbox"
                     value={ActiveProject}
                     onChange={e => setActiveProject(e.target.value)}
-                    required />
+                    required/>
 
                 <label className='label'>
                     Associated Funding
                 </label>
-                 <input
+                <input
                     placeholder='AssociatedFunding '
                     className='input-container'
                     name="AssociatedFunding"
                     type="AssociatedFunding"
                     value={AssociatedFunding}
                     onChange={e => setAssociatedFunding(e.target.value)}
-                    required />
+                    required/>
 
                 <label className='label'>
                     Number Resulting Publications
                 </label>
-                 <input
+                <input
                     placeholder='NumberResultingPublications '
                     className='input-container'
                     name="NumberResultingPublications"
                     type="number"
                     value={NumberResultingPublications}
                     onChange={e => setNumberResultingPublications(e.target.value)}
-                    required />
+                    required/>
 
                 <label className='label'>
                     Ref Joint Publication
                 </label>
-                 <input
+                <input
                     placeholder='RefJointPublication '
                     className='input-container'
                     name="RefJointPublication"
                     type="RefJointPublication"
                     value={RefJointPublication}
                     onChange={e => setRefJointPublication(e.target.value)}
-                    required />
+                    required/>
 
                 <label className='label'>
                     Umr Coordinated
                 </label>
-                 <input
+                <input
                     placeholder='UmrCoordinated '
                     className='input-container'
                     name="UmrCoordinated"
                     type="checkbox"
                     value={UmrCoordinated}
                     onChange={e => setUmrCoordinated(e.target.value)}
-                    required />
+                    required/>
 
                 <label className='label'>
                     Agreement Signed
                 </label>
-                 <input
+                <input
                     placeholder='AgreementSigned '
                     className='input-container'
                     name="AgreementSigned"
                     type="checkbox"
                     value={AgreementSigned}
                     onChange={e => setAgreementSigned(e.target.value)}
-                    required />
+                    required/>
 
                 <label className='label'>
                     Name Choice
                 </label>
-                 <input
+                <input
                     placeholder='NameChoice '
                     className='input-container'
                     name="NameChoice"
                     type="NameChoice"
                     value={NameChoice}
                     onChange={e => setNameChoice(e.target.value)}
-                    required />
-                
+                    required/>
+
 
                 <button className='submit'>Valider</button>
             </form>
         </div>
     );
 }
+
 export default NationalInternationalCollaboration;

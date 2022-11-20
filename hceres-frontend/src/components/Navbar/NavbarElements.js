@@ -1,10 +1,8 @@
 // Cette component est pour definir les styles liees a Navbar
 
-import styled  from 'styled-components';
-import { Link } from 'react-router-dom';
-import { Container } from '../../AppElements'
-
-
+import styled from 'styled-components';
+import {Link} from 'react-router-dom';
+import {Container} from '../../AppElements'
 
 
 // style pour le nav bar

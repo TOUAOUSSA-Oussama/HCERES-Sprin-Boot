@@ -31,81 +31,83 @@ export default function Activity() {
     const [showOralCommunication, setShowOralCommunication] = React.useState(false);
 
     return (
-        <div> 
-        <div className='activity-container'>
-            <div className='header'>
-                <h1>
-                    Bienvenue dans la section d'ajout d'activités
-                </h1>
-                <h3>
-                    Choisissez une activité à ajouter parmi les activités suivantes. Si vous nous trouvez pas l'activité recherchée, contactez le support.
-                </h3>
-            </div>
-            <div className='activityList'>
-                <ul>
-                    <li onClick={setShowEducation}>
-                        <a>Education</a>
-                    </li>
-                    
-                    <li onClick={setPrix} >
-                        <a>Prix</a>
-                    </li>
-                    <li onClick={() => setShowPlatform}>
-                        <a>Platform</a>
-                    </li>
-                    <li onClick={() => setShowOralCommunication}>
-                        <a>Communication orale</a>
-                    </li>
-                    <li onClick={() => setShowSeiIndustrialRDContract}>
-                        <a>Signature d'une contrat industrielle</a>
-                    </li>
-                    <li onClick={() => setShowNationalInternationalCollaboration}>
-                        <a>Collaboration internationale</a>
-                    </li>
-                    <li onClick={() => setScientificExpertise}>
-                        <a>Expertise scientifique</a>
-                    </li>
-                    <li onClick={() => setEssaiClinique}>
-                        <a>Essai clinique</a>
-                    </li>
-                    <li onClick={() => setIncomingMobility} >
-                        <a>Mobilité entrante</a>
-                    </li>
-                    <li>
-                        <a>Mobilité sortante</a>
-                    </li>
-                    <li onClick={() => setShowEditorial}>
-                        <a>Edition</a>
-                    </li>
-                    <li>
-                        <a>Création d'entreprise</a>
-                    </li>
-                    <li onClick={() => setShowPostDoctorat}>
-                        <a>PostDoctorat</a>
-                    </li>
-                    <li>
-                        <a>Brevet</a>
-                    </li>
-                    <li onClick={() => setShowReview}>
-                        <a>Revue</a>
-                    </li>
-                </ul>
+        <div>
+            <div className='activity-container'>
+                <div className='header'>
+                    <h1>
+                        Bienvenue dans la section d'ajout d'activités
+                    </h1>
+                    <h3>
+                        Choisissez une activité à ajouter parmi les activités suivantes. Si vous nous trouvez pas
+                        l'activité recherchée, contactez le support.
+                    </h3>
+                </div>
+                <div className='activityList'>
+                    <ul>
+                        <li onClick={setShowEducation}>
+                            <a>Education</a>
+                        </li>
 
+                        <li onClick={setPrix}>
+                            <a>Prix</a>
+                        </li>
+                        <li onClick={() => setShowPlatform}>
+                            <a>Platform</a>
+                        </li>
+                        <li onClick={() => setShowOralCommunication}>
+                            <a>Communication orale</a>
+                        </li>
+                        <li onClick={() => setShowSeiIndustrialRDContract}>
+                            <a>Signature d'une contrat industrielle</a>
+                        </li>
+                        <li onClick={() => setShowNationalInternationalCollaboration}>
+                            <a>Collaboration internationale</a>
+                        </li>
+                        <li onClick={() => setScientificExpertise}>
+                            <a>Expertise scientifique</a>
+                        </li>
+                        <li onClick={() => setEssaiClinique}>
+                            <a>Essai clinique</a>
+                        </li>
+                        <li onClick={() => setIncomingMobility}>
+                            <a>Mobilité entrante</a>
+                        </li>
+                        <li>
+                            <a>Mobilité sortante</a>
+                        </li>
+                        <li onClick={() => setShowEditorial}>
+                            <a>Edition</a>
+                        </li>
+                        <li>
+                            <a>Création d'entreprise</a>
+                        </li>
+                        <li onClick={() => setShowPostDoctorat}>
+                            <a>PostDoctorat</a>
+                        </li>
+                        <li>
+                            <a>Brevet</a>
+                        </li>
+                        <li onClick={() => setShowReview}>
+                            <a>Revue</a>
+                        </li>
+                    </ul>
+
+                </div>
+                {showPrix && (<SrAward> </SrAward>)}
+                {showEssaiClinique && (<EssaiClinique> </EssaiClinique>)}
+                {showIncomingMobility && (<IncomingMobility> </IncomingMobility>)}
+                {showScientificExpertise && (<ScientificExpertise> </ScientificExpertise>)}
+                {showEducation && (<Education onHideAction={() => setShowEducation(false)}/>)}
+                {showPostDoctorat && (<PostDoctorat> </PostDoctorat>)}
+                {showPlatform && (<Platform></Platform>)}
+                {showEditorial && (<Editorial></Editorial>)}
+                {showReview && (<Review></Review>)}
+                {showSeiIndustrialRDContract && (<SeiIndustrialRDContract></SeiIndustrialRDContract>)}
+                {showNationalInternationalCollaboration && (
+                    <NationalInternationalCollaboration></NationalInternationalCollaboration>)}
+                {showOralCommunication && (<OralCommunication></OralCommunication>)}
             </div>
-            {showPrix && (<SrAward> </SrAward>)}
-            {showEssaiClinique && (<EssaiClinique> </EssaiClinique>)}
-            {showIncomingMobility && (<IncomingMobility> </IncomingMobility>)}
-            {showScientificExpertise && (<ScientificExpertise> </ScientificExpertise>)}
-            {showEducation && (<Education onHideAction={() => setShowEducation(false)}/>)}
-            {showPostDoctorat && (<PostDoctorat> </PostDoctorat>)}
-            {showPlatform && (<Platform></Platform>)}
-            {showEditorial && (<Editorial></Editorial>)}
-            {showReview && (<Review></Review>)}
-            {showSeiIndustrialRDContract && (<SeiIndustrialRDContract></SeiIndustrialRDContract>)}
-            {showNationalInternationalCollaboration && (<NationalInternationalCollaboration></NationalInternationalCollaboration>)}
-            {showOralCommunication && (<OralCommunication></OralCommunication>)}
         </div>
-    </div>
-)
-    }
+    )
+}
 

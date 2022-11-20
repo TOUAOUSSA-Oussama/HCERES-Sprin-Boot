@@ -38,7 +38,7 @@ function UpdateResearcher(props) {
                     type="AddResearcherFirstName"
                     value={AddResearcherFirstName}
                     onChange={e => setAddResearcherFirstName(e.target.value)}
-                    required />
+                    required/>
                 <label className='label' >
                 Nom du chercheur
                 </label>

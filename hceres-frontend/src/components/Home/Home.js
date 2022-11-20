@@ -7,24 +7,22 @@ import Navbar from '../Navbar/Navbar';
 //import { HomeContainer,leftside,rightside } from './HomeElements';
 //style={{ backgroundColor: "#" + `${randomColor}` }}
 //let randomColor = Math.floor(Math.random() * 16777215).toString(16);
-function Home(){
+function Home() {
     return (
         <div>
-            <div className="container1" >
+            <div className="container1">
                 <div className="left-side">
-                    <div className="title">
-                        Bienvenue !
-                    </div>
                     <div className="pg">
-                    Serveur d'administration des données pour les enquêtes HCERES
+                        <h1>Bienvenue !</h1>
+                        Serveur d'administration des données pour les enquêtes HCERES
                     </div>
                 </div>
                 <div className="right-side">
-                    <img className="labo" src={welcomImage} alt= "Hello" />
+                    <img className="labo" src={welcomImage} alt="Hello"/>
                 </div>
             </div>
         </div>
     );
-};
+}
 
 export default Home;

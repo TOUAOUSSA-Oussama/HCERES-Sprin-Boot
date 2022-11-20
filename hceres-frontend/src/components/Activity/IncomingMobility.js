@@ -2,9 +2,9 @@ import React from 'react';
 import './Activity.css';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { useEffect } from "react/cjs/react.development";
+import {useState} from "react";
+import {Link, useNavigate, useParams} from "react-router-dom";
+import {useEffect} from "react/cjs/react.development";
 import Axios from 'axios'
 
 const IncomingMobility = () => {
@@ -25,15 +25,16 @@ const IncomingMobility = () => {
     const [umrCoordinated, setumrCoordinated] = useState("");
     const [agreementSigned, setagreementSigned] = useState("");
     const navigate = useNavigate();
-    
+
     const [researchers, setResearchers] = React.useState([]);
+
     async function componentDidMount() {
 
         const url = "http://localhost:9000/Researchers";
         const response = await fetch(url);
 
         const listeChercheurs = await response.json();
-        
+
         setResearchers(listeChercheurs)
     }
 
@@ -47,18 +48,18 @@ const IncomingMobility = () => {
             departureDate: departureDate,
             duration: duration,
             nationality: nationality,
-            originalLabName:originalLabName,
-            originaLabLocation:originaLabLocation,
-            piPartner:piPartner,
-            projectTitle:projectTitle,
-            associatedFunding:associatedFunding,
-            publicationReference:publicationReference,
-            strategicRecurringCollab:strategicRecurringCollab,
-            activeProject:activeProject,
-            umrCoordinated:umrCoordinated,
-            agreementSigned:agreementSigned
+            originalLabName: originalLabName,
+            originaLabLocation: originaLabLocation,
+            piPartner: piPartner,
+            projectTitle: projectTitle,
+            associatedFunding: associatedFunding,
+            publicationReference: publicationReference,
+            strategicRecurringCollab: strategicRecurringCollab,
+            activeProject: activeProject,
+            umrCoordinated: umrCoordinated,
+            agreementSigned: agreementSigned
         };
-        
+
         Axios.post("http://localhost:9000/Api/AddIncomingMobility", data)
             .then(res => {
                 window.location.reload();
@@ -66,21 +67,21 @@ const IncomingMobility = () => {
     }
 
 
-    const handleDate1 = (event) =>{
+    const handleDate1 = (event) => {
         let arrivalDate = `${event.getFullYear()}-${
-            event.getMonth() +1
-          }-${event.getDate()}`;
-          setarrivalDate(arrivalDate);
-          setarrivalDate(event);
-        }
-    const handleDate2 = (event) =>{
-            let departureDate = `${event.getFullYear()}-${
-                event.getMonth() +1
-              }-${event.getDate()}`;
-              setdepartureDate(departureDate);
-              setdepartureDate(event);
-            }
-            const handleChange = e => setResearcherId(e.target.value); 
+            event.getMonth() + 1
+        }-${event.getDate()}`;
+        setarrivalDate(arrivalDate);
+        setarrivalDate(event);
+    }
+    const handleDate2 = (event) => {
+        let departureDate = `${event.getFullYear()}-${
+            event.getMonth() + 1
+        }-${event.getDate()}`;
+        setdepartureDate(departureDate);
+        setdepartureDate(event);
+    }
+    const handleChange = e => setResearcherId(e.target.value);
     return (
         <div className='form-container'>
             <form className='form' onSubmit={handleSubmit}>
@@ -91,7 +92,8 @@ const IncomingMobility = () => {
                 </label>
                 <select onClick={componentDidMount} onChange={handleChange}>
                     {researchers.map(item => {
-                        return (<option key={item.researcherId} value={item.researcherId}>{item.researcherName} {item.researcherSurname}</option>);
+                        return (<option key={item.researcherId}
+                                        value={item.researcherId}>{item.researcherName} {item.researcherSurname}</option>);
                     })}
                 </select>
                 <label className='label'>
@@ -104,27 +106,27 @@ const IncomingMobility = () => {
                     id="nameSeniorScientist"
                     value={nameSeniorScientist}
                     onChange={(e) => setnameSeniorScientist(e.target.value)}
-                    required />
+                    required/>
                 <label className='label'>
-                    Date d'arrivée 
+                    Date d'arrivée
                 </label>
                 <DatePicker
                     className='datePicker'
                     selected={arrivalDate}
                     onChange={handleDate1}
                     withPortal
-                    placeholderText="Choix de date d'arrivée" />
-                 <label className='label'>
-                    Date de départ  
+                    placeholderText="Choix de date d'arrivée"/>
+                <label className='label'>
+                    Date de départ
                 </label>
                 <DatePicker
                     className='datePicker'
                     selected={departureDate}
                     onChange={handleDate2}
                     withPortal
-                    placeholderText="Choix de date de départ" />
+                    placeholderText="Choix de date de départ"/>
 
-                <label className='label' >
+                <label className='label'>
                     Durée
                 </label>
                 <input
@@ -134,9 +136,9 @@ const IncomingMobility = () => {
                     id="duration"
                     value={duration}
                     onChange={(e) => setduration(e.target.value)}
-                    required />
+                    required/>
 
-                <label className='label' >
+                <label className='label'>
                     Nationalité
                 </label>
                 <input
@@ -146,12 +148,11 @@ const IncomingMobility = () => {
                     id="nationality"
                     value={nationality}
                     onChange={(e) => setnationality(e.target.value)}
-                    required />
+                    required/>
 
-    
 
-                <label className='label' >
-                    Nom du laboratoire d'origine 
+                <label className='label'>
+                    Nom du laboratoire d'origine
                 </label>
                 <textarea
                     placeholder='Nom du Laboratoire origine'
@@ -160,9 +161,9 @@ const IncomingMobility = () => {
                     id="originalLabName"
                     value={originalLabName}
                     onChange={(e) => setoriginalLabName(e.target.value)}
-                    required />
-                
-                <label className='label' >
+                    required/>
+
+                <label className='label'>
                     Emplacement du laboratoire origine
                 </label>
                 <textarea
@@ -172,9 +173,9 @@ const IncomingMobility = () => {
                     id="originaLabLocation"
                     value={originaLabLocation}
                     onChange={(e) => setoriginaLabLocation(e.target.value)}
-                    required />
+                    required/>
 
-                <label className='label' >
+                <label className='label'>
                     piPartner
                 </label>
                 <textarea
@@ -184,10 +185,10 @@ const IncomingMobility = () => {
                     id="piPartner"
                     value={piPartner}
                     onChange={(e) => setpiPartner(e.target.value)}
-                    required />
+                    required/>
 
-                <label className='label' >
-                    Titre du projet 
+                <label className='label'>
+                    Titre du projet
                 </label>
                 <textarea
                     placeholder='Emplacement du laboratoire origine'
@@ -196,9 +197,9 @@ const IncomingMobility = () => {
                     id="projectTitle"
                     value={projectTitle}
                     onChange={(e) => setprojectTitle(e.target.value)}
-                    required />
+                    required/>
 
-                <label className='label' >
+                <label className='label'>
                     Financement associé
                 </label>
                 <textarea
@@ -208,8 +209,8 @@ const IncomingMobility = () => {
                     id="associatedFunding"
                     value={associatedFunding}
                     onChange={(e) => setassociatedFunding(e.target.value)}
-                    required />
-                <label className='label' >
+                    required/>
+                <label className='label'>
                     Référence de la publication
                 </label>
                 <textarea
@@ -219,10 +220,10 @@ const IncomingMobility = () => {
                     id="publicationReference"
                     value={publicationReference}
                     onChange={(e) => setpublicationReference(e.target.value)}
-                    required />
+                    required/>
 
-                <label className='label' >
-                  Collaboration stratégique récurrente ?
+                <label className='label'>
+                    Collaboration stratégique récurrente ?
                 </label>
                 <textarea
                     placeholder='Collaboration stratégique récurrente ? (true/false)'
@@ -231,9 +232,9 @@ const IncomingMobility = () => {
                     id="strategicRecurringCollab"
                     value={strategicRecurringCollab}
                     onChange={(e) => setstrategicRecurringCollab(e.target.value)}
-                    required />
-                <label className='label' >
-                        Projet actif ?
+                    required/>
+                <label className='label'>
+                    Projet actif ?
                 </label>
                 <textarea
                     placeholder=' Projet actif ? (true/false)'
@@ -242,9 +243,9 @@ const IncomingMobility = () => {
                     id="activeProject"
                     value={activeProject}
                     onChange={(e) => setactiveProject(e.target.value)}
-                    required />
-                <label className='label' >
-                         Cordonné UMR ?
+                    required/>
+                <label className='label'>
+                    Cordonné UMR ?
                 </label>
                 <textarea
                     placeholder='Cordonné UMR ? (true/false)'
@@ -253,9 +254,9 @@ const IncomingMobility = () => {
                     id="umrCoordinated"
                     value={umrCoordinated}
                     onChange={(e) => setumrCoordinated(e.target.value)}
-                    required />
-                    
-                <label className='label' >
+                    required/>
+
+                <label className='label'>
                     Accord signé ?
                 </label>
                 <textarea
@@ -265,8 +266,8 @@ const IncomingMobility = () => {
                     id="agreementSigned"
                     value={agreementSigned}
                     onChange={(e) => setagreementSigned(e.target.value)}
-                    required />
-                
+                    required/>
+
                 <button className='submit'>Valider</button>
             </form>
         </div>

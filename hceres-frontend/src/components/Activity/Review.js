@@ -15,7 +15,7 @@ function Review() {
             researcherId: chercheur,
             impactFactor: impactFactor,
             journalName: journalName,
-            year : year,
+            year: year,
             nbReviewedArticles: nbReviewedArticles
         };
 
@@ -30,7 +30,7 @@ function Review() {
             <form className='form' onSubmit={handleSubmit}>
                 <a href="/Activity" class="close-button">&#10006;</a>
                 <h3 className='title'>REVUE</h3>
-                <label className='label' >
+                <label className='label'>
                     Chercheur
                 </label>
                 <input
@@ -40,8 +40,8 @@ function Review() {
                     type="nom"
                     value={chercheur}
                     onChange={e => setChercheur(e.target.value)}
-                    required />
-                <label className='label' >
+                    required/>
+                <label className='label'>
                     Année
                 </label>
                 <input
@@ -51,9 +51,9 @@ function Review() {
                     type="year"
                     value={year}
                     onChange={e => setYear(e.target.value)}
-                    required />
+                    required/>
 
-                <label className='label' >
+                <label className='label'>
                     Facteur d'impact
                 </label>
                 <input
@@ -63,9 +63,9 @@ function Review() {
                     type="impactFactor"
                     value={impactFactor}
                     onChange={e => setImpactFactor(e.target.value)}
-                    required />
+                    required/>
 
-                <label className='label' >
+                <label className='label'>
                     Nom du journal
                 </label>
                 <input
@@ -75,9 +75,9 @@ function Review() {
                     type="journalName"
                     value={journalName}
                     onChange={e => setJournalName(e.target.value)}
-                    required />
+                    required/>
 
-                <label className='label' >
+                <label className='label'>
                     Nombre d'article revues
                 </label>
                 <input
@@ -87,10 +87,11 @@ function Review() {
                     type="nbReviewedArticles"
                     value={nbReviewedArticles}
                     onChange={e => setNbReviewedArticles(e.target.value)}
-                    required />
+                    required/>
                 <button className='submit'>Valider</button>
             </form>
         </div>
     );
 }
+
 export default Review;

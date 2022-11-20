@@ -20,7 +20,7 @@ function SeiIndustrialRDContract() {
         const response = await fetch(url);
 
         const listeChercheurs = await response.json();
-        
+
         setResearchers(listeChercheurs)
     }
 
@@ -32,9 +32,10 @@ function SeiIndustrialRDContract() {
             EndDate: EndDate,
             AgreementAmount: AgreementAmount,
             ProjectTitle: ProjectTitle,
-            NameCompanyInvolved:NameCompanyInvolved,
-            StartDate: StartDate };
-        
+            NameCompanyInvolved: NameCompanyInvolved,
+            StartDate: StartDate
+        };
+
         Axios.post("http://localhost:9000/AddSeiIndustrialRDContract", data)
             .then(res => {
                 window.location.reload();
@@ -48,12 +49,13 @@ function SeiIndustrialRDContract() {
             <form className='form' onSubmit={handleSubmit}>
                 <a href="/Activity" class="close-button">&#10006;</a>
                 <h3 className='title'>Signature d'une contrat industrielle</h3>
-                <label className='label' >
+                <label className='label'>
                     chercheur
                 </label>
                 <select onClick={componentDidMount} onChange={handleChange}>
                     {researchers.map(item => {
-                        return (<option key={item.researcherId} value={item.researcherId}>{item.researcherName} {item.researcherSurname}</option>);
+                        return (<option key={item.researcherId}
+                                        value={item.researcherId}>{item.researcherName} {item.researcherSurname}</option>);
                     })}
                 </select>
 
@@ -67,9 +69,9 @@ function SeiIndustrialRDContract() {
                     type="date"
                     value={StartDate}
                     onChange={e => setStartDate(e.target.value)}
-                    required />
+                    required/>
 
-                <label className='label' >
+                <label className='label'>
                     Nom Entreprise impliquée
                 </label>
                 <input
@@ -79,10 +81,10 @@ function SeiIndustrialRDContract() {
                     type="Nom Entreprise impliquée"
                     value={NameCompanyInvolved}
                     onChange={e => setNameCompanyInvolved(e.target.value)}
-                    required />
+                    required/>
 
 
-                <label className='label' >
+                <label className='label'>
                     Titre du projet
                 </label>
                 <input
@@ -92,9 +94,9 @@ function SeiIndustrialRDContract() {
                     type="ProjectTitle"
                     value={ProjectTitle}
                     onChange={e => setProjectTitle(e.target.value)}
-                    required />
+                    required/>
 
-                <label className='label' >
+                <label className='label'>
                     Montant de l'accord
                 </label>
                 <input
@@ -104,10 +106,10 @@ function SeiIndustrialRDContract() {
                     name="AgreementAmount"
                     value={AgreementAmount}
                     onChange={e => setAgreementAmount(e.target.value)}
-                    required />
+                    required/>
 
-                <label className='label' >
-                    Date de fin 
+                <label className='label'>
+                    Date de fin
                 </label>
                 <input
                     placeholder='Description'
@@ -116,23 +118,24 @@ function SeiIndustrialRDContract() {
                     type="date"
                     value={EndDate}
                     onChange={e => setEndDate(e.target.value)}
-                    required />
+                    required/>
 
                 <label className='label'>
                     Référence de la publication associée
                 </label>
-                 <input
+                <input
                     placeholder='ProjectTitle '
                     className='input-container'
                     name="AssociatedPubliRef"
                     type="AssociatedPubliRef"
                     value={AssociatedPubliRef}
                     onChange={e => setAssociatedPubliRef(e.target.value)}
-                    required />
+                    required/>
 
                 <button className='submit'>Valider</button>
             </form>
         </div>
     );
 }
+
 export default SeiIndustrialRDContract;

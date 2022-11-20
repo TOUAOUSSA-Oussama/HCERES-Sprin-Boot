@@ -28,20 +28,20 @@ function Editorial() {
         Axios.post("http://localhost:9000/Api/AddEditorial", data)
             .then(res => {
             })
-            window.location.reload();
+        window.location.reload();
     }
 
 
     const handleStartDate = (event) => {
         let formattedDate = `${event.getFullYear()}-${event.getMonth() + 1
-            }-${event.getDate()}`;
+        }-${event.getDate()}`;
         setFormattedStartDate(formattedDate);
         setStartDate(event);
     }
 
     const handleEndDate = (event) => {
         let formattedDate = `${event.getFullYear()}-${event.getMonth() + 1
-            }-${event.getDate()}`;
+        }-${event.getDate()}`;
         setFormattedEndDate(formattedDate);
         setEndDate(event);
     }
@@ -51,7 +51,7 @@ function Editorial() {
             <form className='form' onSubmit={handleSubmit}>
                 <a href="/Activity" class="close-button">&#10006;</a>
                 <h3 className='title'>EDITION</h3>
-                <label className='label' >
+                <label className='label'>
                     Chercheur
                 </label>
                 <input
@@ -61,9 +61,9 @@ function Editorial() {
                     type="nom"
                     value={chercheur}
                     onChange={e => setChercheur(e.target.value)}
-                    required />
-                
-                <label className='label' >
+                    required/>
+
+                <label className='label'>
                     Facteur d'impact
                 </label>
                 <input
@@ -73,7 +73,7 @@ function Editorial() {
                     type="impactFactor"
                     value={impactFactor}
                     onChange={e => setImpactFactor(e.target.value)}
-                    required />
+                    required/>
 
                 <label className='label'>
                     Date de départ
@@ -83,7 +83,7 @@ function Editorial() {
                     selected={startDate}
                     onChange={handleStartDate}
                     withPortal
-                    placeholderText="Choix de date" />
+                    placeholderText="Choix de date"/>
 
                 <label className='label'>
                     Date de fin
@@ -93,9 +93,9 @@ function Editorial() {
                     selected={endDate}
                     onChange={handleEndDate}
                     withPortal
-                    placeholderText="Choix de date" />
+                    placeholderText="Choix de date"/>
 
-                <label className='label' >
+                <label className='label'>
                     Nom du journal
                 </label>
                 <input
@@ -105,9 +105,9 @@ function Editorial() {
                     type="journalName"
                     value={journalName}
                     onChange={e => setJournalName(e.target.value)}
-                    required />
+                    required/>
 
-                <label className='label' >
+                <label className='label'>
                     Nom de la fonction editoriale
                 </label>
                 <input
@@ -117,10 +117,11 @@ function Editorial() {
                     type="functionName"
                     value={functionName}
                     onChange={e => setFunctionName(e.target.value)}
-                    required />
+                    required/>
                 <button className='submit'>Valider</button>
             </form>
         </div>
     );
 }
+
 export default Editorial;

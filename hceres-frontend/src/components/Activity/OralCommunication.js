@@ -23,7 +23,7 @@ function OralCommunication() {
         const response = await fetch(url);
 
         const listeChercheurs = await response.json();
-        
+
         setResearchers(listeChercheurs)
     }
 
@@ -35,12 +35,13 @@ function OralCommunication() {
             MeetingEnd: MeetingEnd,
             MeetingStart: MeetingStart,
             MeetingLocation: MeetingLocation,
-            MeetingYear:MeetingYear,
+            MeetingYear: MeetingYear,
             MeetingName: MeetingName,
             Authors: Authors,
-            OralCommunicationDate :OralCommunicationDate,
-            OralCommunicationTitle : OralCommunicationTitle };
-        
+            OralCommunicationDate: OralCommunicationDate,
+            OralCommunicationTitle: OralCommunicationTitle
+        };
+
         Axios.post("http://localhost:9000/AddOralCommunication", data)
             .then(res => {
                 window.location.reload();
@@ -54,12 +55,13 @@ function OralCommunication() {
             <form className='form' onSubmit={handleSubmit}>
                 <a href="/Activity" class="close-button">&#10006;</a>
                 <h3 className='title'>Communication orale</h3>
-                <label className='label' >
+                <label className='label'>
                     chercheur
                 </label>
-               <select onClick={componentDidMount} onChange={handleChange}>
+                <select onClick={componentDidMount} onChange={handleChange}>
                     {researchers.map(item => {
-                        return (<option key={item.researcherId} value={item.researcherId}>{item.researcherName} {item.researcherSurname}</option>);
+                        return (<option key={item.researcherId}
+                                        value={item.researcherId}>{item.researcherName} {item.researcherSurname}</option>);
                     })}
                 </select>
 
@@ -73,9 +75,9 @@ function OralCommunication() {
                     type="OralCommunicationTitle"
                     value={OralCommunicationTitle}
                     onChange={e => setOralCommunicationTitle(e.target.value)}
-                    required />
+                    required/>
 
-                <label className='label' >
+                <label className='label'>
                     Oral Communication Date
                 </label>
                 <input
@@ -85,10 +87,10 @@ function OralCommunication() {
                     type="date"
                     value={OralCommunicationDate}
                     onChange={e => setOralCommunicationDate(e.target.value)}
-                    required />
+                    required/>
 
 
-                <label className='label' >
+                <label className='label'>
                     Authors
                 </label>
                 <input
@@ -98,10 +100,10 @@ function OralCommunication() {
                     type="Authors"
                     value={Authors}
                     onChange={e => setAuthors(e.target.value)}
-                    required />
+                    required/>
 
-                <label className='label' >
-                Meeting Name
+                <label className='label'>
+                    Meeting Name
                 </label>
                 <input
                     placeholder='MeetingName'
@@ -110,10 +112,10 @@ function OralCommunication() {
                     name="MeetingName"
                     value={MeetingName}
                     onChange={e => setMeetingName(e.target.value)}
-                    required />
+                    required/>
 
-                <label className='label' >
-                    Meeting Year 
+                <label className='label'>
+                    Meeting Year
                 </label>
                 <input
                     placeholder='MeetingYear'
@@ -122,59 +124,60 @@ function OralCommunication() {
                     type="number"
                     value={MeetingYear}
                     onChange={e => setMeetingYear(e.target.value)}
-                    required />
+                    required/>
 
                 <label className='label'>
-                Meeting Location
+                    Meeting Location
                 </label>
-                 <input
+                <input
                     placeholder='MeetingLocation '
                     className='input-container'
                     name="MeetingLocation"
                     type="MeetingLocation"
                     value={MeetingLocation}
                     onChange={e => setMeetingLocation(e.target.value)}
-                    required />
+                    required/>
 
                 <label className='label'>
-                Meeting Start
+                    Meeting Start
                 </label>
-                 <input
+                <input
                     placeholder='MeetingStart '
                     className='input-container'
                     name="MeetingStart"
                     type="date"
                     value={MeetingStart}
                     onChange={e => setMeetingStart(e.target.value)}
-                    required />
+                    required/>
 
                 <label className='label'>
-                Meeting End
+                    Meeting End
                 </label>
-                 <input
+                <input
                     placeholder='MeetingEnd '
                     className='input-container'
                     name="MeetingEnd"
                     type="date"
                     value={MeetingEnd}
                     onChange={e => setMeetingEnd(e.target.value)}
-                    required />
+                    required/>
 
                 <label className='label'>
-                Type Oral CommunicationName
+                    Type Oral CommunicationName
                 </label>
-                 <input
+                <input
                     placeholder='TypeOralCommunicationName '
                     className='input-container'
                     name="TypeOralCommunicationName"
                     type="TypeOralCommunicationName"
                     value={TypeOralCommunicationName}
                     onChange={e => setTypeOralCommunicationName(e.target.value)}
-                    required />
+                    required/>
 
                 <button className='submit'>Valider</button>
             </form>
         </div>
     );
 }
+
 export default OralCommunication;

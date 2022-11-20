@@ -1,14 +1,13 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import Navbar from '../Navbar/Navbar';
 //import {Table} from "antd";
-import { generatePath } from "react-router-dom";
+import {generatePath} from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Axios from 'axios'
-import { Link, useNavigate, useParams } from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import UpdateResearcher from './UpdateResearcher';
-import { FaEdit } from "react-icons/fa";
+import {FaEdit} from "react-icons/fa";
 import {AiFillDelete} from "react-icons/ai";
-
 
 
 class Researcher extends Component {
@@ -20,7 +19,7 @@ class Researcher extends Component {
             showUpdate: false,
             idResearcher: 0,
         }
-        
+
         this.handleUpdate = this.handleUpdate.bind(this);
     }
 
@@ -34,14 +33,14 @@ class Researcher extends Component {
                 window.location.reload(false);
             })
     }
-    
+
     handleUpdate(idResearcher) {
         this.setState({
             showUpdate: true,
             idResearcher: idResearcher
         })
     }
-    
+
     async componentDidMount() {
 
         const url = "http://localhost:9000/Researchers";
@@ -66,46 +65,48 @@ class Researcher extends Component {
 
                 <div>
                     <div className="container">
-                        
-                                
-                                <h3>Liste des chercheurs </h3>
-                                <a href="/AddResearcher"  className="btn btn-success" role="button" data-bs-toggle="button">Ajouter un chercheur</a>
-                            
-                        
-                        <hr />
 
-                        <table className="table table-bordered table-striped" > <thead className="thead-dark">
+                        <h3>Liste des chercheurs </h3>
+                        <a href="/AddResearcher" className="btn btn-success" role="button" data-bs-toggle="button">Ajouter
+                            un chercheur</a>
+                        <hr/>
+
+                        <table className="table table-bordered table-striped">
+                            <thead className="thead-dark">
                             <tr>
                                 <th>Nom</th>
                                 <th>Prénom</th>
                                 <th>Email</th>
                                 <th>Actions</th>
                             </tr>
-                        </thead>
+                            </thead>
                             <tbody>
-                                {
-                                    this.state.researchers.map((chercheur, index) =>
-                                        <tr key={index} >
-                                            <td>{chercheur.researcherSurname}</td>
-                                            <td>{chercheur.researcherName}</td>
-                                            <td>{chercheur.researcherEmail}</td>
-                                            <td>
-                                                <div className="btn-group" role="group">
-                                                    <button onClick={() => {
-                                                        this.handleUpdate(chercheur.researcherId)
-                                                    }} className="btn btn-outline-info" role="button" data-bs-toggle="button">
-                                                        <FaEdit/></button>
-                                                    <button className="btn btn-outline-danger ml-2" onClick={() => { this.deleteResearcher(chercheur.researcherId) }} ><AiFillDelete/></button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    )}
-                                <tr>
-                                    <th>----</th>
-                                    <th>----</th>
-                                    <th>----</th>
-                                    <th>----</th>
-                                </tr>
+                            {
+                                this.state.researchers.map((chercheur, index) =>
+                                    <tr key={index}>
+                                        <td>{chercheur.researcherSurname}</td>
+                                        <td>{chercheur.researcherName}</td>
+                                        <td>{chercheur.researcherEmail}</td>
+                                        <td>
+                                            <div className="btn-group" role="group">
+                                                <button onClick={() => {
+                                                    this.handleUpdate(chercheur.researcherId)
+                                                }} className="btn btn-outline-info" role="button"
+                                                        data-bs-toggle="button">
+                                                    <FaEdit/></button>
+                                                <button className="btn btn-outline-danger ml-2" onClick={() => {
+                                                    this.deleteResearcher(chercheur.researcherId)
+                                                }}><AiFillDelete/></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                )}
+                            <tr>
+                                <th>----</th>
+                                <th>----</th>
+                                <th>----</th>
+                                <th>----</th>
+                            </tr>
                             </tbody>
                         </table>
                     </div>
@@ -120,6 +121,6 @@ class Researcher extends Component {
         )
     }
 
-};
+}
 
 export default Researcher;

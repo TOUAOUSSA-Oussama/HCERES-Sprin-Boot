@@ -2,7 +2,7 @@ import React from 'react';
 import './Researcher.css';
 import 'react-datepicker/dist/react-datepicker.css';
 import Axios from 'axios'
-import { Link, useNavigate, useParams } from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 
 function AddResearcher() {
     const [AddResearcherFirstName, setAddResearcherFirstName] = React.useState("");
@@ -11,25 +11,26 @@ function AddResearcher() {
     const navigate = useNavigate();
 
     const handleSubmit = (event) => {
-         event.preventDefault();
-         let data = {
-             "researcherSurname": AddResearcherFirstName,
-             "researcherName": AddResearcherLastName,
-             "researcherEmail": AddResearcherEmail};
-        
-         Axios.post("http://localhost:9000/AddResearcher", data)
-             .then(res => {
+        event.preventDefault();
+        let data = {
+            "researcherSurname": AddResearcherFirstName,
+            "researcherName": AddResearcherLastName,
+            "researcherEmail": AddResearcherEmail
+        };
+
+        Axios.post("http://localhost:9000/AddResearcher", data)
+            .then(res => {
                 navigate('/Researcher');
-             })
-     }
-        
+            })
+    }
+
     return (
         <div className='form-container'>
-            <form  className='form' onSubmit={handleSubmit}>
+            <form className='form' onSubmit={handleSubmit}>
                 <a href="/Researcher" class="close-button">&#10006;</a>
                 <h3 className='title'>Ajouter un chercheur:</h3>
-                <label className='label' >
-                Prénom du chercheur
+                <label className='label'>
+                    Prénom du chercheur
                 </label>
                 <input
                     placeholder='Prénom'
@@ -38,9 +39,9 @@ function AddResearcher() {
                     type="AddResearcherFirstName"
                     value={AddResearcherFirstName}
                     onChange={e => setAddResearcherFirstName(e.target.value)}
-                    required />
-                <label className='label' >
-                Nom du chercheur
+                    required/>
+                <label className='label'>
+                    Nom du chercheur
                 </label>
                 <input
                     placeholder='Nom'
@@ -49,10 +50,10 @@ function AddResearcher() {
                     type="AddResearcherLastName"
                     value={AddResearcherLastName}
                     onChange={e => setAddResearcherLastName(e.target.value)}
-                    required />
+                    required/>
 
-                <label className='label' >
-                Email du chercheur
+                <label className='label'>
+                    Email du chercheur
                 </label>
                 <input
                     placeholder='Email'
@@ -61,10 +62,11 @@ function AddResearcher() {
                     type="AddResearcherEmail"
                     value={AddResearcherEmail}
                     onChange={e => setAddResearcherEmail(e.target.value)}
-                    required />
+                    required/>
                 <button className='submit'>Valider</button>
             </form>
         </div>
     );
 }
+
 export default AddResearcher;

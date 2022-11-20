@@ -22,7 +22,7 @@ function Platform() {
         const response = await fetch(url);
 
         const listeChercheurs = await response.json();
-        
+
         setResearchers(listeChercheurs)
     }
 
@@ -35,34 +35,36 @@ function Platform() {
             managers: managers,
             affiliation: affiliation,
             creationDate: formattedDate,
-            openPrivateResearchers:checkbox};
+            openPrivateResearchers: checkbox
+        };
         Axios.post("http://localhost:9000/Api/AddPlatform", data)
-        .then(res => {
-           
-        })
+            .then(res => {
+
+            })
         window.location.reload();
     }
 
 
-    const handleDate = (event) =>{
+    const handleDate = (event) => {
         let formattedDate = `${event.getFullYear()}-${
-            event.getMonth() +1
-          }-${event.getDate()}`;
-          setFormatted(formattedDate);
-          setDate(event);
-        }
-const handleChange = e => setChercheur(e.target.value);
+            event.getMonth() + 1
+        }-${event.getDate()}`;
+        setFormatted(formattedDate);
+        setDate(event);
+    }
+    const handleChange = e => setChercheur(e.target.value);
     return (
         <div className='form-container'>
             <form className='form' onSubmit={handleSubmit}>
                 <a href="/Activity" class="close-button">&#10006;</a>
                 <h3 className='title'>PLATFORM</h3>
-                <label className='label' >
+                <label className='label'>
                     chercheur
                 </label>
-               <select onClick={componentDidMount} onChange={handleChange}>
+                <select onClick={componentDidMount} onChange={handleChange}>
                     {researchers.map(item => {
-                        return (<option key={item.researcherId} value={item.researcherId}>{item.researcherName} {item.researcherSurname}</option>);
+                        return (<option key={item.researcherId}
+                                        value={item.researcherId}>{item.researcherName} {item.researcherSurname}</option>);
                     })}
                 </select>
 
@@ -74,9 +76,9 @@ const handleChange = e => setChercheur(e.target.value);
                     selected={date}
                     onChange={handleDate}
                     withPortal
-                    placeholderText="Choix de date" />
+                    placeholderText="Choix de date"/>
 
-                <label className='label' >
+                <label className='label'>
                     Description
                 </label>
                 <input
@@ -86,10 +88,10 @@ const handleChange = e => setChercheur(e.target.value);
                     type="description"
                     value={description}
                     onChange={e => setDescritption(e.target.value)}
-                    required />
+                    required/>
 
 
-                <label className='label' >
+                <label className='label'>
                     Managers
                 </label>
                 <input
@@ -99,9 +101,9 @@ const handleChange = e => setChercheur(e.target.value);
                     type="managers"
                     value={managers}
                     onChange={e => setManagers(e.target.value)}
-                    required />
+                    required/>
 
-                <label className='label' >
+                <label className='label'>
                     Affiliation
                 </label>
                 <input
@@ -111,9 +113,9 @@ const handleChange = e => setChercheur(e.target.value);
                     type="affiliation"
                     value={affiliation}
                     onChange={e => setAffiliation(e.target.value)}
-                    required />
+                    required/>
 
-                <label className='label' >
+                <label className='label'>
                     Labellisation
                 </label>
                 <input
@@ -123,20 +125,21 @@ const handleChange = e => setChercheur(e.target.value);
                     type="labellisation"
                     value={labellisation}
                     onChange={e => setLabellisation(e.target.value)}
-                    required />
+                    required/>
                 <label className='label'>
                     open private researchers
                 </label>
-                <input 
-                type = "checkbox" 
-                placeholder='Yes' 
-                name='checkbox'
-                value= {checkbox}
-                onChange={e => setCheckBox(e.target.value)}
-                required/>
+                <input
+                    type="checkbox"
+                    placeholder='Yes'
+                    name='checkbox'
+                    value={checkbox}
+                    onChange={e => setCheckBox(e.target.value)}
+                    required/>
                 <button className='submit'>Valider</button>
             </form>
         </div>
     );
 }
+
 export default Platform;
