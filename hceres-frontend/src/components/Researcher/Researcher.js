@@ -72,7 +72,7 @@ class Researcher extends Component {
                         
                                 
                                 <h3>Liste des chercheurs </h3>
-                                <a href="/AddResearcher"  class="btn btn-success" role="button" data-bs-toggle="button">Ajouter un chercheur</a>
+                                <a href="/AddResearcher"  className="btn btn-success" role="button" data-bs-toggle="button">Ajouter un chercheur</a>
                             
                         
                         <hr />

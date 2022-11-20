@@ -10,13 +10,13 @@ import Navbar from '../Navbar/Navbar';
 function About(){
     return (
         <div>
-            <div class="container2" >
-                <div class="left-side1">
-                  <img class="labo1" src={welcomImage} alt= "Hello" />
+            <div className="container2" >
+                <div className="left-side1">
+                  <img className="labo1" src={welcomImage} alt= "Hello" />
                 </div>
-                <div class="right-side1">
-                    <div class="pg1">
-                    <div class="title1">
+                <div className="right-side1">
+                    <div className="pg1">
+                    <div className="title1">
                         About !
                     </div>
                     Cette application web a été créée par une équipe d'éudiants de l'Ecole Centrale de 

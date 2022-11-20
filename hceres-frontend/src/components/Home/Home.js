@@ -10,17 +10,17 @@ import Navbar from '../Navbar/Navbar';
 function Home(){
     return (
         <div>
-            <div class="container1" >
-                <div class="left-side">
-                    <div class="title">
+            <div className="container1" >
+                <div className="left-side">
+                    <div className="title">
                         Bienvenue !
                     </div>
-                    <div class="pg">
+                    <div className="pg">
                     Serveur d'administration des données pour les enquêtes HCERES
                     </div>
                 </div>
-                <div class="right-side">
-                    <img class="labo" src={welcomImage} alt= "Hello" />
+                <div className="right-side">
+                    <img className="labo" src={welcomImage} alt= "Hello" />
                 </div>
             </div>
         </div>
