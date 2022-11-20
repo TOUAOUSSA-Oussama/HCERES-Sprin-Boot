@@ -25,7 +25,6 @@ function OralCommunication() {
         const listeChercheurs = await response.json();
         
         setResearchers(listeChercheurs)
-        console.log(researchers);
     }
 
     const handleSubmit = (event) => {
@@ -42,10 +41,8 @@ function OralCommunication() {
             OralCommunicationDate :OralCommunicationDate,
             OralCommunicationTitle : OralCommunicationTitle };
         
-        console.log(data);
         Axios.post("http://localhost:9000/AddOralCommunication", data)
             .then(res => {
-                console.log(res.data)
                 window.location.reload();
             }).catch(err => alert(err))
     }

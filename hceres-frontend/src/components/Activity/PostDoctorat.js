@@ -29,7 +29,6 @@ function PostDoctorat() {
     const listeChercheurs = await response.json();
 
     setResearchers(listeChercheurs)
-    console.log(researchers);
   }
 
   const handleSubmit = (event) => {
@@ -47,10 +46,8 @@ function PostDoctorat() {
       associatedPubliRef: associatedPubliRef,
     };
 
-    console.log(data);
     Axios.post("http://localhost:9000/Api/AddPostDoc", data)
       .then(res => {
-        console.log(res.data)
         window.location.reload();
       })
   }

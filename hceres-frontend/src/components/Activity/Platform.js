@@ -24,7 +24,6 @@ function Platform() {
         const listeChercheurs = await response.json();
         
         setResearchers(listeChercheurs)
-        console.log(researchers);
     }
 
     const handleSubmit = (event) => {
@@ -39,7 +38,6 @@ function Platform() {
             openPrivateResearchers:checkbox};
         Axios.post("http://localhost:9000/Api/AddPlatform", data)
         .then(res => {
-            console.log(res.data)
            
         })
         window.location.reload();

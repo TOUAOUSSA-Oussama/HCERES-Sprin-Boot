@@ -20,7 +20,6 @@ function SrAward() {
         const listeChercheurs = await response.json();
         
         setResearchers(listeChercheurs)
-        console.log(researchers);
     }
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -30,10 +29,8 @@ function SrAward() {
         awardeeName: awardeeName,
         description: description,
         awardDate: awardDate};
-    console.log(data);
     Axios.post("http://localhost:9000/Api/AddSrAward", data)
         .then(res => {
-            console.log(res.data)
             window.location.reload();
         })
 }

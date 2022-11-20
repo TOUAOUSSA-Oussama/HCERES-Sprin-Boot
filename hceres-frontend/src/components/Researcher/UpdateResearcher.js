@@ -12,13 +12,11 @@ function UpdateResearcher(props) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(props.id);
         let data = {
             "researcherSurname": AddResearcherFirstName,
             "researcherName": AddResearcherLastName,
             "researcherEmail": AddResearcherEmail};
        
-        console.log(data);
         Axios.put(`http://localhost:9000/updateResearcher/${props.id}`, data)
             .then(res => {
                 navigate('/Home');

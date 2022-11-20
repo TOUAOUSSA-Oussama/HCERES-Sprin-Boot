@@ -30,7 +30,6 @@ function NationalInternationalCollaboration() {
         const listeChercheurs = await response.json();
         
         setResearchers(listeChercheurs)
-        console.log(researchers);
     }
 
     const handleSubmit = (event) => {
@@ -52,10 +51,8 @@ function NationalInternationalCollaboration() {
             PartnerEntity: PartnerEntity,
             DateProjectStart: DateProjectStart };
         
-        console.log(data);
         Axios.post("http://localhost:9000/AddNationalInternationalCollaboration", data)
             .then(res => {
-                console.log(res.data)
                 window.location.reload();
             })
     }

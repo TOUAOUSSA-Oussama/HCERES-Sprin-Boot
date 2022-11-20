@@ -24,7 +24,6 @@ const ScientificExpertise = () => {
         const listeChercheurs = await response.json();
         
         setResearchers(listeChercheurs)
-        console.log(researchers);
     }
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -36,10 +35,8 @@ const ScientificExpertise = () => {
             ScientificExpertiseStartDate: startDate,
             ScientificExpertiseEndDate: endDate};
         
-        console.log(data);
         Axios.post("http://localhost:9000/Api/AddScientificExpertise", data)
             .then(res => {
-                console.log(res.data)
                 window.location.reload();
             })
     }

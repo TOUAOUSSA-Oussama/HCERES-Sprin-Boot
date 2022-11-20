@@ -12,7 +12,6 @@ function Production() {
     const [description, setDescritption] = React.useState("");
 
     const handleSubmit = (event) => {
-        console.log("Submitted");
         event.preventDefault();
     }
 

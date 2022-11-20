@@ -25,7 +25,6 @@ function Editorial() {
             functionName: functionName
         };
 
-        console.log(data);
         Axios.post("http://localhost:9000/Api/AddEditorial", data)
             .then(res => {
             })

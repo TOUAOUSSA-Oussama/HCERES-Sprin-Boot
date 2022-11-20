@@ -17,7 +17,6 @@ function AddResearcher() {
              "researcherName": AddResearcherLastName,
              "researcherEmail": AddResearcherEmail};
         
-         console.log(data);
          Axios.post("http://localhost:9000/AddResearcher", data)
              .then(res => {
                 navigate('/Researcher');

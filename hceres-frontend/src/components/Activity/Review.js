@@ -19,10 +19,8 @@ function Review() {
             nbReviewedArticles: nbReviewedArticles
         };
 
-        console.log(data);
         Axios.post("http://localhost:9000/Api/AddReview", data)
             .then(res => {
-                console.log(res.data)
             }).catch(err => alert(err))
     }
 

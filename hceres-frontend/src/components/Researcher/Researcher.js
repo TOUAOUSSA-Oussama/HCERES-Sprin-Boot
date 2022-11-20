@@ -29,7 +29,6 @@ class Researcher extends Component {
     */
     deleteResearcher(id) {
 
-        console.log(id);
         Axios.delete(`http://localhost:9000/deleteResearcher/${id}`)
             .then(res => {
                 window.location.reload(false);
@@ -49,11 +48,9 @@ class Researcher extends Component {
         const response = await fetch(url);
 
         const listeChercheurs = await response.json();
-        console.log("hello")
         this.setState({
             researchers: listeChercheurs,
         })
-        console.log(this.state.researchers);
     }
 
     render() {

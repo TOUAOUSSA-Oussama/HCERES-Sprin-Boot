@@ -30,7 +30,6 @@ const EssaiClinique = () => {
         const listeChercheurs = await response.json();
         
         setResearchers(listeChercheurs)
-        console.log(researchers);
     }
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -48,10 +47,8 @@ const EssaiClinique = () => {
             fundingAmount:montantFinancement
         };
         
-        console.log(data);
         Axios.post("http://localhost:9000/Api/AddSeiClinicalTrial", data)
             .then(res => {
-                console.log(res.data)
                 
             })
             window.location.reload();
