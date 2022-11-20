@@ -17,17 +17,18 @@ function App() {
       <Router>
       <GlobaleStyle />
 
-      <Navbar />
 
       <Routes>
-          <Route path='/Home' exact  element={<Home/>} />
-          <Route path='/Researcher' exact  element={<Researcher/>} />
-          <Route path='/AddResearcher' exact  element={<AddResearcher/>} />
-          <Route path='/UpdateResearcher' exact  element={<UpdateResearcher/>} />
-          <Route path='/Activity' exact  element={<Activity/>} />
           <Route path='/About' exact  element={<About/>} />
           <Route path='' exact  element={<Connection/>} />
-      </Routes> 
+
+
+          <Route path='/Home' exact  element={<><Navbar/><Home/></>} />
+          <Route path='/Researcher' exact  element={<> <Navbar/>  <Researcher/></>} />
+          <Route path='/AddResearcher' exact  element={<> <Navbar/>  <AddResearcher/></>} />
+          <Route path='/UpdateResearcher' exact  element={<> <Navbar/>  <UpdateResearcher/></>} />
+          <Route path='/Activity' exact  element={<> <Navbar/>  <Activity/></>} />
+      </Routes>
 
       <Footer />
 

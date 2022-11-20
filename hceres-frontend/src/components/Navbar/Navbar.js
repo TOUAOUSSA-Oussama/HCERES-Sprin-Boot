@@ -19,22 +19,22 @@ import Logo from '../../assets/logo.png';
 
 const Navbar = () => {
     const [click, setClick] = useState(false);
-    const [button, setButton] = useState(true);    
+    const [isWindowBig, setWindowBig] = useState(true);    
     const closeMobileMenu = () => setClick(false);
-
+    
     const handleClick = () => setClick(!click);
 
     // pour n'afficher le grand boutton que pour les garndes ecrans
-    const showButton = () => {
+    const calculateIsWindowBig = () => {
         if (window.innerWidth <= 960) {
-            setButton(false);
+            setWindowBig(false);
         } else {
-            setButton(true);
+            setWindowBig(true);
         }
     };
 
     useEffect(() => {
-        showButton();
+        calculateIsWindowBig();
     }, []);
 
     return (
@@ -54,7 +54,7 @@ const Navbar = () => {
                 {/* Le menu que va contenir le Navbar */}
                 <NavMenu onClick={handleClick} click={click}>
                     <NavItem>
-                        <NavLinks to="/Home">
+                        <NavLinks to="/Home" className={(nav) => nav.isActive()?"active":""}>
                             Accueil
                         </NavLinks>
                     </NavItem>
@@ -70,13 +70,13 @@ const Navbar = () => {
                     </NavItem>
                     {/* ajouter bouton de deconnexion */}
                     <NavItemBtn>
-                        {button ? (
+                        {isWindowBig ? (
                             <NavBtnLink to='/'>
-                                <Button primary>Deconnexion</Button>
+                                <Button fontBig primary>Deconnexion</Button>
                             </NavBtnLink>
                         ) : (
                             <NavBtnLink to='/'>
-                                <Button fontBig primary>
+                                <Button primary>
                                     Deconnexion
                                 </Button>
                             </NavBtnLink>
