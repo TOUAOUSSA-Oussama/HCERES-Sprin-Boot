@@ -21,7 +21,7 @@ export default function Activity() {
     const [showIncomingMobility, setIncomingMobility] = React.useState(false);
     const [showScientificExpertise, setScientificExpertise] = React.useState(false);
     const [DateProjectStart, setDateProjectStart] = React.useState(null);
-    const [showForm, setShowForm] = React.useState(false);
+    const [showEducation, setShowEducation] = React.useState(false);
     const [showPostDoctorat, setShowPostDoctorat] = React.useState(false);
     const [showPlatform, setShowPlatform] = React.useState(false);
     const [showEditorial, setShowEditorial] = React.useState(false);
@@ -43,50 +43,50 @@ export default function Activity() {
             </div>
             <div className='activityList'>
                 <ul>
-                    <li onClick={setShowForm}>
+                    <li onClick={setShowEducation}>
                         <a>Education</a>
                     </li>
                     
                     <li onClick={setPrix} >
                         <a>Prix</a>
                     </li>
-                    <li onClick={setShowPlatform}>
+                    <li onClick={() => setShowPlatform}>
                         <a>Platform</a>
                     </li>
-                    <li onClick={setShowOralCommunication}>
+                    <li onClick={() => setShowOralCommunication}>
                         <a>Communication orale</a>
                     </li>
-                    <li onClick={setShowSeiIndustrialRDContract}>
+                    <li onClick={() => setShowSeiIndustrialRDContract}>
                         <a>Signature d'une contrat industrielle</a>
                     </li>
-                    <li onClick={setShowNationalInternationalCollaboration}>
+                    <li onClick={() => setShowNationalInternationalCollaboration}>
                         <a>Collaboration internationale</a>
                     </li>
-                    <li onClick={setScientificExpertise}>
+                    <li onClick={() => setScientificExpertise}>
                         <a>Expertise scientifique</a>
                     </li>
-                    <li onClick={setEssaiClinique}>
+                    <li onClick={() => setEssaiClinique}>
                         <a>Essai clinique</a>
                     </li>
-                    <li onClick={setIncomingMobility} >
+                    <li onClick={() => setIncomingMobility} >
                         <a>Mobilité entrante</a>
                     </li>
                     <li>
                         <a>Mobilité sortante</a>
                     </li>
-                    <li onClick={setShowEditorial}>
+                    <li onClick={() => setShowEditorial}>
                         <a>Edition</a>
                     </li>
                     <li>
                         <a>Création d'entreprise</a>
                     </li>
-                    <li onClick={setShowPostDoctorat}>
+                    <li onClick={() => setShowPostDoctorat}>
                         <a>PostDoctorat</a>
                     </li>
                     <li>
                         <a>Brevet</a>
                     </li>
-                    <li onClick={setShowReview}>
+                    <li onClick={() => setShowReview}>
                         <a>Revue</a>
                     </li>
                 </ul>
@@ -96,7 +96,7 @@ export default function Activity() {
             {showEssaiClinique && (<EssaiClinique> </EssaiClinique>)}
             {showIncomingMobility && (<IncomingMobility> </IncomingMobility>)}
             {showScientificExpertise && (<ScientificExpertise> </ScientificExpertise>)}
-            {showForm && (<Education> </Education>)}
+            {showEducation && (<Education onHideAction={() => setShowEducation(false)}/>)}
             {showPostDoctorat && (<PostDoctorat> </PostDoctorat>)}
             {showPlatform && (<Platform></Platform>)}
             {showEditorial && (<Editorial></Editorial>)}
