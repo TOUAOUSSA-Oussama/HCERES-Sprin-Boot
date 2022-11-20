@@ -6,6 +6,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Axios from 'axios'
 import { Link, useNavigate, useParams } from "react-router-dom";
 import UpdateResearcher from './UpdateResearcher';
+import { FaEdit } from "react-icons/fa";
+import {AiFillDelete} from "react-icons/ai";
 
 
 
@@ -91,8 +93,13 @@ class Researcher extends Component {
                                             <td>{chercheur.researcherName}</td>
                                             <td>{chercheur.researcherEmail}</td>
                                             <td>
-                                                <button onClick={ () => { this.handleUpdate(chercheur.researcherId) }} class="btn btn-info" role="button" data-bs-toggle="button">Modifier</button>
-                                                <button className="btn btn-danger ml-2" onClick={() => { this.deleteResearcher(chercheur.researcherId) }} >Supprimer</button>
+                                                <div className="btn-group" role="group">
+                                                    <button onClick={() => {
+                                                        this.handleUpdate(chercheur.researcherId)
+                                                    }} className="btn btn-info" role="button" data-bs-toggle="button">
+                                                        <FaEdit fill={"white"}/></button>
+                                                    <button className="btn btn-danger ml-2" onClick={() => { this.deleteResearcher(chercheur.researcherId) }} ><AiFillDelete/></button>
+                                                </div>
                                             </td>
                                         </tr>
                                     )}
