@@ -7,12 +7,12 @@ import Axios from 'axios'
 import {Link, useNavigate, useParams} from "react-router-dom";
 import UpdateResearcher from './UpdateResearcher';
 import {FaEdit} from "react-icons/fa";
-import {AiFillDelete, AiOutlinePlusCircle} from "react-icons/ai";
+import {AiFillDelete, AiOutlineLoading, AiOutlinePlusCircle} from "react-icons/ai";
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import filterFactory, {textFilter} from 'react-bootstrap-table2-filter';
 import {ImFilter} from "react-icons/im";
-import Button from "react-bootstrap/Button";
+import {Oval} from 'react-loading-icons'
 
 class Researcher extends Component {
     constructor() {
@@ -140,7 +140,7 @@ class Researcher extends Component {
                         <div class="col-4">
                             <br/>
                             <a href="/AddResearcher" className="btn btn-success" role="button" data-bs-toggle="button">
-                                <AiOutlinePlusCircle /> &nbsp; Ajouter un chercheur</a>
+                                <AiOutlinePlusCircle/> &nbsp; Ajouter un chercheur</a>
                         </div>
                     </div>
                 </div>
@@ -169,7 +169,9 @@ class Researcher extends Component {
 
         return (
             <div className="container">
-                <h1>Telechargement data</h1>
+                <h1>Telechargement des donnees
+                    <button className={'btn btn-primary'}><Oval/></button>
+                </h1>
             </div>
         )
     }
