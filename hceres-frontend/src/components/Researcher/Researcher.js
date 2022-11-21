@@ -88,18 +88,19 @@ class Researcher extends Component {
                 sort: true,
                 filter: this.state.showFilter ? textFilter() : null,
             }, {
-                dataField: 'researcherId',
+                dataField: 'actionColumn',
+                isDummyField: true,
                 text: 'Edit',
                 formatter: (cell, row) => {
                     return (
                         <div className="btn-group" role="group">
                             <button onClick={() => {
-                                this.handleUpdate(cell)
+                                this.handleUpdate(row.researcherId)
                             }} className="btn btn-outline-info" role="button"
                                     data-bs-toggle="button">
                                 <FaEdit/></button>
                             <button className="btn btn-outline-danger" onClick={() => {
-                                this.deleteResearcher(cell)
+                                this.deleteResearcher(row.researcherId)
                             }}><AiFillDelete/></button>
                         </div>
                     )
@@ -122,8 +123,8 @@ class Researcher extends Component {
             const CaptionElement = () => (
 
                 <div className={"container text-center"}>
-                    <div class="row">
-                        <div class="col-8">
+                    <div className="row">
+                        <div className="col-8">
                             <h3 style={{
                                 borderRadius: '0.25em',
                                 textAlign: 'center',
@@ -137,7 +138,7 @@ class Researcher extends Component {
                                 </button>
                             </h3>
                         </div>
-                        <div class="col-4">
+                        <div className="col-4">
                             <br/>
                             <a href="/AddResearcher" className="btn btn-success" role="button" data-bs-toggle="button">
                                 <AiOutlinePlusCircle/> &nbsp; Ajouter un chercheur</a>
