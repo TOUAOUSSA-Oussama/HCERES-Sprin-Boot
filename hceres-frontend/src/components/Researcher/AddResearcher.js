@@ -46,7 +46,6 @@ function AddResearcher(props) {
     const handleUpdateResearcher = (data) => {
         Axios.put(`http://localhost:9000/updateResearcher/${targetResearcher.researcherId}`, data)
             .then(response => {
-                console.log(response.data)
                 const researcherId = response.data.researcherId;
                 const msg = {
                     "researcherUpdated": response.data,

@@ -21,7 +21,6 @@ function App() {
                 <Routes>
                     <Route path='/Home' exact element={<Navbar/>}/>
                     <Route path='/Researcher' exact element={<Navbar/>}/>
-                    <Route path='/AddResearcher' exact element={<Navbar/>}/>
                     <Route path='/Activity' exact element={<Navbar/>}/>
                     <Route path='*' exact element={<></>}/>
                 </Routes>

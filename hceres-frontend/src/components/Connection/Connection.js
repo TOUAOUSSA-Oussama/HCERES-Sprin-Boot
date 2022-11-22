@@ -66,7 +66,6 @@ const Login = (props) => {
                 </label>
                 {errorLogin && <Alert className={"alert-danger"} dismissible={true} onClose={()=>setErrorLogin('')}>{errorLogin}</Alert>}
                 <Button variant={"primary"} className={"btn-primary fadeIn fourth"} value={"connection"}
-                        disabled={user.login.length === 0 && user.password.length === 0}
                         onClick={validateUser}> Connexion</Button>
             </form>
         </div>

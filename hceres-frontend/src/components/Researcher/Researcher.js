@@ -10,6 +10,7 @@ import {Oval} from 'react-loading-icons'
 import Axios from "axios";
 import AddResearcher from "./AddResearcher";
 import {Alert} from "react-bootstrap";
+import DeleteResearcher from "./DeleteResearcher";
 
 class Researcher extends Component {
     constructor() {
@@ -18,6 +19,7 @@ class Researcher extends Component {
             researchers: [],
             loading: false,
             showAddResearcher: false,
+            showDeleteResearcher: false,
             addResearcherSuccess: "",
             addResearcherError: "",
             showFilter: false,
@@ -27,20 +29,10 @@ class Researcher extends Component {
         this.onHideModalResearcher = this.onHideModalResearcher.bind(this);
     }
 
-    /*{showForm && (<AddResearcher> </AddResearcher>)}
-     onClick={setShowForm}
-    */
-    deleteResearcher(id) {
-
-        Axios.delete(`http://localhost:9000/deleteResearcher/${id}`)
-            .then(res => {
-                window.location.reload(false);
-            })
-    }
-
     onHideModalResearcher(messages) {
         this.setState({
             showAddResearcher: false,
+            showDeleteResearcher: false,
         })
         // silent close
         if (!messages) return;
@@ -54,6 +46,7 @@ class Researcher extends Component {
                 addResearcherSuccess: messages.successMsg,
             }))
         } else if (messages.researcherUpdated) {
+            // update close
             // 1. Make a shallow copy of the items
             let items = [...this.state.researchers];
             // 2. Make a shallow copy of the item you want to mutate
@@ -62,6 +55,14 @@ class Researcher extends Component {
             //    but that's why we made a copy first
             items[indexUpdated] = messages.researcherUpdated;
             // 4. Set the state to our new copy
+            this.setState({
+                researchers: items,
+                addResearcherSuccess: messages.successMsg,
+            });
+        } else if (messages.researcherDeleted) {
+            let items = [...this.state.researchers];
+            let indexDeleted = this.state.researchers.findIndex(r => r.researcherId === messages.researcherDeleted.researcherId)
+            items.splice(indexDeleted, 1);
             this.setState({
                 researchers: items,
                 addResearcherSuccess: messages.successMsg,
@@ -124,7 +125,10 @@ class Researcher extends Component {
                                     data-bs-toggle="button">
                                 <FaEdit/></button>
                             <button className="btn btn-outline-danger" onClick={() => {
-                                this.deleteResearcher(row.researcherId)
+                                this.setState({
+                                    targetResearcher: row,
+                                    showDeleteResearcher: true
+                                })
                             }}><AiFillDelete/></button>
                         </div>
                     )
@@ -199,6 +203,9 @@ class Researcher extends Component {
                 <div className="container">
                     {this.state.showAddResearcher && (<AddResearcher targetResearcher={this.state.targetResearcher}
                                                                      onHideAction={this.onHideModalResearcher}/>)}
+                    {this.state.showDeleteResearcher && (
+                        <DeleteResearcher targetResearcher={this.state.targetResearcher}
+                                          onHideAction={this.onHideModalResearcher}/>)}
                     <BootstrapTable
                         bootstrap4
                         keyField="researcherId"
