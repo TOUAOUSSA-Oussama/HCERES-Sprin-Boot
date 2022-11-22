@@ -5829,7 +5829,8 @@ INSERT INTO public.publication_type (publication_type_id, publication_type_name)
 -- Data for Name: researcher; Type: TABLE DATA; Schema: public; Owner: hceres
 --
 
-INSERT INTO public.researcher (researcher_id, researcher_surname, researcher_name, researcher_email, researcher_orcid, researcher_login, researcher_password) VALUES (1, 'Ahmil', 'Ghenima', 'Ghemina.Ahmil@univ-nantes.fr', NULL, NULL, NULL);
+INSERT INTO public.researcher (researcher_id, researcher_surname, researcher_name, researcher_email, researcher_orcid, researcher_login, researcher_password)
+VALUES (1, 'Ahmil', 'Ghenima', 'Ghemina.Ahmil@univ-nantes.fr', NULL, 'admin', 'NULL');
 INSERT INTO public.researcher (researcher_id, researcher_surname, researcher_name, researcher_email, researcher_orcid, researcher_login, researcher_password) VALUES (2, 'Anegon', 'Ignacio', 'Ignacio.Anegon@univ-nantes.fr', NULL, NULL, NULL);
 INSERT INTO public.researcher (researcher_id, researcher_surname, researcher_name, researcher_email, researcher_orcid, researcher_login, researcher_password) VALUES (3, 'Asehnoune', 'K.', '', NULL, NULL, NULL);
 INSERT INTO public.researcher (researcher_id, researcher_surname, researcher_name, researcher_email, researcher_orcid, researcher_login, researcher_password) VALUES (4, 'Ba', 'Rokhaya', 'rokhaya.ba@univ-nantes.fr', NULL, NULL, NULL);

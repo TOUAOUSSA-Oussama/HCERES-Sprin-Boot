@@ -101,6 +101,7 @@ public class Researcher implements Serializable {
     private Collection<PhdStudent> phdStudentCollection;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "researcher")
     private Admin admin;
+
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "researcherId")
     private Collection<BelongsTeam> belongsTeamCollection;

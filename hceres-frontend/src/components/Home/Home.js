@@ -3,11 +3,14 @@
 import './Home.css';
 import React from 'react';
 import welcomImage from '../../assets/welcomImg.png';
-import Navbar from '../Navbar/Navbar';
+import authToken from "../../utils/authToken";
 //import { HomeContainer,leftside,rightside } from './HomeElements';
 //style={{ backgroundColor: "#" + `${randomColor}` }}
 //let randomColor = Math.floor(Math.random() * 16777215).toString(16);
 function Home() {
+    if (localStorage.jwtToken) {
+        authToken(localStorage.jwtToken);
+    }
     return (
         <div>
             <div className="container1">

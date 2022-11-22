@@ -3,6 +3,7 @@ import './Activity.css';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Axios from 'axios'
+import axios from "axios";
 
 function OralCommunication() {
     const [OralCommunicationTitle, setOralCommunicationTitle] = React.useState(null);
@@ -20,9 +21,9 @@ function OralCommunication() {
     async function componentDidMount() {
 
         const url = "http://localhost:9000/Researchers";
-        const response = await fetch(url);
+        const response = await axios.get(url);
 
-        const listeChercheurs = await response.json();
+        const listeChercheurs = response.data;
 
         setResearchers(listeChercheurs)
     }

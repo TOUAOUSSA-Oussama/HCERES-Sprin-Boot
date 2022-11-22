@@ -16,12 +16,18 @@ import {
     from './NavbarElements';
 import {Button} from '../../AppElements';
 import Logo from '../../assets/logo.png';
+import {useDispatch} from "react-redux";
+import {logoutUser} from "../../services";
 
 const Navbar = () => {
     const [click, setClick] = useState(false);
     const [isWindowBig, setWindowBig] = useState(true);
     const closeMobileMenu = () => setClick(false);
 
+    const dispatch = useDispatch();
+    const logout = () => {
+        dispatch(logoutUser());
+    };
     const handleClick = () => setClick(!click);
 
     // pour n'afficher le grand boutton que pour les garndes ecrans
@@ -71,11 +77,11 @@ const Navbar = () => {
                     {/* ajouter bouton de deconnexion */}
                     <NavItemBtn>
                         {isWindowBig ? (
-                            <NavBtnLink to='/'>
+                            <NavBtnLink to='/' onClick={logout}>
                                 <Button fontBig primary>Deconnexion</Button>
                             </NavBtnLink>
                         ) : (
-                            <NavBtnLink to='/'>
+                            <NavBtnLink to='/' onClick={logout}>
                                 <Button primary>
                                     Deconnexion
                                 </Button>

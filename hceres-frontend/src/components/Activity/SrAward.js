@@ -4,6 +4,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import {useNavigate} from "react-router-dom";
 import Axios from 'axios'
+import axios from "axios";
 
 function SrAward() {
     const [researcherId, setResearcherId] = React.useState("");
@@ -16,9 +17,9 @@ function SrAward() {
     async function componentDidMount() {
 
         const url = "http://localhost:9000/Researchers";
-        const response = await fetch(url);
+        const response = await axios.get(url);
 
-        const listeChercheurs = await response.json();
+        const listeChercheurs = response.data;
 
         setResearchers(listeChercheurs)
     }

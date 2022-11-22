@@ -1,18 +1,14 @@
 import React, {Component} from 'react';
-import Navbar from '../Navbar/Navbar';
-//import {Table} from "antd";
-import {generatePath} from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Axios from 'axios'
-import {Link, useNavigate, useParams} from "react-router-dom";
 import UpdateResearcher from './UpdateResearcher';
 import {FaEdit} from "react-icons/fa";
-import {AiFillDelete, AiOutlineLoading, AiOutlinePlusCircle} from "react-icons/ai";
+import {AiFillDelete, AiOutlinePlusCircle} from "react-icons/ai";
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import filterFactory, {textFilter} from 'react-bootstrap-table2-filter';
 import {ImFilter} from "react-icons/im";
 import {Oval} from 'react-loading-icons'
+import Axios from "axios";
 
 class Researcher extends Component {
     constructor() {
@@ -49,12 +45,11 @@ class Researcher extends Component {
     async componentDidMount() {
 
         const url = "http://localhost:9000/Researchers";
-        const response = await fetch(url);
-
-        const listeChercheurs = await response.json();
-        this.setState({
-            researchers: listeChercheurs,
-        })
+        Axios.get(url).then(response => {
+            this.setState({
+                researchers: response.data,
+            })
+        });
     }
 
 
@@ -96,7 +91,7 @@ class Researcher extends Component {
                         <div className="btn-group" role="group">
                             <button onClick={() => {
                                 this.handleUpdate(row.researcherId)
-                            }} className="btn btn-outline-info" role="button"
+                            }} className="btn btn-outline-info"
                                     data-bs-toggle="button">
                                 <FaEdit/></button>
                             <button className="btn btn-outline-danger" onClick={() => {

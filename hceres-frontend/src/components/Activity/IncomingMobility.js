@@ -6,6 +6,7 @@ import {useState} from "react";
 import {Link, useNavigate, useParams} from "react-router-dom";
 import {useEffect} from "react/cjs/react.development";
 import Axios from 'axios'
+import axios from "axios";
 
 const IncomingMobility = () => {
     const [researcherId, setResearcherId] = React.useState("");
@@ -31,9 +32,9 @@ const IncomingMobility = () => {
     async function componentDidMount() {
 
         const url = "http://localhost:9000/Researchers";
-        const response = await fetch(url);
+        const response = await axios.get(url);
 
-        const listeChercheurs = await response.json();
+        const listeChercheurs = response.data;
 
         setResearchers(listeChercheurs)
     }

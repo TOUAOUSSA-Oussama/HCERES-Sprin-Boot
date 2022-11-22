@@ -17,17 +17,25 @@ function App() {
             <Router>
                 <GlobaleStyle/>
 
+                {/*Add navigation bar only when user is logged in*/}
+                <Routes>
+                    <Route path='/Home' exact element={<Navbar/>}/>
+                    <Route path='/Researcher' exact element={<Navbar/>}/>
+                    <Route path='/AddResearcher' exact element={<Navbar/>}/>
+                    <Route path='/UpdateResearcher' exact element={<Navbar/>}/>
+                    <Route path='/Activity' exact element={<Navbar/>}/>
+                    <Route path='*' exact element={<></>}/>
+                </Routes>
 
                 <Routes>
                     <Route path='/About' exact element={<About/>}/>
-                    <Route path='' exact element={<Connection/>}/>
+                    <Route path='*' exact element={<Connection/>}/>
 
-
-                    <Route path='/Home' exact element={<><Navbar/><Home/></>}/>
-                    <Route path='/Researcher' exact element={<> <Navbar/> <Researcher/></>}/>
-                    <Route path='/AddResearcher' exact element={<> <Navbar/> <AddResearcher/></>}/>
-                    <Route path='/UpdateResearcher' exact element={<> <Navbar/> <UpdateResearcher/></>}/>
-                    <Route path='/Activity' exact element={<> <Navbar/> <Activity/></>}/>
+                    <Route path='/Home' exact element={<Home/>}/>
+                    <Route path='/Researcher' exact element={<Researcher/>}/>
+                    <Route path='/AddResearcher' exact element={<AddResearcher/>}/>
+                    <Route path='/UpdateResearcher' exact element={<UpdateResearcher/>}/>
+                    <Route path='/Activity' exact element={<Activity/>}/>
                 </Routes>
 
                 <Footer/>

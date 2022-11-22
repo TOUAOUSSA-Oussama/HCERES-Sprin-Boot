@@ -5,6 +5,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import Axios from 'axios'
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
+import axios from "axios";
 
 function Education(props) {
     const [showModal, setShowModal] = React.useState(true);
@@ -28,9 +29,9 @@ function Education(props) {
     async function componentDidMount() {
 
         const url = "http://localhost:9000/Researchers";
-        const response = await fetch(url);
+        const response = await axios.get(url);
 
-        const listeChercheurs = await response.json();
+        const listeChercheurs = response.data;
 
         setResearchers(listeChercheurs)
     }

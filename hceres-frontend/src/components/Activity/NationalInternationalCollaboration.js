@@ -3,6 +3,7 @@ import './Activity.css';
 import 'react-datepicker/dist/react-datepicker.css';
 import DatePicker from 'react-datepicker';
 import Axios from 'axios'
+import axios from "axios";
 
 function NationalInternationalCollaboration() {
     const [DateProjectStart, setDateProjectStart] = React.useState(null);
@@ -25,9 +26,9 @@ function NationalInternationalCollaboration() {
     async function componentDidMount() {
 
         const url = "http://localhost:9000/Researchers";
-        const response = await fetch(url);
+        const response = await axios.get(url);
 
-        const listeChercheurs = await response.json();
+        const listeChercheurs = response.data;
 
         setResearchers(listeChercheurs)
     }

@@ -3,6 +3,7 @@ import './Activity.css';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Axios from 'axios'
+import axios from "axios";
 
 function SeiIndustrialRDContract() {
     const [StartDate, setStartDate] = React.useState(null);
@@ -17,9 +18,9 @@ function SeiIndustrialRDContract() {
     async function componentDidMount() {
 
         const url = "http://localhost:9000/Researchers";
-        const response = await fetch(url);
+        const response = await axios.get(url);
 
-        const listeChercheurs = await response.json();
+        const listeChercheurs = response.data;
 
         setResearchers(listeChercheurs)
     }
