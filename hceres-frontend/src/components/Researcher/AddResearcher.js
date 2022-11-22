@@ -6,8 +6,12 @@ import {Link, useNavigate, useParams} from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 
+/**
+ * add or edit researcher if present in props.targetResearcher
+ */
 function AddResearcher(props) {
     const [showModal, setShowModal] = React.useState(true);
+    const targetResearcher = props.targetResearcher;
 
     const silentClose = () => {
         setShowModal(false);
@@ -19,9 +23,10 @@ function AddResearcher(props) {
         props.onHideAction(msg);
     };
 
-    const [AddResearcherFirstName, setAddResearcherFirstName] = React.useState("");
-    const [AddResearcherLastName, setAddResearcherLastName] = React.useState("");
-    const [AddResearcherEmail, setAddResearcherEmail] = React.useState("");
+    const [AddResearcherFirstName, setAddResearcherFirstName] = React.useState(targetResearcher ? targetResearcher.researcherName : "");
+    const [AddResearcherLastName, setAddResearcherLastName] = React.useState(targetResearcher ? targetResearcher.researcherSurname : "");
+    const [AddResearcherEmail, setAddResearcherEmail] = React.useState(targetResearcher ? targetResearcher.researcherEmail : "");
+
     const navigate = useNavigate();
 
     const handleSubmit = (event) => {
@@ -31,7 +36,33 @@ function AddResearcher(props) {
             "researcherName": AddResearcherLastName,
             "researcherEmail": AddResearcherEmail
         };
+        if (targetResearcher) {
+            handleUpdateResearcher(data)
+        } else {
+            handleAddResearcher(data)
+        }
+    }
 
+    const handleUpdateResearcher = (data) => {
+        Axios.put(`http://localhost:9000/updateResearcher/${targetResearcher.researcherId}`, data)
+            .then(response => {
+                console.log(response.data)
+                const researcherId = response.data.researcherId;
+                const msg = {
+                    "researcherUpdated": response.data,
+                    "successMsg": "Researcher mise a jour ayant id " + researcherId,
+                }
+                handleClose(msg);
+            }).catch(error => {
+            console.log(error);
+            const msg = {
+                "errorMsg": "Researcher non mise a jour, response status: " + error.response.status,
+            }
+            handleClose(msg);
+        })
+    }
+
+    const handleAddResearcher = (data) => {
         Axios.post("http://localhost:9000/AddResearcher", data)
             .then(response => {
                 const researcherId = response.data.researcherId;
@@ -55,7 +86,8 @@ function AddResearcher(props) {
                 <form onSubmit={handleSubmit}>
                     <Modal.Header closeButton>
                         <Modal.Title>
-                            Ajouter un chercheur
+                            {!targetResearcher && <div>Ajouter un chercheur</div>}
+                            {targetResearcher && <div>Editeur d'un chercheur</div>}
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
@@ -99,7 +131,8 @@ function AddResearcher(props) {
                             Close
                         </Button>
                         <Button variant="outline-primary" type={"submit"}>
-                            Ajouter
+                            {!targetResearcher && <div>Ajouter</div>}
+                            {targetResearcher && <div>Mettre à jour</div>}
                         </Button>
                     </Modal.Footer>
                 </form>

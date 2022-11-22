@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import UpdateResearcher from './UpdateResearcher';
 import {FaEdit} from "react-icons/fa";
 import {AiFillDelete, AiOutlinePlusCircle} from "react-icons/ai";
 import BootstrapTable from 'react-bootstrap-table-next';
@@ -21,13 +20,11 @@ class Researcher extends Component {
             showAddResearcher: false,
             addResearcherSuccess: "",
             addResearcherError: "",
-            showUpdate: false,
             showFilter: false,
-            idResearcher: 0,
+            targetResearcher: null,
         }
 
-        this.handleUpdate = this.handleUpdate.bind(this);
-        this.handleAddResearcher = this.handleAddResearcher.bind(this);
+        this.onHideModalResearcher = this.onHideModalResearcher.bind(this);
     }
 
     /*{showForm && (<AddResearcher> </AddResearcher>)}
@@ -41,14 +38,7 @@ class Researcher extends Component {
             })
     }
 
-    handleUpdate(idResearcher) {
-        this.setState({
-            showUpdate: true,
-            idResearcher: idResearcher
-        })
-    }
-
-    handleAddResearcher(messages) {
+    onHideModalResearcher(messages) {
         this.setState({
             showAddResearcher: false,
         })
@@ -56,13 +46,29 @@ class Researcher extends Component {
         if (!messages) return;
 
         // addition close
-        if (messages.successMsg) {
+        if (messages.researcherAdded) {
             this.setState(prevState => ({
+                // push added researcher to previous list
                 researchers: [...prevState.researchers, messages.researcherAdded],
+                // display success message
                 addResearcherSuccess: messages.successMsg,
             }))
+        } else if (messages.researcherUpdated) {
+            // 1. Make a shallow copy of the items
+            let items = [...this.state.researchers];
+            // 2. Make a shallow copy of the item you want to mutate
+            let indexUpdated = this.state.researchers.findIndex(r => r.researcherId === messages.researcherUpdated.researcherId)
+            // 3. Put it the new item into our array. N.B. we *are* mutating the array here,
+            //    but that's why we made a copy first
+            items[indexUpdated] = messages.researcherUpdated;
+            // 4. Set the state to our new copy
+            this.setState({
+                researchers: items,
+                addResearcherSuccess: messages.successMsg,
+            });
         } else {
             this.setState(prevState => ({
+                // displate error message
                 addResearcherError: messages.errorMsg,
             }))
         }
@@ -80,12 +86,6 @@ class Researcher extends Component {
 
 
     render() {
-        if (this.state.showUpdate) {
-            return (
-                <UpdateResearcher id={this.state.idResearcher}/>
-            );
-        }
-
         if (this.state.researchers && this.state.researchers.length) {
             const columns = [{
                 dataField: 'researcherId',
@@ -116,7 +116,10 @@ class Researcher extends Component {
                     return (
                         <div className="btn-group" role="group">
                             <button onClick={() => {
-                                this.handleUpdate(row.researcherId)
+                                this.setState({
+                                    targetResearcher: row,
+                                    showAddResearcher: true
+                                })
                             }} className="btn btn-outline-info"
                                     data-bs-toggle="button">
                                 <FaEdit/></button>
@@ -126,6 +129,11 @@ class Researcher extends Component {
                         </div>
                     )
                 }
+            }];
+
+            const defaultSorted = [{
+                dataField: 'researcherId', // if dataField is not match to any column you defined, it will be ignored.
+                order: 'asc' // desc or asc
             }];
 
             const options = {
@@ -162,6 +170,14 @@ class Researcher extends Component {
                             </h3>
                         </div>
                         <div className="col-4">
+                            <button className="btn btn-success" role="button" data-bs-toggle="button" onClick={() => {
+                                this.setState({
+                                    targetResearcher: null,
+                                    showAddResearcher: true
+                                })
+                            }}>
+                                <AiOutlinePlusCircle/> &nbsp; Ajouter un chercheur
+                            </button>
                             {this.state.addResearcherSuccess && (
                                 <Alert className={"alert-success"} onClose={() => this.setState({
                                     addResearcherSuccess: ""
@@ -174,13 +190,6 @@ class Researcher extends Component {
                                 })}
                                        dismissible={true}>{this.state.addResearcherError}
                                 </Alert>)}
-                            <button className="btn btn-success" role="button" data-bs-toggle="button" onClick={() => {
-                                this.setState({
-                                    showAddResearcher: true
-                                })
-                            }}>
-                                <AiOutlinePlusCircle/> &nbsp; Ajouter un chercheur
-                            </button>
                         </div>
                     </div>
                 </div>
@@ -188,12 +197,14 @@ class Researcher extends Component {
 
             return (
                 <div className="container">
-                    {this.state.showAddResearcher && (<AddResearcher onHideAction={this.handleAddResearcher}/>)}
+                    {this.state.showAddResearcher && (<AddResearcher targetResearcher={this.state.targetResearcher}
+                                                                     onHideAction={this.onHideModalResearcher}/>)}
                     <BootstrapTable
                         bootstrap4
                         keyField="researcherId"
                         data={this.state.researchers}
                         columns={columns}
+                        defaultSorted={defaultSorted}
                         pagination={paginationFactory(options)}
                         filter={filterFactory()}
                         caption={<CaptionElement/>}

@@ -14,7 +14,6 @@ const Login = (props) => {
     // state are parameter passed by navigate functions
     const navState = useLocation().state;
     const [errorLogin, setErrorLogin] = useState(navState ? navState.errorLogin : "");
-    const [showError, setShowError] = useState(true);
     const initialState = {
         login: "",
         password: "",
@@ -38,7 +37,6 @@ const Login = (props) => {
             })
             .catch((error) => {
                 console.log(error)
-                setShowError(true);
                 resetLoginForm();
                 setErrorLogin("Combinaison invalide de login et de mot de passe");
             });
@@ -66,7 +64,7 @@ const Login = (props) => {
                     <input type="password" placeholder="Mot de passe" name="password" value={user.password}
                            onChange={credentialChange}/>
                 </label>
-                {showError && errorLogin && <Alert className={"alert-danger"}>{errorLogin}</Alert>}
+                {errorLogin && <Alert className={"alert-danger"} dismissible={true} onClose={()=>setErrorLogin('')}>{errorLogin}</Alert>}
                 <Button variant={"primary"} className={"btn-primary fadeIn fourth"} value={"connection"}
                         disabled={user.login.length === 0 && user.password.length === 0}
                         onClick={validateUser}> Connexion</Button>

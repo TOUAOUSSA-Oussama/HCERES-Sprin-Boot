@@ -8,7 +8,6 @@ import Activity from './components/Activity/Activity';
 import Footer from './components/Footer/Footer';
 import About from './components/About/About';
 import Connection from './components/Connection/Connection';
-import UpdateResearcher from './components/Researcher/UpdateResearcher';
 import AuthWrapper from "./utils/AuthWrapper";
 import PageNotExist from "./components/pageNotExist";
 
@@ -23,7 +22,6 @@ function App() {
                     <Route path='/Home' exact element={<Navbar/>}/>
                     <Route path='/Researcher' exact element={<Navbar/>}/>
                     <Route path='/AddResearcher' exact element={<Navbar/>}/>
-                    <Route path='/UpdateResearcher' exact element={<Navbar/>}/>
                     <Route path='/Activity' exact element={<Navbar/>}/>
                     <Route path='*' exact element={<></>}/>
                 </Routes>
@@ -36,7 +34,6 @@ function App() {
                     <Route element={<AuthWrapper />}>
                         <Route path='/Home' exact element={<Home/>}/>
                         <Route path='/Researcher' exact element={<Researcher/>}/>
-                        <Route path='/UpdateResearcher' exact element={<UpdateResearcher/>}/>
                         <Route path='/Activity' exact element={<Activity/>}/>
                     </Route>
 
