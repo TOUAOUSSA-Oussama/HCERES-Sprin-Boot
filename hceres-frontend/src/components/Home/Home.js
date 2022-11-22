@@ -9,9 +9,6 @@ import {useSelector} from "react-redux";
 //style={{ backgroundColor: "#" + `${randomColor}` }}
 //let randomColor = Math.floor(Math.random() * 16777215).toString(16);
 function Home() {
-    if (localStorage.jwtToken) {
-        authToken(localStorage.jwtToken);
-    }
     const auth = useSelector((state) => state.auth);
     return (
         <div>

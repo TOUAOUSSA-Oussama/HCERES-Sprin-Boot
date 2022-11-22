@@ -9,6 +9,8 @@ import filterFactory, {textFilter} from 'react-bootstrap-table2-filter';
 import {ImFilter} from "react-icons/im";
 import {Oval} from 'react-loading-icons'
 import Axios from "axios";
+import AddResearcher from "./AddResearcher";
+import {Alert} from "react-bootstrap";
 
 class Researcher extends Component {
     constructor() {
@@ -16,12 +18,16 @@ class Researcher extends Component {
         this.state = {
             researchers: [],
             loading: false,
+            showAddResearcher: false,
+            addResearcherSuccess: "",
+            addResearcherError: "",
             showUpdate: false,
             showFilter: false,
             idResearcher: 0,
         }
 
         this.handleUpdate = this.handleUpdate.bind(this);
+        this.handleAddResearcher = this.handleAddResearcher.bind(this);
     }
 
     /*{showForm && (<AddResearcher> </AddResearcher>)}
@@ -42,9 +48,29 @@ class Researcher extends Component {
         })
     }
 
+    handleAddResearcher(messages) {
+        this.setState({
+            showAddResearcher: false,
+        })
+        // silent close
+        if (!messages) return;
+
+        // addition close
+        if (messages.successMsg) {
+            this.setState(prevState => ({
+                researchers: [...prevState.researchers, messages.researcherAdded],
+                addResearcherSuccess: messages.successMsg,
+            }))
+        } else {
+            this.setState(prevState => ({
+                addResearcherError: messages.errorMsg,
+            }))
+        }
+    }
+
     async componentDidMount() {
 
-        const url = "http://localhost:9000/Researchers";
+        const url = "/Researchers";
         Axios.get(url).then(response => {
             this.setState({
                 researchers: response.data,
@@ -136,9 +162,25 @@ class Researcher extends Component {
                             </h3>
                         </div>
                         <div className="col-4">
-                            <br/>
-                            <a href="/AddResearcher" className="btn btn-success" role="button" data-bs-toggle="button">
-                                <AiOutlinePlusCircle/> &nbsp; Ajouter un chercheur</a>
+                            {this.state.addResearcherSuccess && (
+                                <Alert className={"alert-success"} onClose={() => this.setState({
+                                    addResearcherSuccess: ""
+                                })}
+                                       dismissible={true}>{this.state.addResearcherSuccess}
+                                </Alert>)}
+                            {this.state.addResearcherError && (
+                                <Alert className={"alert-danger"} onClose={() => this.setState({
+                                    addResearcherError: ""
+                                })}
+                                       dismissible={true}>{this.state.addResearcherError}
+                                </Alert>)}
+                            <button className="btn btn-success" role="button" data-bs-toggle="button" onClick={() => {
+                                this.setState({
+                                    showAddResearcher: true
+                                })
+                            }}>
+                                <AiOutlinePlusCircle/> &nbsp; Ajouter un chercheur
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -146,7 +188,7 @@ class Researcher extends Component {
 
             return (
                 <div className="container">
-
+                    {this.state.showAddResearcher && (<AddResearcher onHideAction={this.handleAddResearcher}/>)}
                     <BootstrapTable
                         bootstrap4
                         keyField="researcherId"

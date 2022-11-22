@@ -3,8 +3,22 @@ import './Researcher.css';
 import 'react-datepicker/dist/react-datepicker.css';
 import Axios from 'axios'
 import {Link, useNavigate, useParams} from "react-router-dom";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
 
-function AddResearcher() {
+function AddResearcher(props) {
+    const [showModal, setShowModal] = React.useState(true);
+
+    const silentClose = () => {
+        setShowModal(false);
+        props.onHideAction();
+    };
+
+    const handleClose = (msg) => {
+        setShowModal(false);
+        props.onHideAction(msg);
+    };
+
     const [AddResearcherFirstName, setAddResearcherFirstName] = React.useState("");
     const [AddResearcherLastName, setAddResearcherLastName] = React.useState("");
     const [AddResearcherEmail, setAddResearcherEmail] = React.useState("");
@@ -19,52 +33,77 @@ function AddResearcher() {
         };
 
         Axios.post("http://localhost:9000/AddResearcher", data)
-            .then(res => {
-                navigate('/Researcher');
-            })
+            .then(response => {
+                const researcherId = response.data.researcherId;
+                const msg = {
+                    "researcherAdded": response.data,
+                    "successMsg": "Researcher ajoute avec un id " + researcherId,
+                }
+                handleClose(msg);
+            }).catch(error => {
+            console.log(error);
+            const msg = {
+                "errorMsg": "Researcher non ajoute, response status: " + error.response.status,
+            }
+            handleClose(msg);
+        })
     }
 
     return (
-        <div className='form-container'>
-            <form className='form' onSubmit={handleSubmit}>
-                <a href="/Researcher" class="close-button">&#10006;</a>
-                <h3 className='title'>Ajouter un chercheur:</h3>
-                <label className='label'>
-                    Prénom du chercheur
-                </label>
-                <input
-                    placeholder='Prénom'
-                    className='input-container'
-                    name="AddResearcherFirstName"
-                    type="AddResearcherFirstName"
-                    value={AddResearcherFirstName}
-                    onChange={e => setAddResearcherFirstName(e.target.value)}
-                    required/>
-                <label className='label'>
-                    Nom du chercheur
-                </label>
-                <input
-                    placeholder='Nom'
-                    className='input-container'
-                    name="AddResearcherLastName"
-                    type="AddResearcherLastName"
-                    value={AddResearcherLastName}
-                    onChange={e => setAddResearcherLastName(e.target.value)}
-                    required/>
+        <div>
+            <Modal show={showModal} onHide={() => silentClose()}>
+                <form onSubmit={handleSubmit}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>
+                            Ajouter un chercheur
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <label className='label'>
+                            Prénom du chercheur
+                        </label>
+                        <input
+                            placeholder='Prénom'
+                            className='input-container'
+                            name="AddResearcherFirstName"
+                            type="AddResearcherFirstName"
+                            value={AddResearcherFirstName}
+                            onChange={e => setAddResearcherFirstName(e.target.value)}
+                            required/>
+                        <label className='label'>
+                            Nom du chercheur
+                        </label>
+                        <input
+                            placeholder='Nom'
+                            className='input-container'
+                            name="AddResearcherLastName"
+                            type="AddResearcherLastName"
+                            value={AddResearcherLastName}
+                            onChange={e => setAddResearcherLastName(e.target.value)}
+                            required/>
 
-                <label className='label'>
-                    Email du chercheur
-                </label>
-                <input
-                    placeholder='Email'
-                    className='input-container'
-                    name="AddResearcherEmail"
-                    type="AddResearcherEmail"
-                    value={AddResearcherEmail}
-                    onChange={e => setAddResearcherEmail(e.target.value)}
-                    required/>
-                <button className='submit'>Valider</button>
-            </form>
+                        <label className='label'>
+                            Email du chercheur
+                        </label>
+                        <input
+                            placeholder='Email'
+                            className='input-container'
+                            name="AddResearcherEmail"
+                            type="AddResearcherEmail"
+                            value={AddResearcherEmail}
+                            onChange={e => setAddResearcherEmail(e.target.value)}
+                            required/>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={() => silentClose()}>
+                            Close
+                        </Button>
+                        <Button variant="outline-primary" type={"submit"}>
+                            Ajouter
+                        </Button>
+                    </Modal.Footer>
+                </form>
+            </Modal>
         </div>
     );
 }

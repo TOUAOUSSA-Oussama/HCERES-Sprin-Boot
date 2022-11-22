@@ -4,9 +4,7 @@ import AboutLogo from '../../assets/about.svg';
 import authToken from "../../utils/authToken";
 
 const Footer = () => {
-    if (localStorage.jwtToken) {
-        authToken(localStorage.jwtToken);
-    }
+    authToken(localStorage.jwtToken);
     return (
         <FooterBody className={"fixed-bottom"}>
             <div className="text5"></div>

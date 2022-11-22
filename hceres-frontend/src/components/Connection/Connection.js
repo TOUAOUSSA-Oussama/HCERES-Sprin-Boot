@@ -7,10 +7,13 @@ import Button from "react-bootstrap/Button";
 import {Alert} from "react-bootstrap";
 import {useDispatch} from "react-redux";
 import {authenticateUser} from "../../services";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
+import authToken from "../../utils/authToken";
 
 const Login = (props) => {
-    const [errorLogin, setErrorLogin] = useState("");
+    // state are parameter passed by navigate functions
+    const navState = useLocation().state;
+    const [errorLogin, setErrorLogin] = useState(navState ? navState.errorLogin : "");
     const [showError, setShowError] = useState(true);
     const initialState = {
         login: "",
@@ -28,14 +31,16 @@ const Login = (props) => {
     const navigate = useNavigate();
 
     const validateUser = (event) => {
+        authToken('');
         dispatch(authenticateUser(user.login, user.password))
             .then((response) => {
                 navigate("/Home");
             })
             .catch((error) => {
+                console.log(error)
                 setShowError(true);
                 resetLoginForm();
-                setErrorLogin("Invalid combination of email and password");
+                setErrorLogin("Combinaison invalide de login et de mot de passe");
             });
     };
 
@@ -63,6 +68,7 @@ const Login = (props) => {
                 </label>
                 {showError && errorLogin && <Alert className={"alert-danger"}>{errorLogin}</Alert>}
                 <Button variant={"primary"} className={"btn-primary fadeIn fourth"} value={"connection"}
+                        disabled={user.login.length === 0 && user.password.length === 0}
                         onClick={validateUser}> Connexion</Button>
             </form>
         </div>
