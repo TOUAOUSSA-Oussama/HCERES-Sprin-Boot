@@ -4,6 +4,7 @@ import './Home.css';
 import React from 'react';
 import welcomImage from '../../assets/welcomImg.png';
 import authToken from "../../utils/authToken";
+import {useSelector} from "react-redux";
 //import { HomeContainer,leftside,rightside } from './HomeElements';
 //style={{ backgroundColor: "#" + `${randomColor}` }}
 //let randomColor = Math.floor(Math.random() * 16777215).toString(16);
@@ -11,12 +12,13 @@ function Home() {
     if (localStorage.jwtToken) {
         authToken(localStorage.jwtToken);
     }
+    const auth = useSelector((state) => state.auth);
     return (
         <div>
             <div className="container1">
                 <div className="left-side">
                     <div className="pg">
-                        <h1>Bienvenue !</h1>
+                        <h1>Bienvenue {auth.username} !</h1>
                         Serveur d'administration des données pour les enquêtes HCERES
                     </div>
                 </div>

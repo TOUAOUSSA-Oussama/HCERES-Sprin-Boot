@@ -105,6 +105,8 @@ class Researcher extends Component {
             const options = {
                 showTotal: true,
                 sizePerPageList: [{
+                    text: '5', value: 5
+                }, {
                     text: '10', value: 10
                 }, {
                     text: '25', value: 25
@@ -157,6 +159,14 @@ class Researcher extends Component {
                         hover
                         condensed
                     />
+                    {/*To more scrolling area and see the total list of table size per page*/}
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
                     <br/>
                     <br/>
                 </div>
