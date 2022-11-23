@@ -92,6 +92,8 @@ export default function Activity() {
                         </li>
                     </ul>
 
+
+
                 </div>
                 {showPrix && (<SrAward onHideAction={() => setShowPrix(false)}> </SrAward>)}
                 {showEssaiClinique && (<EssaiClinique> </EssaiClinique>)}
@@ -103,8 +105,7 @@ export default function Activity() {
                 {showEditorial && (<Editorial></Editorial>)}
                 {showReview && (<Review></Review>)}
                 {showSeiIndustrialRDContract && (<SeiIndustrialRDContract onHideAction={() => setShowSeiIndustrialRDContract(false)}></SeiIndustrialRDContract>)}
-                {showNationalInternationalCollaboration && (
-                    <NationalInternationalCollaboration></NationalInternationalCollaboration>)}
+                {showNationalInternationalCollaboration && (<NationalInternationalCollaboration onHideAction={() => setShowNationalInternationalCollaboration(false)}></NationalInternationalCollaboration>)}
                 {showOralCommunication && (<OralCommunication onHideAction={() => setShowOralCommunication(false)}></OralCommunication>)}
             </div>
         </div>

@@ -4,8 +4,17 @@ import 'react-datepicker/dist/react-datepicker.css';
 import DatePicker from 'react-datepicker';
 import Axios from 'axios'
 import axios from "axios";
+import Modal from "react-bootstrap/Modal";
 
-function NationalInternationalCollaboration() {
+function NationalInternationalCollaboration(props) {
+
+    const [showModal, setShowModal] = React.useState(true);
+
+    const handleClose = () => {
+        setShowModal(false);
+        props.onHideAction.call();
+    };
+
     const [DateProjectStart, setDateProjectStart] = React.useState(null);
     const [PartnerEntity, setPartnerEntity] = React.useState("");
     const [CountryStateCity, setCountryStateCity] = React.useState("");
@@ -62,10 +71,15 @@ function NationalInternationalCollaboration() {
     const handleChange = e => setResearcherId(e.target.value);
 
     return (
-        <div className='form-container'>
-            <form className='form' onSubmit={handleSubmit}>
-                <a href="/Activity" class="close-button">&#10006;</a>
-                <h3 className='title'>Collaboration internationale</h3>
+        <div>
+            <Modal show={showModal} onHide={handleClose}>
+                <form onSubmit={handleSubmit}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Collaboration internationale</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+
+
                 <label className='label'>
                     chercheur
                 </label>
@@ -243,10 +257,13 @@ function NationalInternationalCollaboration() {
                     value={NameChoice}
                     onChange={e => setNameChoice(e.target.value)}
                     required/>
-
+                    </Modal.Body>
+                    <Modal.Footer>
 
                 <button className='submit'>Valider</button>
-            </form>
+                    </Modal.Footer>
+                </form>
+            </Modal>
         </div>
     );
 }
