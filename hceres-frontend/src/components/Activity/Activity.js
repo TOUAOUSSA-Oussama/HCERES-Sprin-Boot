@@ -96,7 +96,7 @@ export default function Activity() {
 
                 </div>
                 {showPrix && (<SrAward onHideAction={() => setShowPrix(false)}> </SrAward>)}
-                {showEssaiClinique && (<EssaiClinique> </EssaiClinique>)}
+                {showEssaiClinique && (<EssaiClinique onHideAction={() => setEssaiClinique(false)}> </EssaiClinique>)}
                 {showIncomingMobility && (<IncomingMobility> </IncomingMobility>)}
                 {showScientificExpertise && (<ScientificExpertise> </ScientificExpertise>)}
                 {showEducation && (<Education onHideAction={() => setShowEducation(false)}/>)}
