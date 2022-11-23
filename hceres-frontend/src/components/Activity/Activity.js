@@ -99,13 +99,13 @@ export default function Activity() {
                 {showScientificExpertise && (<ScientificExpertise> </ScientificExpertise>)}
                 {showEducation && (<Education onHideAction={() => setShowEducation(false)}/>)}
                 {showPostDoctorat && (<PostDoctorat> </PostDoctorat>)}
-                {showPlatform && (<Platform></Platform>)}
+                {showPlatform && (<Platform onHideAction={() => setShowPlatform(false)}></Platform>)}
                 {showEditorial && (<Editorial></Editorial>)}
                 {showReview && (<Review></Review>)}
-                {showSeiIndustrialRDContract && (<SeiIndustrialRDContract></SeiIndustrialRDContract>)}
+                {showSeiIndustrialRDContract && (<SeiIndustrialRDContract onHideAction={() => setShowSeiIndustrialRDContract(false)}></SeiIndustrialRDContract>)}
                 {showNationalInternationalCollaboration && (
                     <NationalInternationalCollaboration></NationalInternationalCollaboration>)}
-                {showOralCommunication && (<OralCommunication></OralCommunication>)}
+                {showOralCommunication && (<OralCommunication onHideAction={() => setShowOralCommunication(false)}></OralCommunication>)}
             </div>
         </div>
     )

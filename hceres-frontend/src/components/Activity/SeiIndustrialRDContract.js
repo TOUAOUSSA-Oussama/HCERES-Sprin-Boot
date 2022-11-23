@@ -4,8 +4,15 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Axios from 'axios'
 import axios from "axios";
+import Modal from "react-bootstrap/Modal";
 
-function SeiIndustrialRDContract() {
+function SeiIndustrialRDContract(props) {
+    const [showModal, setShowModal] = React.useState(true);
+
+    const handleClose = () => {
+        setShowModal(false);
+        props.onHideAction.call();
+    };
     const [StartDate, setStartDate] = React.useState(null);
     const [NameCompanyInvolved, setNameCompanyInvolved] = React.useState("");
     const [ProjectTitle, setProjectTitle] = React.useState("");
@@ -46,10 +53,15 @@ function SeiIndustrialRDContract() {
     const handleChange = e => setResearcherId(e.target.value);
 
     return (
-        <div className='form-container'>
-            <form className='form' onSubmit={handleSubmit}>
-                <a href="/Activity" class="close-button">&#10006;</a>
-                <h3 className='title'>Signature d'une contrat industrielle</h3>
+
+        <div>
+            <Modal show={showModal} onHide={handleClose}>
+                <form onSubmit={handleSubmit}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Signature d'une contrat industrielle</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+
                 <label className='label'>
                     chercheur
                 </label>
@@ -132,9 +144,13 @@ function SeiIndustrialRDContract() {
                     value={AssociatedPubliRef}
                     onChange={e => setAssociatedPubliRef(e.target.value)}
                     required/>
+                    </Modal.Body>
+                    <Modal.Footer>
 
                 <button className='submit'>Valider</button>
-            </form>
+                    </Modal.Footer>
+                </form>
+            </Modal>
         </div>
     );
 }
