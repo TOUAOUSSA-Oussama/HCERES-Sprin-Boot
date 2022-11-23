@@ -72,9 +72,12 @@ function Education(props) {
                         <Modal.Title>Education</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
+
+
                         <label className='label'>
                             Chercheur
                         </label>
+
                         <select onClick={componentDidMount} onChange={handleChange}>
                             {researchers.map(item => {
                                 return (<option key={item.researcherId}
@@ -151,6 +154,8 @@ function Education(props) {
                             onChange={handleDate}
                             withPortal
                             placeholderText="Choix de date"/>
+
+
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={handleClose}>
@@ -159,6 +164,7 @@ function Education(props) {
                         <Button variant="outline-primary" type={"submit"}>
                             Ajouter
                         </Button>
+
                     </Modal.Footer>
                 </form>
             </Modal>

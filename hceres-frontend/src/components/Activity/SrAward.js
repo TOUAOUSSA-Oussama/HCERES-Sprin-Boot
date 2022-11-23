@@ -5,8 +5,18 @@ import 'react-datepicker/dist/react-datepicker.css';
 import {useNavigate} from "react-router-dom";
 import Axios from 'axios'
 import axios from "axios";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
 
-function SrAward() {
+
+function SrAward(props) {
+    const [showModal, setShowModal] = React.useState(true);
+
+    const handleClose = () => {
+        setShowModal(false);
+        props.onHideAction.call();
+    };
+
     const [researcherId, setResearcherId] = React.useState("");
     const [awardeeName, setAwardeeName] = React.useState("");
     const [description, setDescritption] = React.useState("");
@@ -52,18 +62,26 @@ function SrAward() {
     }
     const handleChange = e => setResearcherId(e.target.value);
     return (
-        <div className='form-container'>
-            <form className='form' onSubmit={handleSubmit}>
-                <a href="/Activity" class="close-button">&#10006;</a>
-                <h3 className='title'>Prix</h3>
+        <div>
+            <Modal show={showModal} onHide={handleClose}>
+                <form onSubmit={handleSubmit}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Prix</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+
+
                 <label className='label'>
                     Chercheur
                 </label>
+
                 <select onClick={componentDidMount} onChange={handleChange}>
                     {researchers.map(item => {
                         return (<option key={item.researcherId}
                                         value={item.researcherId}>{item.researcherName} {item.researcherSurname}</option>);
                     })}
+
+
                 </select>
                 <label className='label'>
                     Nom du prix
@@ -87,6 +105,7 @@ function SrAward() {
                     withPortal
                     placeholderText="Choix de date"/>
 
+
                 <label className='label'>
                     Description
                 </label>
@@ -99,8 +118,15 @@ function SrAward() {
                     onChange={e => setDescritption(e.target.value)}
                     required/>
 
+                    </Modal.Body>
+                    <Modal.Footer>
+
+
                 <button className='submit' onClick={faireRedirection}>Valider</button>
-            </form>
+
+                    </Modal.Footer>
+                </form>
+            </Modal>
         </div>
     );
 }
