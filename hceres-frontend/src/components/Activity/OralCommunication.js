@@ -4,8 +4,18 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Axios from 'axios'
 import axios from "axios";
+import Modal from "react-bootstrap/Modal";
 
-function OralCommunication() {
+function OralCommunication(props) {
+
+    const [showModal, setShowModal] = React.useState(true);
+
+    const handleClose = () => {
+        setShowModal(false);
+        props.onHideAction.call();
+    };
+
+
     const [OralCommunicationTitle, setOralCommunicationTitle] = React.useState(null);
     const [OralCommunicationDate, setOralCommunicationDate] = React.useState("");
     const [Authors, setAuthors] = React.useState("");
@@ -52,10 +62,15 @@ function OralCommunication() {
     const handleChange = e => setResearcherId(e.target.value);
 
     return (
-        <div className='form-container'>
-            <form className='form' onSubmit={handleSubmit}>
-                <a href="/Activity" class="close-button">&#10006;</a>
-                <h3 className='title'>Communication orale</h3>
+        <div>
+        <Modal show={showModal} onHide={handleClose}>
+            <form onSubmit={handleSubmit}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Communication orale</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+
+
                 <label className='label'>
                     chercheur
                 </label>
@@ -175,9 +190,15 @@ function OralCommunication() {
                     onChange={e => setTypeOralCommunicationName(e.target.value)}
                     required/>
 
+                </Modal.Body>
+                <Modal.Footer>
+
                 <button className='submit'>Valider</button>
+
+                </Modal.Footer>
             </form>
-        </div>
+        </Modal>
+    </div>
     );
 }
 

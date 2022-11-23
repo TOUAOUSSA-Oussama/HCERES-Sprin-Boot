@@ -155,7 +155,6 @@ function Education(props) {
                             withPortal
                             placeholderText="Choix de date"/>
 
-
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={handleClose}>
