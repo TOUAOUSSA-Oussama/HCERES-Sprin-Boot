@@ -16,7 +16,7 @@ import NationalInternationalCollaboration from './NationalInternationalCollabora
 import OralCommunication from './OralCommunication';
 
 export default function Activity() {
-    const [showPrix, setPrix] = React.useState(false);
+    const [showPrix, setShowPrix] = React.useState(false);
     const [showEssaiClinique, setEssaiClinique] = React.useState(false);
     const [showIncomingMobility, setIncomingMobility] = React.useState(false);
     const [showScientificExpertise, setScientificExpertise] = React.useState(false);
@@ -48,7 +48,7 @@ export default function Activity() {
                             <a>Education</a>
                         </li>
 
-                        <li onClick={setPrix}>
+                        <li onClick={setShowPrix}>
                             <a>Prix</a>
                         </li>
                         <li onClick={() => setShowPlatform}>
@@ -93,7 +93,7 @@ export default function Activity() {
                     </ul>
 
                 </div>
-                {showPrix && (<SrAward> </SrAward>)}
+                {showPrix && (<SrAward onHideAction={() => setShowPrix(false)}> </SrAward>)}
                 {showEssaiClinique && (<EssaiClinique> </EssaiClinique>)}
                 {showIncomingMobility && (<IncomingMobility> </IncomingMobility>)}
                 {showScientificExpertise && (<ScientificExpertise> </ScientificExpertise>)}
