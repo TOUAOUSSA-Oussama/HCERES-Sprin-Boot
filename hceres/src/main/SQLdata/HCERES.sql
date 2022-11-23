@@ -5830,8 +5830,9 @@ INSERT INTO public.publication_type (publication_type_id, publication_type_name)
 --
 
 INSERT INTO public.researcher (researcher_id, researcher_surname, researcher_name, researcher_email, researcher_orcid, researcher_login, researcher_password)
-VALUES (1, 'Ahmil', 'Ghenima', 'Ghemina.Ahmil@univ-nantes.fr', NULL, 'admin', 'NULL');
-INSERT INTO public.researcher (researcher_id, researcher_surname, researcher_name, researcher_email, researcher_orcid, researcher_login, researcher_password) VALUES (2, 'Anegon', 'Ignacio', 'Ignacio.Anegon@univ-nantes.fr', NULL, NULL, NULL);
+VALUES (1, 'Ahmil', 'Ghenima', 'Ghemina.Ahmil@univ-nantes.fr', NULL, 'admin', '$2a$10$tR4NMaRiVG.QZdXoCsmEUuDltA7Siy0kisCbUwT3p3P3s9wQWdySi');
+INSERT INTO public.researcher (researcher_id, researcher_surname, researcher_name, researcher_email, researcher_orcid, researcher_login, researcher_password)
+VALUES (2, 'Anegon', 'Ignacio', 'Ignacio.Anegon@univ-nantes.fr', NULL, 'user', '$2a$10$nbNEAKss3/jeNdOPfCqel.cLltnDIfE15jpGFEo7rZw1aY/5nAbzi');
 INSERT INTO public.researcher (researcher_id, researcher_surname, researcher_name, researcher_email, researcher_orcid, researcher_login, researcher_password) VALUES (3, 'Asehnoune', 'K.', '', NULL, NULL, NULL);
 INSERT INTO public.researcher (researcher_id, researcher_surname, researcher_name, researcher_email, researcher_orcid, researcher_login, researcher_password) VALUES (4, 'Ba', 'Rokhaya', 'rokhaya.ba@univ-nantes.fr', NULL, NULL, NULL);
 INSERT INTO public.researcher (researcher_id, researcher_surname, researcher_name, researcher_email, researcher_orcid, researcher_login, researcher_password) VALUES (5, 'Barrière', 'Paul', '', NULL, NULL, NULL);
