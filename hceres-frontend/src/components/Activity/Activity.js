@@ -44,50 +44,50 @@ export default function Activity() {
                 </div>
                 <div className='activityList'>
                     <ul>
-                        <li onClick={setShowEducation}>
+                        <li onClick={() => setShowEducation(true)}>
                             <a>Education</a>
                         </li>
 
-                        <li onClick={setShowPrix}>
+                        <li onClick={() => setShowPrix(true)}>
                             <a>Prix</a>
                         </li>
-                        <li onClick={() => setShowPlatform}>
+                        <li onClick={() => setShowPlatform(true)}>
                             <a>Platform</a>
                         </li>
-                        <li onClick={() => setShowOralCommunication}>
+                        <li onClick={() => setShowOralCommunication(true)}>
                             <a>Communication orale</a>
                         </li>
-                        <li onClick={() => setShowSeiIndustrialRDContract}>
+                        <li onClick={() => setShowSeiIndustrialRDContract(true)}>
                             <a>Signature d'une contrat industrielle</a>
                         </li>
-                        <li onClick={() => setShowNationalInternationalCollaboration}>
+                        <li onClick={() => setShowNationalInternationalCollaboration(true)}>
                             <a>Collaboration internationale</a>
                         </li>
-                        <li onClick={() => setScientificExpertise}>
+                        <li onClick={() => setScientificExpertise(true)}>
                             <a>Expertise scientifique</a>
                         </li>
-                        <li onClick={() => setEssaiClinique}>
+                        <li onClick={() => setEssaiClinique(true)}>
                             <a>Essai clinique</a>
                         </li>
-                        <li onClick={() => setIncomingMobility}>
+                        <li onClick={() => setIncomingMobility(true)}>
                             <a>Mobilité entrante</a>
                         </li>
                         <li>
                             <a>Mobilité sortante</a>
                         </li>
-                        <li onClick={() => setShowEditorial}>
+                        <li onClick={() => setShowEditorial(true)}>
                             <a>Edition</a>
                         </li>
                         <li>
                             <a>Création d'entreprise</a>
                         </li>
-                        <li onClick={() => setShowPostDoctorat}>
+                        <li onClick={() => setShowPostDoctorat(true)}>
                             <a>PostDoctorat</a>
                         </li>
                         <li>
                             <a>Brevet</a>
                         </li>
-                        <li onClick={() => setShowReview}>
+                        <li onClick={() => setShowReview(true)}>
                             <a>Revue</a>
                         </li>
                     </ul>
