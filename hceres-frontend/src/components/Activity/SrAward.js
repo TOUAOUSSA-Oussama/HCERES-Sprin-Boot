@@ -66,7 +66,7 @@ function SrAward(props) {
             <Modal show={showModal} onHide={handleClose}>
                 <form onSubmit={handleSubmit}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Prix</Modal.Title>
+                        <Modal.Title>Pris</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
 
