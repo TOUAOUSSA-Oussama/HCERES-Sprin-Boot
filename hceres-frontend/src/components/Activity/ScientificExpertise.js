@@ -7,8 +7,17 @@ import {Link, useNavigate, useParams} from "react-router-dom";
 import {useEffect} from "react/cjs/react.development";
 import Axios from 'axios'
 import axios from "axios";
+import Modal from "react-bootstrap/Modal";
 
-const ScientificExpertise = () => {
+function ScientificExpertise(props) {
+
+    const [showModal, setShowModal] = React.useState(true);
+
+    const handleClose = () => {
+        setShowModal(false);
+        props.onHideAction.call();
+    };
+
     const [researcherId, setResearcherId] = React.useState("");
     const [typeName, settypeName] = useState("");
     const [startDate, setstartDate] = useState(null);
@@ -62,10 +71,14 @@ const ScientificExpertise = () => {
 
     const handleChange = e => setResearcherId(e.target.value);
     return (
-        <div className='form-container'>
-            <form className='form' onSubmit={handleSubmit}>
-                <a href="/Activity" class="close-button">&#10006;</a>
-                <h3 className='title'>Expertise Scientifique</h3>
+        <div>
+            <Modal show={showModal} onHide={handleClose}>
+                <form onSubmit={handleSubmit}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Expertise scientifique</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+
                 <label className='label'>
                     Chercheur
                 </label>
@@ -116,9 +129,13 @@ const ScientificExpertise = () => {
                     value={description}
                     onChange={(e) => setdescription(e.target.value)}
                     required/>
+                    </Modal.Body>
+                    <Modal.Footer>
 
                 <button className='submit'>Valider</button>
-            </form>
+                    </Modal.Footer>
+                </form>
+            </Modal>
         </div>
     );
 }
