@@ -4,8 +4,15 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Axios from 'axios'
 import axios from "axios";
+import Modal from "react-bootstrap/Modal";
 
-function PostDoctorat() {
+function PostDoctorat(props) {
+    const [showModal, setShowModal] = React.useState(true);
+
+    const handleClose = () => {
+        setShowModal(false);
+        props.onHideAction.call();
+    };
     //const [chercheur, setChercheur] = React.useState("");
     const [chercheur, setResearcherId] = React.useState("");
     const [superviseur, setSuperviseur] = React.useState("");
@@ -70,10 +77,13 @@ function PostDoctorat() {
     const handleChange = e => setResearcherId(e.target.value);
 
     return (
-        <div className='form-container'>
-            <form className='form' onSubmit={handleSubmit}>
-                <a href="/Activity" class="close-button">&#10006;</a>
-                <h3 className='title'>POST DOCTORAT</h3>
+        <div>
+            <Modal show={showModal} onHide={handleClose}>
+                <form onSubmit={handleSubmit}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Post Doctorat</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
                 <label className='label'>
                     Chercheur
                 </label>
@@ -189,9 +199,12 @@ function PostDoctorat() {
                     value={associatedPubliRef}
                     onChange={e => setAssociatedPubliRef(e.target.value)}
                     required/>
-
+                    </Modal.Body>
+                    <Modal.Footer>
                 <button className='submit'>Valider</button>
-            </form>
+                    </Modal.Footer>
+                </form>
+            </Modal>
         </div>
     );
 }

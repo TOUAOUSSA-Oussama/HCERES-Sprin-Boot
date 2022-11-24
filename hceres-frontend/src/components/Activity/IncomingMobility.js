@@ -7,8 +7,16 @@ import {Link, useNavigate, useParams} from "react-router-dom";
 import {useEffect} from "react/cjs/react.development";
 import Axios from 'axios'
 import axios from "axios";
+import Modal from "react-bootstrap/Modal";
 
-const IncomingMobility = () => {
+function IncomingMobility(props) {
+    const [showModal, setShowModal] = React.useState(true);
+
+    const handleClose = () => {
+        setShowModal(false);
+        props.onHideAction.call();
+    };
+
     const [researcherId, setResearcherId] = React.useState("");
     const [nameSeniorScientist, setnameSeniorScientist] = useState("");
     const [arrivalDate, setarrivalDate] = useState(null);
@@ -84,10 +92,13 @@ const IncomingMobility = () => {
     }
     const handleChange = e => setResearcherId(e.target.value);
     return (
-        <div className='form-container'>
-            <form className='form' onSubmit={handleSubmit}>
-                <a href="/Activity" class="close-button">&#10006;</a>
-                <h3 className='title'>Mobilité entrante</h3>
+        <div>
+            <Modal show={showModal} onHide={handleClose}>
+                <form onSubmit={handleSubmit}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Mobilité entrante</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
                 <label className='label'>
                     Chercheur
                 </label>
@@ -268,9 +279,12 @@ const IncomingMobility = () => {
                     value={agreementSigned}
                     onChange={(e) => setagreementSigned(e.target.value)}
                     required/>
-
+                    </Modal.Body>
+                    <Modal.Footer>
                 <button className='submit'>Valider</button>
-            </form>
+                    </Modal.Footer>
+                </form>
+            </Modal>
         </div>
     );
 }

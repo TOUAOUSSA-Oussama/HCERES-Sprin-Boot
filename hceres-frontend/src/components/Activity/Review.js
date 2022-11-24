@@ -1,8 +1,15 @@
 import React from 'react';
 import './Activity.css';
 import Axios from 'axios'
+import Modal from "react-bootstrap/Modal";
 
-function Review() {
+function Review(props) {
+    const [showModal, setShowModal] = React.useState(true);
+
+    const handleClose = () => {
+        setShowModal(false);
+        props.onHideAction.call();
+    };
     const [chercheur, setChercheur] = React.useState("");
     const [impactFactor, setImpactFactor] = React.useState("");
     const [year, setYear] = React.useState("");
@@ -26,10 +33,13 @@ function Review() {
 
 
     return (
-        <div className='form-container'>
-            <form className='form' onSubmit={handleSubmit}>
-                <a href="/Activity" class="close-button">&#10006;</a>
-                <h3 className='title'>REVUE</h3>
+        <div>
+            <Modal show={showModal} onHide={handleClose}>
+                <form onSubmit={handleSubmit}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>REVUE</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
                 <label className='label'>
                     Chercheur
                 </label>
@@ -88,8 +98,12 @@ function Review() {
                     value={nbReviewedArticles}
                     onChange={e => setNbReviewedArticles(e.target.value)}
                     required/>
+                    </Modal.Body>
+                    <Modal.Footer>
                 <button className='submit'>Valider</button>
-            </form>
+                    </Modal.Footer>
+                </form>
+            </Modal>
         </div>
     );
 }
