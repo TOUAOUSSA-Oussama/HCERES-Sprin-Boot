@@ -97,13 +97,13 @@ export default function Activity() {
                 </div>
                 {showPrix && (<SrAward onHideAction={() => setShowPrix(false)}> </SrAward>)}
                 {showEssaiClinique && (<EssaiClinique onHideAction={() => setEssaiClinique(false)}> </EssaiClinique>)}
-                {showIncomingMobility && (<IncomingMobility> </IncomingMobility>)}
-                {showScientificExpertise && (<ScientificExpertise> </ScientificExpertise>)}
+                {showIncomingMobility && (<IncomingMobility onHideAction={() => setIncomingMobility(false)}> </IncomingMobility>)}
+                {showScientificExpertise && (<ScientificExpertise onHideAction={() =>setScientificExpertise(false)}> </ScientificExpertise>)}
                 {showEducation && (<Education onHideAction={() => setShowEducation(false)}/>)}
-                {showPostDoctorat && (<PostDoctorat> </PostDoctorat>)}
+                {showPostDoctorat && (<PostDoctorat onHideAction={() => setShowPostDoctorat(false)}> </PostDoctorat>)}
                 {showPlatform && (<Platform onHideAction={() => setShowPlatform(false)}></Platform>)}
-                {showEditorial && (<Editorial></Editorial>)}
-                {showReview && (<Review></Review>)}
+                {showEditorial && (<Editorial onHideAction={() => setShowEditorial(false)}></Editorial>)}
+                {showReview && (<Review onHideAction={() => setShowReview(false)}></Review>)}
                 {showSeiIndustrialRDContract && (<SeiIndustrialRDContract onHideAction={() => setShowSeiIndustrialRDContract(false)}></SeiIndustrialRDContract>)}
                 {showNationalInternationalCollaboration && (<NationalInternationalCollaboration onHideAction={() => setShowNationalInternationalCollaboration(false)}></NationalInternationalCollaboration>)}
                 {showOralCommunication && (<OralCommunication onHideAction={() => setShowOralCommunication(false)}></OralCommunication>)}
