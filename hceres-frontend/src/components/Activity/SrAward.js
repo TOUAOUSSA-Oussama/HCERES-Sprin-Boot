@@ -11,13 +11,15 @@ import Button from "react-bootstrap/Button";
 
 function SrAward(props) {
     const [showModal, setShowModal] = React.useState(true);
+    const targetResearcher = props.targetResearcher;
+    const listeChercheurs = props.listeChercheurs;
 
-    const handleClose = () => {
+    const handleClose = (msg = null) => {
         setShowModal(false);
-        props.onHideAction.call();
+        props.onHideAction(msg);
     };
 
-    const [researcherId, setResearcherId] = React.useState("");
+    const [researcherId, setResearcherId] = React.useState(targetResearcher ? targetResearcher.researcherId : "");
     const [awardeeName, setAwardeeName] = React.useState("");
     const [description, setDescritption] = React.useState("");
     const [awardDate, setDate] = React.useState("");
@@ -25,13 +27,14 @@ function SrAward(props) {
     const [researchers, setResearchers] = React.useState([]);
 
     async function componentDidMount() {
+        if (!targetResearcher && !listeChercheurs) {
+            const url = "http://localhost:9000/Researchers";
+            const response = await axios.get(url);
 
-        const url = "http://localhost:9000/Researchers";
-        const response = await axios.get(url);
+            const listeChercheurs = response.data;
 
-        const listeChercheurs = response.data;
-
-        setResearchers(listeChercheurs)
+            setResearchers(listeChercheurs)
+        }
     }
 
     const handleSubmit = (event) => {
@@ -44,9 +47,18 @@ function SrAward(props) {
             awardDate: awardDate
         };
         Axios.post("http://localhost:9000/Api/AddSrAward", data)
-            .then(res => {
-                window.location.reload();
-            })
+            .then(response => {
+                const msg = {
+                    "successMsg": "SrAward ajouté avec un id " + response.data.idActivity,
+                }
+                handleClose(msg);
+            }).catch(error => {
+            console.log(error);
+            const msg = {
+                "errorMsg": "Erreur SrAward non ajouté, response status: " + error.response.status,
+            }
+            handleClose(msg);
+        })
     }
 
     const handleDate = (event) => {
@@ -57,9 +69,6 @@ function SrAward(props) {
         setDate(event);
     }
 
-    const faireRedirection = () => {
-        navigate('/Activity');
-    }
     const handleChange = e => setResearcherId(e.target.value);
     return (
         <div>
@@ -75,14 +84,16 @@ function SrAward(props) {
                     Chercheur
                 </label>
 
-                <select onClick={componentDidMount} onChange={handleChange}>
-                    {researchers.map(item => {
-                        return (<option key={item.researcherId}
-                                        value={item.researcherId}>{item.researcherName} {item.researcherSurname}</option>);
-                    })}
+                {targetResearcher ?
+                    <label>{targetResearcher.researcherName} {targetResearcher.researcherSurname}</label> :
 
-
-                </select>
+                    <select onClick={componentDidMount} onChange={handleChange}>
+                        {researchers.map(item => {
+                            return (<option key={item.researcherId}
+                                            value={item.researcherId}>{item.researcherName} {item.researcherSurname}</option>);
+                        })}
+                    </select>
+                }
                 <label className='label'>
                     Nom du prix
                 </label>
@@ -122,7 +133,7 @@ function SrAward(props) {
                     <Modal.Footer>
 
 
-                <button className='submit' onClick={faireRedirection}>Valider</button>
+                <button className='submit'>Valider</button>
 
                     </Modal.Footer>
                 </form>

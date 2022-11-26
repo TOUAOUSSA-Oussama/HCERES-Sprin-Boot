@@ -13,6 +13,7 @@ import {Alert, Dropdown} from "react-bootstrap";
 import DeleteResearcher from "./DeleteResearcher";
 import {MdOutlinePendingActions} from "react-icons/md";
 import Education from "../Activity/Education";
+import SrAward from "../Activity/SrAward";
 
 class Researcher extends Component {
     constructor() {
@@ -23,6 +24,7 @@ class Researcher extends Component {
             showAddResearcher: false,
             showDeleteResearcher: false,
             showEducation: false,
+            showPrix: false,
             researcherSuccessAlert: "",
             researcherErrorAlert: "",
             showFilter: false,
@@ -82,6 +84,7 @@ class Researcher extends Component {
     onHideModalActivity(messages = null) {
         this.setState({
             showEducation: false,
+            showPrix:false,
         })
         // silent close
         if (!messages) return;
@@ -152,6 +155,14 @@ class Researcher extends Component {
                                             showEducation: true
                                         })
                                     }}>Add Education</Dropdown.Item>
+
+                                    <Dropdown.Item onClick={() => {
+                                        this.setState({
+                                            targetResearcher: row,
+                                            showPrix: true
+                                        })
+                                    }}>Add Prix</Dropdown.Item>
+
                                 </Dropdown.Menu>
                             </Dropdown>
                             <button onClick={() => {
@@ -246,6 +257,8 @@ class Researcher extends Component {
                                           onHideAction={this.onHideModalResearcher}/>)}
 
                     {this.state.showEducation && (<Education targetResearcher={this.state.targetResearcher}
+                                                             onHideAction={this.onHideModalActivity}/>)}
+                    {this.state.showPrix && (<SrAward targetResearcher={this.state.targetResearcher}
                                                              onHideAction={this.onHideModalActivity}/>)}
 
                     <BootstrapTable
