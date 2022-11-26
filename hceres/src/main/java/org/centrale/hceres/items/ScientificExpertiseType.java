@@ -10,7 +10,7 @@
 package org.centrale.hceres.items;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -49,7 +49,7 @@ public class ScientificExpertiseType implements Serializable {
     @Column(name = "name_choice")
     private String nameChoice;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "scientificExpertiseTypeId")
-    private Collection<ScientificExpertise> scientificExpertiseCollection;
+    private List<ScientificExpertise> scientificExpertiseList;
 
     /**
      *
@@ -101,16 +101,16 @@ public class ScientificExpertiseType implements Serializable {
      *
      * @return
      */
-    public Collection<ScientificExpertise> getScientificExpertiseCollection() {
-        return scientificExpertiseCollection;
+    public List<ScientificExpertise> getScientificExpertiseList() {
+        return scientificExpertiseList;
     }
 
     /**
      *
-     * @param scientificExpertiseCollection
+     * @param scientificExpertiseList
      */
-    public void setScientificExpertiseCollection(Collection<ScientificExpertise> scientificExpertiseCollection) {
-        this.scientificExpertiseCollection = scientificExpertiseCollection;
+    public void setScientificExpertiseList(List<ScientificExpertise> scientificExpertiseList) {
+        this.scientificExpertiseList = scientificExpertiseList;
     }
 
     /**

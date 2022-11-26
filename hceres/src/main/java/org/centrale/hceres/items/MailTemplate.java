@@ -10,7 +10,7 @@
 package org.centrale.hceres.items;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -55,7 +55,7 @@ public class MailTemplate implements Serializable {
     @Column(name = "mail_template_content")
     private String mailTemplateContent;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "mailTemplateId")
-    private Collection<MailActivity> mailActivityCollection;
+    private List<MailActivity> mailActivityList;
 
     /**
      *
@@ -135,16 +135,16 @@ public class MailTemplate implements Serializable {
      *
      * @return
      */
-    public Collection<MailActivity> getMailActivityCollection() {
-        return mailActivityCollection;
+    public List<MailActivity> getMailActivityList() {
+        return mailActivityList;
     }
 
     /**
      *
-     * @param mailActivityCollection
+     * @param mailActivityList
      */
-    public void setMailActivityCollection(Collection<MailActivity> mailActivityCollection) {
-        this.mailActivityCollection = mailActivityCollection;
+    public void setMailActivityList(List<MailActivity> mailActivityList) {
+        this.mailActivityList = mailActivityList;
     }
 
     /**

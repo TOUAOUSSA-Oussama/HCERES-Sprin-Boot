@@ -10,7 +10,7 @@
 package org.centrale.hceres.items;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -46,7 +46,7 @@ public class LearnedScientificSocietyRole implements Serializable {
     @Column(name = "name_choice")
     private String nameChoice;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "learnedScientificSocietyRoleId")
-    private Collection<LearnedScientificSociety> learnedScientificSocietyCollection;
+    private List<LearnedScientificSociety> learnedScientificSocietyList;
 
     /**
      *
@@ -98,16 +98,16 @@ public class LearnedScientificSocietyRole implements Serializable {
      *
      * @return
      */
-    public Collection<LearnedScientificSociety> getLearnedScientificSocietyCollection() {
-        return learnedScientificSocietyCollection;
+    public List<LearnedScientificSociety> getLearnedScientificSocietyList() {
+        return learnedScientificSocietyList;
     }
 
     /**
      *
-     * @param learnedScientificSocietyCollection
+     * @param learnedScientificSocietyList
      */
-    public void setLearnedScientificSocietyCollection(Collection<LearnedScientificSociety> learnedScientificSocietyCollection) {
-        this.learnedScientificSocietyCollection = learnedScientificSocietyCollection;
+    public void setLearnedScientificSocietyList(List<LearnedScientificSociety> learnedScientificSocietyList) {
+        this.learnedScientificSocietyList = learnedScientificSocietyList;
     }
 
     /**

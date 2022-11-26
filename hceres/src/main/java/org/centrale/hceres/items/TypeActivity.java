@@ -10,7 +10,7 @@
 package org.centrale.hceres.items;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -48,7 +48,7 @@ public class TypeActivity implements Serializable {
     private String nameType;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTypeActivity")
-    private Collection<Activity> activityCollection;
+    private List<Activity> activityList;
 
     /**
      *
@@ -100,16 +100,16 @@ public class TypeActivity implements Serializable {
      *
      * @return
      */
-    public Collection<Activity> getActivityCollection() {
-        return activityCollection;
+    public List<Activity> getActivityList() {
+        return activityList;
     }
 
     /**
      *
-     * @param activityCollection
+     * @param activityList
      */
-    public void setActivityCollection(Collection<Activity> activityCollection) {
-        this.activityCollection = activityCollection;
+    public void setActivityList(List<Activity> activityList) {
+        this.activityList = activityList;
     }
 
     /**

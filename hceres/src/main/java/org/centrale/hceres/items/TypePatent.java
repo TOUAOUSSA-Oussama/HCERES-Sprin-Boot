@@ -10,7 +10,7 @@
 package org.centrale.hceres.items;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -46,7 +46,7 @@ public class TypePatent implements Serializable {
     @Column(name = "name_choice")
     private String nameChoice;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "typePatentId")
-    private Collection<Patent> patentCollection;
+    private List<Patent> patentList;
 
     /**
      *
@@ -98,16 +98,16 @@ public class TypePatent implements Serializable {
      *
      * @return
      */
-    public Collection<Patent> getPatentCollection() {
-        return patentCollection;
+    public List<Patent> getPatentList() {
+        return patentList;
     }
 
     /**
      *
-     * @param patentCollection
+     * @param patentList
      */
-    public void setPatentCollection(Collection<Patent> patentCollection) {
-        this.patentCollection = patentCollection;
+    public void setPatentList(List<Patent> patentList) {
+        this.patentList = patentList;
     }
 
     /**

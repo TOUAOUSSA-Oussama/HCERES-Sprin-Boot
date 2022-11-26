@@ -10,7 +10,7 @@
 package org.centrale.hceres.items;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -53,7 +53,7 @@ public class Nationality implements Serializable {
         @JoinColumn(name = "nationality_id", referencedColumnName = "nationality_id")}, inverseJoinColumns = {
         @JoinColumn(name = "researcher_id", referencedColumnName = "researcher_id")})
     @ManyToMany
-    private Collection<Researcher> researcherCollection;
+    private List<Researcher> researcherList;
 
     /**
      *
@@ -115,16 +115,16 @@ public class Nationality implements Serializable {
      *
      * @return
      */
-    public Collection<Researcher> getResearcherCollection() {
-        return researcherCollection;
+    public List<Researcher> getResearcherList() {
+        return researcherList;
     }
 
     /**
      *
-     * @param researcherCollection
+     * @param researcherList
      */
-    public void setResearcherCollection(Collection<Researcher> researcherCollection) {
-        this.researcherCollection = researcherCollection;
+    public void setResearcherList(List<Researcher> researcherList) {
+        this.researcherList = researcherList;
     }
 
     /**

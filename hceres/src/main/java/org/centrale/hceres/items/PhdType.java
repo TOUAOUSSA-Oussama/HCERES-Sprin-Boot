@@ -10,7 +10,7 @@
 package org.centrale.hceres.items;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -49,7 +49,7 @@ public class PhdType implements Serializable {
     @Column(name = "phd_type_name")
     private String phdTypeName;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "phdTypeId")
-    private Collection<PhdStudent> phdStudentCollection;
+    private List<PhdStudent> phdStudentList;
 
     /**
      *
@@ -111,16 +111,16 @@ public class PhdType implements Serializable {
      *
      * @return
      */
-    public Collection<PhdStudent> getPhdStudentCollection() {
-        return phdStudentCollection;
+    public List<PhdStudent> getPhdStudentList() {
+        return phdStudentList;
     }
 
     /**
      *
-     * @param phdStudentCollection
+     * @param phdStudentList
      */
-    public void setPhdStudentCollection(Collection<PhdStudent> phdStudentCollection) {
-        this.phdStudentCollection = phdStudentCollection;
+    public void setPhdStudentList(List<PhdStudent> phdStudentList) {
+        this.phdStudentList = phdStudentList;
     }
 
     /**

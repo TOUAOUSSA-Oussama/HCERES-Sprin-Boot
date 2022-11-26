@@ -10,7 +10,7 @@
 package org.centrale.hceres.items;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -49,9 +49,9 @@ public class Journal implements Serializable {
     @Column(name = "journal_name")
     private String journalName;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "journalId")
-    private Collection<ReviewingJournalArticles> reviewingJournalArticlesCollection;
+    private List<ReviewingJournalArticles> reviewingJournalArticlesList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "journalId")
-    private Collection<EditorialActivity> editorialActivityCollection;
+    private List<EditorialActivity> editorialActivityList;
 
     /**
      *
@@ -113,32 +113,32 @@ public class Journal implements Serializable {
      *
      * @return
      */
-    public Collection<ReviewingJournalArticles> getReviewingJournalArticlesCollection() {
-        return reviewingJournalArticlesCollection;
+    public List<ReviewingJournalArticles> getReviewingJournalArticlesList() {
+        return reviewingJournalArticlesList;
     }
 
     /**
      *
-     * @param reviewingJournalArticlesCollection
+     * @param reviewingJournalArticlesList
      */
-    public void setReviewingJournalArticlesCollection(Collection<ReviewingJournalArticles> reviewingJournalArticlesCollection) {
-        this.reviewingJournalArticlesCollection = reviewingJournalArticlesCollection;
+    public void setReviewingJournalArticlesList(List<ReviewingJournalArticles> reviewingJournalArticlesList) {
+        this.reviewingJournalArticlesList = reviewingJournalArticlesList;
     }
 
     /**
      *
      * @return
      */
-    public Collection<EditorialActivity> getEditorialActivityCollection() {
-        return editorialActivityCollection;
+    public List<EditorialActivity> getEditorialActivityList() {
+        return editorialActivityList;
     }
 
     /**
      *
-     * @param editorialActivityCollection
+     * @param editorialActivityList
      */
-    public void setEditorialActivityCollection(Collection<EditorialActivity> editorialActivityCollection) {
-        this.editorialActivityCollection = editorialActivityCollection;
+    public void setEditorialActivityList(List<EditorialActivity> editorialActivityList) {
+        this.editorialActivityList = editorialActivityList;
     }
 
     /**

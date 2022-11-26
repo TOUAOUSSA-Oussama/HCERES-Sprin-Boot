@@ -10,7 +10,7 @@
 package org.centrale.hceres.items;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -51,7 +51,7 @@ public class TypeOralCommunication implements Serializable {
     private String typeOralCommunicationName;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "typeOralCommunicationId")
-    private Collection<OralCommunication> oralCommunicationCollection;
+    private List<OralCommunication> oralCommunicationList;
 
     /**
      *
@@ -113,16 +113,16 @@ public class TypeOralCommunication implements Serializable {
      *
      * @return
      */
-    public Collection<OralCommunication> getOralCommunicationCollection() {
-        return oralCommunicationCollection;
+    public List<OralCommunication> getOralCommunicationList() {
+        return oralCommunicationList;
     }
 
     /**
      *
-     * @param oralCommunicationCollection
+     * @param oralCommunicationList
      */
-    public void setOralCommunicationCollection(Collection<OralCommunication> oralCommunicationCollection) {
-        this.oralCommunicationCollection = oralCommunicationCollection;
+    public void setOralCommunicationList(List<OralCommunication> oralCommunicationList) {
+        this.oralCommunicationList = oralCommunicationList;
     }
 
     /**

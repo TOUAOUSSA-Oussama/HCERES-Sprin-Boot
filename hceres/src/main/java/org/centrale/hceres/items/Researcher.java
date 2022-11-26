@@ -10,7 +10,7 @@
 package org.centrale.hceres.items;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -79,32 +79,32 @@ public class Researcher implements Serializable {
     @Column(name = "researcher_password")
     private String researcherPassword;
     @JsonIgnore
-    @ManyToMany(mappedBy = "researcherCollection")
-    private Collection<Nationality> nationalityCollection;
+    @ManyToMany(mappedBy = "researcherList")
+    private List<Nationality> nationalityList;
     @JsonIgnore
-    @ManyToMany(mappedBy = "researcherCollection")
-    private Collection<Activity> activityCollection;
+    @ManyToMany(mappedBy = "researcherList")
+    private List<Activity> activityList;
     @JsonIgnore
     @OneToMany(mappedBy = "researcherId")
-    private Collection<Connection> connectionCollection;
+    private List<Connection> connectionList;
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "researcherId")
-    private Collection<Contract> contractCollection;
+    private List<Contract> contractList;
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "researcherId")
-    private Collection<TeamReferent> teamReferentCollection;
+    private List<TeamReferent> teamReferentList;
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "researcherId")
-    private Collection<Supervisor> supervisorCollection;
+    private List<Supervisor> supervisorList;
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "researcherId")
-    private Collection<PhdStudent> phdStudentCollection;
+    private List<PhdStudent> phdStudentList;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "researcher")
     private Admin admin;
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "researcherId")
-    private Collection<BelongsTeam> belongsTeamCollection;
+    private List<BelongsTeam> belongsTeamList;
 
     /**
      *
@@ -246,112 +246,112 @@ public class Researcher implements Serializable {
      *
      * @return
      */
-    public Collection<Nationality> getNationalityCollection() {
-        return nationalityCollection;
+    public List<Nationality> getNationalityList() {
+        return nationalityList;
     }
 
     /**
      *
-     * @param nationalityCollection
+     * @param nationalityList
      */
-    public void setNationalityCollection(Collection<Nationality> nationalityCollection) {
-        this.nationalityCollection = nationalityCollection;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Collection<Activity> getActivityCollection() {
-        return activityCollection;
-    }
-
-    /**
-     *
-     * @param activityCollection
-     */
-    public void setActivityCollection(Collection<Activity> activityCollection) {
-        this.activityCollection = activityCollection;
+    public void setNationalityList(List<Nationality> nationalityList) {
+        this.nationalityList = nationalityList;
     }
 
     /**
      *
      * @return
      */
-    public Collection<Connection> getConnectionCollection() {
-        return connectionCollection;
+    public List<Activity> getActivityList() {
+        return activityList;
     }
 
     /**
      *
-     * @param connectionCollection
+     * @param activityList
      */
-    public void setConnectionCollection(Collection<Connection> connectionCollection) {
-        this.connectionCollection = connectionCollection;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Collection<Contract> getContractCollection() {
-        return contractCollection;
-    }
-
-    /**
-     *
-     * @param contractCollection
-     */
-    public void setContractCollection(Collection<Contract> contractCollection) {
-        this.contractCollection = contractCollection;
+    public void setActivityList(List<Activity> activityList) {
+        this.activityList = activityList;
     }
 
     /**
      *
      * @return
      */
-    public Collection<TeamReferent> getTeamReferentCollection() {
-        return teamReferentCollection;
+    public List<Connection> getConnectionList() {
+        return connectionList;
     }
 
     /**
      *
-     * @param teamReferentCollection
+     * @param connectionList
      */
-    public void setTeamReferentCollection(Collection<TeamReferent> teamReferentCollection) {
-        this.teamReferentCollection = teamReferentCollection;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Collection<Supervisor> getSupervisorCollection() {
-        return supervisorCollection;
-    }
-
-    /**
-     *
-     * @param supervisorCollection
-     */
-    public void setSupervisorCollection(Collection<Supervisor> supervisorCollection) {
-        this.supervisorCollection = supervisorCollection;
+    public void setConnectionList(List<Connection> connectionList) {
+        this.connectionList = connectionList;
     }
 
     /**
      *
      * @return
      */
-    public Collection<PhdStudent> getPhdStudentCollection() {
-        return phdStudentCollection;
+    public List<Contract> getContractList() {
+        return contractList;
     }
 
     /**
      *
-     * @param phdStudentCollection
+     * @param contractList
      */
-    public void setPhdStudentCollection(Collection<PhdStudent> phdStudentCollection) {
-        this.phdStudentCollection = phdStudentCollection;
+    public void setContractList(List<Contract> contractList) {
+        this.contractList = contractList;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public List<TeamReferent> getTeamReferentList() {
+        return teamReferentList;
+    }
+
+    /**
+     *
+     * @param teamReferentList
+     */
+    public void setTeamReferentList(List<TeamReferent> teamReferentList) {
+        this.teamReferentList = teamReferentList;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public List<Supervisor> getSupervisorList() {
+        return supervisorList;
+    }
+
+    /**
+     *
+     * @param supervisorList
+     */
+    public void setSupervisorList(List<Supervisor> supervisorList) {
+        this.supervisorList = supervisorList;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public List<PhdStudent> getPhdStudentList() {
+        return phdStudentList;
+    }
+
+    /**
+     *
+     * @param phdStudentList
+     */
+    public void setPhdStudentList(List<PhdStudent> phdStudentList) {
+        this.phdStudentList = phdStudentList;
     }
 
     /**
@@ -374,16 +374,16 @@ public class Researcher implements Serializable {
      *
      * @return
      */
-    public Collection<BelongsTeam> getBelongsTeamCollection() {
-        return belongsTeamCollection;
+    public List<BelongsTeam> getBelongsTeamList() {
+        return belongsTeamList;
     }
 
     /**
      *
-     * @param belongsTeamCollection
+     * @param belongsTeamList
      */
-    public void setBelongsTeamCollection(Collection<BelongsTeam> belongsTeamCollection) {
-        this.belongsTeamCollection = belongsTeamCollection;
+    public void setBelongsTeamList(List<BelongsTeam> belongsTeamList) {
+        this.belongsTeamList = belongsTeamList;
     }
 
     /**
@@ -433,11 +433,11 @@ public class Researcher implements Serializable {
      * @return
      */
 //    public Contract getCurrentContract() {
-//        if (this.contractCollection == null) {
+//        if (this.contractList == null) {
 //            return null;
 //        } else {
 //            Date now = Utilities.getCurrentDate();
-//            for (Contract temp : this.contractCollection) {
+//            for (Contract temp : this.contractList) {
 //                Date start = temp.getStartContract();
 //                Date end = temp.getEndContract();
 //                if (((start == null) || (start.before(now))) && ((end == null) || (end.after(now)))) {
@@ -454,11 +454,11 @@ public class Researcher implements Serializable {
      * @return
      */
 //    public BelongsTeam getCurrentBelongsTeam() {
-//        if (this.belongsTeamCollection == null) {
+//        if (this.belongsTeamList == null) {
 //            return null;
 //        } else {
 //            Date now = Utilities.getCurrentDate();
-//            for (BelongsTeam temp : belongsTeamCollection) {
+//            for (BelongsTeam temp : belongsTeamList) {
 //                Date start = temp.getOnboardingDate();
 //                Date end = temp.getLeavingDate();
 //                if (((start == null) || (start.before(now))) && ((end == null) || (end.after(now)))) {

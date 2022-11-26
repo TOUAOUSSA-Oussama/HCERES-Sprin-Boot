@@ -10,7 +10,7 @@
 package org.centrale.hceres.items;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -46,7 +46,7 @@ public class ProjectEvaluationCategory implements Serializable {
     @Column(name = "project_evaluation_category_name")
     private String projectEvaluationCategoryName;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "projectEvaluationCategoryId")
-    private Collection<ProjectEvaluation> projectEvaluationCollection;
+    private List<ProjectEvaluation> projectEvaluationList;
 
     /**
      *
@@ -98,16 +98,16 @@ public class ProjectEvaluationCategory implements Serializable {
      *
      * @return
      */
-    public Collection<ProjectEvaluation> getProjectEvaluationCollection() {
-        return projectEvaluationCollection;
+    public List<ProjectEvaluation> getProjectEvaluationList() {
+        return projectEvaluationList;
     }
 
     /**
      *
-     * @param projectEvaluationCollection
+     * @param projectEvaluationList
      */
-    public void setProjectEvaluationCollection(Collection<ProjectEvaluation> projectEvaluationCollection) {
-        this.projectEvaluationCollection = projectEvaluationCollection;
+    public void setProjectEvaluationList(List<ProjectEvaluation> projectEvaluationList) {
+        this.projectEvaluationList = projectEvaluationList;
     }
 
     /**

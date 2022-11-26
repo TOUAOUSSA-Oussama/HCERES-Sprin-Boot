@@ -12,7 +12,7 @@ package org.centrale.hceres.items;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -80,7 +80,7 @@ public class ToolProduct implements Serializable {
     private ToolProductType toolProductTypeId;
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "toolProduct")
-    private Collection<ToolProductInvolvment> toolProductInvolvmentCollection;
+    private List<ToolProductInvolvment> toolProductInvolvmentList;
 
     /**
      *
@@ -226,16 +226,16 @@ public class ToolProduct implements Serializable {
      *
      * @return
      */
-    public Collection<ToolProductInvolvment> getToolProductInvolvmentCollection() {
-        return toolProductInvolvmentCollection;
+    public List<ToolProductInvolvment> getToolProductInvolvmentList() {
+        return toolProductInvolvmentList;
     }
 
     /**
      *
-     * @param toolProductInvolvmentCollection
+     * @param toolProductInvolvmentList
      */
-    public void setToolProductInvolvmentCollection(Collection<ToolProductInvolvment> toolProductInvolvmentCollection) {
-        this.toolProductInvolvmentCollection = toolProductInvolvmentCollection;
+    public void setToolProductInvolvmentList(List<ToolProductInvolvment> toolProductInvolvmentList) {
+        this.toolProductInvolvmentList = toolProductInvolvmentList;
     }
 
     /**

@@ -10,7 +10,7 @@
 package org.centrale.hceres.items;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -71,9 +71,9 @@ public class PhdStudent implements Serializable {
     @Column(name = "phd_futur")
     private String phdFutur;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "phdStudentId")
-    private Collection<Supervisor> supervisorCollection;
+    private List<Supervisor> supervisorList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "phdStudent")
-    private Collection<PhdAssociatedCompany> phdAssociatedCompanyCollection;
+    private List<PhdAssociatedCompany> phdAssociatedCompanyList;
     @JoinColumn(name = "phd_type_id", referencedColumnName = "phd_type_id")
     @ManyToOne(optional = false)
     private PhdType phdTypeId;
@@ -207,32 +207,32 @@ public class PhdStudent implements Serializable {
      *
      * @return
      */
-    public Collection<Supervisor> getSupervisorCollection() {
-        return supervisorCollection;
+    public List<Supervisor> getSupervisorList() {
+        return supervisorList;
     }
 
     /**
      *
-     * @param supervisorCollection
+     * @param supervisorList
      */
-    public void setSupervisorCollection(Collection<Supervisor> supervisorCollection) {
-        this.supervisorCollection = supervisorCollection;
+    public void setSupervisorList(List<Supervisor> supervisorList) {
+        this.supervisorList = supervisorList;
     }
 
     /**
      *
      * @return
      */
-    public Collection<PhdAssociatedCompany> getPhdAssociatedCompanyCollection() {
-        return phdAssociatedCompanyCollection;
+    public List<PhdAssociatedCompany> getPhdAssociatedCompanyList() {
+        return phdAssociatedCompanyList;
     }
 
     /**
      *
-     * @param phdAssociatedCompanyCollection
+     * @param phdAssociatedCompanyList
      */
-    public void setPhdAssociatedCompanyCollection(Collection<PhdAssociatedCompany> phdAssociatedCompanyCollection) {
-        this.phdAssociatedCompanyCollection = phdAssociatedCompanyCollection;
+    public void setPhdAssociatedCompanyList(List<PhdAssociatedCompany> phdAssociatedCompanyList) {
+        this.phdAssociatedCompanyList = phdAssociatedCompanyList;
     }
 
     /**

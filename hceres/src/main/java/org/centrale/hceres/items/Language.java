@@ -10,7 +10,7 @@
 package org.centrale.hceres.items;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -49,9 +49,9 @@ public class Language implements Serializable {
     @Column(name = "language_name")
     private String languageName;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "languageId")
-    private Collection<Book> bookCollection;
+    private List<Book> bookList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "languageId")
-    private Collection<BookChapter> bookChapterCollection;
+    private List<BookChapter> bookChapterList;
 
     /**
      *
@@ -113,32 +113,32 @@ public class Language implements Serializable {
      *
      * @return
      */
-    public Collection<Book> getBookCollection() {
-        return bookCollection;
+    public List<Book> getBookList() {
+        return bookList;
     }
 
     /**
      *
-     * @param bookCollection
+     * @param bookList
      */
-    public void setBookCollection(Collection<Book> bookCollection) {
-        this.bookCollection = bookCollection;
+    public void setBookList(List<Book> bookList) {
+        this.bookList = bookList;
     }
 
     /**
      *
      * @return
      */
-    public Collection<BookChapter> getBookChapterCollection() {
-        return bookChapterCollection;
+    public List<BookChapter> getBookChapterList() {
+        return bookChapterList;
     }
 
     /**
      *
-     * @param bookChapterCollection
+     * @param bookChapterList
      */
-    public void setBookChapterCollection(Collection<BookChapter> bookChapterCollection) {
-        this.bookChapterCollection = bookChapterCollection;
+    public void setBookChapterList(List<BookChapter> bookChapterList) {
+        this.bookChapterList = bookChapterList;
     }
 
     /**

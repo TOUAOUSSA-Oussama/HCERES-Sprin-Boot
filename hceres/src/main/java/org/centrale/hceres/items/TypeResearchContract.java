@@ -10,7 +10,7 @@
 package org.centrale.hceres.items;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -46,7 +46,7 @@ public class TypeResearchContract implements Serializable {
     @Column(name = "name_choice")
     private String nameChoice;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idType")
-    private Collection<ResearchContractFundedPublicCharitableInst> researchContractFundedPublicCharitableInstCollection;
+    private List<ResearchContractFundedPublicCharitableInst> researchContractFundedPublicCharitableInstList;
 
     /**
      *
@@ -98,16 +98,16 @@ public class TypeResearchContract implements Serializable {
      *
      * @return
      */
-    public Collection<ResearchContractFundedPublicCharitableInst> getResearchContractFundedPublicCharitableInstCollection() {
-        return researchContractFundedPublicCharitableInstCollection;
+    public List<ResearchContractFundedPublicCharitableInst> getResearchContractFundedPublicCharitableInstList() {
+        return researchContractFundedPublicCharitableInstList;
     }
 
     /**
      *
-     * @param researchContractFundedPublicCharitableInstCollection
+     * @param researchContractFundedPublicCharitableInstList
      */
-    public void setResearchContractFundedPublicCharitableInstCollection(Collection<ResearchContractFundedPublicCharitableInst> researchContractFundedPublicCharitableInstCollection) {
-        this.researchContractFundedPublicCharitableInstCollection = researchContractFundedPublicCharitableInstCollection;
+    public void setResearchContractFundedPublicCharitableInstList(List<ResearchContractFundedPublicCharitableInst> researchContractFundedPublicCharitableInstList) {
+        this.researchContractFundedPublicCharitableInstList = researchContractFundedPublicCharitableInstList;
     }
 
     /**

@@ -12,7 +12,7 @@ package org.centrale.hceres.items;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -49,7 +49,7 @@ public class PublicationType implements Serializable {
     private String publicationTypeName;
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "publicationTypeId")
-    private Collection<Publication> publicationCollection;
+    private List<Publication> publicationList;
 
     /**
      *
@@ -101,16 +101,16 @@ public class PublicationType implements Serializable {
      *
      * @return
      */
-    public Collection<Publication> getPublicationCollection() {
-        return publicationCollection;
+    public List<Publication> getPublicationList() {
+        return publicationList;
     }
 
     /**
      *
-     * @param publicationCollection
+     * @param publicationList
      */
-    public void setPublicationCollection(Collection<Publication> publicationCollection) {
-        this.publicationCollection = publicationCollection;
+    public void setPublicationList(List<Publication> publicationList) {
+        this.publicationList = publicationList;
     }
 
     /**

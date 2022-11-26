@@ -10,7 +10,7 @@
 package org.centrale.hceres.items;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -49,7 +49,7 @@ public class Company implements Serializable {
     @Column(name = "company_name")
     private String companyName;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "company")
-    private Collection<PhdAssociatedCompany> phdAssociatedCompanyCollection;
+    private List<PhdAssociatedCompany> phdAssociatedCompanyList;
 
     /**
      *
@@ -111,16 +111,16 @@ public class Company implements Serializable {
      *
      * @return
      */
-    public Collection<PhdAssociatedCompany> getPhdAssociatedCompanyCollection() {
-        return phdAssociatedCompanyCollection;
+    public List<PhdAssociatedCompany> getPhdAssociatedCompanyList() {
+        return phdAssociatedCompanyList;
     }
 
     /**
      *
-     * @param phdAssociatedCompanyCollection
+     * @param phdAssociatedCompanyList
      */
-    public void setPhdAssociatedCompanyCollection(Collection<PhdAssociatedCompany> phdAssociatedCompanyCollection) {
-        this.phdAssociatedCompanyCollection = phdAssociatedCompanyCollection;
+    public void setPhdAssociatedCompanyList(List<PhdAssociatedCompany> phdAssociatedCompanyList) {
+        this.phdAssociatedCompanyList = phdAssociatedCompanyList;
     }
 
     /**

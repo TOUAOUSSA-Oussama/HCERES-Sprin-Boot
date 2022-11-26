@@ -10,7 +10,7 @@
 package org.centrale.hceres.items;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -46,7 +46,7 @@ public class PublicOutreachType implements Serializable {
     @Column(name = "public_outreach_type_name")
     private String publicOutreachTypeName;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "publicOutreachTypeId")
-    private Collection<PublicOutreach> publicOutreachCollection;
+    private List<PublicOutreach> publicOutreachList;
 
     /**
      *
@@ -98,16 +98,16 @@ public class PublicOutreachType implements Serializable {
      *
      * @return
      */
-    public Collection<PublicOutreach> getPublicOutreachCollection() {
-        return publicOutreachCollection;
+    public List<PublicOutreach> getPublicOutreachList() {
+        return publicOutreachList;
     }
 
     /**
      *
-     * @param publicOutreachCollection
+     * @param publicOutreachList
      */
-    public void setPublicOutreachCollection(Collection<PublicOutreach> publicOutreachCollection) {
-        this.publicOutreachCollection = publicOutreachCollection;
+    public void setPublicOutreachList(List<PublicOutreach> publicOutreachList) {
+        this.publicOutreachList = publicOutreachList;
     }
 
     /**

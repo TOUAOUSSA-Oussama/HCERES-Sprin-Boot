@@ -6296,7 +6296,7 @@ INSERT INTO public.type_activity (id_type_activity, name_type) VALUES (4, 'Paten
 INSERT INTO public.type_activity (id_type_activity, name_type) VALUES (5, 'Editorial Activity');
 INSERT INTO public.type_activity (id_type_activity, name_type) VALUES (6, 'Platform');
 INSERT INTO public.type_activity (id_type_activity, name_type) VALUES (7, 'Tool Product Decision Support Tool');
-INSERT INTO public.type_activity (id_type_activity, name_type) VALUES (8, 'Tool Product Biocollection');
+INSERT INTO public.type_activity (id_type_activity, name_type) VALUES (8, 'Tool Product BioList');
 INSERT INTO public.type_activity (id_type_activity, name_type) VALUES (9, 'Tool Product Software');
 INSERT INTO public.type_activity (id_type_activity, name_type) VALUES (10, 'Tool Product Database');
 INSERT INTO public.type_activity (id_type_activity, name_type) VALUES (11, 'Tool Product Cohort');

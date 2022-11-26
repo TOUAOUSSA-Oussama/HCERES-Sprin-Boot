@@ -68,17 +68,17 @@ public class EditorialService {
         Integer researcherId = RequestParser.parseInt(request.get("researcherId"));
         Optional<Researcher> researcherOp = researchRepo.findById(researcherId);
         Researcher researcher = researcherOp.get();
-        Collection<Activity> activityCollection = researcher.getActivityCollection();
-        activityCollection.add(activity);
-        researcher.setActivityCollection(activityCollection);
+        List<Activity> activityList = researcher.getActivityList();
+        activityList.add(activity);
+        researcher.setActivityList(activityList);
 
         // Add this activity to the reasearcher :
-        Collection<Researcher> activityResearch = activity.getResearcherCollection();
+        List<Researcher> activityResearch = activity.getResearcherList();
         if (activityResearch == null) {
             activityResearch = new ArrayList<Researcher>();
         }
         activityResearch.add(researcher);
-        activity.setResearcherCollection(activityResearch);
+        activity.setResearcherList(activityResearch);
 
         Activity savedActivity = activityRepo.save(activity);
         editorialToSave.setActivity(savedActivity);
@@ -110,15 +110,15 @@ public class EditorialService {
             // Setting the function Name
             functionEditorialActivity.setFunctionEditorialActivityName(functionName);
 
-            // Getting existing collection of editorial activities
-            Collection<EditorialActivity> collection = functionEditorialActivity.getEditorialActivityCollection();
+            // Getting existing List of editorial activities
+            List<EditorialActivity> List = functionEditorialActivity.getEditorialActivityList();
 
-            // Adding the new editorial activity to the collection
-            if (collection == null) {
-                collection = new ArrayList<EditorialActivity>();
+            // Adding the new editorial activity to the List
+            if (List == null) {
+                List = new ArrayList<EditorialActivity>();
             }
-            collection.add(editorialToSave);
-            functionEditorialActivity.setEditorialActivityCollection(collection);
+            List.add(editorialToSave);
+            functionEditorialActivity.setEditorialActivityList(List);
 
             // Persist Function editorial activity
             //functionEditorialActivityRepository.save(functionEditorialActivity);
@@ -130,13 +130,13 @@ public class EditorialService {
         else{
             FunctionEditorialActivity functionEditorialActivity = functionEditorialActivityRepository.findByName(functionName);
 
-            // Getting existing collection of editorial activities
-            Collection<EditorialActivity> collection = functionEditorialActivity.getEditorialActivityCollection();
+            // Getting existing List of editorial activities
+            List<EditorialActivity> List = functionEditorialActivity.getEditorialActivityList();
 
-            // Adding the new editorial activity to the collection
+            // Adding the new editorial activity to the List
 
-            collection.add(editorialToSave);
-            functionEditorialActivity.setEditorialActivityCollection(collection);
+            List.add(editorialToSave);
+            functionEditorialActivity.setEditorialActivityList(List);
 
             // Persist Function editorial activity
             //functionEditorialActivityRepository.save(functionEditorialActivity);

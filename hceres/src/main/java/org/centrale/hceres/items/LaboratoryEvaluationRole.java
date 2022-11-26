@@ -10,7 +10,7 @@
 package org.centrale.hceres.items;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -46,9 +46,9 @@ public class LaboratoryEvaluationRole implements Serializable {
     @Column(name = "name_choice")
     private String nameChoice;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "laboratoryEvaluationRoleId")
-    private Collection<InstitutionalComitee> institutionalComiteeCollection;
+    private List<InstitutionalComitee> institutionalComiteeList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "laboratoryEvaluationRoleId")
-    private Collection<LaboratoryEvaluation> laboratoryEvaluationCollection;
+    private List<LaboratoryEvaluation> laboratoryEvaluationList;
 
     /**
      *
@@ -100,32 +100,32 @@ public class LaboratoryEvaluationRole implements Serializable {
      *
      * @return
      */
-    public Collection<InstitutionalComitee> getInstitutionalComiteeCollection() {
-        return institutionalComiteeCollection;
+    public List<InstitutionalComitee> getInstitutionalComiteeList() {
+        return institutionalComiteeList;
     }
 
     /**
      *
-     * @param institutionalComiteeCollection
+     * @param institutionalComiteeList
      */
-    public void setInstitutionalComiteeCollection(Collection<InstitutionalComitee> institutionalComiteeCollection) {
-        this.institutionalComiteeCollection = institutionalComiteeCollection;
+    public void setInstitutionalComiteeList(List<InstitutionalComitee> institutionalComiteeList) {
+        this.institutionalComiteeList = institutionalComiteeList;
     }
 
     /**
      *
      * @return
      */
-    public Collection<LaboratoryEvaluation> getLaboratoryEvaluationCollection() {
-        return laboratoryEvaluationCollection;
+    public List<LaboratoryEvaluation> getLaboratoryEvaluationList() {
+        return laboratoryEvaluationList;
     }
 
     /**
      *
-     * @param laboratoryEvaluationCollection
+     * @param laboratoryEvaluationList
      */
-    public void setLaboratoryEvaluationCollection(Collection<LaboratoryEvaluation> laboratoryEvaluationCollection) {
-        this.laboratoryEvaluationCollection = laboratoryEvaluationCollection;
+    public void setLaboratoryEvaluationList(List<LaboratoryEvaluation> laboratoryEvaluationList) {
+        this.laboratoryEvaluationList = laboratoryEvaluationList;
     }
 
     /**

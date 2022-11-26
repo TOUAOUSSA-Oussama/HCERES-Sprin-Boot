@@ -10,7 +10,7 @@
 package org.centrale.hceres.items;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -48,7 +48,7 @@ public class TypeCollab implements Serializable {
     private String nameChoice;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "typeCollabId")
-    private Collection<NationalInternationalCollaboration> nationalInternationalCollaborationCollection;
+    private List<NationalInternationalCollaboration> nationalInternationalCollaborationList;
 
     /**
      *
@@ -100,16 +100,16 @@ public class TypeCollab implements Serializable {
      *
      * @return
      */
-    public Collection<NationalInternationalCollaboration> getNationalInternationalCollaborationCollection() {
-        return nationalInternationalCollaborationCollection;
+    public List<NationalInternationalCollaboration> getNationalInternationalCollaborationList() {
+        return nationalInternationalCollaborationList;
     }
 
     /**
      *
-     * @param nationalInternationalCollaborationCollection
+     * @param nationalInternationalCollaborationList
      */
-    public void setNationalInternationalCollaborationCollection(Collection<NationalInternationalCollaboration> nationalInternationalCollaborationCollection) {
-        this.nationalInternationalCollaborationCollection = nationalInternationalCollaborationCollection;
+    public void setNationalInternationalCollaborationList(List<NationalInternationalCollaboration> nationalInternationalCollaborationList) {
+        this.nationalInternationalCollaborationList = nationalInternationalCollaborationList;
     }
 
     /**

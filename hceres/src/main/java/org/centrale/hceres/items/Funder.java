@@ -10,7 +10,7 @@
 package org.centrale.hceres.items;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -50,7 +50,7 @@ public class Funder implements Serializable {
     @Column(name = "funder_name")
     private String funderName;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "funderId")
-    private Collection<ProjectEvaluation> projectEvaluationCollection;
+    private List<ProjectEvaluation> projectEvaluationList;
 
     /**
      *
@@ -112,16 +112,16 @@ public class Funder implements Serializable {
      *
      * @return
      */
-    public Collection<ProjectEvaluation> getProjectEvaluationCollection() {
-        return projectEvaluationCollection;
+    public List<ProjectEvaluation> getProjectEvaluationList() {
+        return projectEvaluationList;
     }
 
     /**
      *
-     * @param projectEvaluationCollection
+     * @param projectEvaluationList
      */
-    public void setProjectEvaluationCollection(Collection<ProjectEvaluation> projectEvaluationCollection) {
-        this.projectEvaluationCollection = projectEvaluationCollection;
+    public void setProjectEvaluationList(List<ProjectEvaluation> projectEvaluationList) {
+        this.projectEvaluationList = projectEvaluationList;
     }
 
     /**

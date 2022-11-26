@@ -10,7 +10,7 @@
 package org.centrale.hceres.items;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -63,14 +63,14 @@ public class Team implements Serializable {
     @Column(name = "team_last_report")
     @Temporal(TemporalType.DATE)
     private Date teamLastReport;
-    @ManyToMany(mappedBy = "teamCollection")
-    private Collection<Activity> activityCollection;
+    @ManyToMany(mappedBy = "teamList")
+    private List<Activity> activityList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "teamId")
-    private Collection<TeamReferent> teamReferentCollection;
+    private List<TeamReferent> teamReferentList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "team")
-    private Collection<PublicationStatistics> publicationStatisticsCollection;
+    private List<PublicationStatistics> publicationStatisticsList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "teamId")
-    private Collection<BelongsTeam> belongsTeamCollection;
+    private List<BelongsTeam> belongsTeamList;
     @JoinColumn(name = "laboratory_id", referencedColumnName = "laboratory_id")
     @ManyToOne(optional = false)
     private Laboratory laboratoryId;
@@ -173,64 +173,64 @@ public class Team implements Serializable {
      *
      * @return
      */
-    public Collection<Activity> getActivityCollection() {
-        return activityCollection;
+    public List<Activity> getActivityList() {
+        return activityList;
     }
 
     /**
      *
-     * @param activityCollection
+     * @param activityList
      */
-    public void setActivityCollection(Collection<Activity> activityCollection) {
-        this.activityCollection = activityCollection;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Collection<TeamReferent> getTeamReferentCollection() {
-        return teamReferentCollection;
-    }
-
-    /**
-     *
-     * @param teamReferentCollection
-     */
-    public void setTeamReferentCollection(Collection<TeamReferent> teamReferentCollection) {
-        this.teamReferentCollection = teamReferentCollection;
+    public void setActivityList(List<Activity> activityList) {
+        this.activityList = activityList;
     }
 
     /**
      *
      * @return
      */
-    public Collection<PublicationStatistics> getPublicationStatisticsCollection() {
-        return publicationStatisticsCollection;
+    public List<TeamReferent> getTeamReferentList() {
+        return teamReferentList;
     }
 
     /**
      *
-     * @param publicationStatisticsCollection
+     * @param teamReferentList
      */
-    public void setPublicationStatisticsCollection(Collection<PublicationStatistics> publicationStatisticsCollection) {
-        this.publicationStatisticsCollection = publicationStatisticsCollection;
+    public void setTeamReferentList(List<TeamReferent> teamReferentList) {
+        this.teamReferentList = teamReferentList;
     }
 
     /**
      *
      * @return
      */
-    public Collection<BelongsTeam> getBelongsTeamCollection() {
-        return belongsTeamCollection;
+    public List<PublicationStatistics> getPublicationStatisticsList() {
+        return publicationStatisticsList;
     }
 
     /**
      *
-     * @param belongsTeamCollection
+     * @param publicationStatisticsList
      */
-    public void setBelongsTeamCollection(Collection<BelongsTeam> belongsTeamCollection) {
-        this.belongsTeamCollection = belongsTeamCollection;
+    public void setPublicationStatisticsList(List<PublicationStatistics> publicationStatisticsList) {
+        this.publicationStatisticsList = publicationStatisticsList;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public List<BelongsTeam> getBelongsTeamList() {
+        return belongsTeamList;
+    }
+
+    /**
+     *
+     * @param belongsTeamList
+     */
+    public void setBelongsTeamList(List<BelongsTeam> belongsTeamList) {
+        this.belongsTeamList = belongsTeamList;
     }
 
     /**

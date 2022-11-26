@@ -10,7 +10,7 @@
 package org.centrale.hceres.items;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -58,7 +58,7 @@ public class Laboratory implements Serializable {
     @ManyToOne(optional = false)
     private Institution institutionId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "laboratoryId")
-    private Collection<Team> teamCollection;
+    private List<Team> teamList;
 
     /**
      *
@@ -152,16 +152,16 @@ public class Laboratory implements Serializable {
      *
      * @return
      */
-    public Collection<Team> getTeamCollection() {
-        return teamCollection;
+    public List<Team> getTeamList() {
+        return teamList;
     }
 
     /**
      *
-     * @param teamCollection
+     * @param teamList
      */
-    public void setTeamCollection(Collection<Team> teamCollection) {
-        this.teamCollection = teamCollection;
+    public void setTeamList(List<Team> teamList) {
+        this.teamList = teamList;
     }
 
     /**

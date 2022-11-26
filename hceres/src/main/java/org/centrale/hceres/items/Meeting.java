@@ -10,7 +10,7 @@
 package org.centrale.hceres.items;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -77,10 +77,10 @@ public class Meeting implements Serializable {
     private Date meetingEnd;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "meetingId")
-    private Collection<MeetingCongressOrg> meetingCongressOrgCollection;
+    private List<MeetingCongressOrg> meetingCongressOrgList;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "meetingId")
-    private Collection<OralCommunication> oralCommunicationCollection;
+    private List<OralCommunication> oralCommunicationList;
 
     /**
      *
@@ -210,32 +210,32 @@ public class Meeting implements Serializable {
      *
      * @return
      */
-    public Collection<MeetingCongressOrg> getMeetingCongressOrgCollection() {
-        return meetingCongressOrgCollection;
+    public List<MeetingCongressOrg> getMeetingCongressOrgList() {
+        return meetingCongressOrgList;
     }
 
     /**
      *
-     * @param meetingCongressOrgCollection
+     * @param meetingCongressOrgList
      */
-    public void setMeetingCongressOrgCollection(Collection<MeetingCongressOrg> meetingCongressOrgCollection) {
-        this.meetingCongressOrgCollection = meetingCongressOrgCollection;
+    public void setMeetingCongressOrgList(List<MeetingCongressOrg> meetingCongressOrgList) {
+        this.meetingCongressOrgList = meetingCongressOrgList;
     }
 
     /**
      *
      * @return
      */
-    public Collection<OralCommunication> getOralCommunicationCollection() {
-        return oralCommunicationCollection;
+    public List<OralCommunication> getOralCommunicationList() {
+        return oralCommunicationList;
     }
 
     /**
      *
-     * @param oralCommunicationCollection
+     * @param oralCommunicationList
      */
-    public void setOralCommunicationCollection(Collection<OralCommunication> oralCommunicationCollection) {
-        this.oralCommunicationCollection = oralCommunicationCollection;
+    public void setOralCommunicationList(List<OralCommunication> oralCommunicationList) {
+        this.oralCommunicationList = oralCommunicationList;
     }
 
     /**

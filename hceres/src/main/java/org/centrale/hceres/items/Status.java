@@ -10,7 +10,7 @@
 package org.centrale.hceres.items;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -49,7 +49,7 @@ public class Status implements Serializable {
     @Column(name = "name_status")
     private String nameStatus;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idStatus")
-    private Collection<Contract> contractCollection;
+    private List<Contract> contractList;
 
     /**
      *
@@ -111,16 +111,16 @@ public class Status implements Serializable {
      *
      * @return
      */
-    public Collection<Contract> getContractCollection() {
-        return contractCollection;
+    public List<Contract> getContractList() {
+        return contractList;
     }
 
     /**
      *
-     * @param contractCollection
+     * @param contractList
      */
-    public void setContractCollection(Collection<Contract> contractCollection) {
-        this.contractCollection = contractCollection;
+    public void setContractList(List<Contract> contractList) {
+        this.contractList = contractList;
     }
 
     /**

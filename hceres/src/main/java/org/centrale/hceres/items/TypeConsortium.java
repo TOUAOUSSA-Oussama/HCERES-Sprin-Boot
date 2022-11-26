@@ -10,7 +10,7 @@
 package org.centrale.hceres.items;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -46,7 +46,7 @@ public class TypeConsortium implements Serializable {
     @Column(name = "type_consortium_name")
     private String typeConsortiumName;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "typeConsortiumId")
-    private Collection<SeiLeadConsortiumIndustry> seiLeadConsortiumIndustryCollection;
+    private List<SeiLeadConsortiumIndustry> seiLeadConsortiumIndustryList;
 
     /**
      *
@@ -98,16 +98,16 @@ public class TypeConsortium implements Serializable {
      *
      * @return
      */
-    public Collection<SeiLeadConsortiumIndustry> getSeiLeadConsortiumIndustryCollection() {
-        return seiLeadConsortiumIndustryCollection;
+    public List<SeiLeadConsortiumIndustry> getSeiLeadConsortiumIndustryList() {
+        return seiLeadConsortiumIndustryList;
     }
 
     /**
      *
-     * @param seiLeadConsortiumIndustryCollection
+     * @param seiLeadConsortiumIndustryList
      */
-    public void setSeiLeadConsortiumIndustryCollection(Collection<SeiLeadConsortiumIndustry> seiLeadConsortiumIndustryCollection) {
-        this.seiLeadConsortiumIndustryCollection = seiLeadConsortiumIndustryCollection;
+    public void setSeiLeadConsortiumIndustryList(List<SeiLeadConsortiumIndustry> seiLeadConsortiumIndustryList) {
+        this.seiLeadConsortiumIndustryList = seiLeadConsortiumIndustryList;
     }
 
     /**

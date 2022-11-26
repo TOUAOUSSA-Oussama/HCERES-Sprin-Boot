@@ -10,7 +10,7 @@
 package org.centrale.hceres.items;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -48,7 +48,7 @@ public class FunctionEditorialActivity implements Serializable {
     @Column(name = "function_editorial_activity_name")
     private String functionEditorialActivityName;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "functionEditorialActivityId")
-    private Collection<EditorialActivity> editorialActivityCollection;
+    private List<EditorialActivity> editorialActivityList;
 
     /**
      *
@@ -100,16 +100,16 @@ public class FunctionEditorialActivity implements Serializable {
      *
      * @return
      */
-    public Collection<EditorialActivity> getEditorialActivityCollection() {
-        return editorialActivityCollection;
+    public List<EditorialActivity> getEditorialActivityList() {
+        return editorialActivityList;
     }
 
     /**
      *
-     * @param editorialActivityCollection
+     * @param editorialActivityList
      */
-    public void setEditorialActivityCollection(Collection<EditorialActivity> editorialActivityCollection) {
-        this.editorialActivityCollection = editorialActivityCollection;
+    public void setEditorialActivityList(List<EditorialActivity> editorialActivityList) {
+        this.editorialActivityList = editorialActivityList;
     }
 
     /**

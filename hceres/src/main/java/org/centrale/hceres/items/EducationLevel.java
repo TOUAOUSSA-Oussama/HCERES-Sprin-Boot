@@ -10,7 +10,7 @@
 package org.centrale.hceres.items;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -49,7 +49,7 @@ public class EducationLevel implements Serializable {
     @Column(name = "education_level_name")
     private String educationLevelName;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "educationLevelId")
-    private Collection<Education> educationCollection;
+    private List<Education> educationList;
 
     /**
      *
@@ -111,16 +111,16 @@ public class EducationLevel implements Serializable {
      *
      * @return
      */
-    public Collection<Education> getEducationCollection() {
-        return educationCollection;
+    public List<Education> getEducationList() {
+        return educationList;
     }
 
     /**
      *
-     * @param educationCollection
+     * @param educationList
      */
-    public void setEducationCollection(Collection<Education> educationCollection) {
-        this.educationCollection = educationCollection;
+    public void setEducationList(List<Education> educationList) {
+        this.educationList = educationList;
     }
 
     /**

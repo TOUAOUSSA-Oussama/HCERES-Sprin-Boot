@@ -4,7 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
+import java.util.List;
 import java.util.Date;
 import java.util.Map;
 import java.util.Optional;
@@ -112,18 +112,18 @@ public class ScientificExpertiseService {
         Optional<Researcher> researcherOp = researchRepo.findById(researcherId);
         Researcher researcher = researcherOp.get();
 
-		Collection<Activity> activityCollection = researcher.getActivityCollection();
-        activityCollection.add(activity);
-        researcher.setActivityCollection(activityCollection);
+		List<Activity> activityList = researcher.getActivityList();
+        activityList.add(activity);
+        researcher.setActivityList(activityList);
 
 
 		 // Add this activity to the reasearcher :
-		 Collection<Researcher> activityResearch = activity.getResearcherCollection();
+		 List<Researcher> activityResearch = activity.getResearcherList();
 		 if (activityResearch == null) {
 			 activityResearch = new ArrayList<Researcher>();
 		 }
 		 activityResearch.add(researcher);
-		 activity.setResearcherCollection(activityResearch);
+		 activity.setResearcherList(activityResearch);
  
 		 Activity savedActivity = activityRepo.save(activity);
 		 ScientificExpertiseTosave.setActivity(savedActivity);

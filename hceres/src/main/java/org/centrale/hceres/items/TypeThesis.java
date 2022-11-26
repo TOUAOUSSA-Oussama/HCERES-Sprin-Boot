@@ -10,7 +10,7 @@
 package org.centrale.hceres.items;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -46,7 +46,7 @@ public class TypeThesis implements Serializable {
     @Column(name = "type_thesis_name")
     private String typeThesisName;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "typeThesisId")
-    private Collection<EvaluationThesis> evaluationThesisCollection;
+    private List<EvaluationThesis> evaluationThesisList;
 
     /**
      *
@@ -98,16 +98,16 @@ public class TypeThesis implements Serializable {
      *
      * @return
      */
-    public Collection<EvaluationThesis> getEvaluationThesisCollection() {
-        return evaluationThesisCollection;
+    public List<EvaluationThesis> getEvaluationThesisList() {
+        return evaluationThesisList;
     }
 
     /**
      *
-     * @param evaluationThesisCollection
+     * @param evaluationThesisList
      */
-    public void setEvaluationThesisCollection(Collection<EvaluationThesis> evaluationThesisCollection) {
-        this.evaluationThesisCollection = evaluationThesisCollection;
+    public void setEvaluationThesisList(List<EvaluationThesis> evaluationThesisList) {
+        this.evaluationThesisList = evaluationThesisList;
     }
 
     /**

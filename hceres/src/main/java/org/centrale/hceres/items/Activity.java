@@ -10,7 +10,7 @@
 package org.centrale.hceres.items;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -50,13 +50,13 @@ public class Activity implements Serializable {
         @JoinColumn(name = "id_activity", referencedColumnName = "id_activity")}, inverseJoinColumns = {
         @JoinColumn(name = "team_id", referencedColumnName = "team_id")})
     @ManyToMany
-    private Collection<Team> teamCollection;
+    private List<Team> teamList;
     
     @JoinTable(name = "activity_researcher", joinColumns = {
         @JoinColumn(name = "id_activity", referencedColumnName = "id_activity")}, inverseJoinColumns = {
         @JoinColumn(name = "researcher_id", referencedColumnName = "researcher_id")})
     @ManyToMany
-    private Collection<Researcher> researcherCollection;
+    private List<Researcher> researcherList;
     
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "activity")
     private IncomingMobility incomingMobility;
@@ -65,7 +65,7 @@ public class Activity implements Serializable {
     private Education education;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idActivity")
-    private Collection<MailActivity> mailActivityCollection;
+    private List<MailActivity> mailActivityList;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "activity")
     private NationalInternationalCollaboration nationalInternationalCollaboration;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "activity")
@@ -166,32 +166,32 @@ public class Activity implements Serializable {
      *
      * @return
      */
-    public Collection<Team> getTeamCollection() {
-        return teamCollection;
+    public List<Team> getTeamList() {
+        return teamList;
     }
 
     /**
      *
-     * @param teamCollection
+     * @param teamList
      */
-    public void setTeamCollection(Collection<Team> teamCollection) {
-        this.teamCollection = teamCollection;
+    public void setTeamList(List<Team> teamList) {
+        this.teamList = teamList;
     }
 
     /**
      *
      * @return
      */
-    public Collection<Researcher> getResearcherCollection() {
-        return researcherCollection;
+    public List<Researcher> getResearcherList() {
+        return researcherList;
     }
 
     /**
      *
-     * @param researcherCollection
+     * @param researcherList
      */
-    public void setResearcherCollection(Collection<Researcher> researcherCollection) {
-        this.researcherCollection = researcherCollection;
+    public void setResearcherList(List<Researcher> researcherList) {
+        this.researcherList = researcherList;
     }
 
     /**
@@ -230,16 +230,16 @@ public class Activity implements Serializable {
      *
      * @return
      */
-    public Collection<MailActivity> getMailActivityCollection() {
-        return mailActivityCollection;
+    public List<MailActivity> getMailActivityList() {
+        return mailActivityList;
     }
 
     /**
      *
-     * @param mailActivityCollectionf
+     * @param mailActivityListf
      */
-    public void setMailActivityCollection(Collection<MailActivity> mailActivityCollection) {
-        this.mailActivityCollection = mailActivityCollection;
+    public void setMailActivityList(List<MailActivity> mailActivityList) {
+        this.mailActivityList = mailActivityList;
     }
 
     /**
