@@ -71,6 +71,11 @@ const Navbar = () => {
                     </NavItem>
                     <NavItem>
                         <NavLinks to="/Activity">
+                            Activités
+                        </NavLinks>
+                    </NavItem>
+                    <NavItem>
+                        <NavLinks to="/ActivityOld">
                             Ajout d'activités
                         </NavLinks>
                     </NavItem>

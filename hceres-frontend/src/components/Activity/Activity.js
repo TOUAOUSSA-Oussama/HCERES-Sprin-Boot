@@ -14,6 +14,7 @@ import Review from './Review';
 import SeiIndustrialRDContract from './SeiIndustrialRDContract';
 import NationalInternationalCollaboration from './NationalInternationalCollaboration';
 import OralCommunication from './OralCommunication';
+import {Alert} from "react-bootstrap";
 
 export default function Activity() {
     const [showPrix, setShowPrix] = React.useState(false);
@@ -34,6 +35,7 @@ export default function Activity() {
         <div>
             <div className='activity-container'>
                 <div className='header'>
+                    {<Alert variant={"warning"}><h1>Page a remplacer plus tard par l'onglet activités</h1> <s>Activity.js</s> ActivityList.js</Alert>}
                     <h1>
                         Bienvenue dans la section d'ajout d'activités
                     </h1>

@@ -1,0 +1,9 @@
+.list_container {
+    max-height: 50vh;
+    overflow:auto;
+    direction: rtl;
+}
+
+.item_direction {
+    direction:ltr;
+}

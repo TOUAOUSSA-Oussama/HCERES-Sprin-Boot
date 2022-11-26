@@ -1,4 +1,7 @@
 import React, {Component} from 'react';
+// import these 2 import to show sort icon on table
+import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
+import 'react-bootstrap-table2-filter/dist/react-bootstrap-table2-filter.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {FaEdit} from "react-icons/fa";
 import {AiFillDelete, AiOutlinePlusCircle} from "react-icons/ai";
@@ -274,16 +277,6 @@ class Researcher extends Component {
                         hover
                         condensed
                     />
-                    {/*To more scrolling area and see the total list of table size per page*/}
-                    <br/>
-                    <br/>
-                    <br/>
-                    <br/>
-                    <br/>
-                    <br/>
-                    <br/>
-                    <br/>
-                    <br/>
                 </div>
             );
         }
