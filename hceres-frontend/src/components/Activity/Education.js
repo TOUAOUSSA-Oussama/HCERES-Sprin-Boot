@@ -6,6 +6,7 @@ import Axios from 'axios'
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
+import {ListGroup} from "react-bootstrap";
 
 // If targetResearcher is set in props use it as default without charging list from database
 // If listeChercheurs is set then use it in selection menu of list
@@ -94,7 +95,7 @@ function Education(props) {
                             Chercheur
                         </label>
                         {targetResearcher ?
-                            <label>{targetResearcher.researcherName} {targetResearcher.researcherSurname}</label> :
+                            <ListGroup.Item variant={"primary"}>{targetResearcher.researcherName} {targetResearcher.researcherSurname}</ListGroup.Item>:
 
                             <select onClick={componentDidMount} onChange={handleChange}>
                                 {researchers.map(item => {

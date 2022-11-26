@@ -7,6 +7,7 @@ import Axios from 'axios'
 import axios from "axios";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
+import {ListGroup} from "react-bootstrap";
 
 
 function SrAward(props) {
@@ -85,7 +86,7 @@ function SrAward(props) {
                 </label>
 
                 {targetResearcher ?
-                    <label>{targetResearcher.researcherName} {targetResearcher.researcherSurname}</label> :
+                    <ListGroup.Item variant={"primary"}>{targetResearcher.researcherName} {targetResearcher.researcherSurname}</ListGroup.Item>:
 
                     <select onClick={componentDidMount} onChange={handleChange}>
                         {researchers.map(item => {
