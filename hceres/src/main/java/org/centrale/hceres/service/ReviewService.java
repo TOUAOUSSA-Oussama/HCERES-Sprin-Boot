@@ -2,6 +2,7 @@ package org.centrale.hceres.service;
 
 import org.centrale.hceres.items.*;
 import org.centrale.hceres.repository.*;
+import org.centrale.hceres.util.RequestParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -60,9 +61,7 @@ public class ReviewService {
         activity.setIdTypeActivity(typeActivity);
 
         // Add this activity to the researcher activity list :
-        String researcherIdStr = (String)request.get("researcherId");
-        int researcherId = -1;
-        researcherId = Integer.parseInt(researcherIdStr);
+        Integer researcherId = RequestParser.parseInt(request.get("researcherId"));
         Optional<Researcher> researcherOp = researchRepo.findById(researcherId);
         Researcher researcher = researcherOp.get();
         Collection<Activity> activityCollection = researcher.getActivityCollection();

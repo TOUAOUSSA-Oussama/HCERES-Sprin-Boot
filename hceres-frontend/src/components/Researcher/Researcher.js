@@ -9,8 +9,10 @@ import {ImFilter} from "react-icons/im";
 import {Oval} from 'react-loading-icons'
 import Axios from "axios";
 import AddResearcher from "./AddResearcher";
-import {Alert} from "react-bootstrap";
+import {Alert, Dropdown} from "react-bootstrap";
 import DeleteResearcher from "./DeleteResearcher";
+import {MdOutlinePendingActions} from "react-icons/md";
+import Education from "../Activity/Education";
 
 class Researcher extends Component {
     constructor() {
@@ -20,13 +22,15 @@ class Researcher extends Component {
             loading: false,
             showAddResearcher: false,
             showDeleteResearcher: false,
-            addResearcherSuccess: "",
-            addResearcherError: "",
+            showEducation: false,
+            researcherSuccessAlert: "",
+            researcherErrorAlert: "",
             showFilter: false,
             targetResearcher: null,
         }
 
         this.onHideModalResearcher = this.onHideModalResearcher.bind(this);
+        this.onHideModalActivity = this.onHideModalActivity.bind(this);
     }
 
     onHideModalResearcher(messages) {
@@ -43,7 +47,7 @@ class Researcher extends Component {
                 // push added researcher to previous list
                 researchers: [...prevState.researchers, messages.researcherAdded],
                 // display success message
-                addResearcherSuccess: messages.successMsg,
+                researcherSuccessAlert: messages.successMsg,
             }))
         } else if (messages.researcherUpdated) {
             // update close
@@ -57,7 +61,7 @@ class Researcher extends Component {
             // 4. Set the state to our new copy
             this.setState({
                 researchers: items,
-                addResearcherSuccess: messages.successMsg,
+                researcherSuccessAlert: messages.successMsg,
             });
         } else if (messages.researcherDeleted) {
             let items = [...this.state.researchers];
@@ -65,15 +69,36 @@ class Researcher extends Component {
             items.splice(indexDeleted, 1);
             this.setState({
                 researchers: items,
-                addResearcherSuccess: messages.successMsg,
+                researcherSuccessAlert: messages.successMsg,
             });
         } else {
             this.setState(prevState => ({
                 // displate error message
-                addResearcherError: messages.errorMsg,
+                researcherErrorAlert: messages.errorMsg,
             }))
         }
     }
+
+    onHideModalActivity(messages = null) {
+        this.setState({
+            showEducation: false,
+        })
+        // silent close
+        if (!messages) return;
+
+        if (messages.successMsg) {
+            this.setState({
+                researcherSuccessAlert: messages.successMsg,
+            });
+        }
+
+        if (messages.errorMsg) {
+            this.setState({
+                researcherErrorAlert: messages.errorMsg,
+            });
+        }
+    }
+
 
     async componentDidMount() {
 
@@ -95,13 +120,13 @@ class Researcher extends Component {
                 search: true,
                 filter: this.state.showFilter ? textFilter() : null,
             }, {
-                dataField: 'researcherSurname',
-                text: 'Nom',
+                dataField: 'researcherName',
+                text: 'Prénom',
                 sort: true,
                 filter: this.state.showFilter ? textFilter() : null,
             }, {
-                dataField: 'researcherName',
-                text: 'Prénom',
+                dataField: 'researcherSurname',
+                text: 'Nom',
                 sort: true,
                 filter: this.state.showFilter ? textFilter() : null,
             }, {
@@ -116,6 +141,19 @@ class Researcher extends Component {
                 formatter: (cell, row) => {
                     return (
                         <div className="btn-group" role="group">
+                            <Dropdown drop={"left"}>
+                                <Dropdown.Toggle variant={"outline-secondary"} id="dropdown-activity">
+                                    <MdOutlinePendingActions/>
+                                </Dropdown.Toggle>
+                                <Dropdown.Menu>
+                                    <Dropdown.Item onClick={() => {
+                                        this.setState({
+                                            targetResearcher: row,
+                                            showEducation: true
+                                        })
+                                    }}>Add Education</Dropdown.Item>
+                                </Dropdown.Menu>
+                            </Dropdown>
                             <button onClick={() => {
                                 this.setState({
                                     targetResearcher: row,
@@ -182,17 +220,17 @@ class Researcher extends Component {
                             }}>
                                 <AiOutlinePlusCircle/> &nbsp; Ajouter un chercheur
                             </button>
-                            {this.state.addResearcherSuccess && (
+                            {this.state.researcherSuccessAlert && (
                                 <Alert className={"alert-success"} onClose={() => this.setState({
-                                    addResearcherSuccess: ""
+                                    researcherSuccessAlert: ""
                                 })}
-                                       dismissible={true}>{this.state.addResearcherSuccess}
+                                       dismissible={true}>{this.state.researcherSuccessAlert}
                                 </Alert>)}
-                            {this.state.addResearcherError && (
+                            {this.state.researcherErrorAlert && (
                                 <Alert className={"alert-danger"} onClose={() => this.setState({
-                                    addResearcherError: ""
+                                    researcherErrorAlert: ""
                                 })}
-                                       dismissible={true}>{this.state.addResearcherError}
+                                       dismissible={true}>{this.state.researcherErrorAlert}
                                 </Alert>)}
                         </div>
                     </div>
@@ -206,6 +244,10 @@ class Researcher extends Component {
                     {this.state.showDeleteResearcher && (
                         <DeleteResearcher targetResearcher={this.state.targetResearcher}
                                           onHideAction={this.onHideModalResearcher}/>)}
+
+                    {this.state.showEducation && (<Education targetResearcher={this.state.targetResearcher}
+                                                             onHideAction={this.onHideModalActivity}/>)}
+
                     <BootstrapTable
                         bootstrap4
                         keyField="researcherId"

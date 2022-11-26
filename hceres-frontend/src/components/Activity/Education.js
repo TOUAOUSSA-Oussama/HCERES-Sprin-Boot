@@ -7,15 +7,20 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
 
+// If targetResearcher is set in props use it as default without charging list from database
+// If listeChercheurs is set then use it in selection menu of list
+// else load list de chercheurs from database
 function Education(props) {
     const [showModal, setShowModal] = React.useState(true);
+    const targetResearcher = props.targetResearcher;
+    const listeChercheurs = props.listeChercheurs;
 
-    const handleClose = () => {
+    const handleClose = (msg = null) => {
         setShowModal(false);
-        props.onHideAction.call();
+        props.onHideAction(msg);
     };
 
-    const [researcherId, setResearcherId] = React.useState("");
+    const [researcherId, setResearcherId] = React.useState(targetResearcher ? targetResearcher.researcherId : "");
     const [educationCourseName, setEducationCourseName] = React.useState("");
     const [educationFormation, setEducationFormation] = React.useState("");
     const [educationDescription, setEducationDescription] = React.useState("");
@@ -27,13 +32,14 @@ function Education(props) {
     const [researchers, setResearchers] = React.useState([]);
 
     async function componentDidMount() {
+        if (!targetResearcher && !listeChercheurs) {
+            const url = "http://localhost:9000/Researchers";
+            const response = await axios.get(url);
 
-        const url = "http://localhost:9000/Researchers";
-        const response = await axios.get(url);
+            const listeChercheurs = response.data;
 
-        const listeChercheurs = response.data;
-
-        setResearchers(listeChercheurs)
+            setResearchers(listeChercheurs)
+        }
     }
 
     const handleSubmit = (event) => {
@@ -49,9 +55,19 @@ function Education(props) {
         };
 
         Axios.post("http://localhost:9000/AddEducation", data)
-            .then(res => {
-                window.location.reload();
-            })
+            .then(response => {
+                // const activityId = response.data.researcherId;
+                const msg = {
+                    "successMsg": "Education ajouté avec un id " + response.data.idActivity,
+                }
+                handleClose(msg);
+            }).catch(error => {
+            console.log(error);
+            const msg = {
+                "errorMsg": "Erreur Education non ajouté, response status: " + error.response.status,
+            }
+            handleClose(msg);
+        })
     }
 
     const handleDate = (event) => {
@@ -77,14 +93,16 @@ function Education(props) {
                         <label className='label'>
                             Chercheur
                         </label>
+                        {targetResearcher ?
+                            <label>{targetResearcher.researcherName} {targetResearcher.researcherSurname}</label> :
 
-                        <select onClick={componentDidMount} onChange={handleChange}>
-                            {researchers.map(item => {
-                                return (<option key={item.researcherId}
-                                                value={item.researcherId}>{item.researcherName} {item.researcherSurname}</option>);
-                            })}
-                        </select>
-
+                            <select onClick={componentDidMount} onChange={handleChange}>
+                                {researchers.map(item => {
+                                    return (<option key={item.researcherId}
+                                                    value={item.researcherId}>{item.researcherName} {item.researcherSurname}</option>);
+                                })}
+                            </select>
+                        }
                         <label className='label'>
                             Nom du cours d'éducation
                         </label>

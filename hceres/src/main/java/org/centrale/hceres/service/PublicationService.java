@@ -7,6 +7,7 @@ import org.centrale.hceres.repository.ResearchRepository;
 import org.centrale.hceres.repository.TypeActivityRepository;
 import org.centrale.hceres.repository.PublicationRepository;
 import org.centrale.hceres.repository.PublicationTypeRepository;
+import org.centrale.hceres.util.RequestParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Service;
@@ -94,12 +95,7 @@ public class PublicationService {
         activity.setIdTypeActivity(typeActivity);
 
         // Add this activity to the researcher activity list :
-        String researcherIdStr = (String)request.get("researcherId");
-        int researcherId = 1;
-        if (researcherIdStr != null){
-            researcherId = Integer.parseInt(researcherIdStr);
-        }
-
+        Integer researcherId = RequestParser.parseInt(request.get("researcherId"));
         Optional<Researcher> researcherOp = researchRepo.findById(researcherId);
         Researcher researcher = researcherOp.get();
 

@@ -4,6 +4,7 @@ import org.centrale.hceres.items.*;
 import org.centrale.hceres.repository.*;
 import org.centrale.hceres.repository.PostDocRepository;
 
+import org.centrale.hceres.util.RequestParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -80,15 +81,7 @@ public class PostDocService {
         activity.setIdTypeActivity(typeActivity);
 
         // Add activity to researchers list :
-        String researcherIdStr = (String)request.get("researcherId");
-        int researcherId = -1;
-        if(researcherIdStr!=null) {
-            try {
-                researcherId = Integer.parseInt(researcherIdStr);
-            } catch (Exception e) {
-                System.out.print("Hello Error I caught you!!");
-            }
-        }
+        Integer researcherId = RequestParser.parseInt(request.get("researcherId"));
 
         Optional<Researcher> researcherOp = researchRepo.findById(researcherId);
         Researcher researcher = researcherOp.get();

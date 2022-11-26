@@ -32,8 +32,8 @@ function AddResearcher(props) {
     const handleSubmit = (event) => {
         event.preventDefault();
         let data = {
-            "researcherSurname": AddResearcherFirstName,
-            "researcherName": AddResearcherLastName,
+            "researcherSurname": AddResearcherLastName,
+            "researcherName": AddResearcherFirstName,
             "researcherEmail": AddResearcherEmail
         };
         if (targetResearcher) {

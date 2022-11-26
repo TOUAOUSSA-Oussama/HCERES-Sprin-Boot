@@ -204,3 +204,8 @@
 select {
     text-align-last: right;
 }
+
+.dropdown-menu {
+    max-height: 50vh;
+    overflow-y: scroll;
+}

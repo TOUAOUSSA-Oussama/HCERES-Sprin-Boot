@@ -18,6 +18,7 @@ import org.centrale.hceres.repository.ActivityRepository;
 import org.centrale.hceres.repository.ResearchRepository;
 import org.centrale.hceres.repository.SeiIndustrialRDContractRepository;
 import org.centrale.hceres.repository.TypeActivityRepository;
+import org.centrale.hceres.util.RequestParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -79,9 +80,7 @@ public class SeiIndustrialRDContractService {
 		activity.setIdTypeActivity(typeActivity);
 		
 		// ajouter cette activité à la liste de ce chercheur :
-		String researcherIdStr = (String)request.get("researcherId");
-		int researcherId = -1;
-		researcherId = Integer.parseInt(researcherIdStr);
+		Integer researcherId = RequestParser.parseInt(request.get("researcherId"));
 		Optional<Researcher> researcherOp = researchRepo.findById(researcherId);
 		Researcher researcher = researcherOp.get();
 		
