@@ -92,7 +92,7 @@ public class PublicationService {
         // Activity :
         Activity activity = new Activity();
         TypeActivity typeActivity = typeActivityLevelRepo.getById(1);
-        activity.setIdTypeActivity(typeActivity);
+        activity.setTypeActivity(typeActivity);
 
         // Add this activity to the researcher activity list :
         Integer researcherId = RequestParser.parseInt(request.get("researcherId"));

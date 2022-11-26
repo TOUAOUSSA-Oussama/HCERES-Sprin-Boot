@@ -53,8 +53,8 @@ public class EducationService {
 	/**
 	 * permet de retourner la liste
 	 */
-	public Iterable<Education> getEducations(){
-		return educationRepo.findAll();
+	public List<Activity> getEducations(){
+		return activityRepo.findByIdTypeActivity(TypeActivity.IdTypeActivity.EDUCATION.getId());
 	}
 	
 	/**
@@ -112,8 +112,8 @@ public class EducationService {
 		
 		// Activity : 
 		Activity activity = new Activity();
-		TypeActivity typeActivity = typeActivityLevelRepo.getById(12);
-		activity.setIdTypeActivity(typeActivity);
+		TypeActivity typeActivity = typeActivityLevelRepo.getById(TypeActivity.IdTypeActivity.EDUCATION.getId());
+		activity.setTypeActivity(typeActivity);
 		
 		// ajouter cette activité à la liste de ce chercheur :
 		Integer researcherId = RequestParser.parseInt(request.get("researcherId"));

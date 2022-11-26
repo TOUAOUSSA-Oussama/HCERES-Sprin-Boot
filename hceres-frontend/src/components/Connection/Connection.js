@@ -1,7 +1,7 @@
 import React, {Component, useState} from "react";
 import "./Connection.css";
 import Logo from '../../assets/logo.png';
-import {FaUserAlt} from 'react-icons/fa';
+import {FaSmile, FaUserAlt} from 'react-icons/fa';
 import {FaKey} from 'react-icons/fa';
 import Button from "react-bootstrap/Button";
 import {Alert} from "react-bootstrap";
@@ -38,7 +38,13 @@ const Login = (props) => {
             .catch((error) => {
                 console.log(error)
                 resetLoginForm();
-                setErrorLogin("Combinaison invalide de login et de mot de passe");
+                if (!error.response) {
+                  setErrorLogin("Le serveur ne repond pas. Est-ce que spring boot est lancé  (^_^)  ?")
+                } else if (error.response.status === 403) {
+                    setErrorLogin("Combinaison invalide de login et de mot de passe");
+                } else {
+                    setErrorLogin("Erreur non claire, Contacter le support pour voir les logs. " + error.response.status )
+                }
             });
     };
 

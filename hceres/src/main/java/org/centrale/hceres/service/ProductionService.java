@@ -111,7 +111,7 @@ public class ProductionService {
 		// Activity :
 		Activity activity = new Activity();
 		TypeActivity typeActivity = typeActivityLevelRepo.getById(9);
-		activity.setIdTypeActivity(typeActivity);
+		activity.setTypeActivity(typeActivity);
 		
 		// ajouter cette activité à la liste de ce chercheur :
 		String researcherIdStr = (String) request.get("researcherId");

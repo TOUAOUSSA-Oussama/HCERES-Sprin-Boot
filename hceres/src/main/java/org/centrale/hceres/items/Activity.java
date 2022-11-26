@@ -1,13 +1,14 @@
 /* --------------------------------------------------------------------------------
  * Projet HCERES
- * 
+ *
  * Gestion de données pour l'HCERES
- * 
+ *
  * Ecole Centrale Nantes - laboratoire CRTI
  * Avril 2021
  * L LETERTRE, S LIMOUX, JY MARTIN
  * -------------------------------------------------------------------------------- */
 package org.centrale.hceres.items;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -15,6 +16,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -35,7 +37,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
- *
  * @author kwyhr
  */
 @Entity
@@ -56,28 +57,35 @@ public class Activity implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_activity")
     private Integer idActivity;
-    
+
+    @Column(name = "id_type_activity", insertable = false, updatable = false)
+    private Integer idTypeActivity;
+
+    @JoinColumn(name = "id_type_activity", referencedColumnName = "id_type_activity")
+    @ManyToOne(optional = false)
+    private TypeActivity typeActivity;
+
     @JoinTable(name = "activity_team", joinColumns = {
-        @JoinColumn(name = "id_activity", referencedColumnName = "id_activity")}, inverseJoinColumns = {
-        @JoinColumn(name = "team_id", referencedColumnName = "team_id")})
+            @JoinColumn(name = "id_activity", referencedColumnName = "id_activity")}, inverseJoinColumns = {
+            @JoinColumn(name = "team_id", referencedColumnName = "team_id")})
     @ManyToMany
     @JsonIgnore
     private List<Team> teamList;
-    
+
     @JoinTable(name = "activity_researcher", joinColumns = {
-        @JoinColumn(name = "id_activity", referencedColumnName = "id_activity")}, inverseJoinColumns = {
-        @JoinColumn(name = "researcher_id", referencedColumnName = "researcher_id")})
+            @JoinColumn(name = "id_activity", referencedColumnName = "id_activity")}, inverseJoinColumns = {
+            @JoinColumn(name = "researcher_id", referencedColumnName = "researcher_id")})
     @ManyToMany
     @JsonManagedReference
     private List<Researcher> researcherList;
-    
+
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "activity")
     @JsonIgnore
     private IncomingMobility incomingMobility;
-    
+
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "activity")
     private Education education;
-    
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idActivity")
     @JsonIgnore
     private List<MailActivity> mailActivityList;
@@ -119,10 +127,7 @@ public class Activity implements Serializable {
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "activity")
     @JsonIgnore
     private Patent patent;
-    @JoinColumn(name = "id_type_activity", referencedColumnName = "id_type_activity")
-    @ManyToOne(optional = false)
-    @JsonIgnore
-    private TypeActivity idTypeActivity;
+
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "activity")
     @JsonIgnore
     private Book book;

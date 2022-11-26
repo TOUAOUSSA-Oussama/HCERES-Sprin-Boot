@@ -85,7 +85,7 @@ public class SrAwardService {
 	    // Activity : 
 		Activity activity = new Activity();
 		TypeActivity typeActivity = typeActivityLevelRepo.getById(29);
-		activity.setIdTypeActivity(typeActivity);
+		activity.setTypeActivity(typeActivity);
 		
 		// ajouter cette activité à la liste de ce chercheur :
 		Integer researcherId = RequestParser.parseInt(request.get("researcherId"));

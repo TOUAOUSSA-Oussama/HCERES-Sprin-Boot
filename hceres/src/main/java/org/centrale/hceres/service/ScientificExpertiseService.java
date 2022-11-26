@@ -102,7 +102,7 @@ public class ScientificExpertiseService {
 		// Activity : 
 		Activity activity = new Activity();
 		TypeActivity typeActivity = typeActivityLevelRepo.getById(16);
-		activity.setIdTypeActivity(typeActivity);
+		activity.setTypeActivity(typeActivity);
 		//Activity savedActivity = activityRepo.save(activity);
 		//ScientificExpertiseTosave.setActivity(savedActivity);
 		

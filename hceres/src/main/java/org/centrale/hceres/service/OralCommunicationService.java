@@ -82,7 +82,7 @@ public class OralCommunicationService {
 		// Activity : 
 		Activity activity = new Activity();
 		TypeActivity typeActivity = typeActivityLevelRepo.getById(32);
-		activity.setIdTypeActivity(typeActivity);
+		activity.setTypeActivity(typeActivity);
 		
 		// Meeting
 		Meeting meeting = new Meeting();

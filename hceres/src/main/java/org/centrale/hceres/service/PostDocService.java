@@ -78,7 +78,7 @@ public class PostDocService {
         // Activity :
         Activity activity = new Activity();
         TypeActivity typeActivity = typeActivityLevelRepo.getById(21);
-        activity.setIdTypeActivity(typeActivity);
+        activity.setTypeActivity(typeActivity);
 
         // Add activity to researchers list :
         Integer researcherId = RequestParser.parseInt(request.get("researcherId"));

@@ -56,8 +56,18 @@ public class TypeActivity implements Serializable {
     @Column(name = "name_type")
     private String nameType;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTypeActivity")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "typeActivity")
     @JsonIgnore
     private List<Activity> activityList;
 
+    @Getter
+    public enum IdTypeActivity{
+        EDUCATION(12);
+
+
+        int id;
+        IdTypeActivity(int id) {
+            this.id = id;
+        }
+    }
 }

@@ -1,11 +1,14 @@
 package org.centrale.hceres.controller;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.centrale.hceres.items.Activity;
 import org.centrale.hceres.items.Education;
+import org.centrale.hceres.items.Researcher;
 import org.centrale.hceres.service.EducationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -22,11 +25,18 @@ public class EducationController {
 	 */
 	@Autowired
 	private EducationService eduService;
-	
-	
+
+
+	/**
+	 * return a list of activities of education type only
+	 */
+	@GetMapping(value ="/Educations")
+	public List<Activity> getEducations() {
+		return eduService.getEducations();
+	}
+
 	/**
 	 * ajouter un elmt a la base de donnees
-	 * @param education : l'elmt a ajouter
 	 * @return l'elmt ajoute
 	 */
 	@PostMapping(value ="/AddEducation")

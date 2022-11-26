@@ -14,7 +14,9 @@ const AuthWrapper = () => {
             console.log(error);
             let errorMsg = '';
             isAuthorised = true;
-            if (error.response.status === 401) {
+            if (!error.response) {
+                errorMsg = "Le serveur ne repond pas. Est-ce que spring boot est lancé (^_^)  ?";
+            } else if (error.response.status === 401) {
                 // Unauthorized action
                 errorMsg = 'Session expirée, veuillez vous reconnecter';
                 authToken('');
