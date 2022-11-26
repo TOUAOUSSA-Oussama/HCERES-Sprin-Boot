@@ -8,6 +8,10 @@
  * L LETERTRE, S LIMOUX, JY MARTIN
  * -------------------------------------------------------------------------------- */
 package org.centrale.hceres.items;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.List;
@@ -35,6 +39,10 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "PhdType.findAll", query = "SELECT p FROM PhdType p"),
     @NamedQuery(name = "PhdType.findByPhdTypeId", query = "SELECT p FROM PhdType p WHERE p.phdTypeId = :phdTypeId"),
     @NamedQuery(name = "PhdType.findByPhdTypeName", query = "SELECT p FROM PhdType p WHERE p.phdTypeName = :phdTypeName")})
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class PhdType implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -51,114 +59,4 @@ public class PhdType implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "phdTypeId")
     private List<PhdStudent> phdStudentList;
 
-    /**
-     *
-     */
-    public PhdType() {
-    }
-
-    /**
-     *
-     * @param phdTypeId
-     */
-    public PhdType(Integer phdTypeId) {
-        this.phdTypeId = phdTypeId;
-    }
-
-    /**
-     *
-     * @param phdTypeId
-     * @param phdTypeName
-     */
-    public PhdType(Integer phdTypeId, String phdTypeName) {
-        this.phdTypeId = phdTypeId;
-        this.phdTypeName = phdTypeName;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Integer getPhdTypeId() {
-        return phdTypeId;
-    }
-
-    /**
-     *
-     * @param phdTypeId
-     */
-    public void setPhdTypeId(Integer phdTypeId) {
-        this.phdTypeId = phdTypeId;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getPhdTypeName() {
-        return phdTypeName;
-    }
-
-    /**
-     *
-     * @param phdTypeName
-     */
-    public void setPhdTypeName(String phdTypeName) {
-        this.phdTypeName = phdTypeName;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public List<PhdStudent> getPhdStudentList() {
-        return phdStudentList;
-    }
-
-    /**
-     *
-     * @param phdStudentList
-     */
-    public void setPhdStudentList(List<PhdStudent> phdStudentList) {
-        this.phdStudentList = phdStudentList;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (phdTypeId != null ? phdTypeId.hashCode() : 0);
-        return hash;
-    }
-
-    /**
-     *
-     * @param object
-     * @return
-     */
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof PhdType)) {
-            return false;
-        }
-        PhdType other = (PhdType) object;
-        if ((this.phdTypeId == null && other.phdTypeId != null) || (this.phdTypeId != null && !this.phdTypeId.equals(other.phdTypeId))) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public String toString() {
-        return "org.centrale.hceres.items.PhdType[ phdTypeId=" + phdTypeId + " ]";
-    }
-    
 }

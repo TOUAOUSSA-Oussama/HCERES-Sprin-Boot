@@ -8,6 +8,10 @@
  * L LETERTRE, S LIMOUX, JY MARTIN
  * -------------------------------------------------------------------------------- */
 package org.centrale.hceres.items;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -27,6 +31,10 @@ import javax.validation.constraints.NotNull;
     @NamedQuery(name = "ReviewingJournalArticles.findByYear", query = "SELECT r FROM ReviewingJournalArticles r WHERE r.year = :year"),
     @NamedQuery(name = "ReviewingJournalArticles.findByNbReviewedArticles", query = "SELECT r FROM ReviewingJournalArticles r WHERE r.nbReviewedArticles = :nbReviewedArticles"),
     @NamedQuery(name = "ReviewingJournalArticles.findByImpactFactor", query = "SELECT r FROM ReviewingJournalArticles r WHERE r.impactFactor = :impactFactor")})*/
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class ReviewingJournalArticles implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -48,152 +56,4 @@ public class ReviewingJournalArticles implements Serializable {
     @ManyToOne(optional = false, cascade = CascadeType.ALL)
     private Journal journalId;
 
-    /**
-     *
-     */
-    public ReviewingJournalArticles() {
-    }
-
-    /**
-     *
-     * @param idActivity
-     */
-    public ReviewingJournalArticles(Integer idActivity) {
-        this.idActivity = idActivity;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Integer getIdActivity() {
-        return idActivity;
-    }
-
-    /**
-     *
-     * @param idActivity
-     */
-    public void setIdActivity(Integer idActivity) {
-        this.idActivity = idActivity;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Integer getYear() {
-        return year;
-    }
-
-    /**
-     *
-     * @param year
-     */
-    public void setYear(Integer year) {
-        this.year = year;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Integer getNbReviewedArticles() {
-        return nbReviewedArticles;
-    }
-
-    /**
-     *
-     * @param nbReviewedArticles
-     */
-    public void setNbReviewedArticles(Integer nbReviewedArticles) {
-        this.nbReviewedArticles = nbReviewedArticles;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public BigDecimal getImpactFactor() {
-        return impactFactor;
-    }
-
-    /**
-     *
-     * @param impactFactor
-     */
-    public void setImpactFactor(BigDecimal impactFactor) {
-        this.impactFactor = impactFactor;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Activity getActivity() {
-        return activity;
-    }
-
-    /**
-     *
-     * @param activity
-     */
-    public void setActivity(Activity activity) {
-        this.activity = activity;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Journal getJournalId() {
-        return journalId;
-    }
-
-    /**
-     *
-     * @param journalId
-     */
-    public void setJournalId(Journal journalId) {
-        this.journalId = journalId;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idActivity != null ? idActivity.hashCode() : 0);
-        return hash;
-    }
-
-    /**
-     *
-     * @param object
-     * @return
-     */
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof ReviewingJournalArticles)) {
-            return false;
-        }
-        ReviewingJournalArticles other = (ReviewingJournalArticles) object;
-        if ((this.idActivity == null && other.idActivity != null) || (this.idActivity != null && !this.idActivity.equals(other.idActivity))) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public String toString() {
-        return "org.centrale.hceres.items.ReviewingJournalArticles[ idActivity=" + idActivity + " ]";
-    }
-    
 }

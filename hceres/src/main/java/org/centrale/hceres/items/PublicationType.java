@@ -8,6 +8,10 @@
  * L LETERTRE, S LIMOUX, JY MARTIN
  * -------------------------------------------------------------------------------- */
 package org.centrale.hceres.items;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -36,6 +40,10 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "PublicationType.findAll", query = "SELECT p FROM PublicationType p"),
     @NamedQuery(name = "PublicationType.findByPublicationTypeId", query = "SELECT p FROM PublicationType p WHERE p.publicationTypeId = :publicationTypeId"),
     @NamedQuery(name = "PublicationType.findByPublicationTypeName", query = "SELECT p FROM PublicationType p WHERE p.publicationTypeName = :publicationTypeName")})
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class PublicationType implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -51,104 +59,4 @@ public class PublicationType implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "publicationTypeId")
     private List<Publication> publicationList;
 
-    /**
-     *
-     */
-    public PublicationType() {
-    }
-
-    /**
-     *
-     * @param publicationTypeId
-     */
-    public PublicationType(Integer publicationTypeId) {
-        this.publicationTypeId = publicationTypeId;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Integer getPublicationTypeId() {
-        return publicationTypeId;
-    }
-
-    /**
-     *
-     * @param publicationTypeId
-     */
-    public void setPublicationTypeId(Integer publicationTypeId) {
-        this.publicationTypeId = publicationTypeId;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getPublicationTypeName() {
-        return publicationTypeName;
-    }
-
-    /**
-     *
-     * @param publicationTypeName
-     */
-    public void setPublicationTypeName(String publicationTypeName) {
-        this.publicationTypeName = publicationTypeName;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public List<Publication> getPublicationList() {
-        return publicationList;
-    }
-
-    /**
-     *
-     * @param publicationList
-     */
-    public void setPublicationList(List<Publication> publicationList) {
-        this.publicationList = publicationList;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (publicationTypeId != null ? publicationTypeId.hashCode() : 0);
-        return hash;
-    }
-
-    /**
-     *
-     * @param object
-     * @return
-     */
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof PublicationType)) {
-            return false;
-        }
-        PublicationType other = (PublicationType) object;
-        if ((this.publicationTypeId == null && other.publicationTypeId != null) || (this.publicationTypeId != null && !this.publicationTypeId.equals(other.publicationTypeId))) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public String toString() {
-        return "org.centrale.hceres.items.PublicationType[ publicationTypeId=" + publicationTypeId + " ]";
-    }
-    
 }

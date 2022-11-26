@@ -8,6 +8,10 @@
  * L LETERTRE, S LIMOUX, JY MARTIN
  * -------------------------------------------------------------------------------- */
 package org.centrale.hceres.items;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.List;
@@ -34,6 +38,10 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "TypeActivity.findAll", query = "SELECT t FROM TypeActivity t"),
     @NamedQuery(name = "TypeActivity.findByIdTypeActivity", query = "SELECT t FROM TypeActivity t WHERE t.idTypeActivity = :idTypeActivity"),
     @NamedQuery(name = "TypeActivity.findByNameType", query = "SELECT t FROM TypeActivity t WHERE t.nameType = :nameType")})
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class TypeActivity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -50,104 +58,4 @@ public class TypeActivity implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTypeActivity")
     private List<Activity> activityList;
 
-    /**
-     *
-     */
-    public TypeActivity() {
-    }
-
-    /**
-     *
-     * @param idTypeActivity
-     */
-    public TypeActivity(Integer idTypeActivity) {
-        this.idTypeActivity = idTypeActivity;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Integer getIdTypeActivity() {
-        return idTypeActivity;
-    }
-
-    /**
-     *
-     * @param idTypeActivity
-     */
-    public void setIdTypeActivity(Integer idTypeActivity) {
-        this.idTypeActivity = idTypeActivity;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getNameType() {
-        return nameType;
-    }
-
-    /**
-     *
-     * @param nameType
-     */
-    public void setNameType(String nameType) {
-        this.nameType = nameType;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public List<Activity> getActivityList() {
-        return activityList;
-    }
-
-    /**
-     *
-     * @param activityList
-     */
-    public void setActivityList(List<Activity> activityList) {
-        this.activityList = activityList;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idTypeActivity != null ? idTypeActivity.hashCode() : 0);
-        return hash;
-    }
-
-    /**
-     *
-     * @param object
-     * @return
-     */
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof TypeActivity)) {
-            return false;
-        }
-        TypeActivity other = (TypeActivity) object;
-        if ((this.idTypeActivity == null && other.idTypeActivity != null) || (this.idTypeActivity != null && !this.idTypeActivity.equals(other.idTypeActivity))) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public String toString() {
-        return "org.centrale.hceres.items.TypeActivity[ idTypeActivity=" + idTypeActivity + " ]";
-    }
-    
 }

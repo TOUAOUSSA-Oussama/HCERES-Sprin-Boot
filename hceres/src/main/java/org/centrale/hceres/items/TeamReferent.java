@@ -8,6 +8,10 @@
  * L LETERTRE, S LIMOUX, JY MARTIN
  * -------------------------------------------------------------------------------- */
 package org.centrale.hceres.items;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -36,6 +40,10 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "TeamReferent.findByTeamReferentId", query = "SELECT t FROM TeamReferent t WHERE t.teamReferentId = :teamReferentId"),
     @NamedQuery(name = "TeamReferent.findByTeamReferentStart", query = "SELECT t FROM TeamReferent t WHERE t.teamReferentStart = :teamReferentStart"),
     @NamedQuery(name = "TeamReferent.findByTeamReferentEnd", query = "SELECT t FROM TeamReferent t WHERE t.teamReferentEnd = :teamReferentEnd")})
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class TeamReferent implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -57,136 +65,4 @@ public class TeamReferent implements Serializable {
     @ManyToOne(optional = false)
     private Team teamId;
 
-    /**
-     *
-     */
-    public TeamReferent() {
-    }
-
-    /**
-     *
-     * @param teamReferentId
-     */
-    public TeamReferent(Integer teamReferentId) {
-        this.teamReferentId = teamReferentId;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Integer getTeamReferentId() {
-        return teamReferentId;
-    }
-
-    /**
-     *
-     * @param teamReferentId
-     */
-    public void setTeamReferentId(Integer teamReferentId) {
-        this.teamReferentId = teamReferentId;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Date getTeamReferentStart() {
-        return teamReferentStart;
-    }
-
-    /**
-     *
-     * @param teamReferentStart
-     */
-    public void setTeamReferentStart(Date teamReferentStart) {
-        this.teamReferentStart = teamReferentStart;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Date getTeamReferentEnd() {
-        return teamReferentEnd;
-    }
-
-    /**
-     *
-     * @param teamReferentEnd
-     */
-    public void setTeamReferentEnd(Date teamReferentEnd) {
-        this.teamReferentEnd = teamReferentEnd;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Researcher getResearcherId() {
-        return researcherId;
-    }
-
-    /**
-     *
-     * @param researcherId
-     */
-    public void setResearcherId(Researcher researcherId) {
-        this.researcherId = researcherId;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Team getTeamId() {
-        return teamId;
-    }
-
-    /**
-     *
-     * @param teamId
-     */
-    public void setTeamId(Team teamId) {
-        this.teamId = teamId;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (teamReferentId != null ? teamReferentId.hashCode() : 0);
-        return hash;
-    }
-
-    /**
-     *
-     * @param object
-     * @return
-     */
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof TeamReferent)) {
-            return false;
-        }
-        TeamReferent other = (TeamReferent) object;
-        if ((this.teamReferentId == null && other.teamReferentId != null) || (this.teamReferentId != null && !this.teamReferentId.equals(other.teamReferentId))) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public String toString() {
-        return "org.centrale.hceres.items.TeamReferent[ teamReferentId=" + teamReferentId + " ]";
-    }
-    
 }

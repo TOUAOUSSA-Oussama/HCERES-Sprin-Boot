@@ -8,6 +8,10 @@
  * L LETERTRE, S LIMOUX, JY MARTIN
  * -------------------------------------------------------------------------------- */
 package org.centrale.hceres.items;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.List;
@@ -42,6 +46,10 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Meeting.findByMeetingLocation", query = "SELECT m FROM Meeting m WHERE m.meetingLocation = :meetingLocation"),
     @NamedQuery(name = "Meeting.findByMeetingStart", query = "SELECT m FROM Meeting m WHERE m.meetingStart = :meetingStart"),
     @NamedQuery(name = "Meeting.findByMeetingEnd", query = "SELECT m FROM Meeting m WHERE m.meetingEnd = :meetingEnd")})
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Meeting implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -82,198 +90,4 @@ public class Meeting implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "meetingId")
     private List<OralCommunication> oralCommunicationList;
 
-    /**
-     *
-     */
-    public Meeting() {
-    }
-
-    /**
-     *
-     * @param meetingId
-     */
-    public Meeting(Integer meetingId) {
-        this.meetingId = meetingId;
-    }
-
-    /**
-     *
-     * @param meetingId
-     * @param neetingName
-     * @param meetingYear
-     * @param meetingLocation
-     */
-    public Meeting(Integer meetingId, String neetingName, int meetingYear, String meetingLocation) {
-        this.meetingId = meetingId;
-        this.neetingName = neetingName;
-        this.meetingYear = meetingYear;
-        this.meetingLocation = meetingLocation;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Integer getMeetingId() {
-        return meetingId;
-    }
-
-    /**
-     *
-     * @param meetingId
-     */
-    public void setMeetingId(Integer meetingId) {
-        this.meetingId = meetingId;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getNeetingName() {
-        return neetingName;
-    }
-
-    /**
-     *
-     * @param neetingName
-     */
-    public void setNeetingName(String neetingName) {
-        this.neetingName = neetingName;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public int getMeetingYear() {
-        return meetingYear;
-    }
-
-    /**
-     *
-     * @param meetingYear
-     */
-    public void setMeetingYear(int meetingYear) {
-        this.meetingYear = meetingYear;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getMeetingLocation() {
-        return meetingLocation;
-    }
-
-    /**
-     *
-     * @param meetingLocation
-     */
-    public void setMeetingLocation(String meetingLocation) {
-        this.meetingLocation = meetingLocation;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Date getMeetingStart() {
-        return meetingStart;
-    }
-
-    /**
-     *
-     * @param meetingStart
-     */
-    public void setMeetingStart(Date meetingStart) {
-        this.meetingStart = meetingStart;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Date getMeetingEnd() {
-        return meetingEnd;
-    }
-
-    /**
-     *
-     * @param meetingEnd
-     */
-    public void setMeetingEnd(Date meetingEnd) {
-        this.meetingEnd = meetingEnd;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public List<MeetingCongressOrg> getMeetingCongressOrgList() {
-        return meetingCongressOrgList;
-    }
-
-    /**
-     *
-     * @param meetingCongressOrgList
-     */
-    public void setMeetingCongressOrgList(List<MeetingCongressOrg> meetingCongressOrgList) {
-        this.meetingCongressOrgList = meetingCongressOrgList;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public List<OralCommunication> getOralCommunicationList() {
-        return oralCommunicationList;
-    }
-
-    /**
-     *
-     * @param oralCommunicationList
-     */
-    public void setOralCommunicationList(List<OralCommunication> oralCommunicationList) {
-        this.oralCommunicationList = oralCommunicationList;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (meetingId != null ? meetingId.hashCode() : 0);
-        return hash;
-    }
-
-    /**
-     *
-     * @param object
-     * @return
-     */
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Meeting)) {
-            return false;
-        }
-        Meeting other = (Meeting) object;
-        if ((this.meetingId == null && other.meetingId != null) || (this.meetingId != null && !this.meetingId.equals(other.meetingId))) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public String toString() {
-        return "org.centrale.hceres.items.Meeting[ meetingId=" + meetingId + " ]";
-    }
-    
 }

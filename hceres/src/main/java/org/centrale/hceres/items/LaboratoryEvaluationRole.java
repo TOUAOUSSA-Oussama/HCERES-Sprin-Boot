@@ -8,6 +8,10 @@
  * L LETERTRE, S LIMOUX, JY MARTIN
  * -------------------------------------------------------------------------------- */
 package org.centrale.hceres.items;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.List;
@@ -34,6 +38,10 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "LaboratoryEvaluationRole.findAll", query = "SELECT l FROM LaboratoryEvaluationRole l"),
     @NamedQuery(name = "LaboratoryEvaluationRole.findByLaboratoryEvaluationRoleId", query = "SELECT l FROM LaboratoryEvaluationRole l WHERE l.laboratoryEvaluationRoleId = :laboratoryEvaluationRoleId"),
     @NamedQuery(name = "LaboratoryEvaluationRole.findByNameChoice", query = "SELECT l FROM LaboratoryEvaluationRole l WHERE l.nameChoice = :nameChoice")})
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class LaboratoryEvaluationRole implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -50,120 +58,4 @@ public class LaboratoryEvaluationRole implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "laboratoryEvaluationRoleId")
     private List<LaboratoryEvaluation> laboratoryEvaluationList;
 
-    /**
-     *
-     */
-    public LaboratoryEvaluationRole() {
-    }
-
-    /**
-     *
-     * @param laboratoryEvaluationRoleId
-     */
-    public LaboratoryEvaluationRole(Integer laboratoryEvaluationRoleId) {
-        this.laboratoryEvaluationRoleId = laboratoryEvaluationRoleId;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Integer getLaboratoryEvaluationRoleId() {
-        return laboratoryEvaluationRoleId;
-    }
-
-    /**
-     *
-     * @param laboratoryEvaluationRoleId
-     */
-    public void setLaboratoryEvaluationRoleId(Integer laboratoryEvaluationRoleId) {
-        this.laboratoryEvaluationRoleId = laboratoryEvaluationRoleId;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getNameChoice() {
-        return nameChoice;
-    }
-
-    /**
-     *
-     * @param nameChoice
-     */
-    public void setNameChoice(String nameChoice) {
-        this.nameChoice = nameChoice;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public List<InstitutionalComitee> getInstitutionalComiteeList() {
-        return institutionalComiteeList;
-    }
-
-    /**
-     *
-     * @param institutionalComiteeList
-     */
-    public void setInstitutionalComiteeList(List<InstitutionalComitee> institutionalComiteeList) {
-        this.institutionalComiteeList = institutionalComiteeList;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public List<LaboratoryEvaluation> getLaboratoryEvaluationList() {
-        return laboratoryEvaluationList;
-    }
-
-    /**
-     *
-     * @param laboratoryEvaluationList
-     */
-    public void setLaboratoryEvaluationList(List<LaboratoryEvaluation> laboratoryEvaluationList) {
-        this.laboratoryEvaluationList = laboratoryEvaluationList;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (laboratoryEvaluationRoleId != null ? laboratoryEvaluationRoleId.hashCode() : 0);
-        return hash;
-    }
-
-    /**
-     *
-     * @param object
-     * @return
-     */
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof LaboratoryEvaluationRole)) {
-            return false;
-        }
-        LaboratoryEvaluationRole other = (LaboratoryEvaluationRole) object;
-        if ((this.laboratoryEvaluationRoleId == null && other.laboratoryEvaluationRoleId != null) || (this.laboratoryEvaluationRoleId != null && !this.laboratoryEvaluationRoleId.equals(other.laboratoryEvaluationRoleId))) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public String toString() {
-        return "org.centrale.hceres.items.LaboratoryEvaluationRole[ laboratoryEvaluationRoleId=" + laboratoryEvaluationRoleId + " ]";
-    }
-    
 }

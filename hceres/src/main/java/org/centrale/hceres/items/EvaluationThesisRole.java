@@ -8,6 +8,10 @@
  * L LETERTRE, S LIMOUX, JY MARTIN
  * -------------------------------------------------------------------------------- */
 package org.centrale.hceres.items;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.List;
@@ -34,6 +38,10 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "EvaluationThesisRole.findAll", query = "SELECT e FROM EvaluationThesisRole e"),
     @NamedQuery(name = "EvaluationThesisRole.findByEvaluationThesisRoleId", query = "SELECT e FROM EvaluationThesisRole e WHERE e.evaluationThesisRoleId = :evaluationThesisRoleId"),
     @NamedQuery(name = "EvaluationThesisRole.findByEvaluationThesisRoleName", query = "SELECT e FROM EvaluationThesisRole e WHERE e.evaluationThesisRoleName = :evaluationThesisRoleName")})
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class EvaluationThesisRole implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -48,104 +56,4 @@ public class EvaluationThesisRole implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "evaluationThesisRoleId")
     private List<EvaluationThesis> evaluationThesisList;
 
-    /**
-     *
-     */
-    public EvaluationThesisRole() {
-    }
-
-    /**
-     *
-     * @param evaluationThesisRoleId
-     */
-    public EvaluationThesisRole(Integer evaluationThesisRoleId) {
-        this.evaluationThesisRoleId = evaluationThesisRoleId;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Integer getEvaluationThesisRoleId() {
-        return evaluationThesisRoleId;
-    }
-
-    /**
-     *
-     * @param evaluationThesisRoleId
-     */
-    public void setEvaluationThesisRoleId(Integer evaluationThesisRoleId) {
-        this.evaluationThesisRoleId = evaluationThesisRoleId;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getEvaluationThesisRoleName() {
-        return evaluationThesisRoleName;
-    }
-
-    /**
-     *
-     * @param evaluationThesisRoleName
-     */
-    public void setEvaluationThesisRoleName(String evaluationThesisRoleName) {
-        this.evaluationThesisRoleName = evaluationThesisRoleName;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public List<EvaluationThesis> getEvaluationThesisList() {
-        return evaluationThesisList;
-    }
-
-    /**
-     *
-     * @param evaluationThesisList
-     */
-    public void setEvaluationThesisList(List<EvaluationThesis> evaluationThesisList) {
-        this.evaluationThesisList = evaluationThesisList;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (evaluationThesisRoleId != null ? evaluationThesisRoleId.hashCode() : 0);
-        return hash;
-    }
-
-    /**
-     *
-     * @param object
-     * @return
-     */
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof EvaluationThesisRole)) {
-            return false;
-        }
-        EvaluationThesisRole other = (EvaluationThesisRole) object;
-        if ((this.evaluationThesisRoleId == null && other.evaluationThesisRoleId != null) || (this.evaluationThesisRoleId != null && !this.evaluationThesisRoleId.equals(other.evaluationThesisRoleId))) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public String toString() {
-        return "org.centrale.hceres.items.EvaluationThesisRole[ evaluationThesisRoleId=" + evaluationThesisRoleId + " ]";
-    }
-    
 }

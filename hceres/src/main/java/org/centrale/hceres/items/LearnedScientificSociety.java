@@ -8,6 +8,10 @@
  * L LETERTRE, S LIMOUX, JY MARTIN
  * -------------------------------------------------------------------------------- */
 package org.centrale.hceres.items;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -38,6 +42,10 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "LearnedScientificSociety.findByLearnedScientificSocietyName", query = "SELECT l FROM LearnedScientificSociety l WHERE l.learnedScientificSocietyName = :learnedScientificSocietyName"),
     @NamedQuery(name = "LearnedScientificSociety.findByStartDate", query = "SELECT l FROM LearnedScientificSociety l WHERE l.startDate = :startDate"),
     @NamedQuery(name = "LearnedScientificSociety.findByEndDate", query = "SELECT l FROM LearnedScientificSociety l WHERE l.endDate = :endDate")})
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class LearnedScientificSociety implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -62,152 +70,4 @@ public class LearnedScientificSociety implements Serializable {
     @ManyToOne(optional = false)
     private LearnedScientificSocietyRole learnedScientificSocietyRoleId;
 
-    /**
-     *
-     */
-    public LearnedScientificSociety() {
-    }
-
-    /**
-     *
-     * @param idActivity
-     */
-    public LearnedScientificSociety(Integer idActivity) {
-        this.idActivity = idActivity;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Integer getIdActivity() {
-        return idActivity;
-    }
-
-    /**
-     *
-     * @param idActivity
-     */
-    public void setIdActivity(Integer idActivity) {
-        this.idActivity = idActivity;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getLearnedScientificSocietyName() {
-        return learnedScientificSocietyName;
-    }
-
-    /**
-     *
-     * @param learnedScientificSocietyName
-     */
-    public void setLearnedScientificSocietyName(String learnedScientificSocietyName) {
-        this.learnedScientificSocietyName = learnedScientificSocietyName;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    /**
-     *
-     * @param startDate
-     */
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Date getEndDate() {
-        return endDate;
-    }
-
-    /**
-     *
-     * @param endDate
-     */
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Activity getActivity() {
-        return activity;
-    }
-
-    /**
-     *
-     * @param activity
-     */
-    public void setActivity(Activity activity) {
-        this.activity = activity;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public LearnedScientificSocietyRole getLearnedScientificSocietyRoleId() {
-        return learnedScientificSocietyRoleId;
-    }
-
-    /**
-     *
-     * @param learnedScientificSocietyRoleId
-     */
-    public void setLearnedScientificSocietyRoleId(LearnedScientificSocietyRole learnedScientificSocietyRoleId) {
-        this.learnedScientificSocietyRoleId = learnedScientificSocietyRoleId;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idActivity != null ? idActivity.hashCode() : 0);
-        return hash;
-    }
-
-    /**
-     *
-     * @param object
-     * @return
-     */
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof LearnedScientificSociety)) {
-            return false;
-        }
-        LearnedScientificSociety other = (LearnedScientificSociety) object;
-        if ((this.idActivity == null && other.idActivity != null) || (this.idActivity != null && !this.idActivity.equals(other.idActivity))) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public String toString() {
-        return "org.centrale.hceres.items.LearnedScientificSociety[ idActivity=" + idActivity + " ]";
-    }
-    
 }

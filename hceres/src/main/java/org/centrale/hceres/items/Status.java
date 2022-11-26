@@ -8,6 +8,10 @@
  * L LETERTRE, S LIMOUX, JY MARTIN
  * -------------------------------------------------------------------------------- */
 package org.centrale.hceres.items;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.List;
@@ -35,6 +39,10 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Status.findAll", query = "SELECT s FROM Status s"),
     @NamedQuery(name = "Status.findByIdStatus", query = "SELECT s FROM Status s WHERE s.idStatus = :idStatus"),
     @NamedQuery(name = "Status.findByNameStatus", query = "SELECT s FROM Status s WHERE s.nameStatus = :nameStatus")})
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Status implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -51,114 +59,4 @@ public class Status implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idStatus")
     private List<Contract> contractList;
 
-    /**
-     *
-     */
-    public Status() {
-    }
-
-    /**
-     *
-     * @param idStatus
-     */
-    public Status(Integer idStatus) {
-        this.idStatus = idStatus;
-    }
-
-    /**
-     *
-     * @param idStatus
-     * @param nameStatus
-     */
-    public Status(Integer idStatus, String nameStatus) {
-        this.idStatus = idStatus;
-        this.nameStatus = nameStatus;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Integer getIdStatus() {
-        return idStatus;
-    }
-
-    /**
-     *
-     * @param idStatus
-     */
-    public void setIdStatus(Integer idStatus) {
-        this.idStatus = idStatus;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getNameStatus() {
-        return nameStatus;
-    }
-
-    /**
-     *
-     * @param nameStatus
-     */
-    public void setNameStatus(String nameStatus) {
-        this.nameStatus = nameStatus;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public List<Contract> getContractList() {
-        return contractList;
-    }
-
-    /**
-     *
-     * @param contractList
-     */
-    public void setContractList(List<Contract> contractList) {
-        this.contractList = contractList;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idStatus != null ? idStatus.hashCode() : 0);
-        return hash;
-    }
-
-    /**
-     *
-     * @param object
-     * @return
-     */
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Status)) {
-            return false;
-        }
-        Status other = (Status) object;
-        if ((this.idStatus == null && other.idStatus != null) || (this.idStatus != null && !this.idStatus.equals(other.idStatus))) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public String toString() {
-        return "org.centrale.hceres.items.Status[ idStatus=" + idStatus + " ]";
-    }
-    
 }

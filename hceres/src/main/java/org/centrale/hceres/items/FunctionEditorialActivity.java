@@ -8,6 +8,10 @@
  * L LETERTRE, S LIMOUX, JY MARTIN
  * -------------------------------------------------------------------------------- */
 package org.centrale.hceres.items;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.List;
@@ -36,6 +40,10 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "FunctionEditorialActivity.findByFunctionEditorialActivityId", query = "SELECT f FROM FunctionEditorialActivity f WHERE f.functionEditorialActivityId = :functionEditorialActivityId"),
     @NamedQuery(name = "FunctionEditorialActivity.findByFunctionEditorialActivityName", query = "SELECT f FROM FunctionEditorialActivity f WHERE f.functionEditorialActivityName = :functionEditorialActivityName")})
 */
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class FunctionEditorialActivity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -50,104 +58,4 @@ public class FunctionEditorialActivity implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "functionEditorialActivityId")
     private List<EditorialActivity> editorialActivityList;
 
-    /**
-     *
-     */
-    public FunctionEditorialActivity() {
-    }
-
-    /**
-     *
-     * @param functionEditorialActivityId
-     */
-    public FunctionEditorialActivity(Integer functionEditorialActivityId) {
-        this.functionEditorialActivityId = functionEditorialActivityId;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Integer getFunctionEditorialActivityId() {
-        return functionEditorialActivityId;
-    }
-
-    /**
-     *
-     * @param functionEditorialActivityId
-     */
-    public void setFunctionEditorialActivityId(Integer functionEditorialActivityId) {
-        this.functionEditorialActivityId = functionEditorialActivityId;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getFunctionEditorialActivityName() {
-        return functionEditorialActivityName;
-    }
-
-    /**
-     *
-     * @param functionEditorialActivityName
-     */
-    public void setFunctionEditorialActivityName(String functionEditorialActivityName) {
-        this.functionEditorialActivityName = functionEditorialActivityName;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public List<EditorialActivity> getEditorialActivityList() {
-        return editorialActivityList;
-    }
-
-    /**
-     *
-     * @param editorialActivityList
-     */
-    public void setEditorialActivityList(List<EditorialActivity> editorialActivityList) {
-        this.editorialActivityList = editorialActivityList;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (functionEditorialActivityId != null ? functionEditorialActivityId.hashCode() : 0);
-        return hash;
-    }
-
-    /**
-     *
-     * @param object
-     * @return
-     */
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof FunctionEditorialActivity)) {
-            return false;
-        }
-        FunctionEditorialActivity other = (FunctionEditorialActivity) object;
-        if ((this.functionEditorialActivityId == null && other.functionEditorialActivityId != null) || (this.functionEditorialActivityId != null && !this.functionEditorialActivityId.equals(other.functionEditorialActivityId))) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public String toString() {
-        return "org.centrale.hceres.items.FunctionEditorialActivity[ functionEditorialActivityId=" + functionEditorialActivityId + " ]";
-    }
-    
 }

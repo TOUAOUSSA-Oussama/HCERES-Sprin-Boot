@@ -8,6 +8,10 @@
  * L LETERTRE, S LIMOUX, JY MARTIN
  * -------------------------------------------------------------------------------- */
 package org.centrale.hceres.items;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.List;
@@ -35,6 +39,10 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Institution.findAll", query = "SELECT i FROM Institution i"),
     @NamedQuery(name = "Institution.findByInstitutionId", query = "SELECT i FROM Institution i WHERE i.institutionId = :institutionId"),
     @NamedQuery(name = "Institution.findByInstitutionName", query = "SELECT i FROM Institution i WHERE i.institutionName = :institutionName")})
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Institution implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -51,114 +59,4 @@ public class Institution implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "institutionId")
     private List<Laboratory> laboratoryList;
 
-    /**
-     *
-     */
-    public Institution() {
-    }
-
-    /**
-     *
-     * @param institutionId
-     */
-    public Institution(Integer institutionId) {
-        this.institutionId = institutionId;
-    }
-
-    /**
-     *
-     * @param institutionId
-     * @param institutionName
-     */
-    public Institution(Integer institutionId, String institutionName) {
-        this.institutionId = institutionId;
-        this.institutionName = institutionName;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Integer getInstitutionId() {
-        return institutionId;
-    }
-
-    /**
-     *
-     * @param institutionId
-     */
-    public void setInstitutionId(Integer institutionId) {
-        this.institutionId = institutionId;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getInstitutionName() {
-        return institutionName;
-    }
-
-    /**
-     *
-     * @param institutionName
-     */
-    public void setNameInstitution(String institutionName) {
-        this.institutionName = institutionName;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public List<Laboratory> getLaboratoryList() {
-        return laboratoryList;
-    }
-
-    /**
-     *
-     * @param laboratoryList
-     */
-    public void setLaboratoryList(List<Laboratory> laboratoryList) {
-        this.laboratoryList = laboratoryList;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (institutionId != null ? institutionId.hashCode() : 0);
-        return hash;
-    }
-
-    /**
-     *
-     * @param object
-     * @return
-     */
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Institution)) {
-            return false;
-        }
-        Institution other = (Institution) object;
-        if ((this.institutionId == null && other.institutionId != null) || (this.institutionId != null && !this.institutionId.equals(other.institutionId))) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public String toString() {
-        return "org.centrale.hceres.items.Institution[ institutionId=" + institutionId + " ]";
-    }
-    
 }

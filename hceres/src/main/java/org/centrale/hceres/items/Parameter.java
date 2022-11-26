@@ -8,6 +8,10 @@
  * L LETERTRE, S LIMOUX, JY MARTIN
  * -------------------------------------------------------------------------------- */
 package org.centrale.hceres.items;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
@@ -33,6 +37,10 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Parameter.findByParameterId", query = "SELECT p FROM Parameter p WHERE p.parameterId = :parameterId"),
     @NamedQuery(name = "Parameter.findByParameterName", query = "SELECT p FROM Parameter p WHERE p.parameterName = :parameterName"),
     @NamedQuery(name = "Parameter.findByParameterValue", query = "SELECT p FROM Parameter p WHERE p.parameterValue = :parameterValue")})
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Parameter implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -50,114 +58,4 @@ public class Parameter implements Serializable {
     @Column(name = "parameter_value")
     private String parameterValue;
 
-    /**
-     *
-     */
-    public Parameter() {
-    }
-
-    /**
-     *
-     * @param parameterId
-     */
-    public Parameter(Integer parameterId) {
-        this.parameterId = parameterId;
-    }
-
-    /**
-     *
-     * @param parameterId
-     * @param parameterName
-     */
-    public Parameter(Integer parameterId, String parameterName) {
-        this.parameterId = parameterId;
-        this.parameterName = parameterName;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Integer getParameterId() {
-        return parameterId;
-    }
-
-    /**
-     *
-     * @param parameterId
-     */
-    public void setParameterId(Integer parameterId) {
-        this.parameterId = parameterId;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getParameterName() {
-        return parameterName;
-    }
-
-    /**
-     *
-     * @param parameterName
-     */
-    public void setParameterName(String parameterName) {
-        this.parameterName = parameterName;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getParameterValue() {
-        return parameterValue;
-    }
-
-    /**
-     *
-     * @param parameterValue
-     */
-    public void setParameterValue(String parameterValue) {
-        this.parameterValue = parameterValue;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (parameterId != null ? parameterId.hashCode() : 0);
-        return hash;
-    }
-
-    /**
-     *
-     * @param object
-     * @return
-     */
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Parameter)) {
-            return false;
-        }
-        Parameter other = (Parameter) object;
-        if ((this.parameterId == null && other.parameterId != null) || (this.parameterId != null && !this.parameterId.equals(other.parameterId))) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public String toString() {
-        return "org.centrale.hceres.items.Parameter[ parameterId=" + parameterId + " ]";
-    }
-    
 }

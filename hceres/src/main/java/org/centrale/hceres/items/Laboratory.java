@@ -8,6 +8,10 @@
  * L LETERTRE, S LIMOUX, JY MARTIN
  * -------------------------------------------------------------------------------- */
 package org.centrale.hceres.items;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.List;
@@ -38,6 +42,10 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Laboratory.findByLaboratoryId", query = "SELECT l FROM Laboratory l WHERE l.laboratoryId = :laboratoryId"),
     @NamedQuery(name = "Laboratory.findByLaboratoryName", query = "SELECT l FROM Laboratory l WHERE l.laboratoryName = :laboratoryName"),
     @NamedQuery(name = "Laboratory.findByLaboratoryAcronym", query = "SELECT l FROM Laboratory l WHERE l.laboratoryAcronym = :laboratoryAcronym")})
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Laboratory implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -60,146 +68,4 @@ public class Laboratory implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "laboratoryId")
     private List<Team> teamList;
 
-    /**
-     *
-     */
-    public Laboratory() {
-    }
-
-    /**
-     *
-     * @param laboratoryId
-     */
-    public Laboratory(Integer laboratoryId) {
-        this.laboratoryId = laboratoryId;
-    }
-
-    /**
-     *
-     * @param laboratoryId
-     * @param laboratoryName
-     */
-    public Laboratory(Integer laboratoryId, String laboratoryName) {
-        this.laboratoryId = laboratoryId;
-        this.laboratoryName = laboratoryName;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Integer getLaboratoryId() {
-        return laboratoryId;
-    }
-
-    /**
-     *
-     * @param laboratoryId
-     */
-    public void setLaboratoryId(Integer laboratoryId) {
-        this.laboratoryId = laboratoryId;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getLaboratoryName() {
-        return laboratoryName;
-    }
-
-    /**
-     *
-     * @param laboratoryName
-     */
-    public void setLaboratoryName(String laboratoryName) {
-        this.laboratoryName = laboratoryName;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getLaboratoryAcronym() {
-        return laboratoryAcronym;
-    }
-
-    /**
-     *
-     * @param laboratoryAcronym
-     */
-    public void setLaboratoryAcronym(String laboratoryAcronym) {
-        this.laboratoryAcronym = laboratoryAcronym;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Institution getInstitutionId() {
-        return institutionId;
-    }
-
-    /**
-     *
-     * @param institutionId
-     */
-    public void setInstitutionId(Institution institutionId) {
-        this.institutionId = institutionId;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public List<Team> getTeamList() {
-        return teamList;
-    }
-
-    /**
-     *
-     * @param teamList
-     */
-    public void setTeamList(List<Team> teamList) {
-        this.teamList = teamList;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (laboratoryId != null ? laboratoryId.hashCode() : 0);
-        return hash;
-    }
-
-    /**
-     *
-     * @param object
-     * @return
-     */
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Laboratory)) {
-            return false;
-        }
-        Laboratory other = (Laboratory) object;
-        if ((this.laboratoryId == null && other.laboratoryId != null) || (this.laboratoryId != null && !this.laboratoryId.equals(other.laboratoryId))) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public String toString() {
-        return "org.centrale.hceres.items.Laboratory[ laboratoryId=" + laboratoryId + " ]";
-    }
-    
 }

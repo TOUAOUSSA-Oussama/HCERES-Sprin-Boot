@@ -8,6 +8,10 @@
  * L LETERTRE, S LIMOUX, JY MARTIN
  * -------------------------------------------------------------------------------- */
 package org.centrale.hceres.items;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
@@ -30,6 +34,10 @@ import javax.validation.constraints.NotNull;
 @NamedQueries({
     @NamedQuery(name = "Admin.findAll", query = "SELECT a FROM Admin a"),
     @NamedQuery(name = "Admin.findByResearcherId", query = "SELECT a FROM Admin a WHERE a.researcherId = :researcherId")})
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Admin implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -42,88 +50,4 @@ public class Admin implements Serializable {
     @OneToOne(optional = false)
     private Researcher researcher;
 
-    /**
-     *
-     */
-    public Admin() {
-    }
-
-    /**
-     *
-     * @param researcherId
-     */
-    public Admin(Integer researcherId) {
-        this.researcherId = researcherId;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Integer getResearcherId() {
-        return researcherId;
-    }
-
-    /**
-     *
-     * @param researcherId
-     */
-    public void setResearcherId(Integer researcherId) {
-        this.researcherId = researcherId;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Researcher getResearcher() {
-        return researcher;
-    }
-
-    /**
-     *
-     * @param researcher
-     */
-    public void setResearcher(Researcher researcher) {
-        this.researcher = researcher;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (researcherId != null ? researcherId.hashCode() : 0);
-        return hash;
-    }
-
-    /**
-     *
-     * @param object
-     * @return
-     */
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Admin)) {
-            return false;
-        }
-        Admin other = (Admin) object;
-        if ((this.researcherId == null && other.researcherId != null) || (this.researcherId != null && !this.researcherId.equals(other.researcherId))) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public String toString() {
-        return "org.centrale.hceres.items.Admin[ researcherId=" + researcherId + " ]";
-    }
-    
 }

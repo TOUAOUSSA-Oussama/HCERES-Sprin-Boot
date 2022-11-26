@@ -8,6 +8,10 @@
  * L LETERTRE, S LIMOUX, JY MARTIN
  * -------------------------------------------------------------------------------- */
 package org.centrale.hceres.items;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -40,6 +44,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
     @NamedQuery(name = "Education.findByEducationCompletion", query = "SELECT e FROM Education e WHERE e.educationCompletion = :educationCompletion"),
     @NamedQuery(name = "Education.findByEducationDescription", query = "SELECT e FROM Education e WHERE e.educationDescription = :educationDescription"),
     @NamedQuery(name = "Education.findByEducationFormation", query = "SELECT e FROM Education e WHERE e.educationFormation = :educationFormation")})
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Education implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -77,184 +85,4 @@ public class Education implements Serializable {
     @ManyToOne(optional = false)
     private EducationLevel educationLevelId;
 
-    /**
-     *
-     */
-    public Education() {
-    }
-
-    /**
-     *
-     * @param idActivity
-     */
-    public Education(Integer idActivity) {
-        this.idActivity = idActivity;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Integer getIdActivity() {
-        return idActivity;
-    }
-
-    /**
-     *
-     * @param idActivity
-     */
-    public void setIdActivity(Integer idActivity) {
-        this.idActivity = idActivity;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getEducationCourseName() {
-        return educationCourseName;
-    }
-
-    /**
-     *
-     * @param educationCourseName
-     */
-    public void setEducationCourseName(String educationCourseName) {
-        this.educationCourseName = educationCourseName;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Date getEducationCompletion() {
-        return educationCompletion;
-    }
-
-    /**
-     *
-     * @param educationCompletion
-     */
-    public void setEducationCompletion(Date educationCompletion) {
-        this.educationCompletion = educationCompletion;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getEducationDescription() {
-        return educationDescription;
-    }
-
-    /**
-     *
-     * @param educationDescription
-     */
-    public void setEducationDescription(String educationDescription) {
-        this.educationDescription = educationDescription;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getEducationFormation() {
-        return educationFormation;
-    }
-
-    /**
-     *
-     * @param educationFormation
-     */
-    public void setEducationFormation(String educationFormation) {
-        this.educationFormation = educationFormation;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Activity getActivity() {
-        return activity;
-    }
-
-    /**
-     *
-     * @param activity
-     */
-    public void setActivity(Activity activity) {
-        this.activity = activity;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public EducationInvolvment getEducationInvolvmentId() {
-        return educationInvolvmentId;
-    }
-
-    /**
-     *
-     * @param educationInvolvmentId
-     */
-    public void setEducationInvolvmentId(EducationInvolvment educationInvolvmentId) {
-        this.educationInvolvmentId = educationInvolvmentId;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public EducationLevel getEducationLevelId() {
-        return educationLevelId;
-    }
-
-    /**
-     *
-     * @param educationLevelId
-     */
-    public void setEducationLevelId(EducationLevel educationLevelId) {
-        this.educationLevelId = educationLevelId;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idActivity != null ? idActivity.hashCode() : 0);
-        return hash;
-    }
-
-    /**
-     *
-     * @param object
-     * @return
-     */
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Education)) {
-            return false;
-        }
-        Education other = (Education) object;
-        if ((this.idActivity == null && other.idActivity != null) || (this.idActivity != null && !this.idActivity.equals(other.idActivity))) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public String toString() {
-        return "org.centrale.hceres.items.Education[ idActivity=" + idActivity + " ]";
-    }
-    
 }

@@ -8,6 +8,10 @@
  * L LETERTRE, S LIMOUX, JY MARTIN
  * -------------------------------------------------------------------------------- */
 package org.centrale.hceres.items;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.List;
@@ -36,6 +40,10 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Nationality.findAll", query = "SELECT n FROM Nationality n"),
     @NamedQuery(name = "Nationality.findByNationalityId", query = "SELECT n FROM Nationality n WHERE n.nationalityId = :nationalityId"),
     @NamedQuery(name = "Nationality.findByNationalityName", query = "SELECT n FROM Nationality n WHERE n.nationalityName = :nationalityName")})
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Nationality implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -55,114 +63,4 @@ public class Nationality implements Serializable {
     @ManyToMany
     private List<Researcher> researcherList;
 
-    /**
-     *
-     */
-    public Nationality() {
-    }
-
-    /**
-     *
-     * @param nationalityId
-     */
-    public Nationality(Integer nationalityId) {
-        this.nationalityId = nationalityId;
-    }
-
-    /**
-     *
-     * @param nationalityId
-     * @param nationalityName
-     */
-    public Nationality(Integer nationalityId, String nationalityName) {
-        this.nationalityId = nationalityId;
-        this.nationalityName = nationalityName;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Integer getNationalityId() {
-        return nationalityId;
-    }
-
-    /**
-     *
-     * @param nationalityId
-     */
-    public void setNationalityId(Integer nationalityId) {
-        this.nationalityId = nationalityId;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getNationalityName() {
-        return nationalityName;
-    }
-
-    /**
-     *
-     * @param nationalityName
-     */
-    public void setNationalityName(String nationalityName) {
-        this.nationalityName = nationalityName;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public List<Researcher> getResearcherList() {
-        return researcherList;
-    }
-
-    /**
-     *
-     * @param researcherList
-     */
-    public void setResearcherList(List<Researcher> researcherList) {
-        this.researcherList = researcherList;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (nationalityId != null ? nationalityId.hashCode() : 0);
-        return hash;
-    }
-
-    /**
-     *
-     * @param object
-     * @return
-     */
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Nationality)) {
-            return false;
-        }
-        Nationality other = (Nationality) object;
-        if ((this.nationalityId == null && other.nationalityId != null) || (this.nationalityId != null && !this.nationalityId.equals(other.nationalityId))) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public String toString() {
-        return "org.centrale.hceres.items.Nationality[ nationalityId=" + nationalityId + " ]";
-    }
-    
 }

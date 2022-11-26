@@ -8,6 +8,10 @@
  * L LETERTRE, S LIMOUX, JY MARTIN
  * -------------------------------------------------------------------------------- */
 package org.centrale.hceres.items;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -44,6 +48,10 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "SeiClinicalTrial.findByIncludedPatientsNb", query = "SELECT s FROM SeiClinicalTrial s WHERE s.includedPatientsNb = :includedPatientsNb"),
     @NamedQuery(name = "SeiClinicalTrial.findByFunding", query = "SELECT s FROM SeiClinicalTrial s WHERE s.funding = :funding"),
     @NamedQuery(name = "SeiClinicalTrial.findByFundingAmount", query = "SELECT s FROM SeiClinicalTrial s WHERE s.fundingAmount = :fundingAmount")})
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class SeiClinicalTrial implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -80,232 +88,4 @@ public class SeiClinicalTrial implements Serializable {
     @OneToOne(optional = false, cascade = CascadeType.ALL)
     private Activity activity;
 
-    /**
-     *
-     */
-    public SeiClinicalTrial() {
-    }
-
-    /**
-     *
-     * @param idActivity
-     */
-    public SeiClinicalTrial(Integer idActivity) {
-        this.idActivity = idActivity;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Integer getIdActivity() {
-        return idActivity;
-    }
-
-    /**
-     *
-     * @param idActivity
-     */
-    public void setIdActivity(Integer idActivity) {
-        this.idActivity = idActivity;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    /**
-     *
-     * @param startDate
-     */
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Boolean getCoordinatorPartner() {
-        return coordinatorPartner;
-    }
-
-    /**
-     *
-     * @param coordinatorPartner
-     */
-    public void setCoordinatorPartner(Boolean coordinatorPartner) {
-        this.coordinatorPartner = coordinatorPartner;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getTitleClinicalTrial() {
-        return titleClinicalTrial;
-    }
-
-    /**
-     *
-     * @param titleClinicalTrial
-     */
-    public void setTitleClinicalTrial(String titleClinicalTrial) {
-        this.titleClinicalTrial = titleClinicalTrial;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Date getEndDate() {
-        return endDate;
-    }
-
-    /**
-     *
-     * @param endDate
-     */
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getRegistrationNb() {
-        return registrationNb;
-    }
-
-    /**
-     *
-     * @param registrationNb
-     */
-    public void setRegistrationNb(String registrationNb) {
-        this.registrationNb = registrationNb;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getSponsorName() {
-        return sponsorName;
-    }
-
-    /**
-     *
-     * @param sponsorName
-     */
-    public void setSponsorName(String sponsorName) {
-        this.sponsorName = sponsorName;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Integer getIncludedPatientsNb() {
-        return includedPatientsNb;
-    }
-
-    /**
-     *
-     * @param includedPatientsNb
-     */
-    public void setIncludedPatientsNb(Integer includedPatientsNb) {
-        this.includedPatientsNb = includedPatientsNb;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getFunding() {
-        return funding;
-    }
-
-    /**
-     *
-     * @param funding
-     */
-    public void setFunding(String funding) {
-        this.funding = funding;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Integer getFundingAmount() {
-        return fundingAmount;
-    }
-
-    /**
-     *
-     * @param fundingAmount
-     */
-    public void setFundingAmount(Integer fundingAmount) {
-        this.fundingAmount = fundingAmount;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Activity getActivity() {
-        return activity;
-    }
-
-    /**
-     *
-     * @param activity
-     */
-    public void setActivity(Activity activity) {
-        this.activity = activity;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idActivity != null ? idActivity.hashCode() : 0);
-        return hash;
-    }
-
-    /**
-     *
-     * @param object
-     * @return
-     */
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof SeiClinicalTrial)) {
-            return false;
-        }
-        SeiClinicalTrial other = (SeiClinicalTrial) object;
-        if ((this.idActivity == null && other.idActivity != null) || (this.idActivity != null && !this.idActivity.equals(other.idActivity))) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public String toString() {
-        return "org.centrale.hceres.items.SeiClinicalTrial[ idActivity=" + idActivity + " ]";
-    }
-    
 }

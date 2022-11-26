@@ -8,6 +8,10 @@
  * L LETERTRE, S LIMOUX, JY MARTIN
  * -------------------------------------------------------------------------------- */
 package org.centrale.hceres.items;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.List;
@@ -35,6 +39,10 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "EducationInvolvment.findAll", query = "SELECT e FROM EducationInvolvment e"),
     @NamedQuery(name = "EducationInvolvment.findByEducationInvolvmentId", query = "SELECT e FROM EducationInvolvment e WHERE e.educationInvolvmentId = :educationInvolvmentId"),
     @NamedQuery(name = "EducationInvolvment.findByEducationInvolvmentName", query = "SELECT e FROM EducationInvolvment e WHERE e.educationInvolvmentName = :educationInvolvmentName")})
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class EducationInvolvment implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -54,114 +62,4 @@ public class EducationInvolvment implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "educationInvolvmentId")
     private List<Education> educationList;
 
-    /**
-     *
-     */
-    public EducationInvolvment() {
-    }
-
-    /**
-     *
-     * @param educationInvolvmentId
-     */
-    public EducationInvolvment(Integer educationInvolvmentId) {
-        this.educationInvolvmentId = educationInvolvmentId;
-    }
-
-    /**
-     *
-     * @param educationInvolvmentId
-     * @param educationInvolvmentName
-     */
-    public EducationInvolvment(Integer educationInvolvmentId, String educationInvolvmentName) {
-        this.educationInvolvmentId = educationInvolvmentId;
-        this.educationInvolvmentName = educationInvolvmentName;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Integer getEducationInvolvmentId() {
-        return educationInvolvmentId;
-    }
-
-    /**
-     *
-     * @param educationInvolvmentId
-     */
-    public void setEducationInvolvmentId(Integer educationInvolvmentId) {
-        this.educationInvolvmentId = educationInvolvmentId;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getEducationInvolvmentName() {
-        return educationInvolvmentName;
-    }
-
-    /**
-     *
-     * @param educationInvolvmentName
-     */
-    public void setEducationInvolvmentName(String educationInvolvmentName) {
-        this.educationInvolvmentName = educationInvolvmentName;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public List<Education> getEducationList() {
-        return educationList;
-    }
-
-    /**
-     *
-     * @param educationList
-     */
-    public void setEducationList(List<Education> educationList) {
-        this.educationList = educationList;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (educationInvolvmentId != null ? educationInvolvmentId.hashCode() : 0);
-        return hash;
-    }
-
-    /**
-     *
-     * @param object
-     * @return
-     */
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof EducationInvolvment)) {
-            return false;
-        }
-        EducationInvolvment other = (EducationInvolvment) object;
-        if ((this.educationInvolvmentId == null && other.educationInvolvmentId != null) || (this.educationInvolvmentId != null && !this.educationInvolvmentId.equals(other.educationInvolvmentId))) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public String toString() {
-        return "org.centrale.hceres.items.EducationInvolvment[ educationInvolvmentId=" + educationInvolvmentId + " ]";
-    }
-    
 }

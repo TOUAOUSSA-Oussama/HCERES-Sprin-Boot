@@ -8,6 +8,10 @@
  * L LETERTRE, S LIMOUX, JY MARTIN
  * -------------------------------------------------------------------------------- */
 package org.centrale.hceres.items;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -41,6 +45,10 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "SeiCifreFellowship.findByContractEndDate", query = "SELECT s FROM SeiCifreFellowship s WHERE s.contractEndDate = :contractEndDate"),
     @NamedQuery(name = "SeiCifreFellowship.findByContractAmount", query = "SELECT s FROM SeiCifreFellowship s WHERE s.contractAmount = :contractAmount"),
     @NamedQuery(name = "SeiCifreFellowship.findByAssociatedPubliRef", query = "SELECT s FROM SeiCifreFellowship s WHERE s.associatedPubliRef = :associatedPubliRef")})
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class SeiCifreFellowship implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -73,200 +81,4 @@ public class SeiCifreFellowship implements Serializable {
     @OneToOne(optional = false)
     private Activity activity;
 
-    /**
-     *
-     */
-    public SeiCifreFellowship() {
-    }
-
-    /**
-     *
-     * @param idActivity
-     */
-    public SeiCifreFellowship(Integer idActivity) {
-        this.idActivity = idActivity;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Integer getIdActivity() {
-        return idActivity;
-    }
-
-    /**
-     *
-     * @param idActivity
-     */
-    public void setIdActivity(Integer idActivity) {
-        this.idActivity = idActivity;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Date getContractStartDate() {
-        return contractStartDate;
-    }
-
-    /**
-     *
-     * @param contractStartDate
-     */
-    public void setContractStartDate(Date contractStartDate) {
-        this.contractStartDate = contractStartDate;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getNameFellow() {
-        return nameFellow;
-    }
-
-    /**
-     *
-     * @param nameFellow
-     */
-    public void setNameFellow(String nameFellow) {
-        this.nameFellow = nameFellow;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getNameCompanyInvolved() {
-        return nameCompanyInvolved;
-    }
-
-    /**
-     *
-     * @param nameCompanyInvolved
-     */
-    public void setNameCompanyInvolved(String nameCompanyInvolved) {
-        this.nameCompanyInvolved = nameCompanyInvolved;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getTitleThesis() {
-        return titleThesis;
-    }
-
-    /**
-     *
-     * @param titleThesis
-     */
-    public void setTitleThesis(String titleThesis) {
-        this.titleThesis = titleThesis;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Date getContractEndDate() {
-        return contractEndDate;
-    }
-
-    /**
-     *
-     * @param contractEndDate
-     */
-    public void setContractEndDate(Date contractEndDate) {
-        this.contractEndDate = contractEndDate;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Integer getContractAmount() {
-        return contractAmount;
-    }
-
-    /**
-     *
-     * @param contractAmount
-     */
-    public void setContractAmount(Integer contractAmount) {
-        this.contractAmount = contractAmount;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getAssociatedPubliRef() {
-        return associatedPubliRef;
-    }
-
-    /**
-     *
-     * @param associatedPubliRef
-     */
-    public void setAssociatedPubliRef(String associatedPubliRef) {
-        this.associatedPubliRef = associatedPubliRef;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Activity getActivity() {
-        return activity;
-    }
-
-    /**
-     *
-     * @param activity
-     */
-    public void setActivity(Activity activity) {
-        this.activity = activity;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idActivity != null ? idActivity.hashCode() : 0);
-        return hash;
-    }
-
-    /**
-     *
-     * @param object
-     * @return
-     */
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof SeiCifreFellowship)) {
-            return false;
-        }
-        SeiCifreFellowship other = (SeiCifreFellowship) object;
-        if ((this.idActivity == null && other.idActivity != null) || (this.idActivity != null && !this.idActivity.equals(other.idActivity))) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public String toString() {
-        return "org.centrale.hceres.items.SeiCifreFellowship[ idActivity=" + idActivity + " ]";
-    }
-    
 }

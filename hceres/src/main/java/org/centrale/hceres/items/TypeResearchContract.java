@@ -8,6 +8,10 @@
  * L LETERTRE, S LIMOUX, JY MARTIN
  * -------------------------------------------------------------------------------- */
 package org.centrale.hceres.items;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.List;
@@ -34,6 +38,10 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "TypeResearchContract.findAll", query = "SELECT t FROM TypeResearchContract t"),
     @NamedQuery(name = "TypeResearchContract.findByIdType", query = "SELECT t FROM TypeResearchContract t WHERE t.idType = :idType"),
     @NamedQuery(name = "TypeResearchContract.findByNameChoice", query = "SELECT t FROM TypeResearchContract t WHERE t.nameChoice = :nameChoice")})
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class TypeResearchContract implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -48,104 +56,4 @@ public class TypeResearchContract implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idType")
     private List<ResearchContractFundedPublicCharitableInst> researchContractFundedPublicCharitableInstList;
 
-    /**
-     *
-     */
-    public TypeResearchContract() {
-    }
-
-    /**
-     *
-     * @param idType
-     */
-    public TypeResearchContract(Integer idType) {
-        this.idType = idType;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Integer getIdType() {
-        return idType;
-    }
-
-    /**
-     *
-     * @param idType
-     */
-    public void setIdType(Integer idType) {
-        this.idType = idType;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getNameChoice() {
-        return nameChoice;
-    }
-
-    /**
-     *
-     * @param nameChoice
-     */
-    public void setNameChoice(String nameChoice) {
-        this.nameChoice = nameChoice;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public List<ResearchContractFundedPublicCharitableInst> getResearchContractFundedPublicCharitableInstList() {
-        return researchContractFundedPublicCharitableInstList;
-    }
-
-    /**
-     *
-     * @param researchContractFundedPublicCharitableInstList
-     */
-    public void setResearchContractFundedPublicCharitableInstList(List<ResearchContractFundedPublicCharitableInst> researchContractFundedPublicCharitableInstList) {
-        this.researchContractFundedPublicCharitableInstList = researchContractFundedPublicCharitableInstList;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idType != null ? idType.hashCode() : 0);
-        return hash;
-    }
-
-    /**
-     *
-     * @param object
-     * @return
-     */
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof TypeResearchContract)) {
-            return false;
-        }
-        TypeResearchContract other = (TypeResearchContract) object;
-        if ((this.idType == null && other.idType != null) || (this.idType != null && !this.idType.equals(other.idType))) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public String toString() {
-        return "org.centrale.hceres.items.TypeResearchContract[ idType=" + idType + " ]";
-    }
-    
 }

@@ -8,6 +8,10 @@
  * L LETERTRE, S LIMOUX, JY MARTIN
  * -------------------------------------------------------------------------------- */
 package org.centrale.hceres.items;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -38,6 +42,10 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Contract.findByStartContract", query = "SELECT c FROM Contract c WHERE c.startContract = :startContract"),
     @NamedQuery(name = "Contract.findByEndContract", query = "SELECT c FROM Contract c WHERE c.endContract = :endContract"),
     @NamedQuery(name = "Contract.findByFunctionContract", query = "SELECT c FROM Contract c WHERE c.functionContract = :functionContract")})
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Contract implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -68,184 +76,4 @@ public class Contract implements Serializable {
     @ManyToOne(optional = false)
     private Status idStatus;
 
-    /**
-     *
-     */
-    public Contract() {
-    }
-
-    /**
-     *
-     * @param idContract
-     */
-    public Contract(Integer idContract) {
-        this.idContract = idContract;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Integer getIdContract() {
-        return idContract;
-    }
-
-    /**
-     *
-     * @param idContract
-     */
-    public void setIdContract(Integer idContract) {
-        this.idContract = idContract;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Date getStartContract() {
-        return startContract;
-    }
-
-    /**
-     *
-     * @param startContract
-     */
-    public void setStartContract(Date startContract) {
-        this.startContract = startContract;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Date getEndContract() {
-        return endContract;
-    }
-
-    /**
-     *
-     * @param endContract
-     */
-    public void setEndContract(Date endContract) {
-        this.endContract = endContract;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getFunctionContract() {
-        return functionContract;
-    }
-
-    /**
-     *
-     * @param functionContract
-     */
-    public void setFunctionContract(String functionContract) {
-        this.functionContract = functionContract;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public ContractType getIdContractType() {
-        return idContractType;
-    }
-
-    /**
-     *
-     * @param idContractType
-     */
-    public void setIdContractType(ContractType idContractType) {
-        this.idContractType = idContractType;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Employer getIdEmployer() {
-        return idEmployer;
-    }
-
-    /**
-     *
-     * @param idEmployer
-     */
-    public void setIdEmployer(Employer idEmployer) {
-        this.idEmployer = idEmployer;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Researcher getResearcherId() {
-        return researcherId;
-    }
-
-    /**
-     *
-     * @param researcherId
-     */
-    public void setResearcherId(Researcher researcherId) {
-        this.researcherId = researcherId;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Status getIdStatus() {
-        return idStatus;
-    }
-
-    /**
-     *
-     * @param idStatus
-     */
-    public void setIdStatus(Status idStatus) {
-        this.idStatus = idStatus;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idContract != null ? idContract.hashCode() : 0);
-        return hash;
-    }
-
-    /**
-     *
-     * @param object
-     * @return
-     */
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Contract)) {
-            return false;
-        }
-        Contract other = (Contract) object;
-        if ((this.idContract == null && other.idContract != null) || (this.idContract != null && !this.idContract.equals(other.idContract))) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public String toString() {
-        return "org.centrale.hceres.items.Contract[ idContract=" + idContract + " ]";
-    }
-    
 }

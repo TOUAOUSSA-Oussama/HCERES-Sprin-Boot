@@ -8,6 +8,10 @@
  * L LETERTRE, S LIMOUX, JY MARTIN
  * -------------------------------------------------------------------------------- */
 package org.centrale.hceres.items;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.List;
@@ -34,6 +38,10 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "ProjectEvaluationRole.findAll", query = "SELECT p FROM ProjectEvaluationRole p"),
     @NamedQuery(name = "ProjectEvaluationRole.findByProjectEvaluationRoleId", query = "SELECT p FROM ProjectEvaluationRole p WHERE p.projectEvaluationRoleId = :projectEvaluationRoleId"),
     @NamedQuery(name = "ProjectEvaluationRole.findByProjectEvaluationRoleName", query = "SELECT p FROM ProjectEvaluationRole p WHERE p.projectEvaluationRoleName = :projectEvaluationRoleName")})
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class ProjectEvaluationRole implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -48,104 +56,4 @@ public class ProjectEvaluationRole implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "projectEvaluationRoleId")
     private List<ProjectEvaluation> projectEvaluationList;
 
-    /**
-     *
-     */
-    public ProjectEvaluationRole() {
-    }
-
-    /**
-     *
-     * @param projectEvaluationRoleId
-     */
-    public ProjectEvaluationRole(Integer projectEvaluationRoleId) {
-        this.projectEvaluationRoleId = projectEvaluationRoleId;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Integer getProjectEvaluationRoleId() {
-        return projectEvaluationRoleId;
-    }
-
-    /**
-     *
-     * @param projectEvaluationRoleId
-     */
-    public void setProjectEvaluationRoleId(Integer projectEvaluationRoleId) {
-        this.projectEvaluationRoleId = projectEvaluationRoleId;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getProjectEvaluationRoleName() {
-        return projectEvaluationRoleName;
-    }
-
-    /**
-     *
-     * @param projectEvaluationRoleName
-     */
-    public void setProjectEvaluationRoleName(String projectEvaluationRoleName) {
-        this.projectEvaluationRoleName = projectEvaluationRoleName;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public List<ProjectEvaluation> getProjectEvaluationList() {
-        return projectEvaluationList;
-    }
-
-    /**
-     *
-     * @param projectEvaluationList
-     */
-    public void setProjectEvaluationList(List<ProjectEvaluation> projectEvaluationList) {
-        this.projectEvaluationList = projectEvaluationList;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (projectEvaluationRoleId != null ? projectEvaluationRoleId.hashCode() : 0);
-        return hash;
-    }
-
-    /**
-     *
-     * @param object
-     * @return
-     */
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof ProjectEvaluationRole)) {
-            return false;
-        }
-        ProjectEvaluationRole other = (ProjectEvaluationRole) object;
-        if ((this.projectEvaluationRoleId == null && other.projectEvaluationRoleId != null) || (this.projectEvaluationRoleId != null && !this.projectEvaluationRoleId.equals(other.projectEvaluationRoleId))) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public String toString() {
-        return "org.centrale.hceres.items.ProjectEvaluationRole[ projectEvaluationRoleId=" + projectEvaluationRoleId + " ]";
-    }
-    
 }

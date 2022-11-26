@@ -8,6 +8,10 @@
  * L LETERTRE, S LIMOUX, JY MARTIN
  * -------------------------------------------------------------------------------- */
 package org.centrale.hceres.items;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.math.BigInteger;
@@ -33,6 +37,10 @@ import javax.persistence.Table;
     @NamedQuery(name = "Supervisor.findAll", query = "SELECT s FROM Supervisor s"),
     @NamedQuery(name = "Supervisor.findBySupervisorId", query = "SELECT s FROM Supervisor s WHERE s.supervisorId = :supervisorId"),
     @NamedQuery(name = "Supervisor.findBySupervisorPercentage", query = "SELECT s FROM Supervisor s WHERE s.supervisorPercentage = :supervisorPercentage")})
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Supervisor implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -50,120 +58,4 @@ public class Supervisor implements Serializable {
     @ManyToOne(optional = false)
     private Researcher researcherId;
 
-    /**
-     *
-     */
-    public Supervisor() {
-    }
-
-    /**
-     *
-     * @param supervisorId
-     */
-    public Supervisor(Integer supervisorId) {
-        this.supervisorId = supervisorId;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Integer getSupervisorId() {
-        return supervisorId;
-    }
-
-    /**
-     *
-     * @param supervisorId
-     */
-    public void setSupervisorId(Integer supervisorId) {
-        this.supervisorId = supervisorId;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public BigInteger getSupervisorPercentage() {
-        return supervisorPercentage;
-    }
-
-    /**
-     *
-     * @param supervisorPercentage
-     */
-    public void setSupervisorPercentage(BigInteger supervisorPercentage) {
-        this.supervisorPercentage = supervisorPercentage;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public PhdStudent getPhdStudentId() {
-        return phdStudentId;
-    }
-
-    /**
-     *
-     * @param phdStudentId
-     */
-    public void setPhdStudentId(PhdStudent phdStudentId) {
-        this.phdStudentId = phdStudentId;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Researcher getResearcherId() {
-        return researcherId;
-    }
-
-    /**
-     *
-     * @param researcherId
-     */
-    public void setResearcherId(Researcher researcherId) {
-        this.researcherId = researcherId;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (supervisorId != null ? supervisorId.hashCode() : 0);
-        return hash;
-    }
-
-    /**
-     *
-     * @param object
-     * @return
-     */
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Supervisor)) {
-            return false;
-        }
-        Supervisor other = (Supervisor) object;
-        if ((this.supervisorId == null && other.supervisorId != null) || (this.supervisorId != null && !this.supervisorId.equals(other.supervisorId))) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public String toString() {
-        return "org.centrale.hceres.items.Supervisor[ supervisorId=" + supervisorId + " ]";
-    }
-    
 }

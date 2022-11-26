@@ -8,6 +8,10 @@
  * L LETERTRE, S LIMOUX, JY MARTIN
  * -------------------------------------------------------------------------------- */
 package org.centrale.hceres.items;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -38,6 +42,10 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "InvitedSeminar.findByDate", query = "SELECT i FROM InvitedSeminar i WHERE i.date = :date"),
     @NamedQuery(name = "InvitedSeminar.findByLocation", query = "SELECT i FROM InvitedSeminar i WHERE i.location = :location"),
     @NamedQuery(name = "InvitedSeminar.findByInvitedBy", query = "SELECT i FROM InvitedSeminar i WHERE i.invitedBy = :invitedBy")})
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class InvitedSeminar implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -62,152 +70,4 @@ public class InvitedSeminar implements Serializable {
     @OneToOne(optional = false)
     private Activity activity;
 
-    /**
-     *
-     */
-    public InvitedSeminar() {
-    }
-
-    /**
-     *
-     * @param idActivity
-     */
-    public InvitedSeminar(Integer idActivity) {
-        this.idActivity = idActivity;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Integer getIdActivity() {
-        return idActivity;
-    }
-
-    /**
-     *
-     * @param idActivity
-     */
-    public void setIdActivity(Integer idActivity) {
-        this.idActivity = idActivity;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getTitleSeminar() {
-        return titleSeminar;
-    }
-
-    /**
-     *
-     * @param titleSeminar
-     */
-    public void setTitleSeminar(String titleSeminar) {
-        this.titleSeminar = titleSeminar;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Date getDate() {
-        return date;
-    }
-
-    /**
-     *
-     * @param date
-     */
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getLocation() {
-        return location;
-    }
-
-    /**
-     *
-     * @param location
-     */
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getInvitedBy() {
-        return invitedBy;
-    }
-
-    /**
-     *
-     * @param invitedBy
-     */
-    public void setInvitedBy(String invitedBy) {
-        this.invitedBy = invitedBy;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Activity getActivity() {
-        return activity;
-    }
-
-    /**
-     *
-     * @param activity
-     */
-    public void setActivity(Activity activity) {
-        this.activity = activity;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idActivity != null ? idActivity.hashCode() : 0);
-        return hash;
-    }
-
-    /**
-     *
-     * @param object
-     * @return
-     */
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof InvitedSeminar)) {
-            return false;
-        }
-        InvitedSeminar other = (InvitedSeminar) object;
-        if ((this.idActivity == null && other.idActivity != null) || (this.idActivity != null && !this.idActivity.equals(other.idActivity))) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public String toString() {
-        return "org.centrale.hceres.items.InvitedSeminar[ idActivity=" + idActivity + " ]";
-    }
-    
 }

@@ -8,6 +8,10 @@
  * L LETERTRE, S LIMOUX, JY MARTIN
  * -------------------------------------------------------------------------------- */
 package org.centrale.hceres.items;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.List;
@@ -43,6 +47,10 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Team.findByTeamCreation", query = "SELECT t FROM Team t WHERE t.teamCreation = :teamCreation"),
     @NamedQuery(name = "Team.findByTeamEnd", query = "SELECT t FROM Team t WHERE t.teamEnd = :teamEnd"),
     @NamedQuery(name = "Team.findByTeamLastReport", query = "SELECT t FROM Team t WHERE t.teamLastReport = :teamLastReport")})
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Team implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -75,216 +83,4 @@ public class Team implements Serializable {
     @ManyToOne(optional = false)
     private Laboratory laboratoryId;
 
-    /**
-     *
-     */
-    public Team() {
-    }
-
-    /**
-     *
-     * @param teamId
-     */
-    public Team(Integer teamId) {
-        this.teamId = teamId;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Integer getTeamId() {
-        return teamId;
-    }
-
-    /**
-     *
-     * @param teamId
-     */
-    public void setTeamId(Integer teamId) {
-        this.teamId = teamId;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getTeamName() {
-        return teamName;
-    }
-
-    /**
-     *
-     * @param teamName
-     */
-    public void setTeamName(String teamName) {
-        this.teamName = teamName;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Date getTeamCreation() {
-        return teamCreation;
-    }
-
-    /**
-     *
-     * @param teamCreation
-     */
-    public void setTeamCreation(Date teamCreation) {
-        this.teamCreation = teamCreation;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Date getTeamEnd() {
-        return teamEnd;
-    }
-
-    /**
-     *
-     * @param teamEnd
-     */
-    public void setTeamEnd(Date teamEnd) {
-        this.teamEnd = teamEnd;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Date getTeamLastReport() {
-        return teamLastReport;
-    }
-
-    /**
-     *
-     * @param teamLastReport
-     */
-    public void setTeamLastReport(Date teamLastReport) {
-        this.teamLastReport = teamLastReport;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public List<Activity> getActivityList() {
-        return activityList;
-    }
-
-    /**
-     *
-     * @param activityList
-     */
-    public void setActivityList(List<Activity> activityList) {
-        this.activityList = activityList;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public List<TeamReferent> getTeamReferentList() {
-        return teamReferentList;
-    }
-
-    /**
-     *
-     * @param teamReferentList
-     */
-    public void setTeamReferentList(List<TeamReferent> teamReferentList) {
-        this.teamReferentList = teamReferentList;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public List<PublicationStatistics> getPublicationStatisticsList() {
-        return publicationStatisticsList;
-    }
-
-    /**
-     *
-     * @param publicationStatisticsList
-     */
-    public void setPublicationStatisticsList(List<PublicationStatistics> publicationStatisticsList) {
-        this.publicationStatisticsList = publicationStatisticsList;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public List<BelongsTeam> getBelongsTeamList() {
-        return belongsTeamList;
-    }
-
-    /**
-     *
-     * @param belongsTeamList
-     */
-    public void setBelongsTeamList(List<BelongsTeam> belongsTeamList) {
-        this.belongsTeamList = belongsTeamList;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Laboratory getLaboratoryId() {
-        return laboratoryId;
-    }
-
-    /**
-     *
-     * @param laboratoryId
-     */
-    public void setLaboratoryId(Laboratory laboratoryId) {
-        this.laboratoryId = laboratoryId;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (teamId != null ? teamId.hashCode() : 0);
-        return hash;
-    }
-
-    /**
-     *
-     * @param object
-     * @return
-     */
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Team)) {
-            return false;
-        }
-        Team other = (Team) object;
-        if ((this.teamId == null && other.teamId != null) || (this.teamId != null && !this.teamId.equals(other.teamId))) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public String toString() {
-        return "org.centrale.hceres.items.Team[ teamId=" + teamId + " ]";
-    }
-    
 }

@@ -8,6 +8,10 @@
  * L LETERTRE, S LIMOUX, JY MARTIN
  * -------------------------------------------------------------------------------- */
 package org.centrale.hceres.items;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -43,6 +47,10 @@ import javax.persistence.CascadeType;
     @NamedQuery(name = "Network.findByRefResultingPublications", query = "SELECT n FROM Network n WHERE n.refResultingPublications = :refResultingPublications"),
     @NamedQuery(name = "Network.findByUmrCoordinated", query = "SELECT n FROM Network n WHERE n.umrCoordinated = :umrCoordinated"),
     @NamedQuery(name = "Network.findByAgreementSigned", query = "SELECT n FROM Network n WHERE n.agreementSigned = :agreementSigned")})
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Network implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -75,216 +83,4 @@ public class Network implements Serializable {
     @OneToOne(optional = false, cascade = CascadeType.ALL)
     private Activity activity;
 
-    /**
-     *
-     */
-    public Network() {
-    }
-
-    /**
-     *
-     * @param idActivity
-     */
-    public Network(Integer idActivity) {
-        this.idActivity = idActivity;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Integer getIdActivity() {
-        return idActivity;
-    }
-
-    /**
-     *
-     * @param idActivity
-     */
-    public void setIdActivity(Integer idActivity) {
-        this.idActivity = idActivity;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    /**
-     *
-     * @param startDate
-     */
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getNameNetwork() {
-        return nameNetwork;
-    }
-
-    /**
-     *
-     * @param nameNetwork
-     */
-    public void setNameNetwork(String nameNetwork) {
-        this.nameNetwork = nameNetwork;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Boolean getActiveNetwork() {
-        return activeNetwork;
-    }
-
-    /**
-     *
-     * @param activeNetwork
-     */
-    public void setActiveNetwork(Boolean activeNetwork) {
-        this.activeNetwork = activeNetwork;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getAssociatedFunding() {
-        return associatedFunding;
-    }
-
-    /**
-     *
-     * @param associatedFunding
-     */
-    public void setAssociatedFunding(String associatedFunding) {
-        this.associatedFunding = associatedFunding;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Integer getNbResultingPublications() {
-        return nbResultingPublications;
-    }
-
-    /**
-     *
-     * @param string
-     */
-    public void setNbResultingPublications(Integer string) {
-        this.nbResultingPublications = string;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getRefResultingPublications() {
-        return refResultingPublications;
-    }
-
-    /**
-     *
-     * @param refResultingPublications
-     */
-    public void setRefResultingPublications(String refResultingPublications) {
-        this.refResultingPublications = refResultingPublications;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Boolean getUmrCoordinated() {
-        return umrCoordinated;
-    }
-
-    /**
-     *
-     * @param umrCoordinated
-     */
-    public void setUmrCoordinated(Boolean umrCoordinated) {
-        this.umrCoordinated = umrCoordinated;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Boolean getAgreementSigned() {
-        return agreementSigned;
-    }
-
-    /**
-     *
-     * @param agreementSigned
-     */
-    public void setAgreementSigned(Boolean agreementSigned) {
-        this.agreementSigned = agreementSigned;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Activity getActivity() {
-        return activity;
-    }
-
-    /**
-     *
-     * @param activity
-     */
-    public void setActivity(Activity activity) {
-        this.activity = activity;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idActivity != null ? idActivity.hashCode() : 0);
-        return hash;
-    }
-
-    /**
-     *
-     * @param object
-     * @return
-     */
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Network)) {
-            return false;
-        }
-        Network other = (Network) object;
-        if ((this.idActivity == null && other.idActivity != null) || (this.idActivity != null && !this.idActivity.equals(other.idActivity))) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public String toString() {
-        return "org.centrale.hceres.items.Network[ idActivity=" + idActivity + " ]";
-    }
-    
 }

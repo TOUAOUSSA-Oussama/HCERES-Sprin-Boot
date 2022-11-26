@@ -8,6 +8,10 @@
  * L LETERTRE, S LIMOUX, JY MARTIN
  * -------------------------------------------------------------------------------- */
 package org.centrale.hceres.items;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.List;
@@ -44,6 +48,10 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "PhdStudent.findByPhdDefenseDate", query = "SELECT p FROM PhdStudent p WHERE p.phdDefenseDate = :phdDefenseDate"),
     @NamedQuery(name = "PhdStudent.findByPhdDuration", query = "SELECT p FROM PhdStudent p WHERE p.phdDuration = :phdDuration"),
     @NamedQuery(name = "PhdStudent.findByPhdFutur", query = "SELECT p FROM PhdStudent p WHERE p.phdFutur = :phdFutur")})
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class PhdStudent implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -81,228 +89,4 @@ public class PhdStudent implements Serializable {
     @ManyToOne(optional = false)
     private Researcher researcherId;
 
-    /**
-     *
-     */
-    public PhdStudent() {
-    }
-
-    /**
-     *
-     * @param phdStudentId
-     */
-    public PhdStudent(Integer phdStudentId) {
-        this.phdStudentId = phdStudentId;
-    }
-
-    /**
-     *
-     * @param phdStudentId
-     * @param phdStart
-     * @param phdDuration
-     */
-    public PhdStudent(Integer phdStudentId, Date phdStart, int phdDuration) {
-        this.phdStudentId = phdStudentId;
-        this.phdStart = phdStart;
-        this.phdDuration = phdDuration;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Integer getPhdStudentId() {
-        return phdStudentId;
-    }
-
-    /**
-     *
-     * @param phdStudentId
-     */
-    public void setPhdStudentId(Integer phdStudentId) {
-        this.phdStudentId = phdStudentId;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Date getPhdStart() {
-        return phdStart;
-    }
-
-    /**
-     *
-     * @param phdStart
-     */
-    public void setPhdStart(Date phdStart) {
-        this.phdStart = phdStart;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getPhdMainFunding() {
-        return phdMainFunding;
-    }
-
-    /**
-     *
-     * @param phdMainFunding
-     */
-    public void setPhdMainFunding(String phdMainFunding) {
-        this.phdMainFunding = phdMainFunding;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Date getPhdDefenseDate() {
-        return phdDefenseDate;
-    }
-
-    /**
-     *
-     * @param phdDefenseDate
-     */
-    public void setPhdDefenseDate(Date phdDefenseDate) {
-        this.phdDefenseDate = phdDefenseDate;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public int getPhdDuration() {
-        return phdDuration;
-    }
-
-    /**
-     *
-     * @param phdDuration
-     */
-    public void setPhdDuration(int phdDuration) {
-        this.phdDuration = phdDuration;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getPhdFutur() {
-        return phdFutur;
-    }
-
-    /**
-     *
-     * @param phdFutur
-     */
-    public void setPhdFutur(String phdFutur) {
-        this.phdFutur = phdFutur;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public List<Supervisor> getSupervisorList() {
-        return supervisorList;
-    }
-
-    /**
-     *
-     * @param supervisorList
-     */
-    public void setSupervisorList(List<Supervisor> supervisorList) {
-        this.supervisorList = supervisorList;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public List<PhdAssociatedCompany> getPhdAssociatedCompanyList() {
-        return phdAssociatedCompanyList;
-    }
-
-    /**
-     *
-     * @param phdAssociatedCompanyList
-     */
-    public void setPhdAssociatedCompanyList(List<PhdAssociatedCompany> phdAssociatedCompanyList) {
-        this.phdAssociatedCompanyList = phdAssociatedCompanyList;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public PhdType getPhdTypeId() {
-        return phdTypeId;
-    }
-
-    /**
-     *
-     * @param phdTypeId
-     */
-    public void setPhdTypeId(PhdType phdTypeId) {
-        this.phdTypeId = phdTypeId;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Researcher getResearcherId() {
-        return researcherId;
-    }
-
-    /**
-     *
-     * @param researcherId
-     */
-    public void setResearcherId(Researcher researcherId) {
-        this.researcherId = researcherId;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (phdStudentId != null ? phdStudentId.hashCode() : 0);
-        return hash;
-    }
-
-    /**
-     *
-     * @param object
-     * @return
-     */
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof PhdStudent)) {
-            return false;
-        }
-        PhdStudent other = (PhdStudent) object;
-        if ((this.phdStudentId == null && other.phdStudentId != null) || (this.phdStudentId != null && !this.phdStudentId.equals(other.phdStudentId))) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public String toString() {
-        return "org.centrale.hceres.items.PhdStudent[ phdStudentId=" + phdStudentId + " ]";
-    }
-    
 }
