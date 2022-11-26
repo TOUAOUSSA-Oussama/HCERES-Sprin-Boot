@@ -1,7 +1,11 @@
 package org.centrale.hceres.controller;
 
+import java.util.List;
 import java.util.Map;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.centrale.hceres.items.Activity;
 import org.centrale.hceres.items.Researcher;
 import org.centrale.hceres.repository.ResearchRepository;
 import org.centrale.hceres.service.ResearchService;
@@ -42,6 +46,18 @@ public class ResearchController {
 	@GetMapping("/Researchers")
 	public Iterable<Researcher> getResearchers() {
 		return rs.getResearchers();
+	}
+
+	@GetMapping("/Researcher/{id}/Activities")
+	public List<Activity> getResearcherActivity(@RequestBody @PathVariable("id") final Integer id) {
+		return researchRepo.findById(id).map(researcher -> {
+			List<Activity> activities = researcher.getActivityList();
+			for (Activity activity : activities) {
+				// remove current researcher from researcher list to prevent redundant information of same researcher id
+				activity.getResearcherList().removeIf(r -> r.getResearcherId().equals(researcher.getResearcherId()));
+			}
+			return researcher.getActivityList();
+		}).orElse(null);
 	}
 	
 	/**

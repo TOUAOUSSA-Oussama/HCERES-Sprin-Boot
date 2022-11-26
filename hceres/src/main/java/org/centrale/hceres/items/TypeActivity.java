@@ -8,6 +8,7 @@
  * L LETERTRE, S LIMOUX, JY MARTIN
  * -------------------------------------------------------------------------------- */
 package org.centrale.hceres.items;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -56,6 +57,7 @@ public class TypeActivity implements Serializable {
     private String nameType;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTypeActivity")
+    @JsonIgnore
     private List<Activity> activityList;
 
 }

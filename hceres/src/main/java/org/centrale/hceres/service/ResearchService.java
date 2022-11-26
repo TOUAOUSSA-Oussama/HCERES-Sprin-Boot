@@ -1,22 +1,11 @@
 package org.centrale.hceres.service;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Date;
 import java.util.Map;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
 
-import org.centrale.hceres.items.Activity;
-import org.centrale.hceres.items.Education;
-import org.centrale.hceres.items.EducationInvolvment;
-import org.centrale.hceres.items.EducationLevel;
 import org.centrale.hceres.items.Researcher;
-import org.centrale.hceres.items.TypeActivity;
 import org.centrale.hceres.repository.ResearchRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,7 +30,14 @@ public class ResearchService {
 	public Iterable<Researcher> getResearchers(){
 		return researchRepo.findAll();
 	}
-	
+
+	/**
+	 * permet d'avoir la liste des chercheurs
+	 */
+	public Optional<Researcher> getResearcher(final Integer id){
+		return researchRepo.findById(id);
+	}
+
 	/**
 	 * supprimer l'elmt selon son id
 	 * @param id : id de l'elmt
