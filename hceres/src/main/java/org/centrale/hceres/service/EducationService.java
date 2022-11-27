@@ -79,7 +79,7 @@ public class EducationService {
 	 * @return : l'elemt ajouter a la base de donnees
 	 */
 	@Transactional
-	public Education saveEducation(@RequestBody Map<String, Object> request) {
+	public Activity saveEducation(@RequestBody Map<String, Object> request) {
 		
 		Education educationTosave = new Education();
 		
@@ -142,8 +142,10 @@ public class EducationService {
 				
 		// Enregistrer Education dans la base de données :
 		Education saveEducation = educationRepo.save(educationTosave);
-		
-		return saveEducation;
+
+		// wrapping all elements in activity
+		savedActivity.setEducation(saveEducation);
+		return savedActivity;
 	}
 	
 	// Convertir une date string en Date

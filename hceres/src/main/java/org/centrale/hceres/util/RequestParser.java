@@ -7,4 +7,10 @@ public class RequestParser {
             return (Integer) number;
         else return Integer.parseInt(String.valueOf(number));
     }
+
+    public static String getAsString(Object string) throws NullPointerException {
+        if (string == null)
+            throw new NullPointerException();
+        return String.valueOf(string);
+    }
 }

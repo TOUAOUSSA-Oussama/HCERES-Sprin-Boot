@@ -42,8 +42,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "activity")
 @NamedQueries({
-    @NamedQuery(name = "Activity.findAll", query = "SELECT a FROM Activity a"),
-    @NamedQuery(name = "Activity.findByIdActivity", query = "SELECT a FROM Activity a WHERE a.idActivity = :idActivity")})
+        @NamedQuery(name = "Activity.findAll", query = "SELECT a FROM Activity a")})
 @Getter
 @Setter
 @NoArgsConstructor
@@ -64,6 +63,11 @@ public class Activity implements Serializable {
     @JoinColumn(name = "id_type_activity", referencedColumnName = "id_type_activity")
     @ManyToOne(optional = false)
     private TypeActivity typeActivity;
+
+    public void setTypeActivity(TypeActivity typeActivity) {
+        this.typeActivity = typeActivity;
+        if (typeActivity != null) setIdTypeActivity(typeActivity.getIdTypeActivity());
+    }
 
     @JoinTable(name = "activity_team", joinColumns = {
             @JoinColumn(name = "id_activity", referencedColumnName = "id_activity")}, inverseJoinColumns = {

@@ -21,7 +21,6 @@ import {logoutUser} from "../../services";
 
 const Navbar = () => {
     const [click, setClick] = useState(false);
-    const [isWindowBig, setWindowBig] = useState(true);
     const closeMobileMenu = () => setClick(false);
 
     const dispatch = useDispatch();
@@ -29,19 +28,6 @@ const Navbar = () => {
         dispatch(logoutUser());
     };
     const handleClick = () => setClick(!click);
-
-    // pour n'afficher le grand boutton que pour les garndes ecrans
-    const calculateIsWindowBig = () => {
-        if (window.innerWidth <= 960) {
-            setWindowBig(false);
-        } else {
-            setWindowBig(true);
-        }
-    };
-
-    useEffect(() => {
-        calculateIsWindowBig();
-    }, []);
 
     return (
         // Nav, NavbarContainer, ... sont des styles qu'on a definti dans Navbar.elements.js
@@ -81,17 +67,9 @@ const Navbar = () => {
                     </NavItem>
                     {/* ajouter bouton de deconnexion */}
                     <NavItemBtn>
-                        {isWindowBig ? (
                             <NavBtnLink to='/' onClick={logout}>
-                                <Button fontBig primary>Deconnexion</Button>
+                                <Button primary>Deconnexion</Button>
                             </NavBtnLink>
-                        ) : (
-                            <NavBtnLink to='/' onClick={logout}>
-                                <Button primary>
-                                    Deconnexion
-                                </Button>
-                            </NavBtnLink>
-                        )}
                     </NavItemBtn>
                 </NavMenu>
             </NavbarContainer>

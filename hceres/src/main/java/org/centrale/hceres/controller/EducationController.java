@@ -12,6 +12,7 @@ import org.centrale.hceres.items.Researcher;
 import org.centrale.hceres.service.EducationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.Map;
 
 // Controller permet de receptionner la requete http depuis le client, envoyer cette requete a service pour la traiter, puis retouner la reponse
@@ -19,28 +20,40 @@ import java.util.Map;
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
 public class EducationController {
-	
-	/**
-	 * instanciation
-	 */
-	@Autowired
-	private EducationService eduService;
+
+    /**
+     * instanciation
+     */
+    @Autowired
+    private EducationService eduService;
 
 
-	/**
-	 * return a list of activities of education type only
-	 */
-	@GetMapping(value ="/Educations")
-	public List<Activity> getEducations() {
-		return eduService.getEducations();
-	}
+    /**
+     * return a list of activities of education type only
+     */
+    @GetMapping(value = "/Educations")
+    public List<Activity> getEducations() {
+        return eduService.getEducations();
+    }
 
-	/**
-	 * ajouter un elmt a la base de donnees
-	 * @return l'elmt ajoute
-	 */
-	@PostMapping(value ="/AddEducation")
-	public Education createEducation(@RequestBody Map<String, Object> request) {
-		return eduService.saveEducation(request);
-	}
+    /**
+     * ajouter un elmt a la base de donnees
+     *
+     * @return Activity
+     */
+    @PostMapping(value = "/Education/Create")
+    public Activity createEducation(@RequestBody Map<String, Object> request) {
+        return eduService.saveEducation(request);
+    }
+
+    /**
+     * Delete - Delete an element
+     *
+     * @param id - The id of the element
+     */
+    @DeleteMapping("/Education/Delete/{id}")
+
+    public void deleteEducation(@RequestBody @PathVariable("id") final Integer id) {
+        eduService.deleteEducation(id);
+    }
 }

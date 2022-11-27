@@ -1,20 +1,17 @@
 import React from 'react';
-import './Activity.css';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import Axios from 'axios'
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
-import axios from "axios";
 import {ListGroup} from "react-bootstrap";
+import {fetchListResearchers} from "../../../services/Researcher/ResearcherActions";
+import {addEducation} from "../../../services/education/EducationActions";
 
 // If targetResearcher is set in props use it as default without charging list from database
-// If listeChercheurs is set then use it in selection menu of list
 // else load list de chercheurs from database
-function Education(props) {
+function EducationAdd(props) {
     const [showModal, setShowModal] = React.useState(true);
     const targetResearcher = props.targetResearcher;
-    const listeChercheurs = props.listeChercheurs;
 
     const handleClose = (msg = null) => {
         setShowModal(false);
@@ -32,16 +29,12 @@ function Education(props) {
 
     const [researchers, setResearchers] = React.useState([]);
 
-    async function componentDidMount() {
-        if (!targetResearcher && !listeChercheurs) {
-            const url = "http://localhost:9000/Researchers";
-            const response = await axios.get(url);
-
-            const listeChercheurs = response.data;
-
-            setResearchers(listeChercheurs)
-        }
-    }
+    React.useEffect(() => {
+        if (!targetResearcher)
+            fetchListResearchers().then(list => {
+                setResearchers(list);
+            });
+    }, []);
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -55,8 +48,7 @@ function Education(props) {
             educationCompletion: formattedDate
         };
 
-        Axios.post("http://localhost:9000/AddEducation", data)
-            .then(response => {
+        addEducation(data).then(response => {
                 // const activityId = response.data.researcherId;
                 const msg = {
                     "successMsg": "Education ajouté avec un id " + response.data.idActivity,
@@ -79,7 +71,7 @@ function Education(props) {
         setDate(event);
     }
 
-    const handleChange = e => setResearcherId(e.target.value);
+    const onReseacherSelection = id => setResearcherId(id.target.value);
 
     return (
         <div>
@@ -97,7 +89,7 @@ function Education(props) {
                         {targetResearcher ?
                             <ListGroup.Item variant={"primary"}>{targetResearcher.researcherName} {targetResearcher.researcherSurname}</ListGroup.Item>:
 
-                            <select onClick={componentDidMount} onChange={handleChange}>
+                            <select onChange={onReseacherSelection}>
                                 {researchers.map(item => {
                                     return (<option key={item.researcherId}
                                                     value={item.researcherId}>{item.researcherName} {item.researcherSurname}</option>);
@@ -190,4 +182,4 @@ function Education(props) {
     );
 }
 
-export default Education;
+export default EducationAdd;

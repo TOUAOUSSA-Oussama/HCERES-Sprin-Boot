@@ -6,7 +6,7 @@ import './Activity.css'
 import Navbar from '../Navbar/Navbar';
 import SrAward from './SrAward';
 
-import Education from './Education';
+import EducationAdd from './education/EducationAdd';
 import PostDoctorat from './PostDoctorat';
 import Platform from './Platform';
 import Editorial from './Editorial';
@@ -101,7 +101,7 @@ export default function Activity() {
                 {showEssaiClinique && (<EssaiClinique onHideAction={() => setEssaiClinique(false)}> </EssaiClinique>)}
                 {showIncomingMobility && (<IncomingMobility onHideAction={() => setIncomingMobility(false)}> </IncomingMobility>)}
                 {showScientificExpertise && (<ScientificExpertise onHideAction={() =>setScientificExpertise(false)}> </ScientificExpertise>)}
-                {showEducation && (<Education onHideAction={() => setShowEducation(false)}/>)}
+                {showEducation && (<EducationAdd onHideAction={() => setShowEducation(false)}/>)}
                 {showPostDoctorat && (<PostDoctorat onHideAction={() => setShowPostDoctorat(false)}> </PostDoctorat>)}
                 {showPlatform && (<Platform onHideAction={() => setShowPlatform(false)}></Platform>)}
                 {showEditorial && (<Editorial onHideAction={() => setShowEditorial(false)}></Editorial>)}

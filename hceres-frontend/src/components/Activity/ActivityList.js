@@ -6,7 +6,7 @@ import ScientificExpertise from './ScientificExpertise';
 import Navbar from '../Navbar/Navbar';
 import SrAward from './SrAward';
 
-import Education from './Education';
+import EducationAdd from './education/EducationAdd';
 import BootstrapTable from 'react-bootstrap-table-next';
 import PostDoctorat from './PostDoctorat';
 import Platform from './Platform';
@@ -18,213 +18,253 @@ import OralCommunication from './OralCommunication';
 import {Alert, Card, Col, Container, ListGroup, Table} from "react-bootstrap";
 import Collapse from 'react-bootstrap/Collapse';
 import {BiShow, BiHide} from "react-icons/bi";
+import EducationList from "./education/EducationList";
+import ResearcherElement from "../Researcher/ResearcherElement";
 
-export default function ActivityList() {
-    const [showEducation, setShowEducation] = React.useState(false);
-    const [showPrix, setShowPrix] = React.useState(false);
-    const [showPlatform, setShowPlatform] = React.useState(false);
-    const [showOralCommunication, setShowOralCommunication] = React.useState(false);
-    const [showSeiIndustrialRDContract, setShowSeiIndustrialRDContract] = React.useState(false);
-    const [showInterCollaboration, setShowInterCollaboration] = React.useState(false);
-    const [showScientificExpertise, setShowScientificExpertise] = React.useState(false);
-    const [showEssaiClinique, setShowEssaiClinique] = React.useState(false);
-    const [showIncomingMobility, setShowIncomingMobility] = React.useState(false);
-    const [showOutgoingMobility, setShowOutgoingMobility] = React.useState(false);
-    const [showEditorial, setShowEditorial] = React.useState(false);
-    const [showComparnyCreation, setShowComparnyCreation] = React.useState(false);
-    const [showPostDoctorat, setShowPostDoctorat] = React.useState(false);
-    const [showPatent, setShowPatent] = React.useState(false);
-    const [showReview, setShowReview] = React.useState(false);
 
-    const activeItemClass = "border-primary text-primary item_direction"
-    const inactiveItemClass = "item_direction"
+// if target researcher is set in props will show only related information of target researcher
+// otherwise it show actvities by category
+export default function ActivityList(props) {
+    const targetResearcher = props.targetResearcher;
+    const showListByDefault = props.showListByDefault;
+    const [successActivityAlert, setSuccessActivityAlert] = React.useState('');
+    const [errorActivityAlert, setErrorActivityAlert] = React.useState('');
+
+    const [showEducationList, setShowEducationList] = React.useState(true);
+    const [showPrixList, setShowPrixList] = React.useState(showListByDefault);
+    const [showPlatformList, setShowPlatformList] = React.useState(showListByDefault);
+    const [showOralCommunicationList, setShowOralCommunicationList] = React.useState(showListByDefault);
+    const [showSeiIndustrialRDContractList, setShowSeiIndustrialRDContractList] = React.useState(showListByDefault);
+    const [showInterCollaborationList, setShowInterCollaborationList] = React.useState(showListByDefault);
+    const [showScientificExpertiseList, setShowScientificExpertiseList] = React.useState(showListByDefault);
+    const [showEssaiCliniqueList, setShowEssaiCliniqueList] = React.useState(showListByDefault);
+    const [showIncomingMobilityList, setShowIncomingMobilityList] = React.useState(showListByDefault);
+    const [showOutgoingMobilityList, setShowOutgoingMobilityList] = React.useState(showListByDefault);
+    const [showEditorialList, setShowEditorialList] = React.useState(showListByDefault);
+    const [showComparnyCreationList, setShowComparnyCreationList] = React.useState(showListByDefault);
+    const [showPostDoctoratList, setShowPostDoctoratList] = React.useState(showListByDefault);
+    const [showPatentList, setShowPatentList] = React.useState(showListByDefault);
+    const [showReviewList, setShowReviewList] = React.useState(showListByDefault);
+
+    // cached variable list to prevent loading multiple times
+    const [educationList, setEducationList] = React.useState();
+
+    const sendMessageToActivity = (messages = null) => {
+        // silent close
+        if (!messages) return;
+
+        if (messages.successMsg) {
+            setSuccessActivityAlert(messages.successMsg)
+        }
+
+        if (messages.errorMsg) {
+            setErrorActivityAlert(messages.errorMsg)
+        }
+    }
+
+    const activeItemClass = "border-primary text-primary flex-fill"
+    const inactiveItemClass = "flex-fill"
     return (
 
-        <Container>
+        <div>
             <div>
                 <h1>
                     Activités
                 </h1>
-                <div className={"row"}>
+                <div>
 
-                    <div className={"col-3 list_container"} role={"button"}>
-                        <ListGroup>
-                            <ListGroup.Item onClick={() => setShowEducation(!showEducation)}
-                                            className={showEducation ? activeItemClass : inactiveItemClass}>
-                                {showEducation ? <BiShow/> : <BiHide/>}
+                    <div className={"list_container"} role={"button"}>
+                        {targetResearcher && <ResearcherElement targetResearcher={targetResearcher} horizontal/>}
+                        <ListGroup horizontal={true}>
+                            <ListGroup.Item onClick={() => setShowEducationList(!showEducationList)}
+                                            className={showEducationList ? activeItemClass : inactiveItemClass}>
+                                {showEducationList ? <BiShow/> : <BiHide/>}
                                 &nbsp;
                                 Education
                             </ListGroup.Item>
 
-                            <ListGroup.Item onClick={() => setShowPrix(!showPrix)}
-                                            className={showPrix ? activeItemClass : inactiveItemClass}>
-                                {showPrix ? <BiShow/> : <BiHide/>}
+                            <ListGroup.Item onClick={() => setShowPrixList(!showPrixList)}
+                                            className={showPrixList ? activeItemClass : inactiveItemClass}>
+                                {showPrixList ? <BiShow/> : <BiHide/>}
                                 &nbsp;
                                 Prix
                             </ListGroup.Item>
 
-                            <ListGroup.Item onClick={() => setShowPlatform(!showPlatform)}
-                                            className={showPlatform ? activeItemClass : inactiveItemClass}>
-                                {showPlatform ? <BiShow/> : <BiHide/>}
+                            <ListGroup.Item onClick={() => setShowPlatformList(!showPlatformList)}
+                                            className={showPlatformList ? activeItemClass : inactiveItemClass}>
+                                {showPlatformList ? <BiShow/> : <BiHide/>}
                                 &nbsp;
                                 Platform
                             </ListGroup.Item>
 
-                            <ListGroup.Item onClick={() => setShowOralCommunication(!showOralCommunication)}
-                                            className={showOralCommunication ? activeItemClass : inactiveItemClass}>
-                                {showOralCommunication ? <BiShow/> : <BiHide/>}
+                            <ListGroup.Item onClick={() => setShowOralCommunicationList(!showOralCommunicationList)}
+                                            className={showOralCommunicationList ? activeItemClass : inactiveItemClass}>
+                                {showOralCommunicationList ? <BiShow/> : <BiHide/>}
                                 &nbsp;
                                 Communication orale
                             </ListGroup.Item>
 
-                            <ListGroup.Item onClick={() => setShowSeiIndustrialRDContract(!showSeiIndustrialRDContract)}
-                                            className={showSeiIndustrialRDContract ? activeItemClass : inactiveItemClass}>
-                                {showSeiIndustrialRDContract ? <BiShow/> : <BiHide/>}
+                            <ListGroup.Item
+                                onClick={() => setShowSeiIndustrialRDContractList(!showSeiIndustrialRDContractList)}
+                                className={showSeiIndustrialRDContractList ? activeItemClass : inactiveItemClass}>
+                                {showSeiIndustrialRDContractList ? <BiShow/> : <BiHide/>}
                                 &nbsp;
                                 Signature d'une contrat industrielle
                             </ListGroup.Item>
-
-                            <ListGroup.Item onClick={() => setShowInterCollaboration(!showInterCollaboration)}
-                                            className={showInterCollaboration ? activeItemClass : inactiveItemClass}>
-                                {showInterCollaboration ? <BiShow/> : <BiHide/>}
+                        </ListGroup>
+                        <ListGroup horizontal={true}>
+                            <ListGroup.Item onClick={() => setShowInterCollaborationList(!showInterCollaborationList)}
+                                            className={showInterCollaborationList ? activeItemClass : inactiveItemClass}>
+                                {showInterCollaborationList ? <BiShow/> : <BiHide/>}
                                 &nbsp;
                                 Collaboration internationale
                             </ListGroup.Item>
 
-                            <ListGroup.Item onClick={() => setShowScientificExpertise(!showScientificExpertise)}
-                                            className={showScientificExpertise ? activeItemClass : inactiveItemClass}>
-                                {showScientificExpertise ? <BiShow/> : <BiHide/>}
+                            <ListGroup.Item onClick={() => setShowScientificExpertiseList(!showScientificExpertiseList)}
+                                            className={showScientificExpertiseList ? activeItemClass : inactiveItemClass}>
+                                {showScientificExpertiseList ? <BiShow/> : <BiHide/>}
                                 &nbsp;
                                 Expertise scientifique
                             </ListGroup.Item>
 
-                            <ListGroup.Item onClick={() => setShowEssaiClinique(!showEssaiClinique)}
-                                            className={showEssaiClinique ? activeItemClass : inactiveItemClass}>
-                                {showEssaiClinique ? <BiShow/> : <BiHide/>}
+                            <ListGroup.Item onClick={() => setShowEssaiCliniqueList(!showEssaiCliniqueList)}
+                                            className={showEssaiCliniqueList ? activeItemClass : inactiveItemClass}>
+                                {showEssaiCliniqueList ? <BiShow/> : <BiHide/>}
                                 &nbsp;
                                 Essai clinique
                             </ListGroup.Item>
 
-                            <ListGroup.Item onClick={() => setShowIncomingMobility(!showIncomingMobility)}
-                                            className={showIncomingMobility ? activeItemClass : inactiveItemClass}>
-                                {showIncomingMobility ? <BiShow/> : <BiHide/>}
+                            <ListGroup.Item onClick={() => setShowIncomingMobilityList(!showIncomingMobilityList)}
+                                            className={showIncomingMobilityList ? activeItemClass : inactiveItemClass}>
+                                {showIncomingMobilityList ? <BiShow/> : <BiHide/>}
                                 &nbsp;
                                 Mobilité entrante
                             </ListGroup.Item>
 
-                            <ListGroup.Item onClick={() => setShowOutgoingMobility(!showOutgoingMobility)}
-                                            className={showOutgoingMobility ? activeItemClass : inactiveItemClass}>
-                                {showOutgoingMobility ? <BiShow/> : <BiHide/>}
+                            <ListGroup.Item onClick={() => setShowOutgoingMobilityList(!showOutgoingMobilityList)}
+                                            className={showOutgoingMobilityList ? activeItemClass : inactiveItemClass}>
+                                {showOutgoingMobilityList ? <BiShow/> : <BiHide/>}
                                 &nbsp;
                                 Mobilité sortante
                             </ListGroup.Item>
-
-                            <ListGroup.Item onClick={() => setShowEditorial(!showEditorial)}
-                                            className={showEditorial ? activeItemClass : inactiveItemClass}>
-                                {showEditorial ? <BiShow/> : <BiHide/>}
+                        </ListGroup>
+                        <ListGroup horizontal={true}>
+                            <ListGroup.Item onClick={() => setShowEditorialList(!showEditorialList)}
+                                            className={showEditorialList ? activeItemClass : inactiveItemClass}>
+                                {showEditorialList ? <BiShow/> : <BiHide/>}
                                 &nbsp;
                                 Edition
                             </ListGroup.Item>
 
-                            <ListGroup.Item onClick={() => setShowComparnyCreation(!showComparnyCreation)}
-                                            className={showComparnyCreation ? activeItemClass : inactiveItemClass}>
-                                {showComparnyCreation ? <BiShow/> : <BiHide/>}
+                            <ListGroup.Item onClick={() => setShowComparnyCreationList(!showComparnyCreationList)}
+                                            className={showComparnyCreationList ? activeItemClass : inactiveItemClass}>
+                                {showComparnyCreationList ? <BiShow/> : <BiHide/>}
                                 &nbsp;
                                 Création d'entreprise
                             </ListGroup.Item>
 
-                            <ListGroup.Item onClick={() => setShowPostDoctorat(!showPostDoctorat)}
-                                            className={showPostDoctorat ? activeItemClass : inactiveItemClass}>
-                                {showPostDoctorat ? <BiShow/> : <BiHide/>}
+                            <ListGroup.Item onClick={() => setShowPostDoctoratList(!showPostDoctoratList)}
+                                            className={showPostDoctoratList ? activeItemClass : inactiveItemClass}>
+                                {showPostDoctoratList ? <BiShow/> : <BiHide/>}
                                 &nbsp;
                                 PostDoctorat
                             </ListGroup.Item>
 
-                            <ListGroup.Item onClick={() => setShowPatent(!showPatent)}
-                                            className={showPatent ? activeItemClass : inactiveItemClass}>
-                                {showPatent ? <BiShow/> : <BiHide/>}
+                            <ListGroup.Item onClick={() => setShowPatentList(!showPatentList)}
+                                            className={showPatentList ? activeItemClass : inactiveItemClass}>
+                                {showPatentList ? <BiShow/> : <BiHide/>}
                                 &nbsp;
                                 Brevet
                             </ListGroup.Item>
 
-                            <ListGroup.Item onClick={() => setShowReview(!showReview)}
-                                            className={showReview ? activeItemClass : inactiveItemClass}>
-                                {showReview ? <BiShow/> : <BiHide/>}
+                            <ListGroup.Item onClick={() => setShowReviewList(!showReviewList)}
+                                            className={showReviewList ? activeItemClass : inactiveItemClass}>
+                                {showReviewList ? <BiShow/> : <BiHide/>}
                                 &nbsp;
                                 Revue
                             </ListGroup.Item>
                         </ListGroup>
                     </div>
 
-                    <div className={"col-9"}>
-
-                        <Collapse in={showEducation}>
-                            <div>{showEducation && <div>import the file to showEducation here</div>}</div>
+                    <div>
+                        {successActivityAlert && <Alert variant={"success"}
+                                                        onClose={() => setSuccessActivityAlert("")}
+                                                        dismissible={true}>{successActivityAlert}</Alert>}
+                        {errorActivityAlert && <Alert variant={"danger"}
+                                                      onClose={() => setErrorActivityAlert("")}
+                                                      dismissible={true}>{errorActivityAlert}</Alert>}
+                        <Collapse in={showEducationList}>
+                            <div>
+                                {showEducationList && <EducationList sendMessageToActivity={sendMessageToActivity} targetResearcher={targetResearcher}/>}
+                            </div>
                         </Collapse>
 
-                        <Collapse in={showPrix}>
-                            <div>{showPrix && <div>import the file to showPrix here</div>}</div>
+                        <Collapse in={showPrixList}>
+                            <div>{showPrixList && <div>import the file to showPrixList here</div>}</div>
                         </Collapse>
 
-                        <Collapse in={showPlatform}>
-                            <div>{showPlatform && <div>import the file to showPlatform here</div>}</div>
+                        <Collapse in={showPlatformList}>
+                            <div>{showPlatformList && <div>import the file to showPlatformList here</div>}</div>
                         </Collapse>
 
-                        <Collapse in={showOralCommunication}>
-                            <div>{showOralCommunication &&
-                                <div>import the file to showOralCommunication here</div>}</div>
+                        <Collapse in={showOralCommunicationList}>
+                            <div>{showOralCommunicationList &&
+                                <div>import the file to showOralCommunicationList here</div>}</div>
                         </Collapse>
 
-                        <Collapse in={showSeiIndustrialRDContract}>
-                            <div>{showSeiIndustrialRDContract &&
-                                <div>import the file to showSeiIndustrialRDContract here</div>}</div>
+                        <Collapse in={showSeiIndustrialRDContractList}>
+                            <div>{showSeiIndustrialRDContractList &&
+                                <div>import the file to showSeiIndustrialRDContractList here</div>}</div>
                         </Collapse>
 
-                        <Collapse in={showInterCollaboration}>
-                            <div>{showInterCollaboration &&
-                                <div>import the file to showInterCollaboration here</div>}</div>
+                        <Collapse in={showInterCollaborationList}>
+                            <div>{showInterCollaborationList &&
+                                <div>import the file to showInterCollaborationList here</div>}</div>
                         </Collapse>
 
-                        <Collapse in={showScientificExpertise}>
-                            <div>{showScientificExpertise &&
-                                <div>import the file to showScientificExpertise here</div>}</div>
+                        <Collapse in={showScientificExpertiseList}>
+                            <div>{showScientificExpertiseList &&
+                                <div>import the file to showScientificExpertiseList here</div>}</div>
                         </Collapse>
 
-                        <Collapse in={showEssaiClinique}>
-                            <div>{showEssaiClinique && <div>import the file to showEssaiClinique here</div>}</div>
+                        <Collapse in={showEssaiCliniqueList}>
+                            <div>{showEssaiCliniqueList &&
+                                <div>import the file to showEssaiCliniqueList here</div>}</div>
                         </Collapse>
 
-                        <Collapse in={showIncomingMobility}>
-                            <div>{showIncomingMobility && <div>import the file to showIncomingMobility here</div>}</div>
+                        <Collapse in={showIncomingMobilityList}>
+                            <div>{showIncomingMobilityList &&
+                                <div>import the file to showIncomingMobilityList here</div>}</div>
                         </Collapse>
 
-                        <Collapse in={showOutgoingMobility}>
-                            <div>{showOutgoingMobility && <div>import the file to showOutgoingMobility here</div>}</div>
+                        <Collapse in={showOutgoingMobilityList}>
+                            <div>{showOutgoingMobilityList &&
+                                <div>import the file to showOutgoingMobilityList here</div>}</div>
                         </Collapse>
 
-                        <Collapse in={showEditorial}>
-                            <div>{showEditorial && <div>import the file to showEditorial here</div>}</div>
+                        <Collapse in={showEditorialList}>
+                            <div>{showEditorialList && <div>import the file to showEditorialList here</div>}</div>
                         </Collapse>
 
-                        <Collapse in={showComparnyCreation}>
-                            <div>{showComparnyCreation && <div>import the file to showComparnyCreation here</div>}</div>
+                        <Collapse in={showComparnyCreationList}>
+                            <div>{showComparnyCreationList &&
+                                <div>import the file to showComparnyCreationList here</div>}</div>
                         </Collapse>
 
-                        <Collapse in={showPostDoctorat}>
-                            <div>{showPostDoctorat && <div>import the file to showPostDoctorat here</div>}</div>
+                        <Collapse in={showPostDoctoratList}>
+                            <div>{showPostDoctoratList && <div>import the file to showPostDoctoratList here</div>}</div>
                         </Collapse>
 
-                        <Collapse in={showPatent}>
-                            <div>{showPatent && <div>import the file to showPatent here</div>}</div>
+                        <Collapse in={showPatentList}>
+                            <div>{showPatentList && <div>import the file to showPatentList here</div>}</div>
                         </Collapse>
 
-                        <Collapse in={showReview}>
-                            <div>{showReview && <div>import the file to showReview here</div>}</div>
+                        <Collapse in={showReviewList}>
+                            <div>{showReviewList && <div>import the file to showReviewList here</div>}</div>
                         </Collapse>
                     </div>
                 </div>
             </div>
-        </Container>
-    )
+        </div>)
 }
 
