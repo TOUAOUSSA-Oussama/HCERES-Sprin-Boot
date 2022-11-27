@@ -43,8 +43,8 @@ public class SrAwardService {
 	/**
 	 * permet de retourner la liste
 	 */
-	public Iterable<SrAward> getSrAwards(){
-		return SrAwardRepo.findAll();
+	public List<Activity> getSrAwards(){
+		return activityRepo.findByIdTypeActivity(TypeActivity.IdTypeActivity.SR_AWARD.getId());
 	}
 	
 	/**
@@ -68,7 +68,7 @@ public class SrAwardService {
 	 * permet d'ajouter un elmt
 	 * @return : l'elemt ajouter a la base de donnees
 	 */
-	public SrAward saveSrAward(@RequestBody Map<String, Object>  request) {
+	public Activity saveSrAward(@RequestBody Map<String, Object>  request) {
 		
 		SrAward SrAwardTosave = new SrAward();
 		
@@ -84,7 +84,7 @@ public class SrAwardService {
 		
 	    // Activity : 
 		Activity activity = new Activity();
-		TypeActivity typeActivity = typeActivityLevelRepo.getById(29);
+		TypeActivity typeActivity = typeActivityLevelRepo.getById(TypeActivity.IdTypeActivity.SR_AWARD.getId());
 		activity.setTypeActivity(typeActivity);
 		
 		// ajouter cette activité à la liste de ce chercheur :
@@ -113,8 +113,8 @@ public class SrAwardService {
 				
 		// Enregistrer SrAward dans la base de données :
 		SrAward saveSrAward = SrAwardRepo.save(SrAwardTosave);
-		
-		return saveSrAward;
+		savedActivity.setSrAward(saveSrAward);
+		return savedActivity;
 	}
 	
 	// Convertir une date string en Date

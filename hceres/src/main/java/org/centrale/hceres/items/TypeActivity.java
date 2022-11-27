@@ -62,7 +62,8 @@ public class TypeActivity implements Serializable {
 
     @Getter
     public enum IdTypeActivity{
-        EDUCATION(12);
+        EDUCATION(12),
+        SR_AWARD(29);
 
 
         int id;
