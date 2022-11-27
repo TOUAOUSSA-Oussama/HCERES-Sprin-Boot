@@ -4,15 +4,18 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Axios from 'axios'
 import Modal from "react-bootstrap/Modal";
+import {fetchListResearchers} from "../../services/Researcher/ResearcherActions";
+import {Selector, SelectorFactory} from "react-redux";
 
 function Editorial( props) {
     const [showModal, setShowModal] = React.useState(true);
+    const targetResearcher = props.targetResearcher;
 
     const handleClose = () => {
         setShowModal(false);
         props.onHideAction.call();
     };
-    const [chercheur, setChercheur] = React.useState("");
+    const [researcherId, setResearcherId] = React.useState("");
     const [impactFactor, setImpactFactor] = React.useState("");
     const [startDate, setStartDate] = React.useState(null);
     const [endDate, setEndDate] = React.useState(null);
@@ -21,10 +24,12 @@ function Editorial( props) {
     const [formattedStartDate, setFormattedStartDate] = React.useState(null);
     const [formattedEndDate, setFormattedEndDate] = React.useState(null);
 
+    const [researchers, setResearchers] = React.useState([]);
+
     const handleSubmit = (event) => {
         event.preventDefault();
         let data = {
-            researcherId: chercheur,
+            researcherId: researcherId,
             impactFactor: impactFactor,
             startDate: formattedStartDate,
             endDate: formattedEndDate,
@@ -37,6 +42,13 @@ function Editorial( props) {
             })
         window.location.reload();
     }
+
+    React.useEffect(() => {
+        if (!targetResearcher)
+            fetchListResearchers().then(list => {
+                setResearchers(list);
+            });
+    }, []);
 
 
     const handleStartDate = (event) => {
@@ -65,15 +77,14 @@ function Editorial( props) {
                 <label className='label'>
                     Chercheur
                 </label>
-                <input
-                    placeholder='Nom'
-                    className='input-container'
-                    name="nom"
-                    type="nom"
-                    value={chercheur}
-                    onChange={e => setChercheur(e.target.value)}
-                    required/>
-
+                        <select onSelect={(e)=> {
+                            setResearcherId(e.target.value);
+                        }} id={"selectorResearcherId"}>
+                            {researchers.map(item => {
+                                return (<option key={item.researcherId}
+                                                value={item.researcherId}>{item.researcherName} {item.researcherSurname}</option>);
+                            })}
+                        </select>
                 <label className='label'>
                     Facteur d'impact
                 </label>
