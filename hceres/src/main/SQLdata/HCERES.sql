@@ -194,7 +194,7 @@ CREATE TABLE public.company_creation (
     id_activity integer NOT NULL,
     company_creation_name character varying(256),
     company_creation_date date,
-    company_creation_active boolean DEFAULT true NOT NULL
+    company_creation_active bool DEFAULT true NOT NULL
 );
 
 
@@ -434,10 +434,10 @@ CREATE TABLE public.incoming_mobility (
     project_title character varying(256),
     associated_funding character varying(256),
     publication_reference character varying(256),
-    strategic_recurring_collab boolean,
-    active_project boolean,
-    umr_coordinated boolean,
-    agreement_signed boolean
+    strategic_recurring_collab bool,
+    active_project bool,
+    umr_coordinated bool,
+    agreement_signed bool
 );
 
 
@@ -676,13 +676,13 @@ CREATE TABLE public.national_international_collaboration (
     pi_partners character varying(256),
     mail_partners character varying(256),
     projetc_title character varying(256),
-    strategic_recurring_collab boolean,
-    active_project boolean,
+    strategic_recurring_collab bool,
+    active_project bool,
     associated_funding character varying(256),
     number_resulting_publications integer,
     ref_joint_publication character varying(256),
-    umr_coordinated boolean,
-    agreement_signed boolean
+    umr_coordinated bool,
+    agreement_signed bool
 );
 
 
@@ -710,12 +710,12 @@ CREATE TABLE public.network (
     id_activity integer NOT NULL,
     start_date date,
     name_network character varying(256),
-    active_network boolean,
+    active_network bool,
     associated_funding character varying(256),
     nb_resulting_publications integer,
     ref_resulting_publications character varying(256),
-    umr_coordinated boolean,
-    agreement_signed boolean
+    umr_coordinated bool,
+    agreement_signed bool
 );
 
 
@@ -759,7 +759,7 @@ CREATE TABLE public.outgoing_mobility (
     strategic_recurring_collab bit(1),
     active_project bit(1),
     umr_coordinated bit(1),
-    agreement_signed boolean
+    agreement_signed bool
 );
 
 
@@ -799,11 +799,11 @@ CREATE TABLE public.patent (
     publication_number character varying(256),
     publication_date date,
     inpi_link character varying(256),
-    status boolean DEFAULT false NOT NULL,
-    pct_extension_obtained boolean DEFAULT false NOT NULL,
+    status bool DEFAULT false NOT NULL,
+    pct_extension_obtained bool DEFAULT false NOT NULL,
     publication_number_pct_extension character varying(256),
     publication_date_pct_extension date,
-    international_extension boolean DEFAULT false NOT NULL,
+    international_extension bool DEFAULT false NOT NULL,
     publication_number_international_extension character varying(256),
     publication_date_international_extension date,
     ref_transfer_contract character varying(256),
@@ -1163,7 +1163,7 @@ ALTER TABLE public.sei_cifre_fellowship OWNER TO hceres;
 CREATE TABLE public.sei_clinical_trial (
     id_activity integer NOT NULL,
     start_date date,
-    coordinator_partner boolean,
+    coordinator_partner bool,
     title_clinical_trial character varying(256),
     end_date date,
     registration_nb character varying(256),
