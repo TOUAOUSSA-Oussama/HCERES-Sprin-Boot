@@ -33,6 +33,9 @@ function EducationAdd(props) {
         if (!targetResearcher)
             fetchListResearchers().then(list => {
                 setResearchers(list);
+                if (list.length > 0) {
+                    setResearcherId(list.entries().next().value[1].researcherId)
+                }
             });
     }, []);
 

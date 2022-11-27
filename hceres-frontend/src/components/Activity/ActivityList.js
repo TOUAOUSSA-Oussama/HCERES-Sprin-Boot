@@ -4,7 +4,6 @@ import EssaiClinique from './EssaiClinique';
 import IncomingMobility from './IncomingMobility';
 import ScientificExpertise from './ScientificExpertise';
 import Navbar from '../Navbar/Navbar';
-import SrAward from './SrAward';
 
 import EducationAdd from './education/EducationAdd';
 import BootstrapTable from 'react-bootstrap-table-next';
@@ -20,6 +19,8 @@ import Collapse from 'react-bootstrap/Collapse';
 import {BiShow, BiHide} from "react-icons/bi";
 import EducationList from "./education/EducationList";
 import ResearcherElement from "../Researcher/ResearcherElement";
+import SrAwardElement from "./sraward/SrAwardElement";
+import SrAwardList from "./sraward/SrAwardList";
 
 
 // if target researcher is set in props will show only related information of target researcher
@@ -200,7 +201,7 @@ export default function ActivityList(props) {
                         </Collapse>
 
                         <Collapse in={showPrixList}>
-                            <div>{showPrixList && <div>import the file to showPrixList here</div>}</div>
+                            <div>{showPrixList && <SrAwardList sendMessageToActivity={sendMessageToActivity} targetResearcher={targetResearcher}/>}</div>
                         </Collapse>
 
                         <Collapse in={showPlatformList}>

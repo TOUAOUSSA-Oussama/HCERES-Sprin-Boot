@@ -4,7 +4,6 @@ import IncomingMobility from './IncomingMobility';
 import ScientificExpertise from './ScientificExpertise';
 import './Activity.css'
 import Navbar from '../Navbar/Navbar';
-import SrAward from './SrAward';
 
 import PostDoctorat from './PostDoctorat';
 import Platform from './Platform';
@@ -91,7 +90,6 @@ export default function Activity() {
 
 
                 </div>
-                {showPrix && (<SrAward onHideAction={() => setShowPrix(false)}> </SrAward>)}
                 {showEssaiClinique && (<EssaiClinique onHideAction={() => setEssaiClinique(false)}> </EssaiClinique>)}
                 {showIncomingMobility && (<IncomingMobility onHideAction={() => setIncomingMobility(false)}> </IncomingMobility>)}
                 {showScientificExpertise && (<ScientificExpertise onHideAction={() =>setScientificExpertise(false)}> </ScientificExpertise>)}

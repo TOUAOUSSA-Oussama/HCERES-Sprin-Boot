@@ -2,6 +2,7 @@ class MyClass {
     constructor() {
         this.listeChercheurs = null;
         this.listeEducations = null;
+        this.listeSrAwards = null;
     }
 
     deleteActivity(activityList, idActivity) {
