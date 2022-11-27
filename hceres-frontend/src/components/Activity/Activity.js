@@ -6,7 +6,6 @@ import './Activity.css'
 import Navbar from '../Navbar/Navbar';
 import SrAward from './SrAward';
 
-import EducationAdd from './education/EducationAdd';
 import PostDoctorat from './PostDoctorat';
 import Platform from './Platform';
 import Editorial from './Editorial';
@@ -22,7 +21,6 @@ export default function Activity() {
     const [showIncomingMobility, setIncomingMobility] = React.useState(false);
     const [showScientificExpertise, setScientificExpertise] = React.useState(false);
     const [DateProjectStart, setDateProjectStart] = React.useState(null);
-    const [showEducation, setShowEducation] = React.useState(false);
     const [showPostDoctorat, setShowPostDoctorat] = React.useState(false);
     const [showPlatform, setShowPlatform] = React.useState(false);
     const [showEditorial, setShowEditorial] = React.useState(false);
@@ -46,10 +44,6 @@ export default function Activity() {
                 </div>
                 <div className='activityList'>
                     <ul>
-                        <li onClick={() => setShowEducation(true)}>
-                            <a>Education</a>
-                        </li>
-
                         <li onClick={() => setShowPrix(true)}>
                             <a>Prix</a>
                         </li>
@@ -101,7 +95,6 @@ export default function Activity() {
                 {showEssaiClinique && (<EssaiClinique onHideAction={() => setEssaiClinique(false)}> </EssaiClinique>)}
                 {showIncomingMobility && (<IncomingMobility onHideAction={() => setIncomingMobility(false)}> </IncomingMobility>)}
                 {showScientificExpertise && (<ScientificExpertise onHideAction={() =>setScientificExpertise(false)}> </ScientificExpertise>)}
-                {showEducation && (<EducationAdd onHideAction={() => setShowEducation(false)}/>)}
                 {showPostDoctorat && (<PostDoctorat onHideAction={() => setShowPostDoctorat(false)}> </PostDoctorat>)}
                 {showPlatform && (<Platform onHideAction={() => setShowPlatform(false)}></Platform>)}
                 {showEditorial && (<Editorial onHideAction={() => setShowEditorial(false)}></Editorial>)}
