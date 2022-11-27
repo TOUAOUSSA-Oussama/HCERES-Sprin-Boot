@@ -872,7 +872,7 @@ CREATE TABLE public.platform (
     managers character varying(256),
     affiliation character varying(256),
     labellisation character varying(256),
-    open_private_researchers boolean
+    open_private_researchers bool
 );
 
 
