@@ -1,6 +1,6 @@
 // Cette component est pour definir la barre de navigation
 import React, {useState, useEffect} from 'react';
-import {FaBars, FaTimes} from 'react-icons/fa';
+import {FaBars, FaHome, FaTimes, FaUserGraduate} from 'react-icons/fa';
 import {
     Nav,
     NavbarContainer,
@@ -18,6 +18,8 @@ import {Button} from '../../AppElements';
 import Logo from '../../assets/logo.png';
 import {useDispatch} from "react-redux";
 import {logoutUser} from "../../services";
+import {BiLogOut, BiTask} from "react-icons/bi";
+import {MdAddTask} from "react-icons/md";
 
 const Navbar = () => {
     const [click, setClick] = useState(false);
@@ -47,28 +49,28 @@ const Navbar = () => {
                 <NavMenu onClick={handleClick} click={click}>
                     <NavItem>
                         <NavLinks to="/Home" className={(nav) => nav.isActive() ? "active" : ""}>
-                            Accueil
+                            <FaHome/> Accueil
                         </NavLinks>
                     </NavItem>
                     <NavItem>
                         <NavLinks to="/Researcher">
-                            Chercheurs
+                            <FaUserGraduate/> Chercheurs
                         </NavLinks>
                     </NavItem>
                     <NavItem>
                         <NavLinks to="/Activity">
-                            Activités
+                            <BiTask/> Activités
                         </NavLinks>
                     </NavItem>
                     <NavItem>
                         <NavLinks to="/ActivityOld">
-                            Ajout d'activités
+                           <MdAddTask/> Ajout d'activités
                         </NavLinks>
                     </NavItem>
                     {/* ajouter bouton de deconnexion */}
                     <NavItemBtn>
                             <NavBtnLink to='/' onClick={logout}>
-                                <Button primary>Deconnexion</Button>
+                                <Button primary><BiLogOut/> Deconnexion</Button>
                             </NavBtnLink>
                     </NavItemBtn>
                 </NavMenu>
