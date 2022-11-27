@@ -24,8 +24,8 @@ public class PlatformService {
     private TypeActivityRepository typeActivityLevelRepo;
 
 
-    public Iterable<Platform> getPlatforms(){
-        return platformRepository.findAll();
+    public List<Activity> getPlatforms(){
+        return activityRepo.findByIdTypeActivity(TypeActivity.IdTypeActivity.PLATFORM.getId());
     }
 
 
@@ -34,15 +34,13 @@ public class PlatformService {
     }
 
 
-    public void deleteEducation(final Integer id) {
+    public void deletePlatform(final Integer id) {
         platformRepository.deleteById(id);
     }
 
-    public Platform savePlatform(@RequestBody Map<String, Object> request) {
+    public Activity savePlatform(@RequestBody Map<String, Object> request) {
 
         Platform platfomToSave = new Platform();
-
-        System.out.println((String) request.get("researcherId"));
 
         // Creation Date
         try {
@@ -69,7 +67,7 @@ public class PlatformService {
 
         // Activity :
         Activity activity = new Activity();
-        TypeActivity typeActivity = typeActivityLevelRepo.getById(6);
+        TypeActivity typeActivity = typeActivityLevelRepo.getById(TypeActivity.IdTypeActivity.PLATFORM.getId());
         activity.setTypeActivity(typeActivity);
 
         // Add this activity to the researcher activity list :
@@ -99,10 +97,8 @@ public class PlatformService {
 
         // Persist Platform to database :
         Platform savePlatform = platformRepository.save(platfomToSave);
-
-        return savePlatform;
-
-
+        savedActivity.setPlatform(savePlatform);
+        return savedActivity;
     }
 
     // Date to String

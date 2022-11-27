@@ -9,37 +9,37 @@ import filterFactory, {dateFilter} from 'react-bootstrap-table2-filter';
 
 import 'react-datepicker/dist/react-datepicker.css';
 import Button from "react-bootstrap/Button";
-import {Audio} from "react-loading-icons";
+import {Bars} from "react-loading-icons";
 import {chercheursColumnOfActivity, paginationOptions} from "../../util/BootStrapTableOptions";
 import {ImFilter} from "react-icons/im";
 import {AiFillDelete, AiOutlinePlusCircle} from "react-icons/ai";
-import EducationAdd from "./EducationAdd";
+import PlatformAdd from "./PlatformAdd";
 
 import ActivityTypes from "../../../const/ActivityTypes";
-import {fetchListEducations} from "../../../services/education/EducationActions";
+import {fetchListPlatforms} from "../../../services/platform/PlatformActions";
 import {fetchResearcherActivities} from "../../../services/Researcher/ResearcherActions";
-import EducationDelete from "./EducationDelete";
+import PlatformDelete from "./PlatformDelete";
 
 // If targetResearcher is set in props display related information only (
-// else load list des tous les educations du database
-function EducationList(props) {
+// else load list des tous les platforms du database
+function PlatformList(props) {
     const targetResearcher = props.targetResearcher;
 
-    const [educationList, setEducationList] = React.useState(null);
+    const [platformList, setPlatformList] = React.useState(null);
 
     const [showFilter, setShowFilter] = React.useState(false);
 
 
-    const [targetEducation, setTargetEducation] = React.useState(false);
-    const [showEducationAdd, setShowEducationAdd] = React.useState(false);
-    const [showEducationDelete, setShowEducationDelete] = React.useState(false);
+    const [targetPlatform, setTargetPlatform] = React.useState(false);
+    const [showPlatformAdd, setShowPlatformAdd] = React.useState(false);
+    const [showPlatformDelete, setShowPlatformDelete] = React.useState(false);
     const [listChangeCount, setListChangeCount] = React.useState(0);
 
     const {SearchBar, ClearSearchButton} = Search;
 
     const handleHideModal = (msg = null) => {
-        setShowEducationAdd(false);
-        setShowEducationDelete(false);
+        setShowPlatformAdd(false);
+        setShowPlatformDelete(false);
         if (msg) {
             // an add or delete did occur
             // re render the table to load new data
@@ -53,30 +53,30 @@ function EducationList(props) {
     React.useEffect(() => {
         if (!targetResearcher) {
             // attention that method always change reference to variable not only its content
-            fetchListEducations().then(list => setEducationList(list))
+            fetchListPlatforms().then(list => setPlatformList(list))
         } else
             fetchResearcherActivities(targetResearcher.researcherId)
                 .then(list => {
-                    setEducationList(list.filter(a => a.idTypeActivity === ActivityTypes.EDUCATIONAL_OUTPUT));
+                    setPlatformList(list.filter(a => a.idTypeActivity === ActivityTypes.PLATFORM));
                 })
     }, [listChangeCount]);
 
 
-    if (!educationList) {
-        return <div><Button><Audio/></Button></div>
+    if (!platformList) {
+        return <div><Button><Bars/></Button></div>
     } else {
-        if (educationList.length === 0) {
+        if (platformList.length === 0) {
             return <div className={"row"}>
                 <br/>
                 <div className={"col-8"}>
-                    <h3>Aucun Education est enregistre</h3>
+                    <h3>Aucun Platform est enregistre</h3>
                 </div>
                 <div className={"col-4"}>
-                    {showEducationAdd &&
-                        <EducationAdd targetResearcher={targetResearcher} onHideAction={handleHideModal}/>}
+                    {showPlatformAdd &&
+                        <PlatformAdd targetResearcher={targetResearcher} onHideAction={handleHideModal}/>}
                     <button className="btn btn-success" data-bs-toggle="button"
-                            onClick={() => setShowEducationAdd(true)}>
-                        <AiOutlinePlusCircle/> &nbsp; Ajouter une education
+                            onClick={() => setShowPlatformAdd(true)}>
+                        <AiOutlinePlusCircle/> &nbsp; Ajouter une platform
                     </button>
                 </div>
             </div>;
@@ -89,35 +89,39 @@ function EducationList(props) {
             formatter: (cell, row) => {
                 return (<div>
                     <button className="btn btn-outline-danger btn-sm" onClick={() => {
-                        setTargetEducation(row)
-                        setShowEducationDelete(true)
+                        setTargetPlatform(row)
+                        setShowPlatformDelete(true)
                     }}><AiFillDelete/></button>
                     &nbsp;  &nbsp;
                     {row.idActivity}
                 </div>)
             }
         }, {
-            dataField: 'education.educationCourseName',
-            text: 'Course',
-            sort: true,
-        }, {
-            dataField: 'education.educationDescription',
-            text: 'Description',
-        }, {
-            dataField: 'education.educationFormation',
-            text: 'Formation',
-            sort: true,
-        }, {
-            dataField: 'education.educationCompletion',
-            text: 'date d\'achèvement',
+            dataField: 'platform.creationDate',
+            text: 'Date de creation',
             sort: true,
             filter: showFilter ? dateFilter() : null,
+        }, {
+            dataField: 'platform.description',
+            text: 'Description',
+        }, {
+            dataField: 'platform.affiliation',
+            text: 'Affiliation',
+            sort: true,
+        }, {
+            dataField: 'platform.labellisation',
+            text: 'Labellisation',
+            sort: true,
+        }, {
+            dataField: 'platform.openPrivateResearchers',
+            text: 'Open Private Researchers',
+            sort: true,
         }];
 
-        let title = "Education"
+        let title = "Platform"
         if (!targetResearcher) {
             columns.push(chercheursColumnOfActivity)
-            title = "Liste des educations pour les Chercheurs"
+            title = "Liste des platforms pour les Chercheurs"
         }
         const CaptionElement = <div>
             <h3> {title} - &nbsp;
@@ -132,7 +136,7 @@ function EducationList(props) {
                 <ToolkitProvider
                     bootstrap4
                     keyField="idActivity"
-                    data={educationList}
+                    data={platformList}
                     columns={columns}
                     search
                 >
@@ -145,15 +149,15 @@ function EducationList(props) {
                                         <h3>{CaptionElement}</h3>
                                     </div>
                                     <div className={"col-4"}>
-                                        {showEducationAdd &&
-                                            <EducationAdd targetResearcher={targetResearcher}
+                                        {showPlatformAdd &&
+                                            <PlatformAdd targetResearcher={targetResearcher}
                                                           onHideAction={handleHideModal}/>}
-                                        {showEducationDelete &&
-                                            <EducationDelete targetEducation={targetEducation}
+                                        {showPlatformDelete &&
+                                            <PlatformDelete targetPlatform={targetPlatform}
                                                              onHideAction={handleHideModal}/>}
                                         <button className="btn btn-success" data-bs-toggle="button"
-                                                onClick={() => setShowEducationAdd(true)}>
-                                            <AiOutlinePlusCircle/> &nbsp; Ajouter une education
+                                                onClick={() => setShowPlatformAdd(true)}>
+                                            <AiOutlinePlusCircle/> &nbsp; Ajouter une platform
                                         </button>
                                     </div>
                                 </div>
@@ -162,7 +166,7 @@ function EducationList(props) {
                                 <BootstrapTable
                                     bootstrap4
                                     filter={filterFactory()}
-                                    pagination={paginationFactory(paginationOptions(educationList.length))}
+                                    pagination={paginationFactory(paginationOptions(platformList.length))}
                                     striped
                                     hover
                                     condensed
@@ -176,4 +180,4 @@ function EducationList(props) {
     }
 }
 
-export default EducationList;
+export default PlatformList;

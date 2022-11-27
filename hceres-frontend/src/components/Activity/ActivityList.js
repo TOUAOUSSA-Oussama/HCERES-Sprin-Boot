@@ -8,7 +8,6 @@ import Navbar from '../Navbar/Navbar';
 import EducationAdd from './education/EducationAdd';
 import BootstrapTable from 'react-bootstrap-table-next';
 import PostDoctorat from './PostDoctorat';
-import Platform from './Platform';
 import Editorial from './Editorial';
 import Review from './Review';
 import SeiIndustrialRDContract from './SeiIndustrialRDContract';
@@ -21,6 +20,7 @@ import EducationList from "./education/EducationList";
 import ResearcherElement from "../Researcher/ResearcherElement";
 import SrAwardElement from "./sraward/SrAwardElement";
 import SrAwardList from "./sraward/SrAwardList";
+import PlatformList from "./platform/PlatformList";
 
 
 // if target researcher is set in props will show only related information of target researcher
@@ -31,7 +31,7 @@ export default function ActivityList(props) {
     const [successActivityAlert, setSuccessActivityAlert] = React.useState('');
     const [errorActivityAlert, setErrorActivityAlert] = React.useState('');
 
-    const [showEducationList, setShowEducationList] = React.useState(true);
+    const [showEducationList, setShowEducationList] = React.useState(showListByDefault);
     const [showPrixList, setShowPrixList] = React.useState(showListByDefault);
     const [showPlatformList, setShowPlatformList] = React.useState(showListByDefault);
     const [showOralCommunicationList, setShowOralCommunicationList] = React.useState(showListByDefault);
@@ -205,7 +205,7 @@ export default function ActivityList(props) {
                         </Collapse>
 
                         <Collapse in={showPlatformList}>
-                            <div>{showPlatformList && <div>import the file to showPlatformList here</div>}</div>
+                            <div>{showPlatformList && <PlatformList sendMessageToActivity={sendMessageToActivity} targetResearcher={targetResearcher}/>}</div>
                         </Collapse>
 
                         <Collapse in={showOralCommunicationList}>

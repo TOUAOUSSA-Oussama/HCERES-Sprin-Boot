@@ -6,7 +6,6 @@ import './Activity.css'
 import Navbar from '../Navbar/Navbar';
 
 import PostDoctorat from './PostDoctorat';
-import Platform from './Platform';
 import Editorial from './Editorial';
 import Review from './Review';
 import SeiIndustrialRDContract from './SeiIndustrialRDContract';
@@ -15,13 +14,11 @@ import OralCommunication from './OralCommunication';
 import {Alert} from "react-bootstrap";
 
 export default function Activity() {
-    const [showPrix, setShowPrix] = React.useState(false);
     const [showEssaiClinique, setEssaiClinique] = React.useState(false);
     const [showIncomingMobility, setIncomingMobility] = React.useState(false);
     const [showScientificExpertise, setScientificExpertise] = React.useState(false);
     const [DateProjectStart, setDateProjectStart] = React.useState(null);
     const [showPostDoctorat, setShowPostDoctorat] = React.useState(false);
-    const [showPlatform, setShowPlatform] = React.useState(false);
     const [showEditorial, setShowEditorial] = React.useState(false);
     const [showReview, setShowReview] = React.useState(false);
     const [showSeiIndustrialRDContract, setShowSeiIndustrialRDContract] = React.useState(false);
@@ -43,12 +40,6 @@ export default function Activity() {
                 </div>
                 <div className='activityList'>
                     <ul>
-                        <li onClick={() => setShowPrix(true)}>
-                            <a>Prix</a>
-                        </li>
-                        <li onClick={() => setShowPlatform(true)}>
-                            <a>Platform</a>
-                        </li>
                         <li onClick={() => setShowOralCommunication(true)}>
                             <a>Communication orale</a>
                         </li>
@@ -94,7 +85,6 @@ export default function Activity() {
                 {showIncomingMobility && (<IncomingMobility onHideAction={() => setIncomingMobility(false)}> </IncomingMobility>)}
                 {showScientificExpertise && (<ScientificExpertise onHideAction={() =>setScientificExpertise(false)}> </ScientificExpertise>)}
                 {showPostDoctorat && (<PostDoctorat onHideAction={() => setShowPostDoctorat(false)}> </PostDoctorat>)}
-                {showPlatform && (<Platform onHideAction={() => setShowPlatform(false)}></Platform>)}
                 {showEditorial && (<Editorial onHideAction={() => setShowEditorial(false)}></Editorial>)}
                 {showReview && (<Review onHideAction={() => setShowReview(false)}></Review>)}
                 {showSeiIndustrialRDContract && (<SeiIndustrialRDContract onHideAction={() => setShowSeiIndustrialRDContract(false)}></SeiIndustrialRDContract>)}

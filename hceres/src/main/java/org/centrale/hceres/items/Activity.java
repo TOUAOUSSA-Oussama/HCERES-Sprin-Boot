@@ -145,7 +145,6 @@ public class Activity implements Serializable {
     @JsonIgnore
     private BookChapter bookChapter;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "activity")
-    @JsonIgnore
     private Platform platform;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "activity")
     @JsonIgnore

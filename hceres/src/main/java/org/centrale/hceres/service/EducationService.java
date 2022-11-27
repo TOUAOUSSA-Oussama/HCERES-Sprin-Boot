@@ -54,7 +54,7 @@ public class EducationService {
 	 * permet de retourner la liste
 	 */
 	public List<Activity> getEducations(){
-		return activityRepo.findByIdTypeActivity(TypeActivity.IdTypeActivity.EDUCATION.getId());
+		return activityRepo.findByIdTypeActivity(TypeActivity.IdTypeActivity.EDUCATIONAL_OUTPUT.getId());
 	}
 	
 	/**
@@ -112,7 +112,7 @@ public class EducationService {
 		
 		// Activity : 
 		Activity activity = new Activity();
-		TypeActivity typeActivity = typeActivityLevelRepo.getById(TypeActivity.IdTypeActivity.EDUCATION.getId());
+		TypeActivity typeActivity = typeActivityLevelRepo.getById(TypeActivity.IdTypeActivity.EDUCATIONAL_OUTPUT.getId());
 		activity.setTypeActivity(typeActivity);
 		
 		// ajouter cette activité à la liste de ce chercheur :

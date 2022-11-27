@@ -57,7 +57,7 @@ function SrAwardList(props) {
         } else
             fetchResearcherActivities(targetResearcher.researcherId)
                 .then(list => {
-                    setSrAwardList(list.filter(a => a.idTypeActivity === ActivityTypes.SrAwardIdType));
+                    setSrAwardList(list.filter(a => a.idTypeActivity === ActivityTypes.SR_AWARD));
                 })
     }, [listChangeCount]);
 

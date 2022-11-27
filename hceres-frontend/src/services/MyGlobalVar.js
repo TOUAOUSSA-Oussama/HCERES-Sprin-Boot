@@ -3,6 +3,7 @@ class MyClass {
         this.listeChercheurs = null;
         this.listeEducations = null;
         this.listeSrAwards = null;
+        this.listePlatforms = null;
     }
 
     deleteActivity(activityList, idActivity) {
