@@ -20,11 +20,12 @@ import ResearcherElement from "../Researcher/ResearcherElement";
 import SrAwardElement from "./sraward/SrAwardElement";
 import SrAwardList from "./sraward/SrAwardList";
 import PlatformList from "./platform/PlatformList";
-import OralCommunicationList from "./oralcommunication/OralCommunicationList";
+import OralCommunicationList from "./oral-communication/OralCommunicationList";
 import Button from "react-bootstrap/Button";
-import {fetchListOralCommunications} from "../../services/oralcommunication/OralCommunicationActions";
+import {fetchListOralCommunications} from "../../services/oral-communication/OralCommunicationActions";
 import {fetchResearcherActivities} from "../../services/Researcher/ResearcherActions";
 import ActivityTypes from "../../const/ActivityTypes";
+import IndustrialContractList from "./industrial-contract/IndustrialContractList";
 
 
 // if target researcher is set in props will show only related information of target researcher
@@ -243,7 +244,7 @@ export default function ActivityList(props) {
 
                         <Collapse in={showSeiIndustrialRDContractList}>
                             <div>{showSeiIndustrialRDContractList &&
-                                <div>import the file to showSeiIndustrialRDContractList here</div>}</div>
+                                <IndustrialContractList targetResearcher={targetResearcher}/>}</div>
                         </Collapse>
 
                         <Collapse in={showInterCollaborationList}>

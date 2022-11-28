@@ -2,7 +2,7 @@ import {useState} from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import OralCommunicationElement from "./OralCommunicationElement";
-import {deleteOralCommunication} from "../../../services/oralcommunication/OralCommunicationActions";
+import {deleteOralCommunication} from "../../../services/oral-communication/OralCommunicationActions";
 
 function OralCommunicationDelete(props) {
     const [show, setShow] = useState(true);
@@ -35,7 +35,7 @@ function OralCommunicationDelete(props) {
                 <Modal.Title>Êtes-vous sûr de vouloir supprimer l'oralCommunication sélectionné?</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <OralCommunicationElement targetOralCommunication={targetOralCommunication} />
+                <OralCommunicationElement targetOralCommunication={targetOralCommunication}/>
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>

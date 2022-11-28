@@ -1,12 +1,12 @@
 import {useState} from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
-import EducationElement from "./EducationElement";
-import {deleteEducation} from "../../../services/education/EducationActions";
+import IndustrialContractElement from "./IndustrialContractElement";
+import {deleteIndustrialContract} from "../../../services/industrial-contract/IndustrialContractActions";
 
-function EducationDelete(props) {
+function IndustrialContractDelete(props) {
     const [show, setShow] = useState(true);
-    const targetEducation = props.targetEducation;
+    const targetIndustrialContract = props.targetIndustrialContract;
 
     const handleClose = (msg = null) => {
         setShow(false);
@@ -14,16 +14,16 @@ function EducationDelete(props) {
     };
 
     const handleDelete = () => {
-        deleteEducation(targetEducation.idActivity)
+        deleteIndustrialContract(targetIndustrialContract.idActivity)
             .then(response => {
                 const msg = {
-                    "successMsg": "Education supprimé ayant l'id " + targetEducation.idActivity,
+                    "successMsg": "IndustrialContract supprimé ayant l'id " + targetIndustrialContract.idActivity,
                 }
                 handleClose(msg);
             }).catch(error => {
             console.log(error);
             const msg = {
-                "errorMsg": "Education non supprimé, response status: " + error.response.status,
+                "errorMsg": "IndustrialContract non supprimé, response status: " + error.response.status,
             }
             handleClose(msg);
         })
@@ -32,10 +32,10 @@ function EducationDelete(props) {
     return (
         <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
-                <Modal.Title>Êtes-vous sûr de vouloir supprimer l'education sélectionné?</Modal.Title>
+                <Modal.Title>Êtes-vous sûr de vouloir supprimer le Contract industrial sélectionné?</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <EducationElement targetEducation={targetEducation}/>
+                <IndustrialContractElement targetIndustrialContract={targetIndustrialContract}/>
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>
@@ -50,5 +50,5 @@ function EducationDelete(props) {
 }
 
 
-export default EducationDelete;
+export default IndustrialContractDelete;
 

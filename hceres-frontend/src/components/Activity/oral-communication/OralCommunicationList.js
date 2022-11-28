@@ -17,27 +17,27 @@ import {AiFillDelete, AiOutlinePlusCircle} from "react-icons/ai";
 import OralCommunicationAdd from "./OralCommunicationAdd";
 
 import ActivityTypes from "../../../const/ActivityTypes";
-import {fetchListOralCommunications} from "../../../services/oralcommunication/OralCommunicationActions";
+import {fetchListOralCommunications} from "../../../services/oral-communication/OralCommunicationActions";
 import {fetchResearcherActivities} from "../../../services/Researcher/ResearcherActions";
 import OralCommunicationDelete from "./OralCommunicationDelete";
 
 // If targetResearcher is set in props display related information only (
 // else load list des tous les oralCommunications du database
 function OralCommunicationList(props) {
-    // parameter constant
+    // parameter constant (List Class)
     const targetResearcher = props.targetResearcher;
 
-    // Cached state
+    // Cached state (List Class)
     const [oralCommunicationList, setOralCommunicationList] = React.useState(null);
 
-    // UI states
+    // UI states (List Class)
     const [successActivityAlert, setSuccessActivityAlert] = React.useState('');
-    const [errorActivityAlert, setErrorActivityAlert] = React.useState('');const [showFilter, setShowFilter] = React.useState(false);
+    const [errorActivityAlert, setErrorActivityAlert] = React.useState('');
+    const [showFilter, setShowFilter] = React.useState(false);
     const {SearchBar, ClearSearchButton} = Search;
 
 
-
-    // Form state
+    // Form state (List Class)
     const [targetOralCommunication, setTargetOralCommunication] = React.useState(false);
     const [showOralCommunicationAdd, setShowOralCommunicationAdd] = React.useState(false);
     const [showOralCommunicationDelete, setShowOralCommunicationDelete] = React.useState(false);
@@ -50,7 +50,7 @@ function OralCommunicationList(props) {
         if (msg) {
             // an add or delete did occur
             // re render the table to load new data
-            // note the list change count on dependencies table of use state
+            // note the list change count on dependencies table of use effect
             setListChangeCount(listChangeCount + 1)
         }
         displayResultMessage(msg);
@@ -162,10 +162,10 @@ function OralCommunicationList(props) {
                                     <div className={"col-4"}>
                                         {showOralCommunicationAdd &&
                                             <OralCommunicationAdd targetResearcher={targetResearcher}
-                                                          onHideAction={handleHideModal}/>}
+                                                                  onHideAction={handleHideModal}/>}
                                         {showOralCommunicationDelete &&
                                             <OralCommunicationDelete targetOralCommunication={targetOralCommunication}
-                                                             onHideAction={handleHideModal}/>}
+                                                                     onHideAction={handleHideModal}/>}
                                         <button className="btn btn-success" data-bs-toggle="button"
                                                 onClick={() => setShowOralCommunicationAdd(true)}>
                                             <AiOutlinePlusCircle/> &nbsp; Ajouter une oralCommunication
@@ -184,7 +184,8 @@ function OralCommunicationList(props) {
                                                                       onClose={() => setErrorActivityAlert("")}
                                                                       dismissible={true}>{errorActivityAlert}</Alert>}
                                     </div>
-                                </div>                                <hr/>
+                                </div>
+                                <hr/>
                                 <BootstrapTable
                                     bootstrap4
                                     filter={filterFactory()}

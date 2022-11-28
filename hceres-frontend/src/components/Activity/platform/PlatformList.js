@@ -25,19 +25,20 @@ import PlatformDelete from "./PlatformDelete";
 // else load list des tous les platforms du database
 function PlatformList(props) {
 
-    // parameter constant
+    // parameter constant (List Class)
     const targetResearcher = props.targetResearcher;
 
-    // Cached state
+    // Cached state (List Class)
     const [platformList, setPlatformList] = React.useState(null);
 
-    // UI states
+    // UI states (List Class)
     const [successActivityAlert, setSuccessActivityAlert] = React.useState('');
-    const [errorActivityAlert, setErrorActivityAlert] = React.useState('');const [showFilter, setShowFilter] = React.useState(false);
+    const [errorActivityAlert, setErrorActivityAlert] = React.useState('');
+    const [showFilter, setShowFilter] = React.useState(false);
     const {SearchBar, ClearSearchButton} = Search;
 
 
-    // Form state
+    // Form state (List Class)
     const [targetPlatform, setTargetPlatform] = React.useState(false);
     const [showPlatformAdd, setShowPlatformAdd] = React.useState(false);
     const [showPlatformDelete, setShowPlatformDelete] = React.useState(false);
@@ -50,7 +51,7 @@ function PlatformList(props) {
         if (msg) {
             // an add or delete did occur
             // re render the table to load new data
-            // note the list change count on dependencies table of use state
+            // note the list change count on dependencies table of use effect
             setListChangeCount(listChangeCount + 1)
         }
         displayResultMessage(msg);
@@ -171,10 +172,10 @@ function PlatformList(props) {
                                     <div className={"col-4"}>
                                         {showPlatformAdd &&
                                             <PlatformAdd targetResearcher={targetResearcher}
-                                                          onHideAction={handleHideModal}/>}
+                                                         onHideAction={handleHideModal}/>}
                                         {showPlatformDelete &&
                                             <PlatformDelete targetPlatform={targetPlatform}
-                                                             onHideAction={handleHideModal}/>}
+                                                            onHideAction={handleHideModal}/>}
                                         <button className="btn btn-success" data-bs-toggle="button"
                                                 onClick={() => setShowPlatformAdd(true)}>
                                             <AiOutlinePlusCircle/> &nbsp; Ajouter une platform
@@ -193,7 +194,8 @@ function PlatformList(props) {
                                                                       onClose={() => setErrorActivityAlert("")}
                                                                       dismissible={true}>{errorActivityAlert}</Alert>}
                                     </div>
-                                </div>                                <hr/>
+                                </div>
+                                <hr/>
                                 <BootstrapTable
                                     bootstrap4
                                     filter={filterFactory()}

@@ -35,7 +35,7 @@ function SrAwardDelete(props) {
                 <Modal.Title>Êtes-vous sûr de vouloir supprimer le prix sélectionné?</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <SrAwardElement targetSrAward={targetSrAward} />
+                <SrAwardElement targetSrAward={targetSrAward}/>
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>

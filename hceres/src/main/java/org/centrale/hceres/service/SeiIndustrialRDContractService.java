@@ -44,13 +44,29 @@ public class SeiIndustrialRDContractService {
 	
 	@Autowired
 	private SeiIndustrialRDContractRepository seiIndustrialRDContractRepo;
-	
+
+
+	/**
+	 * permet de retourner la liste
+	 */
+	public List<Activity> getIndustrialContracts(){
+		return activityRepo.findByIdTypeActivity(TypeActivity.IdTypeActivity.SEI_INDUSTRIAL_R_D_CONTRACT.getId());
+	}
+
+	/**
+	 * supprimer l'elmt selon son id
+	 * @param id : id de l'elmt
+	 */
+	public void deleteIndustrialContract(final Integer id) {
+		seiIndustrialRDContractRepo.deleteById(id);
+	}
+
 	/**
 	 * permet d'ajouter un elmt
 	 * @return : l'elemt ajouter a la base de donnees
 	 */
 	@Transactional
-	public SeiIndustrialRDContract saveSeiIndustrialRDContract(@RequestBody Map<String, Object> request) {
+	public Activity saveIndustrialContract(@RequestBody Map<String, Object> request) {
 		
 		SeiIndustrialRDContract seiIndustrialRDContractToSave = new SeiIndustrialRDContract();
 		
@@ -76,7 +92,7 @@ public class SeiIndustrialRDContractService {
 		
 		// Activity : 
 		Activity activity = new Activity();
-		TypeActivity typeActivity = typeActivityLevelRepo.getById(40);
+		TypeActivity typeActivity = typeActivityLevelRepo.getById(TypeActivity.IdTypeActivity.SEI_INDUSTRIAL_R_D_CONTRACT.getId());
 		activity.setTypeActivity(typeActivity);
 		
 		// ajouter cette activité à la liste de ce chercheur :
@@ -106,8 +122,9 @@ public class SeiIndustrialRDContractService {
 				
 		// Enregistrer Education dans la base de données :
 		SeiIndustrialRDContract seiIndustrialRDContractSaved = seiIndustrialRDContractRepo.save(seiIndustrialRDContractToSave);
-		
-		return seiIndustrialRDContractSaved;
+
+		savedActivity.setSeiIndustrialRDContract(seiIndustrialRDContractSaved);
+		return savedActivity;
 	}
 	
 	// Convertir une date string en Date

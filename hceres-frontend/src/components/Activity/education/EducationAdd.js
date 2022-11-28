@@ -10,14 +10,18 @@ import {addEducation} from "../../../services/education/EducationActions";
 // If targetResearcher is set in props use it as default without charging list from database
 // else load list de chercheurs from database
 function EducationAdd(props) {
-    const [showModal, setShowModal] = React.useState(true);
+    // parameter constant (Add Class)
     const targetResearcher = props.targetResearcher;
+    const onHideParentAction = props.onHideAction
 
-    const handleClose = (msg = null) => {
-        setShowModal(false);
-        props.onHideAction(msg);
-    };
+    // Cached state (Add Class)
+    const [researchers, setResearchers] = React.useState([]);
 
+    // UI states (Add Class)
+    const [showModal, setShowModal] = React.useState(true);
+
+
+    // Form state (Add Class)
     const [researcherId, setResearcherId] = React.useState(targetResearcher ? targetResearcher.researcherId : "");
     const [educationCourseName, setEducationCourseName] = React.useState("");
     const [educationFormation, setEducationFormation] = React.useState("");
@@ -27,7 +31,11 @@ function EducationAdd(props) {
     const [date, setDate] = React.useState(null);
     const [formattedDate, setFormatted] = React.useState("");
 
-    const [researchers, setResearchers] = React.useState([]);
+
+    const handleClose = (msg = null) => {
+        setShowModal(false);
+        onHideParentAction(msg);
+    };
 
     React.useEffect(() => {
         if (!targetResearcher)
@@ -52,12 +60,12 @@ function EducationAdd(props) {
         };
 
         addEducation(data).then(response => {
-                // const activityId = response.data.researcherId;
-                const msg = {
-                    "successMsg": "Education ajouté avec un id " + response.data.idActivity,
-                }
-                handleClose(msg);
-            }).catch(error => {
+            // const activityId = response.data.researcherId;
+            const msg = {
+                "successMsg": "Education ajouté avec un id " + response.data.idActivity,
+            }
+            handleClose(msg);
+        }).catch(error => {
             console.log(error);
             const msg = {
                 "errorMsg": "Erreur Education non ajouté, response status: " + error.response.status,
@@ -90,7 +98,8 @@ function EducationAdd(props) {
                             Chercheur
                         </label>
                         {targetResearcher ?
-                            <ListGroup.Item variant={"primary"}>{targetResearcher.researcherName} {targetResearcher.researcherSurname}</ListGroup.Item>:
+                            <ListGroup.Item
+                                variant={"primary"}>{targetResearcher.researcherName} {targetResearcher.researcherSurname}</ListGroup.Item> :
 
                             <select onChange={onReseacherSelection}>
                                 {researchers.map(item => {

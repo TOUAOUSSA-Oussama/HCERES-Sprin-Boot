@@ -10,20 +10,28 @@ import {addSrAward} from "../../../services/sraward/SrAwardActions";
 // If targetResearcher is set in props use it as default without charging list from database
 // else load list de chercheurs from database
 function SrAwardAdd(props) {
-    const [showModal, setShowModal] = React.useState(true);
+    // parameter constant (Add Class)
     const targetResearcher = props.targetResearcher;
+    const onHideParentAction = props.onHideAction
 
-    const handleClose = (msg = null) => {
-        setShowModal(false);
-        props.onHideAction(msg);
-    };
+    // Cached state (Add Class)
+    const [researchers, setResearchers] = React.useState([]);
 
+    // UI states (Add Class)
+    const [showModal, setShowModal] = React.useState(true);
+
+
+    // Form state (Add Class)
     const [researcherId, setResearcherId] = React.useState(targetResearcher ? targetResearcher.researcherId : "");
     const [awardeeName, setAwardeeName] = React.useState("");
     const [description, setDescritption] = React.useState("");
     const [awardDate, setDate] = React.useState("");
 
-    const [researchers, setResearchers] = React.useState([]);
+
+    const handleClose = (msg = null) => {
+        setShowModal(false);
+        onHideParentAction(msg);
+    };
 
     React.useEffect(() => {
         if (!targetResearcher) {

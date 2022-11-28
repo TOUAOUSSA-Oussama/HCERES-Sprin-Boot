@@ -5,11 +5,11 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import {ListGroup} from "react-bootstrap";
 import {fetchListResearchers} from "../../../services/Researcher/ResearcherActions";
-import {addPlatform} from "../../../services/platform/PlatformActions";
+import {addIndustrialContract} from "../../../services/industrial-contract/IndustrialContractActions";
 
 // If targetResearcher is set in props use it as default without charging list from database
 // else load list de chercheurs from database
-function PlatformAdd(props) {
+function IndustrialContractAdd(props) {
     // parameter constant (Add Class)
     const targetResearcher = props.targetResearcher;
     const onHideParentAction = props.onHideAction
@@ -23,13 +23,12 @@ function PlatformAdd(props) {
 
     // Form state (Add Class)
     const [researcherId, setResearcherId] = React.useState(targetResearcher ? targetResearcher.researcherId : "");
-    const [labellisation, setLabellisation] = React.useState("");
-    const [description, setDescription] = React.useState("");
-    const [managers, setManagers] = React.useState("");
-    const [affiliation, setAffiliation] = React.useState("");
-    const [date, setDate] = React.useState(null);
-    const [checkbox, setCheckBox] = React.useState(false);
-    const [formattedDate, setFormatted] = React.useState("")
+    const [StartDate, setStartDate] = React.useState(null);
+    const [NameCompanyInvolved, setNameCompanyInvolved] = React.useState("");
+    const [ProjectTitle, setProjectTitle] = React.useState("");
+    const [AgreementAmount, setAgreementAmount] = React.useState("");
+    const [EndDate, setEndDate] = React.useState(null);
+    const [AssociatedPubliRef, setAssociatedPubliRef] = React.useState("");
 
 
     const handleClose = (msg = null) => {
@@ -51,35 +50,27 @@ function PlatformAdd(props) {
         event.preventDefault();
         let data = {
             researcherId: researcherId,
-            labellisation: labellisation,
-            description: description,
-            managers: managers,
-            affiliation: affiliation,
-            creationDate: formattedDate,
-            openPrivateResearchers: checkbox
+            AssociatedPubliRef: AssociatedPubliRef,
+            EndDate: EndDate,
+            AgreementAmount: AgreementAmount,
+            ProjectTitle: ProjectTitle,
+            NameCompanyInvolved: NameCompanyInvolved,
+            StartDate: StartDate
         };
 
-        addPlatform(data).then(response => {
+        addIndustrialContract(data).then(response => {
             // const activityId = response.data.researcherId;
             const msg = {
-                "successMsg": "Platform ajouté avec un id " + response.data.idActivity,
+                "successMsg": "IndustrialContract ajouté avec un id " + response.data.idActivity,
             }
             handleClose(msg);
         }).catch(error => {
             console.log(error);
             const msg = {
-                "errorMsg": "Erreur Platform non ajouté, response status: " + error.response.status,
+                "errorMsg": "Erreur IndustrialContract non ajouté, response status: " + error.response.status,
             }
             handleClose(msg);
         })
-    }
-
-    const handleDate = (event) => {
-        let formattedDate = `${event.getFullYear()}-${
-            event.getMonth() + 1
-        }-${event.getDate()}`;
-        setFormatted(formattedDate);
-        setDate(event);
     }
 
     const onReseacherSelection = id => setResearcherId(id.target.value);
@@ -89,7 +80,7 @@ function PlatformAdd(props) {
             <Modal show={showModal} onHide={handleClose}>
                 <form onSubmit={handleSubmit}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Platform</Modal.Title>
+                        <Modal.Title>Contrat industrielle</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
 
@@ -108,75 +99,79 @@ function PlatformAdd(props) {
                                 })}
                             </select>
                         }
-                        <label className='label'>
-                            Date de création
-                        </label>
-                        <DatePicker
-                            className='datePicker'
-                            selected={date}
-                            onChange={handleDate}
-                            withPortal
-                            placeholderText="Choix de date"/>
 
                         <label className='label'>
-                            Description
+                            Date de début
                         </label>
                         <input
                             placeholder='Description'
                             className='input-container'
-                            name="description"
-                            type="description"
-                            value={description}
-                            onChange={e => setDescription(e.target.value)}
+                            name="StartDate"
+                            type="date"
+                            value={StartDate}
+                            onChange={e => setStartDate(e.target.value)}
                             required/>
 
-
                         <label className='label'>
-                            Managers
+                            Nom Entreprise impliquée
                         </label>
                         <input
-                            placeholder='Managers '
+                            placeholder='Description'
                             className='input-container'
-                            name="managers"
-                            type="managers"
-                            value={managers}
-                            onChange={e => setManagers(e.target.value)}
+                            name="Nom Entreprise impliquée"
+                            type="Nom Entreprise impliquée"
+                            value={NameCompanyInvolved}
+                            onChange={e => setNameCompanyInvolved(e.target.value)}
+                            required/>
+
+
+                        <label className='label'>
+                            Titre du projet
+                        </label>
+                        <input
+                            placeholder='ProjectTitle '
+                            className='input-container'
+                            name="ProjectTitle"
+                            type="ProjectTitle"
+                            value={ProjectTitle}
+                            onChange={e => setProjectTitle(e.target.value)}
                             required/>
 
                         <label className='label'>
-                            Affiliation
+                            Montant de l'accord
                         </label>
                         <input
                             placeholder='Affiliation'
+                            type="number"
                             className='input-container'
-                            name="affiliation"
-                            type="affiliation"
-                            value={affiliation}
-                            onChange={e => setAffiliation(e.target.value)}
+                            name="AgreementAmount"
+                            value={AgreementAmount}
+                            onChange={e => setAgreementAmount(e.target.value)}
                             required/>
 
                         <label className='label'>
-                            Labellisation
+                            Date de fin
                         </label>
                         <input
-                            placeholder='Labellisation'
+                            placeholder='Description'
                             className='input-container'
-                            name="labellisation"
-                            type="labellisation"
-                            value={labellisation}
-                            onChange={e => setLabellisation(e.target.value)}
-                            required/>
-                        <label className='label'>
-                            open private researchers
-                        </label>
-                        <input
-                            type="checkbox"
-                            placeholder='Yes'
-                            name='checkbox'
-                            value={checkbox}
-                            onChange={e => setCheckBox(e.target.value)}
+                            name="EndDate"
+                            type="date"
+                            value={EndDate}
+                            onChange={e => setEndDate(e.target.value)}
                             required/>
 
+                        <label className='label'>
+                            Référence de la publication associée
+                        </label>
+                        <input
+                            placeholder='ProjectTitle '
+                            className='input-container'
+                            name="AssociatedPubliRef"
+                            type="AssociatedPubliRef"
+                            value={AssociatedPubliRef}
+                            onChange={e => setAssociatedPubliRef(e.target.value)}
+                            required/>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={handleClose}>
@@ -193,4 +188,4 @@ function PlatformAdd(props) {
     );
 }
 
-export default PlatformAdd;
+export default IndustrialContractAdd;

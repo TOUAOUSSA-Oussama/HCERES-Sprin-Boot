@@ -29,7 +29,7 @@ public class EducationController {
 
 
     /**
-     * return a list of activities of education type only
+     * return a list of activities of specified type only
      */
     @GetMapping(value = "/Educations")
     public List<Activity> getEducations() {
@@ -37,7 +37,7 @@ public class EducationController {
     }
 
     /**
-     * ajouter un elmt a la base de donnees
+     * create an element in database
      *
      * @return Activity
      */

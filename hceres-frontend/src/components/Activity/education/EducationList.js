@@ -24,19 +24,20 @@ import EducationDelete from "./EducationDelete";
 // If targetResearcher is set in props display related information only (
 // else load list des tous les educations du database
 function EducationList(props) {
-    // parameter constante
+    // parameter constant (List Class)
     const targetResearcher = props.targetResearcher;
 
-    // Cached state
+    // Cached state (List Class)
     const [educationList, setEducationList] = React.useState(null);
 
-    // UI states
+    // UI states (List Class)
     const [successActivityAlert, setSuccessActivityAlert] = React.useState('');
-    const [errorActivityAlert, setErrorActivityAlert] = React.useState('');const [showFilter, setShowFilter] = React.useState(false);
+    const [errorActivityAlert, setErrorActivityAlert] = React.useState('');
+    const [showFilter, setShowFilter] = React.useState(false);
     const {SearchBar, ClearSearchButton} = Search;
 
 
-    // Form state
+    // Form state (List Class)
     const [targetEducation, setTargetEducation] = React.useState(false);
     const [showEducationAdd, setShowEducationAdd] = React.useState(false);
     const [showEducationDelete, setShowEducationDelete] = React.useState(false);
@@ -49,7 +50,7 @@ function EducationList(props) {
         if (msg) {
             // an add or delete did occur
             // re render the table to load new data
-            // note the list change count on dependencies table of use state
+            // note the list change count on dependencies table of use effect
             setListChangeCount(listChangeCount + 1)
         }
         displayResultMessage(msg);
@@ -188,7 +189,8 @@ function EducationList(props) {
                                                                       onClose={() => setErrorActivityAlert("")}
                                                                       dismissible={true}>{errorActivityAlert}</Alert>}
                                     </div>
-                                </div>                                <hr/>
+                                </div>
+                                <hr/>
                                 <BootstrapTable
                                     bootstrap4
                                     filter={filterFactory()}

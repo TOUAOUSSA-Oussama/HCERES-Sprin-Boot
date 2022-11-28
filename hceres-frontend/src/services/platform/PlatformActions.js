@@ -3,16 +3,14 @@ import MyGlobalVar from "../MyGlobalVar";
 
 export const fetchListPlatforms = async () => {
     if (!MyGlobalVar.listePlatforms) {
-        const url = "http://localhost:9000/Platforms";
-        const response = await axios.get(url);
+        const response = await axios.get("http://localhost:9000/Platforms");
         MyGlobalVar.listePlatforms = response.data;
     }
     return MyGlobalVar.listePlatforms;
 }
 
 export const addPlatform  = async (data) => {
-    const url = "http://localhost:9000/Platform/Create";
-    return await axios.post(url, data).then(response => {
+    return await axios.post("http://localhost:9000/Platform/Create", data).then(response => {
         if (MyGlobalVar.listePlatforms)
             // using method push will use same reference of table,
             // so it will not trigger change state, therefore creating copy of the array
@@ -23,8 +21,7 @@ export const addPlatform  = async (data) => {
 }
 
 export const deletePlatform  = async (idActivity) => {
-    const url = "http://localhost:9000/Platform/Delete/" + idActivity;
-    return await axios.delete(url).then(response => {
+    return await axios.delete("http://localhost:9000/Platform/Delete/" + idActivity).then(response => {
         // change to a new reference => cause change state immediately
         MyGlobalVar.listePlatforms = MyGlobalVar.deleteActivity(MyGlobalVar.listePlatforms, idActivity)
         return response

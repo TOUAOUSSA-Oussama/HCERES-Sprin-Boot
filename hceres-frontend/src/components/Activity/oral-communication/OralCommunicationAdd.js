@@ -5,19 +5,23 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import {ListGroup} from "react-bootstrap";
 import {fetchListResearchers} from "../../../services/Researcher/ResearcherActions";
-import {addOralCommunication} from "../../../services/oralcommunication/OralCommunicationActions";
+import {addOralCommunication} from "../../../services/oral-communication/OralCommunicationActions";
 
 // If targetResearcher is set in props use it as default without charging list from database
 // else load list de chercheurs from database
 function OralCommunicationAdd(props) {
-    const [showModal, setShowModal] = React.useState(true);
+    // parameter constant (Add Class)
     const targetResearcher = props.targetResearcher;
+    const onHideParentAction = props.onHideAction
 
-    const handleClose = (msg = null) => {
-        setShowModal(false);
-        props.onHideAction(msg);
-    };
+    // Cached state (Add Class)
+    const [researchers, setResearchers] = React.useState([]);
 
+    // UI states (Add Class)
+    const [showModal, setShowModal] = React.useState(true);
+
+
+    // Form state (Add Class)
     const [researcherId, setResearcherId] = React.useState(targetResearcher ? targetResearcher.researcherId : "");
     const [OralCommunicationTitle, setOralCommunicationTitle] = React.useState(null);
     const [OralCommunicationDate, setOralCommunicationDate] = React.useState("");
@@ -29,7 +33,11 @@ function OralCommunicationAdd(props) {
     const [MeetingEnd, setMeetingEnd] = React.useState("");
     const [TypeOralCommunicationName, setTypeOralCommunicationName] = React.useState("");
 
-    const [researchers, setResearchers] = React.useState([]);
+
+    const handleClose = (msg = null) => {
+        setShowModal(false);
+        onHideParentAction(msg);
+    };
 
     React.useEffect(() => {
         if (!targetResearcher)
@@ -57,12 +65,12 @@ function OralCommunicationAdd(props) {
         };
 
         addOralCommunication(data).then(response => {
-                // const activityId = response.data.researcherId;
-                const msg = {
-                    "successMsg": "OralCommunication ajouté avec un id " + response.data.idActivity,
-                }
-                handleClose(msg);
-            }).catch(error => {
+            // const activityId = response.data.researcherId;
+            const msg = {
+                "successMsg": "OralCommunication ajouté avec un id " + response.data.idActivity,
+            }
+            handleClose(msg);
+        }).catch(error => {
             console.log(error);
             const msg = {
                 "errorMsg": "Erreur OralCommunication non ajouté, response status: " + error.response.status,
@@ -87,7 +95,8 @@ function OralCommunicationAdd(props) {
                             Chercheur
                         </label>
                         {targetResearcher ?
-                            <ListGroup.Item variant={"primary"}>{targetResearcher.researcherName} {targetResearcher.researcherSurname}</ListGroup.Item>:
+                            <ListGroup.Item
+                                variant={"primary"}>{targetResearcher.researcherName} {targetResearcher.researcherSurname}</ListGroup.Item> :
 
                             <select onChange={onReseacherSelection}>
                                 {researchers.map(item => {

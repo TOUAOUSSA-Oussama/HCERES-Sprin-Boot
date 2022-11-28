@@ -159,7 +159,6 @@ public class Activity implements Serializable {
     @JsonIgnore
     private EditorialActivity editorialActivity;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "activity")
-    @JsonIgnore
     private SeiIndustrialRDContract seiIndustrialRDContract;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "activity")
     @JsonIgnore

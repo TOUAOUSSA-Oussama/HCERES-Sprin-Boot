@@ -35,7 +35,7 @@ function PlatformDelete(props) {
                 <Modal.Title>Êtes-vous sûr de vouloir supprimer le platform sélectionné?</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <PlatformElement targetPlatform={targetPlatform} />
+                <PlatformElement targetPlatform={targetPlatform}/>
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>

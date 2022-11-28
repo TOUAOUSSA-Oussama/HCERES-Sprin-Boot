@@ -5,30 +5,30 @@ import 'react-bootstrap-table2-filter/dist/react-bootstrap-table2-filter.min.css
 import BootstrapTable from 'react-bootstrap-table-next';
 import ToolkitProvider, {Search} from 'react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit';
 import paginationFactory from 'react-bootstrap-table2-paginator';
-import filterFactory, {dateFilter} from 'react-bootstrap-table2-filter';
+import filterFactory, {dateFilter, numberFilter} from 'react-bootstrap-table2-filter';
 import {Alert} from "react-bootstrap";
 
 import 'react-datepicker/dist/react-datepicker.css';
 import Button from "react-bootstrap/Button";
-import {BallTriangle} from "react-loading-icons";
+import {Grid} from "react-loading-icons";
 import {chercheursColumnOfActivity, paginationOptions} from "../../util/BootStrapTableOptions";
 import {ImFilter} from "react-icons/im";
 import {AiFillDelete, AiOutlinePlusCircle} from "react-icons/ai";
-import SrAwardAdd from "./SrAwardAdd";
+import IndustrialContractAdd from "./IndustrialContractAdd";
 
 import ActivityTypes from "../../../const/ActivityTypes";
-import {fetchListSrAwards} from "../../../services/sraward/SrAwardActions";
+import {fetchListIndustrialContracts} from "../../../services/industrial-contract/IndustrialContractActions";
 import {fetchResearcherActivities} from "../../../services/Researcher/ResearcherActions";
-import SrAwardDelete from "./SrAwardDelete";
+import IndustrialContractDelete from "./IndustrialContractDelete";
 
 // If targetResearcher is set in props display related information only (
-// else load list des tous les srAwards du database
-function SrAwardList(props) {
+// else load list des tous les industrialContracts du database
+function IndustrialContractList(props) {
     // parameter constant (List Class)
     const targetResearcher = props.targetResearcher;
 
     // Cached state (List Class)
-    const [srAwardList, setSrAwardList] = React.useState(null);
+    const [industrialContractList, setIndustrialContractList] = React.useState(null);
 
     // UI states (List Class)
     const [successActivityAlert, setSuccessActivityAlert] = React.useState('');
@@ -38,15 +38,15 @@ function SrAwardList(props) {
 
 
     // Form state (List Class)
-    const [targetSrAward, setTargetSrAward] = React.useState(false);
-    const [showSrAwardAdd, setShowSrAwardAdd] = React.useState(false);
-    const [showSrAwardDelete, setShowSrAwardDelete] = React.useState(false);
+    const [targetIndustrialContract, setTargetIndustrialContract] = React.useState(false);
+    const [showIndustrialContractAdd, setShowIndustrialContractAdd] = React.useState(false);
+    const [showIndustrialContractDelete, setShowIndustrialContractDelete] = React.useState(false);
     const [listChangeCount, setListChangeCount] = React.useState(0);
 
 
     const handleHideModal = (msg = null) => {
-        setShowSrAwardAdd(false);
-        setShowSrAwardDelete(false);
+        setShowIndustrialContractAdd(false);
+        setShowIndustrialContractDelete(false);
         if (msg) {
             // an add or delete did occur
             // re render the table to load new data
@@ -73,30 +73,30 @@ function SrAwardList(props) {
     React.useEffect(() => {
         if (!targetResearcher) {
             // attention that method always change reference to variable not only its content
-            fetchListSrAwards().then(list => setSrAwardList(list))
+            fetchListIndustrialContracts().then(list => setIndustrialContractList(list))
         } else
             fetchResearcherActivities(targetResearcher.researcherId)
                 .then(list => {
-                    setSrAwardList(list.filter(a => a.idTypeActivity === ActivityTypes.SR_AWARD));
+                    setIndustrialContractList(list.filter(a => a.idTypeActivity === ActivityTypes.SEI_INDUSTRIAL_R_D_CONTRACT));
                 })
     }, [listChangeCount]);
 
 
-    if (!srAwardList) {
-        return <div><Button><BallTriangle/></Button></div>
+    if (!industrialContractList) {
+        return <div><Button><Grid/></Button></div>
     } else {
-        if (srAwardList.length === 0) {
+        if (industrialContractList.length === 0) {
             return <div className={"row"}>
                 <br/>
                 <div className={"col-8"}>
-                    <h3>Aucun SrAward est enregistre</h3>
+                    <h3>Aucun IndustrialContract est enregistre</h3>
                 </div>
                 <div className={"col-4"}>
-                    {showSrAwardAdd &&
-                        <SrAwardAdd targetResearcher={targetResearcher} onHideAction={handleHideModal}/>}
+                    {showIndustrialContractAdd &&
+                        <IndustrialContractAdd targetResearcher={targetResearcher} onHideAction={handleHideModal}/>}
                     <button className="btn btn-success" data-bs-toggle="button"
-                            onClick={() => setShowSrAwardAdd(true)}>
-                        <AiOutlinePlusCircle/> &nbsp; Ajouter une srAward
+                            onClick={() => setShowIndustrialContractAdd(true)}>
+                        <AiOutlinePlusCircle/> &nbsp; Ajouter une industrialContract
                     </button>
                 </div>
             </div>;
@@ -109,31 +109,46 @@ function SrAwardList(props) {
             formatter: (cell, row) => {
                 return (<div>
                     <button className="btn btn-outline-danger btn-sm" onClick={() => {
-                        setTargetSrAward(row)
-                        setShowSrAwardDelete(true)
+                        setTargetIndustrialContract(row)
+                        setShowIndustrialContractDelete(true)
                     }}><AiFillDelete/></button>
                     &nbsp;  &nbsp;
                     {row.idActivity}
                 </div>)
             }
         }, {
-            dataField: 'srAward.awardeeName',
-            text: 'Course',
+            dataField: 'seiIndustrialRDContract.projectTitle',
+            text: 'Titre de projet',
             sort: true,
         }, {
-            dataField: 'srAward.description',
-            text: 'Description',
+            dataField: 'seiIndustrialRDContract.nameCompanyInvolved',
+            text: 'Nom de l\'entreprise',
+            sort: true,
         }, {
-            dataField: 'srAward.awardDate',
-            text: 'date d\'achèvement',
+            dataField: 'seiIndustrialRDContract.agreementAmount',
+            text: 'Montant du contract',
+            sort: true,
+            filter: showFilter ? numberFilter() : null,
+        }, {
+            dataField: 'seiIndustrialRDContract.associatedPubliRef',
+            text: 'Publication associé ref',
+            sort: true,
+        }, {
+            dataField: 'seiIndustrialRDContract.startDate',
+            text: 'Date de depart',
+            sort: true,
+            filter: showFilter ? dateFilter() : null,
+        }, {
+            dataField: 'seiIndustrialRDContract.endDate',
+            text: 'Date de fin',
             sort: true,
             filter: showFilter ? dateFilter() : null,
         }];
 
-        let title = "SrAward"
+        let title = "IndustrialContract"
         if (!targetResearcher) {
             columns.push(chercheursColumnOfActivity)
-            title = "Liste des srAwards pour les Chercheurs"
+            title = "Liste des industrialContracts pour les Chercheurs"
         }
         const CaptionElement = <div>
             <h3> {title} - &nbsp;
@@ -148,7 +163,7 @@ function SrAwardList(props) {
                 <ToolkitProvider
                     bootstrap4
                     keyField="idActivity"
-                    data={srAwardList}
+                    data={industrialContractList}
                     columns={columns}
                     search
                 >
@@ -161,15 +176,16 @@ function SrAwardList(props) {
                                         <h3>{CaptionElement}</h3>
                                     </div>
                                     <div className={"col-4"}>
-                                        {showSrAwardAdd &&
-                                            <SrAwardAdd targetResearcher={targetResearcher}
-                                                        onHideAction={handleHideModal}/>}
-                                        {showSrAwardDelete &&
-                                            <SrAwardDelete targetSrAward={targetSrAward}
-                                                           onHideAction={handleHideModal}/>}
+                                        {showIndustrialContractAdd &&
+                                            <IndustrialContractAdd targetResearcher={targetResearcher}
+                                                                   onHideAction={handleHideModal}/>}
+                                        {showIndustrialContractDelete &&
+                                            <IndustrialContractDelete
+                                                targetIndustrialContract={targetIndustrialContract}
+                                                onHideAction={handleHideModal}/>}
                                         <button className="btn btn-success" data-bs-toggle="button"
-                                                onClick={() => setShowSrAwardAdd(true)}>
-                                            <AiOutlinePlusCircle/> &nbsp; Ajouter une srAward
+                                                onClick={() => setShowIndustrialContractAdd(true)}>
+                                            <AiOutlinePlusCircle/> &nbsp; Ajouter une industrialContract
                                         </button>
                                     </div>
                                 </div>
@@ -190,7 +206,7 @@ function SrAwardList(props) {
                                 <BootstrapTable
                                     bootstrap4
                                     filter={filterFactory()}
-                                    pagination={paginationFactory(paginationOptions(srAwardList.length))}
+                                    pagination={paginationFactory(paginationOptions(industrialContractList.length))}
                                     striped
                                     hover
                                     condensed
@@ -204,4 +220,4 @@ function SrAwardList(props) {
     }
 }
 
-export default SrAwardList;
+export default IndustrialContractList;

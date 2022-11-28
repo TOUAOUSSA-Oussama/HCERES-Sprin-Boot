@@ -44,7 +44,7 @@ function SeiIndustrialRDContract(props) {
             StartDate: StartDate
         };
 
-        Axios.post("http://localhost:9000/AddSeiIndustrialRDContract", data)
+        Axios.post("http://localhost:9000/IndustrialContract/Create", data)
             .then(res => {
                 window.location.reload();
             })
@@ -62,92 +62,92 @@ function SeiIndustrialRDContract(props) {
                     </Modal.Header>
                     <Modal.Body>
 
-                <label className='label'>
-                    chercheur
-                </label>
-                <select onClick={componentDidMount} onChange={handleChange}>
-                    {researchers.map(item => {
-                        return (<option key={item.researcherId}
-                                        value={item.researcherId}>{item.researcherName} {item.researcherSurname}</option>);
-                    })}
-                </select>
+                        <label className='label'>
+                            chercheur
+                        </label>
+                        <select onClick={componentDidMount} onChange={handleChange}>
+                            {researchers.map(item => {
+                                return (<option key={item.researcherId}
+                                                value={item.researcherId}>{item.researcherName} {item.researcherSurname}</option>);
+                            })}
+                        </select>
 
-                <label className='label'>
-                    Date de début
-                </label>
-                <input
-                    placeholder='Description'
-                    className='input-container'
-                    name="StartDate"
-                    type="date"
-                    value={StartDate}
-                    onChange={e => setStartDate(e.target.value)}
-                    required/>
+                        <label className='label'>
+                            Date de début
+                        </label>
+                        <input
+                            placeholder='Description'
+                            className='input-container'
+                            name="StartDate"
+                            type="date"
+                            value={StartDate}
+                            onChange={e => setStartDate(e.target.value)}
+                            required/>
 
-                <label className='label'>
-                    Nom Entreprise impliquée
-                </label>
-                <input
-                    placeholder='Description'
-                    className='input-container'
-                    name="Nom Entreprise impliquée"
-                    type="Nom Entreprise impliquée"
-                    value={NameCompanyInvolved}
-                    onChange={e => setNameCompanyInvolved(e.target.value)}
-                    required/>
+                        <label className='label'>
+                            Nom Entreprise impliquée
+                        </label>
+                        <input
+                            placeholder='Description'
+                            className='input-container'
+                            name="Nom Entreprise impliquée"
+                            type="Nom Entreprise impliquée"
+                            value={NameCompanyInvolved}
+                            onChange={e => setNameCompanyInvolved(e.target.value)}
+                            required/>
 
 
-                <label className='label'>
-                    Titre du projet
-                </label>
-                <input
-                    placeholder='ProjectTitle '
-                    className='input-container'
-                    name="ProjectTitle"
-                    type="ProjectTitle"
-                    value={ProjectTitle}
-                    onChange={e => setProjectTitle(e.target.value)}
-                    required/>
+                        <label className='label'>
+                            Titre du projet
+                        </label>
+                        <input
+                            placeholder='ProjectTitle '
+                            className='input-container'
+                            name="ProjectTitle"
+                            type="ProjectTitle"
+                            value={ProjectTitle}
+                            onChange={e => setProjectTitle(e.target.value)}
+                            required/>
 
-                <label className='label'>
-                    Montant de l'accord
-                </label>
-                <input
-                    placeholder='Affiliation'
-                    type="number"
-                    className='input-container'
-                    name="AgreementAmount"
-                    value={AgreementAmount}
-                    onChange={e => setAgreementAmount(e.target.value)}
-                    required/>
+                        <label className='label'>
+                            Montant de l'accord
+                        </label>
+                        <input
+                            placeholder='Affiliation'
+                            type="number"
+                            className='input-container'
+                            name="AgreementAmount"
+                            value={AgreementAmount}
+                            onChange={e => setAgreementAmount(e.target.value)}
+                            required/>
 
-                <label className='label'>
-                    Date de fin
-                </label>
-                <input
-                    placeholder='Description'
-                    className='input-container'
-                    name="EndDate"
-                    type="date"
-                    value={EndDate}
-                    onChange={e => setEndDate(e.target.value)}
-                    required/>
+                        <label className='label'>
+                            Date de fin
+                        </label>
+                        <input
+                            placeholder='Description'
+                            className='input-container'
+                            name="EndDate"
+                            type="date"
+                            value={EndDate}
+                            onChange={e => setEndDate(e.target.value)}
+                            required/>
 
-                <label className='label'>
-                    Référence de la publication associée
-                </label>
-                <input
-                    placeholder='ProjectTitle '
-                    className='input-container'
-                    name="AssociatedPubliRef"
-                    type="AssociatedPubliRef"
-                    value={AssociatedPubliRef}
-                    onChange={e => setAssociatedPubliRef(e.target.value)}
-                    required/>
+                        <label className='label'>
+                            Référence de la publication associée
+                        </label>
+                        <input
+                            placeholder='ProjectTitle '
+                            className='input-container'
+                            name="AssociatedPubliRef"
+                            type="AssociatedPubliRef"
+                            value={AssociatedPubliRef}
+                            onChange={e => setAssociatedPubliRef(e.target.value)}
+                            required/>
                     </Modal.Body>
                     <Modal.Footer>
 
-                <button className='submit'>Valider</button>
+                        <button className='submit'>Valider</button>
                     </Modal.Footer>
                 </form>
             </Modal>
