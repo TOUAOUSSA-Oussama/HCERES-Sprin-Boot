@@ -34,41 +34,41 @@ public class SeiClinicalTrialService {
 	@Autowired
 	private ResearchRepository researchRepo;
 	@Autowired
-	private SeiClinicalTrialRepository SeiClinicalTrialRepo;
+	private SeiClinicalTrialRepository seiClinicalTrialRepo;
 	@Autowired
 	private ActivityRepository activityRepo;
 	@Autowired
 	private TypeActivityRepository typeActivityLevelRepo;
-	
-	/**
-	 * permet de retourner la liste
-	 */
-	public Iterable<SeiClinicalTrial> getSeiClinicalTrials(){
-		return SeiClinicalTrialRepo.findAll();
-	}
-	
+
 	/**
 	 * retourner l'elmt selon son id
 	 * @param id : id de l'elmt
 	 * @return : elmt a retourner
 	 */
-	public Optional<SeiClinicalTrial> getSeiClinicalTrial(final Integer id) { 
-		return SeiClinicalTrialRepo.findById(id); 
+	public Optional<SeiClinicalTrial> getSeiClinicalTrial(final Integer id) {
+		return seiClinicalTrialRepo.findById(id);
 	}
-	
+
+	/**
+	 * permet de retourner la liste
+	 */
+	public List<Activity> getSeiClinicalTrials(){
+		return activityRepo.findByIdTypeActivity(TypeActivity.IdTypeActivity.SEI_CLINICAL_TRIAL.getId());
+	}
+
 	/**
 	 * supprimer l'elmt selon son id
 	 * @param id : id de l'elmt
 	 */
 	public void deleteSeiClinicalTrial(final Integer id) {
-		SeiClinicalTrialRepo.deleteById(id);
+		seiClinicalTrialRepo.deleteById(id);
 	}
-	
+
 	/**
 	 * permet d'ajouter un elmt
 	 * @return : l'elemt ajouter a la base de donnees
 	 */
-	public SeiClinicalTrial saveSeiClinicalTrial(@RequestBody Map<String, Object> request) {
+	public Activity saveSeiClinicalTrial(@RequestBody Map<String, Object> request) {
 		
 		SeiClinicalTrial SeiClinicalTrialTosave = new SeiClinicalTrial();
 		
@@ -104,7 +104,7 @@ public class SeiClinicalTrialService {
 
 	    // Activity : 
 		Activity activity = new Activity();
-		TypeActivity typeActivity = typeActivityLevelRepo.getById(41);
+		TypeActivity typeActivity = typeActivityLevelRepo.getById(TypeActivity.IdTypeActivity.SEI_CLINICAL_TRIAL.getId());
 		activity.setTypeActivity(typeActivity);
 		
 		// ajouter cette activité à la liste de ce chercheur :
@@ -132,9 +132,11 @@ public class SeiClinicalTrialService {
 		SeiClinicalTrialTosave.setIdActivity(idSeiClinicalTrial);
 				
 		// Enregistrer SeiClinicalTrial dans la base de données :
-		SeiClinicalTrial saveSeiClinicalTrial = SeiClinicalTrialRepo.save(SeiClinicalTrialTosave);
-		
-		return saveSeiClinicalTrial;
+		SeiClinicalTrial saveSeiClinicalTrial = seiClinicalTrialRepo.save(SeiClinicalTrialTosave);
+
+		// wrap all objects in activity
+		savedActivity.setSeiClinicalTrial(saveSeiClinicalTrial);
+		return activity;
 	}
 	
 	// Convertir une date string en Date

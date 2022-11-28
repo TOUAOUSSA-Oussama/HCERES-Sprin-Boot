@@ -8,6 +8,7 @@ class MyClass {
         this.listeIndustrialContracts = null;
         this.listeInternationalCollaborations = null;
         this.listeScientificExpertises = null;
+        this.listeSeiClinicalTrials = null;
     }
 
     deleteActivity(activityList, idActivity) {
