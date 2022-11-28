@@ -12,8 +12,7 @@ import Editorial from './Editorial';
 import Review from './Review';
 import SeiIndustrialRDContract from './SeiIndustrialRDContract';
 import NationalInternationalCollaboration from './NationalInternationalCollaboration';
-import OralCommunication from './OralCommunication';
-import {Alert, Card, Col, Container, ListGroup, Table} from "react-bootstrap";
+import {Alert, ButtonGroup, Card, Col, Container, ListGroup, Table} from "react-bootstrap";
 import Collapse from 'react-bootstrap/Collapse';
 import {BiShow, BiHide} from "react-icons/bi";
 import EducationList from "./education/EducationList";
@@ -21,6 +20,11 @@ import ResearcherElement from "../Researcher/ResearcherElement";
 import SrAwardElement from "./sraward/SrAwardElement";
 import SrAwardList from "./sraward/SrAwardList";
 import PlatformList from "./platform/PlatformList";
+import OralCommunicationList from "./oralcommunication/OralCommunicationList";
+import Button from "react-bootstrap/Button";
+import {fetchListOralCommunications} from "../../services/oralcommunication/OralCommunicationActions";
+import {fetchResearcherActivities} from "../../services/Researcher/ResearcherActions";
+import ActivityTypes from "../../const/ActivityTypes";
 
 
 // if target researcher is set in props will show only related information of target researcher
@@ -47,8 +51,26 @@ export default function ActivityList(props) {
     const [showPatentList, setShowPatentList] = React.useState(showListByDefault);
     const [showReviewList, setShowReviewList] = React.useState(showListByDefault);
 
-    // cached variable list to prevent loading multiple times
-    const [educationList, setEducationList] = React.useState();
+    const setShowAllList = (isShow) => {
+        setShowEducationList(isShow)
+        setShowPrixList(isShow)
+        setShowPlatformList(isShow)
+        setShowOralCommunicationList(isShow)
+        setShowSeiIndustrialRDContractList(isShow)
+        setShowInterCollaborationList(isShow)
+        setShowScientificExpertiseList(isShow)
+        setShowEssaiCliniqueList(isShow)
+        setShowIncomingMobilityList(isShow)
+        setShowOutgoingMobilityList(isShow)
+        setShowEditorialList(isShow)
+        setShowComparnyCreationList(isShow)
+        setShowPostDoctoratList(isShow)
+        setShowPatentList(isShow)
+        setShowReviewList(isShow)
+    }
+
+    const showAllList = () => setShowAllList(true)
+    const hideAllList = () => setShowAllList(false)
 
     const sendMessageToActivity = (messages = null) => {
         // silent close
@@ -75,6 +97,12 @@ export default function ActivityList(props) {
                 <div>
 
                     <div className={"list_container"} role={"button"}>
+                        <ListGroup horizontal={true}>
+                            <ButtonGroup>
+                                <Button onClick={showAllList} variant={"outline-primary"} id={"showAllActivityListBtn"}>Voyer tous</Button>
+                                <Button onClick={hideAllList} variant={"outline-secondary"}>Cacher tous</Button>
+                            </ButtonGroup>
+                        </ListGroup>
                         {targetResearcher && <ResearcherElement targetResearcher={targetResearcher} horizontal/>}
                         <ListGroup horizontal={true}>
                             <ListGroup.Item onClick={() => setShowEducationList(!showEducationList)}
@@ -210,7 +238,7 @@ export default function ActivityList(props) {
 
                         <Collapse in={showOralCommunicationList}>
                             <div>{showOralCommunicationList &&
-                                <div>import the file to showOralCommunicationList here</div>}</div>
+                                <OralCommunicationList sendMessageToActivity={sendMessageToActivity} targetResearcher={targetResearcher}/>}</div>
                         </Collapse>
 
                         <Collapse in={showSeiIndustrialRDContractList}>

@@ -62,6 +62,7 @@ public class TypeActivity implements Serializable {
 
     @Getter
     public enum IdTypeActivity {
+        UNDEFINED(0),
         PUBLICATION(1),
         BOOK(2),
         BOOK_CHAPTER(3),

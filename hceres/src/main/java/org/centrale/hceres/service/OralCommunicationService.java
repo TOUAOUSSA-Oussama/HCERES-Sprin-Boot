@@ -59,13 +59,21 @@ public class OralCommunicationService {
 	
 	@Autowired
 	private MeetingCongressOrgRepository meetingCongressOrgRepo;
-	
+
+	public List<Activity> getOralCommunications() {
+		return activityRepo.findByIdTypeActivity(TypeActivity.IdTypeActivity.ORAL_COMMUNICATION_POSTER.getId());
+	}
+
+	public void deleteOralCommunication(Integer id) {
+		oralCommunicationRepo.deleteById(id);
+	}
+
 	/**
 	 * permet d'ajouter un elmt
 	 * @return : l'elemt ajouter a la base de donnees
 	 */
 	@Transactional
-	public OralCommunication saveOralCommunication(@RequestBody Map<String, Object> request) {
+	public Activity saveOralCommunication(@RequestBody Map<String, Object> request) {
 		
 		OralCommunication oralCommunicationTosave = new OralCommunication();
 		
@@ -81,7 +89,7 @@ public class OralCommunicationService {
 		
 		// Activity : 
 		Activity activity = new Activity();
-		TypeActivity typeActivity = typeActivityLevelRepo.getById(32);
+		TypeActivity typeActivity = typeActivityLevelRepo.getById(TypeActivity.IdTypeActivity.ORAL_COMMUNICATION_POSTER.getId());
 		activity.setTypeActivity(typeActivity);
 		
 		// Meeting
@@ -132,8 +140,9 @@ public class OralCommunicationService {
 				
 		// Enregistrer dans la base de données :
 		OralCommunication saveOralCommunication = oralCommunicationRepo.save(oralCommunicationTosave);
-		
-		return saveOralCommunication;
+
+		savedActivity.setOralCommunication(saveOralCommunication);
+		return savedActivity;
 	}
 	
 	// Convertir une date string en Date

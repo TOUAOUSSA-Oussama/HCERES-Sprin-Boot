@@ -10,7 +10,6 @@ import Editorial from './Editorial';
 import Review from './Review';
 import SeiIndustrialRDContract from './SeiIndustrialRDContract';
 import NationalInternationalCollaboration from './NationalInternationalCollaboration';
-import OralCommunication from './OralCommunication';
 import {Alert} from "react-bootstrap";
 
 export default function Activity() {
@@ -23,7 +22,6 @@ export default function Activity() {
     const [showReview, setShowReview] = React.useState(false);
     const [showSeiIndustrialRDContract, setShowSeiIndustrialRDContract] = React.useState(false);
     const [showNationalInternationalCollaboration, setShowNationalInternationalCollaboration] = React.useState(false);
-    const [showOralCommunication, setShowOralCommunication] = React.useState(false);
 
     return (
         <div>
@@ -40,9 +38,6 @@ export default function Activity() {
                 </div>
                 <div className='activityList'>
                     <ul>
-                        <li onClick={() => setShowOralCommunication(true)}>
-                            <a>Communication orale</a>
-                        </li>
                         <li onClick={() => setShowSeiIndustrialRDContract(true)}>
                             <a>Signature d'une contrat industrielle</a>
                         </li>
@@ -89,7 +84,6 @@ export default function Activity() {
                 {showReview && (<Review onHideAction={() => setShowReview(false)}></Review>)}
                 {showSeiIndustrialRDContract && (<SeiIndustrialRDContract onHideAction={() => setShowSeiIndustrialRDContract(false)}></SeiIndustrialRDContract>)}
                 {showNationalInternationalCollaboration && (<NationalInternationalCollaboration onHideAction={() => setShowNationalInternationalCollaboration(false)}></NationalInternationalCollaboration>)}
-                {showOralCommunication && (<OralCommunication onHideAction={() => setShowOralCommunication(false)}></OralCommunication>)}
             </div>
         </div>
     )

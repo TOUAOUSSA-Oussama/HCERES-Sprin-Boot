@@ -4,6 +4,7 @@ class MyClass {
         this.listeEducations = null;
         this.listeSrAwards = null;
         this.listePlatforms = null;
+        this.listeOralCommunications = null;
     }
 
     deleteActivity(activityList, idActivity) {

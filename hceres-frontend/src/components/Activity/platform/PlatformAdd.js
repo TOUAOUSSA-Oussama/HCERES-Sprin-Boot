@@ -170,8 +170,12 @@ function PlatformAdd(props) {
 
                     </Modal.Body>
                     <Modal.Footer>
-
-                        <button className='submit'>Valider</button>
+                        <Button variant="secondary" onClick={handleClose}>
+                            Close
+                        </Button>
+                        <Button variant="outline-primary" type={"submit"}>
+                            Ajouter
+                        </Button>
 
                     </Modal.Footer>
                 </form>

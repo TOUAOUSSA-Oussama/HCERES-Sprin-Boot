@@ -149,9 +149,17 @@ class Researcher extends Component {
 
                             <button onClick={() => {
                                 this.setState({
+                                    showActivities: this.state.targetResearcher === row ? !this.state.showActivities : false,
                                     targetResearcher: row,
-                                    showActivities: true
                                 })
+                                // refresh contents by alternating sate
+                                if (this.state.targetResearcher !== row) {
+                                    setTimeout(() => {
+                                        this.setState({
+                                            showActivities: true
+                                        })
+                                    })
+                                }
                             }} className={"btn btn-outline-secondary"}>
                                 <MdPendingActions/>
                             </button>
@@ -249,8 +257,9 @@ class Researcher extends Component {
                     />
                     <Collapse in={this.state.showActivities}>
                         <div>
-                            <Button onClick={()=>this.setState({showActivities:false})}><VscEyeClosed/></Button>
-                            {this.state.showActivities && <ActivityList targetResearcher={this.state.targetResearcher}/>}
+                            <Button onClick={() => this.setState({showActivities: false})}><VscEyeClosed/></Button>
+                            {this.state.showActivities &&
+                                <ActivityList targetResearcher={this.state.targetResearcher}/>}
                         </div>
                     </Collapse>
                 </div>
