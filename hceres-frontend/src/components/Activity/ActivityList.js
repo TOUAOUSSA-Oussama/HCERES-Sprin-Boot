@@ -2,7 +2,6 @@ import React from 'react';
 import './ActivityList.css'
 import EssaiClinique from './EssaiClinique';
 import IncomingMobility from './IncomingMobility';
-import ScientificExpertise from './ScientificExpertise';
 import Navbar from '../Navbar/Navbar';
 
 import EducationAdd from './education/EducationAdd';
@@ -25,6 +24,7 @@ import {fetchResearcherActivities} from "../../services/Researcher/ResearcherAct
 import ActivityTypes from "../../const/ActivityTypes";
 import IndustrialContractList from "./industrial-contract/IndustrialContractList";
 import InternationalCollaborationList from "./international-collaboration/InternationalCollaborationList";
+import ScientificExpertiseList from "./scientific-expertise/ScientificExpertiseList";
 
 
 // if target researcher is set in props will show only related information of target researcher
@@ -253,7 +253,7 @@ export default function ActivityList(props) {
 
                         <Collapse in={showScientificExpertiseList}>
                             <div>{showScientificExpertiseList &&
-                                <div>import the file to showScientificExpertiseList here</div>}</div>
+                                <ScientificExpertiseList targetResearcher={targetResearcher}/>}</div>
                         </Collapse>
 
                         <Collapse in={showEssaiCliniqueList}>

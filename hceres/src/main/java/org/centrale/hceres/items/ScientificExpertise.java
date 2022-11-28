@@ -72,7 +72,7 @@ public class ScientificExpertise implements Serializable {
     @JoinColumn(name = "id_activity", referencedColumnName = "id_activity", insertable = false, updatable = false)
     @OneToOne(optional = false, cascade = CascadeType.ALL)
     private Activity activity;
-    @JsonIgnore
+
     @JoinColumn(name = "scientific_expertise_type_id", referencedColumnName = "scientific_expertise_type_id")
     @ManyToOne(optional = false)
     private ScientificExpertiseType scientificExpertiseTypeId;

@@ -40,44 +40,35 @@ public class ScientificExpertiseService {
 	@Autowired
 	private ResearchRepository researchRepo;
 	@Autowired
-	private ScientificExpertiseRepository ScientificExpertiseRepo;
+	private ScientificExpertiseRepository scientificExpertiseRepo;
 	@Autowired
-	private ScientificExpertiseTypeRepository ScientificExpertiseTypeRepo;
+	private ScientificExpertiseTypeRepository scientificExpertiseTypeRepository;
 	@Autowired
 	private ActivityRepository activityRepo;
 	@Autowired
 	private TypeActivityRepository typeActivityLevelRepo;
-	
+
 	/**
 	 * permet de retourner la liste
 	 */
-	public Iterable<ScientificExpertise> getScientificExpertises(){
-		return ScientificExpertiseRepo.findAll();
+	public List<Activity> getScientificExpertises(){
+		return activityRepo.findByIdTypeActivity(TypeActivity.IdTypeActivity.SCIENTIFIC_EXPERTISE.getId());
 	}
-	
-	/**
-	 * retourner l'elmt selon son id
-	 * @param id : id de l'elmt
-	 * @return : elmt a retourner
-	 */
-	public Optional<ScientificExpertise> getScientificExpertise(final Integer id) { 
-		return ScientificExpertiseRepo.findById(id); 
-	}
-	
+
 	/**
 	 * supprimer l'elmt selon son id
 	 * @param id : id de l'elmt
 	 */
 	public void deleteScientificExpertise(final Integer id) {
-		ScientificExpertiseRepo.deleteById(id);
+		scientificExpertiseRepo.deleteById(id);
 	}
-	
+
 	/**
 	 * permet d'ajouter un elmt
 	 * @return : l'elemt ajouter a la base de donnees
 	 */
 	@Transactional
-	public ScientificExpertise saveScientificExpertise(@RequestBody Map<String, Object> request) {
+	public Activity saveScientificExpertise(@RequestBody Map<String, Object> request) {
 		
 		ScientificExpertise ScientificExpertiseTosave = new ScientificExpertise();
 		
@@ -96,12 +87,12 @@ public class ScientificExpertiseService {
 		// ScientificExpertiseType : 
 		ScientificExpertiseType ScientificExpertiseType = new ScientificExpertiseType();
 		ScientificExpertiseType.setNameChoice((String)request.get("ScientificExpertiseTypeName"));
-		ScientificExpertiseType saveScientificExpertiseType = ScientificExpertiseTypeRepo.save(ScientificExpertiseType);
+		ScientificExpertiseType saveScientificExpertiseType = scientificExpertiseTypeRepository.save(ScientificExpertiseType);
 		ScientificExpertiseTosave.setScientificExpertiseTypeId(saveScientificExpertiseType);
 		
 		// Activity : 
 		Activity activity = new Activity();
-		TypeActivity typeActivity = typeActivityLevelRepo.getById(16);
+		TypeActivity typeActivity = typeActivityLevelRepo.getById(TypeActivity.IdTypeActivity.SCIENTIFIC_EXPERTISE.getId());
 		activity.setTypeActivity(typeActivity);
 		//Activity savedActivity = activityRepo.save(activity);
 		//ScientificExpertiseTosave.setActivity(savedActivity);
@@ -131,9 +122,10 @@ public class ScientificExpertiseService {
 		  Integer idSE = activity.getIdActivity();
 		  ScientificExpertiseTosave.setIdActivity(idSE);
 		// Enregistrer ScientificExpertise dans la base de données :
-		ScientificExpertise saveScientificExpertise = ScientificExpertiseRepo.save(ScientificExpertiseTosave);
-		
-		return saveScientificExpertise;
+		ScientificExpertise saveScientificExpertise = scientificExpertiseRepo.save(ScientificExpertiseTosave);
+
+		savedActivity.setScientificExpertise(saveScientificExpertise);
+		return savedActivity;
 	}
 	
 	// Convertir une date string en Date

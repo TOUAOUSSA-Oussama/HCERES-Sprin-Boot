@@ -99,7 +99,6 @@ public class Activity implements Serializable {
     @JsonIgnore
     private Publication publication;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "activity")
-    @JsonIgnore
     private ScientificExpertise scientificExpertise;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "activity")
     @JsonIgnore

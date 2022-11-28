@@ -1,7 +1,6 @@
 import React from 'react';
 import EssaiClinique from './EssaiClinique';
 import IncomingMobility from './IncomingMobility';
-import ScientificExpertise from './ScientificExpertise';
 import './Activity.css'
 import Navbar from '../Navbar/Navbar';
 
@@ -13,7 +12,6 @@ import {Alert} from "react-bootstrap";
 export default function Activity() {
     const [showEssaiClinique, setEssaiClinique] = React.useState(false);
     const [showIncomingMobility, setIncomingMobility] = React.useState(false);
-    const [showScientificExpertise, setScientificExpertise] = React.useState(false);
     const [DateProjectStart, setDateProjectStart] = React.useState(null);
     const [showPostDoctorat, setShowPostDoctorat] = React.useState(false);
     const [showEditorial, setShowEditorial] = React.useState(false);
@@ -34,9 +32,6 @@ export default function Activity() {
                 </div>
                 <div className='activityList'>
                     <ul>
-                        <li onClick={() => setScientificExpertise(true)}>
-                            <a>Expertise scientifique</a>
-                        </li>
                         <li onClick={() => setEssaiClinique(true)}>
                             <a>Essai clinique</a>
                         </li>
@@ -68,7 +63,6 @@ export default function Activity() {
                 </div>
                 {showEssaiClinique && (<EssaiClinique onHideAction={() => setEssaiClinique(false)}> </EssaiClinique>)}
                 {showIncomingMobility && (<IncomingMobility onHideAction={() => setIncomingMobility(false)}> </IncomingMobility>)}
-                {showScientificExpertise && (<ScientificExpertise onHideAction={() =>setScientificExpertise(false)}> </ScientificExpertise>)}
                 {showPostDoctorat && (<PostDoctorat onHideAction={() => setShowPostDoctorat(false)}> </PostDoctorat>)}
                 {showEditorial && (<Editorial onHideAction={() => setShowEditorial(false)}></Editorial>)}
                 {showReview && (<Review onHideAction={() => setShowReview(false)}></Review>)}
