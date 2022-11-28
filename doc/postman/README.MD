@@ -1,3 +1,10 @@
+# Postman
+
+Cette readme vise à utiliser Postman avec le projet HECERS pour tester l'API backend sans avoir besoin d'une
+interface graphique.
+
+## Tableau de contenu
+
 <!-- TOC -->
 
 * [Postman](#postman)
@@ -11,11 +18,6 @@
     * [Etape 3](#etape-3)
 
 <!-- TOC -->
-
-# Postman
-
-Cette readme vise à utiliser Postman avec le projet HECERS pour tester l'API backend sans avoir besoin d'une
-interface graphique.
 
 ## Telchargement
 
