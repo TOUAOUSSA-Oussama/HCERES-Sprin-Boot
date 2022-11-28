@@ -10,7 +10,7 @@ import {Alert} from "react-bootstrap";
 
 import 'react-datepicker/dist/react-datepicker.css';
 import Button from "react-bootstrap/Button";
-import {Audio} from "react-loading-icons";
+import {Rings} from "react-loading-icons";
 import {chercheursColumnOfActivity, paginationOptions} from "../../util/BootStrapTableOptions";
 import {ImFilter} from "react-icons/im";
 import {AiFillDelete, AiOutlinePlusCircle} from "react-icons/ai";
@@ -83,7 +83,7 @@ function IncomingMobilityList(props) {
 
 
     if (!incomingMobilityList) {
-        return <div><Button><Audio/></Button></div>
+        return <div><Button><Rings/></Button></div>
     } else {
         if (incomingMobilityList.length === 0) {
             return <div className={"row"}>
