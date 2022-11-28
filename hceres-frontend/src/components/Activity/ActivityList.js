@@ -10,8 +10,6 @@ import BootstrapTable from 'react-bootstrap-table-next';
 import PostDoctorat from './PostDoctorat';
 import Editorial from './Editorial';
 import Review from './Review';
-import SeiIndustrialRDContract from './SeiIndustrialRDContract';
-import NationalInternationalCollaboration from './NationalInternationalCollaboration';
 import {Alert, ButtonGroup, Card, Col, Container, ListGroup, Table} from "react-bootstrap";
 import Collapse from 'react-bootstrap/Collapse';
 import {BiShow, BiHide} from "react-icons/bi";
@@ -26,6 +24,7 @@ import {fetchListOralCommunications} from "../../services/oral-communication/Ora
 import {fetchResearcherActivities} from "../../services/Researcher/ResearcherActions";
 import ActivityTypes from "../../const/ActivityTypes";
 import IndustrialContractList from "./industrial-contract/IndustrialContractList";
+import InternationalCollaborationList from "./international-collaboration/InternationalCollaborationList";
 
 
 // if target researcher is set in props will show only related information of target researcher
@@ -249,7 +248,7 @@ export default function ActivityList(props) {
 
                         <Collapse in={showInterCollaborationList}>
                             <div>{showInterCollaborationList &&
-                                <div>import the file to showInterCollaborationList here</div>}</div>
+                                <InternationalCollaborationList targetResearcher={targetResearcher}/>}</div>
                         </Collapse>
 
                         <Collapse in={showScientificExpertiseList}>

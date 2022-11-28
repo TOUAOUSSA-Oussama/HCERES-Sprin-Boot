@@ -25,20 +25,20 @@ import PlatformDelete from "./PlatformDelete";
 // else load list des tous les platforms du database
 function PlatformList(props) {
 
-    // parameter constant (List Class)
+    // parameter constant (List Template)
     const targetResearcher = props.targetResearcher;
 
-    // Cached state (List Class)
+    // Cached state (List Template)
     const [platformList, setPlatformList] = React.useState(null);
 
-    // UI states (List Class)
+    // UI states (List Template)
     const [successActivityAlert, setSuccessActivityAlert] = React.useState('');
     const [errorActivityAlert, setErrorActivityAlert] = React.useState('');
     const [showFilter, setShowFilter] = React.useState(false);
     const {SearchBar, ClearSearchButton} = Search;
 
 
-    // Form state (List Class)
+    // Form state (List Template)
     const [targetPlatform, setTargetPlatform] = React.useState(false);
     const [showPlatformAdd, setShowPlatformAdd] = React.useState(false);
     const [showPlatformDelete, setShowPlatformDelete] = React.useState(false);

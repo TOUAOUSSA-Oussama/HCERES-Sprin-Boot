@@ -24,20 +24,20 @@ import SrAwardDelete from "./SrAwardDelete";
 // If targetResearcher is set in props display related information only (
 // else load list des tous les srAwards du database
 function SrAwardList(props) {
-    // parameter constant (List Class)
+    // parameter constant (List Template)
     const targetResearcher = props.targetResearcher;
 
-    // Cached state (List Class)
+    // Cached state (List Template)
     const [srAwardList, setSrAwardList] = React.useState(null);
 
-    // UI states (List Class)
+    // UI states (List Template)
     const [successActivityAlert, setSuccessActivityAlert] = React.useState('');
     const [errorActivityAlert, setErrorActivityAlert] = React.useState('');
     const [showFilter, setShowFilter] = React.useState(false);
     const {SearchBar, ClearSearchButton} = Search;
 
 
-    // Form state (List Class)
+    // Form state (List Template)
     const [targetSrAward, setTargetSrAward] = React.useState(false);
     const [showSrAwardAdd, setShowSrAwardAdd] = React.useState(false);
     const [showSrAwardDelete, setShowSrAwardDelete] = React.useState(false);

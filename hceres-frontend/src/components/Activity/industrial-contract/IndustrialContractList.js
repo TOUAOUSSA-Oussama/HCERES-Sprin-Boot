@@ -24,20 +24,20 @@ import IndustrialContractDelete from "./IndustrialContractDelete";
 // If targetResearcher is set in props display related information only (
 // else load list des tous les industrialContracts du database
 function IndustrialContractList(props) {
-    // parameter constant (List Class)
+    // parameter constant (List Template)
     const targetResearcher = props.targetResearcher;
 
-    // Cached state (List Class)
+    // Cached state (List Template)
     const [industrialContractList, setIndustrialContractList] = React.useState(null);
 
-    // UI states (List Class)
+    // UI states (List Template)
     const [successActivityAlert, setSuccessActivityAlert] = React.useState('');
     const [errorActivityAlert, setErrorActivityAlert] = React.useState('');
     const [showFilter, setShowFilter] = React.useState(false);
     const {SearchBar, ClearSearchButton} = Search;
 
 
-    // Form state (List Class)
+    // Form state (List Template)
     const [targetIndustrialContract, setTargetIndustrialContract] = React.useState(false);
     const [showIndustrialContractAdd, setShowIndustrialContractAdd] = React.useState(false);
     const [showIndustrialContractDelete, setShowIndustrialContractDelete] = React.useState(false);

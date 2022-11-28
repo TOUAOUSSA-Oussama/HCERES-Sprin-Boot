@@ -8,8 +8,6 @@ import Navbar from '../Navbar/Navbar';
 import PostDoctorat from './PostDoctorat';
 import Editorial from './Editorial';
 import Review from './Review';
-import SeiIndustrialRDContract from './SeiIndustrialRDContract';
-import NationalInternationalCollaboration from './NationalInternationalCollaboration';
 import {Alert} from "react-bootstrap";
 
 export default function Activity() {
@@ -20,8 +18,6 @@ export default function Activity() {
     const [showPostDoctorat, setShowPostDoctorat] = React.useState(false);
     const [showEditorial, setShowEditorial] = React.useState(false);
     const [showReview, setShowReview] = React.useState(false);
-    const [showSeiIndustrialRDContract, setShowSeiIndustrialRDContract] = React.useState(false);
-    const [showNationalInternationalCollaboration, setShowNationalInternationalCollaboration] = React.useState(false);
 
     return (
         <div>
@@ -38,12 +34,6 @@ export default function Activity() {
                 </div>
                 <div className='activityList'>
                     <ul>
-                        <li onClick={() => setShowSeiIndustrialRDContract(true)}>
-                            <a>Signature d'une contrat industrielle</a>
-                        </li>
-                        <li onClick={() => setShowNationalInternationalCollaboration(true)}>
-                            <a>Collaboration internationale</a>
-                        </li>
                         <li onClick={() => setScientificExpertise(true)}>
                             <a>Expertise scientifique</a>
                         </li>
@@ -82,8 +72,6 @@ export default function Activity() {
                 {showPostDoctorat && (<PostDoctorat onHideAction={() => setShowPostDoctorat(false)}> </PostDoctorat>)}
                 {showEditorial && (<Editorial onHideAction={() => setShowEditorial(false)}></Editorial>)}
                 {showReview && (<Review onHideAction={() => setShowReview(false)}></Review>)}
-                {showSeiIndustrialRDContract && (<SeiIndustrialRDContract onHideAction={() => setShowSeiIndustrialRDContract(false)}></SeiIndustrialRDContract>)}
-                {showNationalInternationalCollaboration && (<NationalInternationalCollaboration onHideAction={() => setShowNationalInternationalCollaboration(false)}></NationalInternationalCollaboration>)}
             </div>
         </div>
     )

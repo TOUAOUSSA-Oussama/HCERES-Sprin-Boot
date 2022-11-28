@@ -39,26 +39,26 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name = "national_international_collaboration")
 @NamedQueries({
-    @NamedQuery(name = "NationalInternationalCollaboration.findAll", query = "SELECT n FROM NationalInternationalCollaboration n"),
-    @NamedQuery(name = "NationalInternationalCollaboration.findByIdActivity", query = "SELECT n FROM NationalInternationalCollaboration n WHERE n.idActivity = :idActivity"),
-    @NamedQuery(name = "NationalInternationalCollaboration.findByDateProjectStart", query = "SELECT n FROM NationalInternationalCollaboration n WHERE n.dateProjectStart = :dateProjectStart"),
-    @NamedQuery(name = "NationalInternationalCollaboration.findByPartnerEntity", query = "SELECT n FROM NationalInternationalCollaboration n WHERE n.partnerEntity = :partnerEntity"),
-    @NamedQuery(name = "NationalInternationalCollaboration.findByCountryStateCity", query = "SELECT n FROM NationalInternationalCollaboration n WHERE n.countryStateCity = :countryStateCity"),
-    @NamedQuery(name = "NationalInternationalCollaboration.findByPiPartners", query = "SELECT n FROM NationalInternationalCollaboration n WHERE n.piPartners = :piPartners"),
-    @NamedQuery(name = "NationalInternationalCollaboration.findByMailPartners", query = "SELECT n FROM NationalInternationalCollaboration n WHERE n.mailPartners = :mailPartners"),
-    @NamedQuery(name = "NationalInternationalCollaboration.findByProjetcTitle", query = "SELECT n FROM NationalInternationalCollaboration n WHERE n.projetcTitle = :projetcTitle"),
-    @NamedQuery(name = "NationalInternationalCollaboration.findByStrategicRecurringCollab", query = "SELECT n FROM NationalInternationalCollaboration n WHERE n.strategicRecurringCollab = :strategicRecurringCollab"),
-    @NamedQuery(name = "NationalInternationalCollaboration.findByActiveProject", query = "SELECT n FROM NationalInternationalCollaboration n WHERE n.activeProject = :activeProject"),
-    @NamedQuery(name = "NationalInternationalCollaboration.findByAssociatedFunding", query = "SELECT n FROM NationalInternationalCollaboration n WHERE n.associatedFunding = :associatedFunding"),
-    @NamedQuery(name = "NationalInternationalCollaboration.findByNumberResultingPublications", query = "SELECT n FROM NationalInternationalCollaboration n WHERE n.numberResultingPublications = :numberResultingPublications"),
-    @NamedQuery(name = "NationalInternationalCollaboration.findByRefJointPublication", query = "SELECT n FROM NationalInternationalCollaboration n WHERE n.refJointPublication = :refJointPublication"),
-    @NamedQuery(name = "NationalInternationalCollaboration.findByUmrCoordinated", query = "SELECT n FROM NationalInternationalCollaboration n WHERE n.umrCoordinated = :umrCoordinated"),
-    @NamedQuery(name = "NationalInternationalCollaboration.findByAgreementSigned", query = "SELECT n FROM NationalInternationalCollaboration n WHERE n.agreementSigned = :agreementSigned")})
+    @NamedQuery(name = "InternationalCollaboration.findAll", query = "SELECT n FROM InternationalCollaboration n"),
+    @NamedQuery(name = "InternationalCollaboration.findByIdActivity", query = "SELECT n FROM InternationalCollaboration n WHERE n.idActivity = :idActivity"),
+    @NamedQuery(name = "InternationalCollaboration.findByDateProjectStart", query = "SELECT n FROM InternationalCollaboration n WHERE n.dateProjectStart = :dateProjectStart"),
+    @NamedQuery(name = "InternationalCollaboration.findByPartnerEntity", query = "SELECT n FROM InternationalCollaboration n WHERE n.partnerEntity = :partnerEntity"),
+    @NamedQuery(name = "InternationalCollaboration.findByCountryStateCity", query = "SELECT n FROM InternationalCollaboration n WHERE n.countryStateCity = :countryStateCity"),
+    @NamedQuery(name = "InternationalCollaboration.findByPiPartners", query = "SELECT n FROM InternationalCollaboration n WHERE n.piPartners = :piPartners"),
+    @NamedQuery(name = "InternationalCollaboration.findByMailPartners", query = "SELECT n FROM InternationalCollaboration n WHERE n.mailPartners = :mailPartners"),
+    @NamedQuery(name = "InternationalCollaboration.findByProjetcTitle", query = "SELECT n FROM InternationalCollaboration n WHERE n.projetcTitle = :projetcTitle"),
+    @NamedQuery(name = "InternationalCollaboration.findByStrategicRecurringCollab", query = "SELECT n FROM InternationalCollaboration n WHERE n.strategicRecurringCollab = :strategicRecurringCollab"),
+    @NamedQuery(name = "InternationalCollaboration.findByActiveProject", query = "SELECT n FROM InternationalCollaboration n WHERE n.activeProject = :activeProject"),
+    @NamedQuery(name = "InternationalCollaboration.findByAssociatedFunding", query = "SELECT n FROM InternationalCollaboration n WHERE n.associatedFunding = :associatedFunding"),
+    @NamedQuery(name = "InternationalCollaboration.findByNumberResultingPublications", query = "SELECT n FROM InternationalCollaboration n WHERE n.numberResultingPublications = :numberResultingPublications"),
+    @NamedQuery(name = "InternationalCollaboration.findByRefJointPublication", query = "SELECT n FROM InternationalCollaboration n WHERE n.refJointPublication = :refJointPublication"),
+    @NamedQuery(name = "InternationalCollaboration.findByUmrCoordinated", query = "SELECT n FROM InternationalCollaboration n WHERE n.umrCoordinated = :umrCoordinated"),
+    @NamedQuery(name = "InternationalCollaboration.findByAgreementSigned", query = "SELECT n FROM InternationalCollaboration n WHERE n.agreementSigned = :agreementSigned")})
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class NationalInternationalCollaboration implements Serializable {
+public class InternationalCollaboration implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id

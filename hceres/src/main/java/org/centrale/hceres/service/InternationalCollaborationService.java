@@ -3,21 +3,18 @@ package org.centrale.hceres.service;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.BitSet;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Date;
 import java.util.Optional;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.centrale.hceres.items.Activity;
-import org.centrale.hceres.items.NationalInternationalCollaboration;
+import org.centrale.hceres.items.InternationalCollaboration;
 import org.centrale.hceres.items.Researcher;
 import org.centrale.hceres.items.TypeActivity;
 import org.centrale.hceres.items.TypeCollab;
 import org.centrale.hceres.repository.ActivityRepository;
-import org.centrale.hceres.repository.NationalInternationalCollaborationRepository;
+import org.centrale.hceres.repository.InternationalCollaborationRepository;
 import org.centrale.hceres.repository.ResearchRepository;
 import org.centrale.hceres.repository.TypeActivityRepository;
 import org.centrale.hceres.repository.TypeCollabRepository;
@@ -32,7 +29,7 @@ import java.util.Map;
 
 @Data
 @Service
-public class NationalInternationalCollaborationService {
+public class InternationalCollaborationService {
 
 	/**
 	 * Instanciation
@@ -47,71 +44,86 @@ public class NationalInternationalCollaborationService {
 	private TypeActivityRepository typeActivityLevelRepo;
 	
 	@Autowired
-	private NationalInternationalCollaborationRepository nationalInternationalCollaborationRepo;
+	private InternationalCollaborationRepository internationalCollaborationRepo;
 	
 	@Autowired
 	private TypeCollabRepository typeCollabRepo;
+
+	/**
+	 * permet de retourner la liste
+	 */
+	public List<Activity> getInternationalCollaborations(){
+		return activityRepo.findByIdTypeActivity(TypeActivity.IdTypeActivity.NATIONAL_INTERNATIONAL_COLLABORATION.getId());
+	}
+
+	/**
+	 * supprimer l'elmt selon son id
+	 * @param id : id de l'elmt
+	 */
+	public void deleteInternationalCollaboration(final Integer id) {
+		internationalCollaborationRepo.deleteById(id);
+	}
 	
 	/**
 	 * permet d'ajouter un elmt
 	 * @return : l'elemt ajouter a la base de donnees
 	 */
 	@Transactional
-	public NationalInternationalCollaboration saveNationalInternationalCollaboration(@RequestBody Map<String, Object> request) {
+	public Activity saveInternationalCollaboration(@RequestBody Map<String, Object> request) {
 		
-		NationalInternationalCollaboration nationalInternationalCollaborationTosave = new NationalInternationalCollaboration();
+		InternationalCollaboration InternationalCollaborationTosave = new InternationalCollaboration();
 		
 		// DateProjectStart :
 		String dateProjectStart = (String)request.get("DateProjectStart");
-		nationalInternationalCollaborationTosave.setDateProjectStart(getDateFromString(dateProjectStart, "yyyy-MM-dd"));
+		InternationalCollaborationTosave.setDateProjectStart(getDateFromString(dateProjectStart, "yyyy-MM-dd"));
 		
 		// PartnerEntity :
-		nationalInternationalCollaborationTosave.setPartnerEntity((String)request.get("PartnerEntity"));
+		InternationalCollaborationTosave.setPartnerEntity((String)request.get("PartnerEntity"));
 		
 		// CountryStateCity :
-		nationalInternationalCollaborationTosave.setCountryStateCity((String)request.get("CountryStateCity"));
+		InternationalCollaborationTosave.setCountryStateCity((String)request.get("CountryStateCity"));
 		
 		// setPiPartners :
-		nationalInternationalCollaborationTosave.setPiPartners((String)request.get("PiPartners"));
+		InternationalCollaborationTosave.setPiPartners((String)request.get("PiPartners"));
 		
 		// MailPartners
-		nationalInternationalCollaborationTosave.setMailPartners((String)request.get("MailPartners"));
+		InternationalCollaborationTosave.setMailPartners((String)request.get("MailPartners"));
 		
 		// setProjetcTitle
-		nationalInternationalCollaborationTosave.setProjetcTitle((String)request.get("ProjetcTitle"));
+		InternationalCollaborationTosave.setProjetcTitle((String)request.get("ProjetcTitle"));
 		
 		// StrategicRecurringCollab : probleme => boolean n'est pas de type bit
-		nationalInternationalCollaborationTosave.setStrategicRecurringCollab(Boolean.valueOf((String)request.get("StrategicRecurringCollab")));
+		InternationalCollaborationTosave.setStrategicRecurringCollab(Boolean.valueOf((String)request.get("StrategicRecurringCollab")));
 		
 		// ActiveProject
-		nationalInternationalCollaborationTosave.setActiveProject(Boolean.valueOf((String)request.get("ActiveProject")));
+		InternationalCollaborationTosave.setActiveProject(Boolean.valueOf((String)request.get("ActiveProject")));
 		
 		// AssociatedFunding
-		nationalInternationalCollaborationTosave.setAssociatedFunding((String)request.get("AssociatedFunding"));
+		InternationalCollaborationTosave.setAssociatedFunding((String)request.get("AssociatedFunding"));
 
 		// NumberResultingPublications
-		nationalInternationalCollaborationTosave.setNumberResultingPublications(Integer.parseInt((String)request.get("NumberResultingPublications")));
+		InternationalCollaborationTosave.setNumberResultingPublications(Integer.parseInt((String)request.get("NumberResultingPublications")));
 		
 		// RefJointPublication
-		nationalInternationalCollaborationTosave.setRefJointPublication((String)request.get("RefJointPublication"));
+		InternationalCollaborationTosave.setRefJointPublication((String)request.get("RefJointPublication"));
 
 		// UmrCoordinated
-		nationalInternationalCollaborationTosave.setUmrCoordinated(Boolean.valueOf((String)request.get("UmrCoordinated")));
+		InternationalCollaborationTosave.setUmrCoordinated(Boolean.valueOf((String)request.get("UmrCoordinated")));
 		
 		
 		// AgreementSigned
-		nationalInternationalCollaborationTosave.setAgreementSigned(Boolean.valueOf((String)request.get("AgreementSigned")));
+		InternationalCollaborationTosave.setAgreementSigned(Boolean.valueOf((String)request.get("AgreementSigned")));
 		
 		
 		// TypeCollab :
 		TypeCollab typeCollab = new TypeCollab();
 		typeCollab.setNameChoice((String)request.get("NameChoice"));
 		TypeCollab savedTypeCollab = typeCollabRepo.save(typeCollab);
-		nationalInternationalCollaborationTosave.setTypeCollabId(savedTypeCollab);
+		InternationalCollaborationTosave.setTypeCollabId(savedTypeCollab);
 		
 		// Activity : 
 		Activity activity = new Activity();
-		TypeActivity typeActivity = typeActivityLevelRepo.getById(13);
+		TypeActivity typeActivity = typeActivityLevelRepo.getById(TypeActivity.IdTypeActivity.NATIONAL_INTERNATIONAL_COLLABORATION.getId());
 		activity.setTypeActivity(typeActivity);
 		
 		// ajouter cette activité à la liste de ce chercheur :
@@ -132,17 +144,18 @@ public class NationalInternationalCollaborationService {
 		activity.setResearcherList(activityResearch);
 		
 		Activity savedActivity = activityRepo.save(activity);
-		nationalInternationalCollaborationTosave.setActivity(savedActivity);
+		InternationalCollaborationTosave.setActivity(savedActivity);
 		
 		
-		// Id de l'education :
-		Integer idEducation = activity.getIdActivity();
-		nationalInternationalCollaborationTosave.setIdActivity(idEducation);
+		// Id de l'internationalCollaboration :
+		Integer idInternationalCollaboration = activity.getIdActivity();
+		InternationalCollaborationTosave.setIdActivity(idInternationalCollaboration);
 				
-		// Enregistrer Education dans la base de données :
-		NationalInternationalCollaboration nationalInternationalCollaborationSaved = nationalInternationalCollaborationRepo.save(nationalInternationalCollaborationTosave);
-		
-		return nationalInternationalCollaborationSaved;
+		// Enregistrer InternationalCollaboration dans la base de données :
+		InternationalCollaboration InternationalCollaborationSaved = internationalCollaborationRepo.save(InternationalCollaborationTosave);
+
+		savedActivity.setInternationalCollaboration(InternationalCollaborationSaved);
+		return savedActivity;
 	}
 	
 	// Convertir une date string en Date

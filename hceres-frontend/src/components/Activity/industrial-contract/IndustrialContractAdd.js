@@ -10,18 +10,18 @@ import {addIndustrialContract} from "../../../services/industrial-contract/Indus
 // If targetResearcher is set in props use it as default without charging list from database
 // else load list de chercheurs from database
 function IndustrialContractAdd(props) {
-    // parameter constant (Add Class)
+    // parameter constant (Add Template)
     const targetResearcher = props.targetResearcher;
     const onHideParentAction = props.onHideAction
 
-    // Cached state (Add Class)
+    // Cached state (Add Template)
     const [researchers, setResearchers] = React.useState([]);
 
-    // UI states (Add Class)
+    // UI states (Add Template)
     const [showModal, setShowModal] = React.useState(true);
 
 
-    // Form state (Add Class)
+    // Form state (Add Template)
     const [researcherId, setResearcherId] = React.useState(targetResearcher ? targetResearcher.researcherId : "");
     const [StartDate, setStartDate] = React.useState(null);
     const [NameCompanyInvolved, setNameCompanyInvolved] = React.useState("");

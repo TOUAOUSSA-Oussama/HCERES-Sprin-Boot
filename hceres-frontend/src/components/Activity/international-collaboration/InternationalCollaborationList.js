@@ -10,25 +10,25 @@ import {Alert} from "react-bootstrap";
 
 import 'react-datepicker/dist/react-datepicker.css';
 import Button from "react-bootstrap/Button";
-import {Audio} from "react-loading-icons";
+import {Hearts} from "react-loading-icons";
 import {chercheursColumnOfActivity, paginationOptions} from "../../util/BootStrapTableOptions";
 import {ImFilter} from "react-icons/im";
 import {AiFillDelete, AiOutlinePlusCircle} from "react-icons/ai";
-import EducationAdd from "./EducationAdd";
+import InternationalCollaborationAdd from "./InternationalCollaborationAdd";
 
 import ActivityTypes from "../../../const/ActivityTypes";
-import {fetchListEducations} from "../../../services/education/EducationActions";
+import {fetchListInternationalCollaborations} from "../../../services/international-collaboration/InternationalCollaborationActions";
 import {fetchResearcherActivities} from "../../../services/Researcher/ResearcherActions";
-import EducationDelete from "./EducationDelete";
+import InternationalCollaborationDelete from "./InternationalCollaborationDelete";
 
 // If targetResearcher is set in props display related information only (
-// else load list des tous les educations du database
-function EducationList(props) {
+// else load list des tous les internationalCollaborations du database
+function InternationalCollaborationList(props) {
     // parameter constant (List Template)
     const targetResearcher = props.targetResearcher;
 
     // Cached state (List Template)
-    const [educationList, setEducationList] = React.useState(null);
+    const [internationalCollaborationList, setInternationalCollaborationList] = React.useState(null);
 
     // UI states (List Template)
     const [successActivityAlert, setSuccessActivityAlert] = React.useState('');
@@ -38,15 +38,15 @@ function EducationList(props) {
 
 
     // Form state (List Template)
-    const [targetEducation, setTargetEducation] = React.useState(false);
-    const [showEducationAdd, setShowEducationAdd] = React.useState(false);
-    const [showEducationDelete, setShowEducationDelete] = React.useState(false);
+    const [targetInternationalCollaboration, setTargetInternationalCollaboration] = React.useState(false);
+    const [showInternationalCollaborationAdd, setShowInternationalCollaborationAdd] = React.useState(false);
+    const [showInternationalCollaborationDelete, setShowInternationalCollaborationDelete] = React.useState(false);
     const [listChangeCount, setListChangeCount] = React.useState(0);
 
 
     const handleHideModal = (msg = null) => {
-        setShowEducationAdd(false);
-        setShowEducationDelete(false);
+        setShowInternationalCollaborationAdd(false);
+        setShowInternationalCollaborationDelete(false);
         if (msg) {
             // an add or delete did occur
             // re render the table to load new data
@@ -73,30 +73,30 @@ function EducationList(props) {
     React.useEffect(() => {
         if (!targetResearcher) {
             // attention that method always change reference to variable not only its content
-            fetchListEducations().then(list => setEducationList(list))
+            fetchListInternationalCollaborations().then(list => setInternationalCollaborationList(list))
         } else
             fetchResearcherActivities(targetResearcher.researcherId)
                 .then(list => {
-                    setEducationList(list.filter(a => a.idTypeActivity === ActivityTypes.EDUCATIONAL_OUTPUT));
+                    setInternationalCollaborationList(list.filter(a => a.idTypeActivity === ActivityTypes.NATIONAL_INTERNATIONAL_COLLABORATION));
                 })
     }, [listChangeCount]);
 
 
-    if (!educationList) {
-        return <div><Button><Audio/></Button></div>
+    if (!internationalCollaborationList) {
+        return <div><Button><Hearts/></Button></div>
     } else {
-        if (educationList.length === 0) {
+        if (internationalCollaborationList.length === 0) {
             return <div className={"row"}>
                 <br/>
                 <div className={"col-8"}>
-                    <h3>Aucun Education est enregistre</h3>
+                    <h3>Aucun InternationalCollaboration est enregistre</h3>
                 </div>
                 <div className={"col-4"}>
-                    {showEducationAdd &&
-                        <EducationAdd targetResearcher={targetResearcher} onHideAction={handleHideModal}/>}
+                    {showInternationalCollaborationAdd &&
+                        <InternationalCollaborationAdd targetResearcher={targetResearcher} onHideAction={handleHideModal}/>}
                     <button className="btn btn-success" data-bs-toggle="button"
-                            onClick={() => setShowEducationAdd(true)}>
-                        <AiOutlinePlusCircle/> &nbsp; Ajouter une education
+                            onClick={() => setShowInternationalCollaborationAdd(true)}>
+                        <AiOutlinePlusCircle/> &nbsp; Ajouter une internationalCollaboration
                     </button>
                 </div>
             </div>;
@@ -109,35 +109,40 @@ function EducationList(props) {
             formatter: (cell, row) => {
                 return (<div>
                     <button className="btn btn-outline-danger btn-sm" onClick={() => {
-                        setTargetEducation(row)
-                        setShowEducationDelete(true)
+                        setTargetInternationalCollaboration(row)
+                        setShowInternationalCollaborationDelete(true)
                     }}><AiFillDelete/></button>
                     &nbsp;  &nbsp;
                     {row.idActivity}
                 </div>)
             }
         }, {
-            dataField: 'education.educationCourseName',
-            text: 'Course',
+            dataField: 'internationalCollaboration.projetcTitle',
+            text: 'Titre de projet',
             sort: true,
         }, {
-            dataField: 'education.educationDescription',
-            text: 'Description',
-        }, {
-            dataField: 'education.educationFormation',
-            text: 'Formation',
+            dataField: 'internationalCollaboration.countryStateCity',
+            text: 'État Ville',
             sort: true,
         }, {
-            dataField: 'education.educationCompletion',
-            text: 'date d\'achèvement',
+            dataField: 'internationalCollaboration.partnerEntity',
+            text: 'Entité partenaire',
+            sort: true,
+        }, {
+            dataField: 'internationalCollaboration.dateProjectStart',
+            text: 'date de début',
             sort: true,
             filter: showFilter ? dateFilter() : null,
+        }, {
+            dataField: 'internationalCollaboration.activeProject',
+            text: 'Projet actif',
+            sort: true,
         }];
 
-        let title = "Education"
+        let title = "InternationalCollaboration"
         if (!targetResearcher) {
             columns.push(chercheursColumnOfActivity)
-            title = "Liste des educations pour les Chercheurs"
+            title = "Liste des internationalCollaborations pour les Chercheurs"
         }
         const CaptionElement = <div>
             <h3> {title} - &nbsp;
@@ -152,7 +157,7 @@ function EducationList(props) {
                 <ToolkitProvider
                     bootstrap4
                     keyField="idActivity"
-                    data={educationList}
+                    data={internationalCollaborationList}
                     columns={columns}
                     search
                 >
@@ -165,15 +170,15 @@ function EducationList(props) {
                                         <h3>{CaptionElement}</h3>
                                     </div>
                                     <div className={"col-4"}>
-                                        {showEducationAdd &&
-                                            <EducationAdd targetResearcher={targetResearcher}
+                                        {showInternationalCollaborationAdd &&
+                                            <InternationalCollaborationAdd targetResearcher={targetResearcher}
                                                           onHideAction={handleHideModal}/>}
-                                        {showEducationDelete &&
-                                            <EducationDelete targetEducation={targetEducation}
+                                        {showInternationalCollaborationDelete &&
+                                            <InternationalCollaborationDelete targetInternationalCollaboration={targetInternationalCollaboration}
                                                              onHideAction={handleHideModal}/>}
                                         <button className="btn btn-success" data-bs-toggle="button"
-                                                onClick={() => setShowEducationAdd(true)}>
-                                            <AiOutlinePlusCircle/> &nbsp; Ajouter une education
+                                                onClick={() => setShowInternationalCollaborationAdd(true)}>
+                                            <AiOutlinePlusCircle/> &nbsp; Ajouter une internationalCollaboration
                                         </button>
                                     </div>
                                 </div>
@@ -194,7 +199,7 @@ function EducationList(props) {
                                 <BootstrapTable
                                     bootstrap4
                                     filter={filterFactory()}
-                                    pagination={paginationFactory(paginationOptions(educationList.length))}
+                                    pagination={paginationFactory(paginationOptions(internationalCollaborationList.length))}
                                     striped
                                     hover
                                     condensed
@@ -208,4 +213,4 @@ function EducationList(props) {
     }
 }
 
-export default EducationList;
+export default InternationalCollaborationList;

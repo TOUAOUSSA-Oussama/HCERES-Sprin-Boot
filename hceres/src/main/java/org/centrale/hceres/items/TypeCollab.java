@@ -56,6 +56,6 @@ public class TypeCollab implements Serializable {
     private String nameChoice;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "typeCollabId")
-    private List<NationalInternationalCollaboration> nationalInternationalCollaborationList;
+    private List<InternationalCollaboration> InternationalCollaborationList;
 
 }

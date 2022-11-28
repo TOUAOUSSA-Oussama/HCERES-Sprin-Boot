@@ -49,21 +49,21 @@ public class EducationService {
 	private ActivityRepository activityRepo;
 	@Autowired
 	private TypeActivityRepository typeActivityLevelRepo;
-	
-	/**
-	 * permet de retourner la liste
-	 */
-	public List<Activity> getEducations(){
-		return activityRepo.findByIdTypeActivity(TypeActivity.IdTypeActivity.EDUCATIONAL_OUTPUT.getId());
-	}
-	
+
 	/**
 	 * retourner l'elmt selon son id
 	 * @param id : id de l'elmt
 	 * @return : elmt a retourner
 	 */
-	public Optional<Education> getEducation(final Integer id) { 
-		return educationRepo.findById(id); 
+	public Optional<Education> getEducation(final Integer id) {
+		return educationRepo.findById(id);
+	}
+
+	/**
+	 * permet de retourner la liste
+	 */
+	public List<Activity> getEducations(){
+		return activityRepo.findByIdTypeActivity(TypeActivity.IdTypeActivity.EDUCATIONAL_OUTPUT.getId());
 	}
 	
 	/**

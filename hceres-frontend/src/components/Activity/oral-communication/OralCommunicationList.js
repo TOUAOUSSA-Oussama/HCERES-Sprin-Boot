@@ -24,20 +24,20 @@ import OralCommunicationDelete from "./OralCommunicationDelete";
 // If targetResearcher is set in props display related information only (
 // else load list des tous les oralCommunications du database
 function OralCommunicationList(props) {
-    // parameter constant (List Class)
+    // parameter constant (List Template)
     const targetResearcher = props.targetResearcher;
 
-    // Cached state (List Class)
+    // Cached state (List Template)
     const [oralCommunicationList, setOralCommunicationList] = React.useState(null);
 
-    // UI states (List Class)
+    // UI states (List Template)
     const [successActivityAlert, setSuccessActivityAlert] = React.useState('');
     const [errorActivityAlert, setErrorActivityAlert] = React.useState('');
     const [showFilter, setShowFilter] = React.useState(false);
     const {SearchBar, ClearSearchButton} = Search;
 
 
-    // Form state (List Class)
+    // Form state (List Template)
     const [targetOralCommunication, setTargetOralCommunication] = React.useState(false);
     const [showOralCommunicationAdd, setShowOralCommunicationAdd] = React.useState(false);
     const [showOralCommunicationDelete, setShowOralCommunicationDelete] = React.useState(false);
