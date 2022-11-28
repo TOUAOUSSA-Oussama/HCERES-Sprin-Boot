@@ -72,7 +72,7 @@ export default function ActivityList(props) {
     const showAllList = () => setShowAllList(true)
     const hideAllList = () => setShowAllList(false)
 
-    const sendMessageToActivity = (messages = null) => {
+    const displayResultMessage = (messages = null) => {
         // silent close
         if (!messages) return;
 
@@ -224,21 +224,21 @@ export default function ActivityList(props) {
                                                       dismissible={true}>{errorActivityAlert}</Alert>}
                         <Collapse in={showEducationList}>
                             <div>
-                                {showEducationList && <EducationList sendMessageToActivity={sendMessageToActivity} targetResearcher={targetResearcher}/>}
+                                {showEducationList && <EducationList targetResearcher={targetResearcher}/>}
                             </div>
                         </Collapse>
 
                         <Collapse in={showPrixList}>
-                            <div>{showPrixList && <SrAwardList sendMessageToActivity={sendMessageToActivity} targetResearcher={targetResearcher}/>}</div>
+                            <div>{showPrixList && <SrAwardList targetResearcher={targetResearcher}/>}</div>
                         </Collapse>
 
                         <Collapse in={showPlatformList}>
-                            <div>{showPlatformList && <PlatformList sendMessageToActivity={sendMessageToActivity} targetResearcher={targetResearcher}/>}</div>
+                            <div>{showPlatformList && <PlatformList targetResearcher={targetResearcher}/>}</div>
                         </Collapse>
 
                         <Collapse in={showOralCommunicationList}>
                             <div>{showOralCommunicationList &&
-                                <OralCommunicationList sendMessageToActivity={sendMessageToActivity} targetResearcher={targetResearcher}/>}</div>
+                                <OralCommunicationList targetResearcher={targetResearcher}/>}</div>
                         </Collapse>
 
                         <Collapse in={showSeiIndustrialRDContractList}>

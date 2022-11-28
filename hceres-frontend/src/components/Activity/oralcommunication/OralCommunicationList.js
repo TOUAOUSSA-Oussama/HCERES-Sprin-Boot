@@ -6,6 +6,7 @@ import BootstrapTable from 'react-bootstrap-table-next';
 import ToolkitProvider, {Search} from 'react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import filterFactory, {dateFilter} from 'react-bootstrap-table2-filter';
+import {Alert} from "react-bootstrap";
 
 import 'react-datepicker/dist/react-datepicker.css';
 import Button from "react-bootstrap/Button";
@@ -23,19 +24,25 @@ import OralCommunicationDelete from "./OralCommunicationDelete";
 // If targetResearcher is set in props display related information only (
 // else load list des tous les oralCommunications du database
 function OralCommunicationList(props) {
+    // parameter constant
     const targetResearcher = props.targetResearcher;
 
+    // Cached state
     const [oralCommunicationList, setOralCommunicationList] = React.useState(null);
 
-    const [showFilter, setShowFilter] = React.useState(false);
+    // UI states
+    const [successActivityAlert, setSuccessActivityAlert] = React.useState('');
+    const [errorActivityAlert, setErrorActivityAlert] = React.useState('');const [showFilter, setShowFilter] = React.useState(false);
+    const {SearchBar, ClearSearchButton} = Search;
 
 
+
+    // Form state
     const [targetOralCommunication, setTargetOralCommunication] = React.useState(false);
     const [showOralCommunicationAdd, setShowOralCommunicationAdd] = React.useState(false);
     const [showOralCommunicationDelete, setShowOralCommunicationDelete] = React.useState(false);
     const [listChangeCount, setListChangeCount] = React.useState(0);
 
-    const {SearchBar, ClearSearchButton} = Search;
 
     const handleHideModal = (msg = null) => {
         setShowOralCommunicationAdd(false);
@@ -46,8 +53,21 @@ function OralCommunicationList(props) {
             // note the list change count on dependencies table of use state
             setListChangeCount(listChangeCount + 1)
         }
-        props.sendMessageToActivity(msg);
+        displayResultMessage(msg);
     };
+
+    const displayResultMessage = (messages = null) => {
+        // silent close
+        if (!messages) return;
+
+        if (messages.successMsg) {
+            setSuccessActivityAlert(messages.successMsg)
+        }
+
+        if (messages.errorMsg) {
+            setErrorActivityAlert(messages.errorMsg)
+        }
+    }
 
 
     React.useEffect(() => {
@@ -152,8 +172,19 @@ function OralCommunicationList(props) {
                                         </button>
                                     </div>
                                 </div>
-                                {showFilter && <SearchBar {...props.searchProps} />}
-                                <hr/>
+                                <div className={"row"}>
+                                    <div className={"col-8"}>
+                                        {showFilter && <SearchBar {...props.searchProps} />}
+                                    </div>
+                                    <div className={"col-4"}>
+                                        {successActivityAlert && <Alert variant={"success"}
+                                                                        onClose={() => setSuccessActivityAlert("")}
+                                                                        dismissible={true}>{successActivityAlert}</Alert>}
+                                        {errorActivityAlert && <Alert variant={"danger"}
+                                                                      onClose={() => setErrorActivityAlert("")}
+                                                                      dismissible={true}>{errorActivityAlert}</Alert>}
+                                    </div>
+                                </div>                                <hr/>
                                 <BootstrapTable
                                     bootstrap4
                                     filter={filterFactory()}
