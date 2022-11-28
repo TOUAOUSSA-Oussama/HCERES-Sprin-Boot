@@ -9,6 +9,7 @@ class MyClass {
         this.listeInternationalCollaborations = null;
         this.listeScientificExpertises = null;
         this.listeSeiClinicalTrials = null;
+        this.listeIncomingMobilitys = null;
     }
 
     deleteActivity(activityList, idActivity) {

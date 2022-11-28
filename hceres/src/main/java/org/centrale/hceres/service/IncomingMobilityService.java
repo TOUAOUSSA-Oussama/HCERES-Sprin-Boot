@@ -35,41 +35,42 @@ public class IncomingMobilityService {
 	@Autowired
 	private ResearchRepository researchRepo;
 	@Autowired
-	private IncomingMobilityRepository IncomingMobilityRepo;
+	private IncomingMobilityRepository incomingMobilityRepo;
 	@Autowired
 	private ActivityRepository activityRepo;
 	@Autowired
 	private TypeActivityRepository typeActivityLevelRepo;
-	
-	/**
-	 * permet de retourner la liste
-	 */
-	public Iterable<IncomingMobility> getIncomingMobilitys(){
-		return IncomingMobilityRepo.findAll();
-	}
-	
+
 	/**
 	 * retourner l'elmt selon son id
 	 * @param id : id de l'elmt
 	 * @return : elmt a retourner
 	 */
-	public Optional<IncomingMobility> getIncomingMobility(final Integer id) { 
-		return IncomingMobilityRepo.findById(id); 
+	public Optional<IncomingMobility> getIncomingMobility(final Integer id) {
+		return incomingMobilityRepo.findById(id);
 	}
-	
+
+
+	/**
+	 * permet de retourner la liste
+	 */
+	public List<Activity> getIncomingMobilitys(){
+		return activityRepo.findByIdTypeActivity(TypeActivity.IdTypeActivity.INCOMING_MOBILITY.getId());
+	}
+
 	/**
 	 * supprimer l'elmt selon son id
 	 * @param id : id de l'elmt
 	 */
 	public void deleteIncomingMobility(final Integer id) {
-		IncomingMobilityRepo.deleteById(id);
+		incomingMobilityRepo.deleteById(id);
 	}
-	
+
 	/**
 	 * permet d'ajouter un elmt
 	 * @return : l'elemt ajouter a la base de donnees
 	 */
-	public IncomingMobility saveIncomingMobility(@RequestBody Map<String, Object> request) {
+	public Activity saveIncomingMobility(@RequestBody Map<String, Object> request) {
 		
 		IncomingMobility IncomingMobilityTosave = new IncomingMobility();
 		
@@ -122,7 +123,7 @@ public class IncomingMobilityService {
 
 	    // Activity : 
 		Activity activity = new Activity();
-		TypeActivity typeActivity = typeActivityLevelRepo.getById(34);
+		TypeActivity typeActivity = typeActivityLevelRepo.getById(TypeActivity.IdTypeActivity.INCOMING_MOBILITY.getId());
 		activity.setTypeActivity(typeActivity);
 		
 		// ajouter cette activité à la liste de ce chercheur :
@@ -150,9 +151,11 @@ public class IncomingMobilityService {
 		IncomingMobilityTosave.setIdActivity(idIncomingMobility);
 				
 		// Enregistrer IncomingMobility dans la base de données :
-		IncomingMobility saveIncomingMobility = IncomingMobilityRepo.save(IncomingMobilityTosave);
-		
-		return saveIncomingMobility;
+		IncomingMobility saveIncomingMobility = incomingMobilityRepo.save(IncomingMobilityTosave);
+
+		// wrap all saved objects in activity
+		savedActivity.setIncomingMobility(saveIncomingMobility);
+		return savedActivity;
 	}
 	
 	// Convertir une date string en Date

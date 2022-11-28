@@ -1,5 +1,4 @@
 import React from 'react';
-import IncomingMobility from './IncomingMobility';
 import './Activity.css'
 import Navbar from '../Navbar/Navbar';
 
@@ -9,7 +8,6 @@ import Review from './Review';
 import {Alert} from "react-bootstrap";
 
 export default function Activity() {
-    const [showIncomingMobility, setIncomingMobility] = React.useState(false);
     const [DateProjectStart, setDateProjectStart] = React.useState(null);
     const [showPostDoctorat, setShowPostDoctorat] = React.useState(false);
     const [showEditorial, setShowEditorial] = React.useState(false);
@@ -30,9 +28,6 @@ export default function Activity() {
                 </div>
                 <div className='activityList'>
                     <ul>
-                        <li onClick={() => setIncomingMobility(true)}>
-                            <a>Mobilité entrante</a>
-                        </li>
                         <li>
                             <a>Mobilité sortante</a>
                         </li>
@@ -56,7 +51,6 @@ export default function Activity() {
 
 
                 </div>
-                {showIncomingMobility && (<IncomingMobility onHideAction={() => setIncomingMobility(false)}> </IncomingMobility>)}
                 {showPostDoctorat && (<PostDoctorat onHideAction={() => setShowPostDoctorat(false)}> </PostDoctorat>)}
                 {showEditorial && (<Editorial onHideAction={() => setShowEditorial(false)}></Editorial>)}
                 {showReview && (<Review onHideAction={() => setShowReview(false)}></Review>)}

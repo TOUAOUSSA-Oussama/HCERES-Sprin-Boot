@@ -84,7 +84,6 @@ public class Activity implements Serializable {
     private List<Researcher> researcherList;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "activity")
-    @JsonIgnore
     private IncomingMobility incomingMobility;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "activity")
