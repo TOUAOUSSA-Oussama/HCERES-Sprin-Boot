@@ -6,7 +6,7 @@ import {deleteIncomingMobility} from "../../../services/incoming-mobility/Incomi
 
 function IncomingMobilityDelete(props) {
     const [show, setShow] = useState(true);
-    const targetIncomingMobility = props.targetIncomingMobility;
+    const targetIncomingMobility = mingMobility;
 
     const handleClose = (msg = null) => {
         setShow(false);

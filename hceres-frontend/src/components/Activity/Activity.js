@@ -18,7 +18,7 @@ export default function Activity() {
             <div className='activity-container'>
                 <div className='header'>
                     {<Alert variant={"warning"}><h1>Page a remplacer plus tard par l'onglet activités</h1> <s>Activity.js</s> ActivityList.js</Alert>}
-                    <Alert variant={"primary"}>Voir le video <a href={"https://youtu.be/3RvyijmwZE4"} target={"_blank"}>https://youtu.be/3RvyijmwZE4</a></Alert>
+                    <Alert variant={"primary"}>Voir le video <a href={"https://youtu.be/e-voo9vu7IQ"} target={"_blank"}>https://youtu.be/3RvyijmwZE4</a></Alert>
                     <h1>
                         Bienvenue dans la section d'ajout d'activités
                     </h1>
