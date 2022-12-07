@@ -10,6 +10,7 @@ class MyClass {
         this.listeScientificExpertises = null;
         this.listeSeiClinicalTrials = null;
         this.listeIncomingMobilitys = null;
+        this.listeReviewArticle = null;
     }
 
     deleteActivity(activityList, idActivity) {
