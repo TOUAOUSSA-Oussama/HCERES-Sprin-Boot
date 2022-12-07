@@ -8,6 +8,7 @@
  * L LETERTRE, S LIMOUX, JY MARTIN
  * -------------------------------------------------------------------------------- */
 package org.centrale.hceres.items;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,7 +16,6 @@ import lombok.Setter;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -26,16 +26,16 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "reviewing_journal_articles")
 /*@NamedQueries({
-    @NamedQuery(name = "ReviewingJournalArticles.findAll", query = "SELECT r FROM ReviewingJournalArticles r"),
-    @NamedQuery(name = "ReviewingJournalArticles.findByIdActivity", query = "SELECT r FROM ReviewingJournalArticles r WHERE r.idActivity = :idActivity"),
-    @NamedQuery(name = "ReviewingJournalArticles.findByYear", query = "SELECT r FROM ReviewingJournalArticles r WHERE r.year = :year"),
-    @NamedQuery(name = "ReviewingJournalArticles.findByNbReviewedArticles", query = "SELECT r FROM ReviewingJournalArticles r WHERE r.nbReviewedArticles = :nbReviewedArticles"),
-    @NamedQuery(name = "ReviewingJournalArticles.findByImpactFactor", query = "SELECT r FROM ReviewingJournalArticles r WHERE r.impactFactor = :impactFactor")})*/
+    @NamedQuery(name = "ReviewArticle.findAll", query = "SELECT r FROM ReviewArticle r"),
+    @NamedQuery(name = "ReviewArticle.findByIdActivity", query = "SELECT r FROM ReviewArticle r WHERE r.idActivity = :idActivity"),
+    @NamedQuery(name = "ReviewArticle.findByYear", query = "SELECT r FROM ReviewArticle r WHERE r.year = :year"),
+    @NamedQuery(name = "ReviewArticle.findByNbReviewedArticles", query = "SELECT r FROM ReviewArticle r WHERE r.nbReviewedArticles = :nbReviewedArticles"),
+    @NamedQuery(name = "ReviewArticle.findByImpactFactor", query = "SELECT r FROM ReviewArticle r WHERE r.impactFactor = :impactFactor")})*/
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ReviewingJournalArticles implements Serializable {
+public class ReviewArticle implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -51,6 +51,7 @@ public class ReviewingJournalArticles implements Serializable {
     private BigDecimal impactFactor;
     @JoinColumn(name = "id_activity", referencedColumnName = "id_activity", insertable = false, updatable = false)
     @OneToOne(optional = false, cascade = CascadeType.ALL)
+    @JsonIgnore
     private Activity activity;
     @JoinColumn(name = "journal_id", referencedColumnName = "journal_id")
     @ManyToOne(optional = false, cascade = CascadeType.ALL)
