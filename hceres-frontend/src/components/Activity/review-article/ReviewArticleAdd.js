@@ -114,7 +114,7 @@ function ReviewArticleAdd(props) {
                             placeholder="Facteur d'impact"
                             className='input-container'
                             name="impactFactor"
-                            type="impactFactor"
+                            type="number"
                             value={impactFactor}
                             onChange={e => setImpactFactor(e.target.value)}
                             required/>
@@ -138,7 +138,7 @@ function ReviewArticleAdd(props) {
                             placeholder='Nom de la fonction'
                             className='input-container'
                             name="nbReviewedArticles"
-                            type="nbReviewedArticles"
+                            type="number"
                             value={nbReviewedArticles}
                             onChange={e => setNbReviewedArticles(e.target.value)}
                             required/>
