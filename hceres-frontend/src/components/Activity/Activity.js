@@ -2,13 +2,11 @@ import React from 'react';
 import './Activity.css'
 
 import PostDoctorat from './PostDoctorat';
-import Editorial from './Editorial';
 import {Alert} from "react-bootstrap";
 
 export default function Activity() {
     const [DateProjectStart, setDateProjectStart] = React.useState(null);
     const [showPostDoctorat, setShowPostDoctorat] = React.useState(false);
-    const [showEditorial, setShowEditorial] = React.useState(false);
 
     return (
         <div>
@@ -29,9 +27,6 @@ export default function Activity() {
                         <li>
                             <a>Mobilité sortante</a>
                         </li>
-                        <li onClick={() => setShowEditorial(true)}>
-                            <a>Edition</a>
-                        </li>
                         <li>
                             <a>Création d'entreprise</a>
                         </li>
@@ -47,7 +42,6 @@ export default function Activity() {
 
                 </div>
                 {showPostDoctorat && (<PostDoctorat onHideAction={() => setShowPostDoctorat(false)}> </PostDoctorat>)}
-                {showEditorial && (<Editorial onHideAction={() => setShowEditorial(false)}></Editorial>)}
             </div>
         </div>
     )

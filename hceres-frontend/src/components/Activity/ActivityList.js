@@ -5,7 +5,6 @@ import Navbar from '../Navbar/Navbar';
 import EducationAdd from './education/EducationAdd';
 import BootstrapTable from 'react-bootstrap-table-next';
 import PostDoctorat from './PostDoctorat';
-import Editorial from './Editorial';
 import {Alert, ButtonGroup, Card, Col, Container, ListGroup, Table} from "react-bootstrap";
 import Collapse from 'react-bootstrap/Collapse';
 import {BiShow, BiHide} from "react-icons/bi";
@@ -24,6 +23,7 @@ import InternationalCollaborationList from "./international-collaboration/Intern
 import ScientificExpertiseList from "./scientific-expertise/ScientificExpertiseList";
 import SeiClinicalTrialList from "./sei-clinical-trial/SeiClinicalTrialList";
 import IncomingMobilityList from "./incoming-mobility/IncomingMobilityList";
+import EditorialActivityList from "./editorial-activity/EditorialActivityList";
 import ReviewArticleList from "./review-article/ReviewArticleList";
 
 
@@ -272,7 +272,7 @@ export default function ActivityList(props) {
                         </Collapse>
 
                         <Collapse in={showEditorialList}>
-                            <div>{showEditorialList && <div>import the file to showEditorialList here</div>}</div>
+                            <div>{showEditorialList && <EditorialActivityList targetResearcher={targetResearcher}/>}</div>
                         </Collapse>
 
                         <Collapse in={showComparnyCreationList}>

@@ -29,22 +29,26 @@ public class EditorialService {
     @Autowired
     private FunctionEditorialActivityRepository functionEditorialActivityRepository;
 
-
-    public Iterable<EditorialActivity> getEditorials(){
-        return editorialRepository.findAll();
-    }
-
-
     public Optional<EditorialActivity> getEditorial(final Integer id) {
         return editorialRepository.findById(id);
     }
 
+    /**
+     * permet de retourner la liste
+     */
+    public List<Activity> getEditorialActivities(){
+        return activityRepo.findByIdTypeActivity(TypeActivity.IdTypeActivity.EDITORIAL_ACTIVITY.getId());
+    }
 
-    public void deleteEditorial(final Integer id) {
+    /**
+     * supprimer l'elmt selon son id
+     * @param id : id de l'elmt
+     */
+    public void deleteEditorialActivity(final Integer id) {
         editorialRepository.deleteById(id);
     }
 
-    public EditorialActivity saveEditorial(@RequestBody Map<String, Object> request) {
+    public Activity saveEditorial(@RequestBody Map<String, Object> request) {
 
         EditorialActivity editorialToSave = new EditorialActivity();
 
@@ -61,7 +65,7 @@ public class EditorialService {
 
         // Activity :
         Activity activity = new Activity();
-        TypeActivity typeActivity = typeActivityLevelRepo.getById(5);
+        TypeActivity typeActivity = typeActivityLevelRepo.getById(TypeActivity.IdTypeActivity.EDITORIAL_ACTIVITY.getId());
         activity.setTypeActivity(typeActivity);
 
         // Add this activity to the researcher activity list :
@@ -148,7 +152,9 @@ public class EditorialService {
         // Persist Platform to database :
         EditorialActivity saveEditorial = editorialRepository.save(editorialToSave);
 
-        return saveEditorial;
+        //Wrap all saved objects in activity
+        savedActivity.setEditorialActivity(saveEditorial);
+        return savedActivity;
 
 
     }

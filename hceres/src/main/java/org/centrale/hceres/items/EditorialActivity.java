@@ -63,9 +63,9 @@ public class EditorialActivity implements Serializable {
     @JoinColumn(name = "function_editorial_activity_id", referencedColumnName = "function_editorial_activity_id")
     @ManyToOne(optional = false, cascade = CascadeType.ALL)
     private FunctionEditorialActivity functionEditorialActivityId;
-    @JsonIgnore
+
     @JoinColumn(name = "journal_id", referencedColumnName = "journal_id")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, cascade=CascadeType.ALL)
     private Journal journalId;
 
 }

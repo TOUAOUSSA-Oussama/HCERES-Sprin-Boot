@@ -57,8 +57,9 @@ public class Journal implements Serializable {
     @Size(min = 1, max = 256)
     @Column(name = "journal_name")
     private String journalName;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "journalId")
+
     @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "journalId")
     private List<ReviewArticle> ReviewArticleList;
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "journalId")
