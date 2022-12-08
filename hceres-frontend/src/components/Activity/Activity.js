@@ -3,14 +3,12 @@ import './Activity.css'
 import Navbar from '../Navbar/Navbar';
 
 import PostDoctorat from './PostDoctorat';
-import Editorial from './Editorial';
 import Review from './Review';
 import {Alert} from "react-bootstrap";
 
 export default function Activity() {
     const [DateProjectStart, setDateProjectStart] = React.useState(null);
     const [showPostDoctorat, setShowPostDoctorat] = React.useState(false);
-    const [showEditorial, setShowEditorial] = React.useState(false);
     const [showReview, setShowReview] = React.useState(false);
 
     return (
@@ -32,9 +30,6 @@ export default function Activity() {
                         <li>
                             <a>Mobilité sortante</a>
                         </li>
-                        <li onClick={() => setShowEditorial(true)}>
-                            <a>Edition</a>
-                        </li>
                         <li>
                             <a>Création d'entreprise</a>
                         </li>
@@ -53,7 +48,6 @@ export default function Activity() {
 
                 </div>
                 {showPostDoctorat && (<PostDoctorat onHideAction={() => setShowPostDoctorat(false)}> </PostDoctorat>)}
-                {showEditorial && (<Editorial onHideAction={() => setShowEditorial(false)}></Editorial>)}
                 {showReview && (<Review onHideAction={() => setShowReview(false)}></Review>)}
             </div>
         </div>
