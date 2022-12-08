@@ -60,8 +60,7 @@ public class Journal implements Serializable {
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "journalId")
-    private List<ReviewingJournalArticles> reviewingJournalArticlesList;
-
+    private List<ReviewArticle> ReviewArticleList;
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "journalId")
     private List<EditorialActivity> editorialActivityList;

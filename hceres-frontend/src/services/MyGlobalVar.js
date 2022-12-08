@@ -11,6 +11,7 @@ class MyClass {
         this.listeSeiClinicalTrials = null;
         this.listeIncomingMobilitys = null;
         this.listeEditorialActivities = null;
+        this.listeReviewArticle = null;
     }
 
     deleteActivity(activityList, idActivity) {
