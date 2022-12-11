@@ -1,6 +1,4 @@
 import React from 'react';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import {ListGroup} from "react-bootstrap";
@@ -104,11 +102,8 @@ function IndustrialContractAdd(props) {
                             Date de début
                         </label>
                         <input
-                            placeholder='Description'
-                            className='input-container'
-                            name="StartDate"
                             type="date"
-                            value={StartDate}
+                            className='input-container'
                             onChange={e => setStartDate(e.target.value)}
                             required/>
 
@@ -141,8 +136,8 @@ function IndustrialContractAdd(props) {
                             Montant de l'accord
                         </label>
                         <input
-                            placeholder='Affiliation'
                             type="number"
+                            placeholder='Affiliation'
                             className='input-container'
                             name="AgreementAmount"
                             value={AgreementAmount}
@@ -153,11 +148,8 @@ function IndustrialContractAdd(props) {
                             Date de fin
                         </label>
                         <input
-                            placeholder='Description'
-                            className='input-container'
-                            name="EndDate"
                             type="date"
-                            value={EndDate}
+                            className='input-container'
                             onChange={e => setEndDate(e.target.value)}
                             required/>
 

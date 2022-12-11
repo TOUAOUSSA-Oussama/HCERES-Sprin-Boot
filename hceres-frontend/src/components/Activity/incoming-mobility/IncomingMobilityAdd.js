@@ -1,6 +1,4 @@
 import React, {useState} from 'react';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import {ListGroup} from "react-bootstrap";
@@ -23,21 +21,21 @@ function IncomingMobilityAdd(props) {
 
     // Form state (Add Template)
     const [researcherId, setResearcherId] = React.useState(targetResearcher ? targetResearcher.researcherId : "");
-    const [nameSeniorScientist, setnameSeniorScientist] = useState("");
-    const [arrivalDate, setarrivalDate] = useState(null);
-    const [departureDate, setdepartureDate] = useState(null);
-    const [duration, setduration] = useState("");
-    const [nationality, setnationality] = useState("");
-    const [originalLabName, setoriginalLabName] = useState("");
-    const [originaLabLocation, setoriginaLabLocation] = useState("");
-    const [piPartner, setpiPartner] = useState("");
-    const [projectTitle, setprojectTitle] = useState("");
-    const [associatedFunding, setassociatedFunding] = useState("");
-    const [publicationReference, setpublicationReference] = useState("");
-    const [strategicRecurringCollab, setstrategicRecurringCollab] = useState("");
-    const [activeProject, setactiveProject] = useState("");
-    const [umrCoordinated, setumrCoordinated] = useState("");
-    const [agreementSigned, setagreementSigned] = useState("");
+    const [nameSeniorScientist, setNameSeniorScientist] = useState("");
+    const [arrivalDate, setArrivalDate] = useState(null);
+    const [departureDate, setDepartureDate] = useState(null);
+    const [duration, setDuration] = useState(""); // number
+    const [nationality, setNationality] = useState("");
+    const [originalLabName, setOriginalLabName] = useState("");
+    const [originaLabLocation, setOriginaLabLocation] = useState("");
+    const [piPartner, setPiPartner] = useState("");
+    const [projectTitle, setProjectTitle] = useState("");
+    const [associatedFunding, setAssociatedFunding] = useState("");
+    const [publicationReference, setPublicationReference] = useState("");
+    const [strategicRecurringCollab, setStrategicRecurringCollab] = useState(false);
+    const [activeProject, setActiveProject] = useState(false);
+    const [umrCoordinated, setUmrCoordinated] = useState(false);
+    const [agreementSigned, setAgreementSigned] = useState(false);
 
 
     const handleClose = (msg = null) => {
@@ -91,21 +89,6 @@ function IncomingMobilityAdd(props) {
         })
     }
 
-    const handleDate1 = (event) => {
-        let arrivalDate = `${event.getFullYear()}-${
-            event.getMonth() + 1
-        }-${event.getDate()}`;
-        setarrivalDate(arrivalDate);
-        setarrivalDate(event);
-    }
-    const handleDate2 = (event) => {
-        let departureDate = `${event.getFullYear()}-${
-            event.getMonth() + 1
-        }-${event.getDate()}`;
-        setdepartureDate(departureDate);
-        setdepartureDate(event);
-    }
-
     const onReseacherSelection = id => setResearcherId(id.target.value);
 
     return (
@@ -142,37 +125,35 @@ function IncomingMobilityAdd(props) {
                             name="nameSeniorScientist"
                             id="nameSeniorScientist"
                             value={nameSeniorScientist}
-                            onChange={(e) => setnameSeniorScientist(e.target.value)}
+                            onChange={(e) => setNameSeniorScientist(e.target.value)}
                             required/>
                         <label className='label'>
                             Date d'arrivée
                         </label>
-                        <DatePicker
-                            className='datePicker'
-                            selected={arrivalDate}
-                            onChange={handleDate1}
-                            withPortal
-                            placeholderText="Choix de date d'arrivée"/>
+                        <input
+                            type="date"
+                            className='input-container'
+                            onChange={e => setArrivalDate(e.target.value)}
+                            required/>
+
                         <label className='label'>
                             Date de départ
                         </label>
-                        <DatePicker
-                            className='datePicker'
-                            selected={departureDate}
-                            onChange={handleDate2}
-                            withPortal
-                            placeholderText="Choix de date de départ"/>
+                        <input
+                            type="date"
+                            className='input-container'
+                            onChange={e => setDepartureDate(e.target.value)}
+                            required/>
 
                         <label className='label'>
                             Durée
                         </label>
                         <input
+                            type={"number"}
                             placeholder='durée'
                             className='input-container'
-                            name="duration"
-                            id="duration"
                             value={duration}
-                            onChange={(e) => setduration(e.target.value)}
+                            onChange={(e) => setDuration(e.target.value)}
                             required/>
 
                         <label className='label'>
@@ -180,130 +161,107 @@ function IncomingMobilityAdd(props) {
                         </label>
                         <input
                             placeholder='nationalité'
-                            className='nationality'
-                            name="nationality"
-                            id="nationality"
+                            className='input-container'
                             value={nationality}
-                            onChange={(e) => setnationality(e.target.value)}
+                            onChange={(e) => setNationality(e.target.value)}
                             required/>
 
 
                         <label className='label'>
                             Nom du laboratoire d'origine
                         </label>
-                        <textarea
+                        <input
                             placeholder='Nom du Laboratoire origine'
-                            className='originalLabName'
-                            name="originalLabName"
-                            id="originalLabName"
+                            className='input-container'
                             value={originalLabName}
-                            onChange={(e) => setoriginalLabName(e.target.value)}
+                            onChange={(e) => setOriginalLabName(e.target.value)}
                             required/>
 
                         <label className='label'>
                             Emplacement du laboratoire origine
                         </label>
-                        <textarea
+                        <input
                             placeholder='Emplacement du laboratoire origine'
-                            className='originaLabLocation'
-                            name="originaLabLocation"
-                            id="originaLabLocation"
+                            className='input-container'
                             value={originaLabLocation}
-                            onChange={(e) => setoriginaLabLocation(e.target.value)}
+                            onChange={(e) => setOriginaLabLocation(e.target.value)}
                             required/>
 
                         <label className='label'>
                             piPartner
                         </label>
-                        <textarea
+                        <input
                             placeholder='Emplacement du laboratoire origine'
-                            className='piPartner'
-                            name="piPartner"
-                            id="piPartner"
+                            className='input-container'
                             value={piPartner}
-                            onChange={(e) => setpiPartner(e.target.value)}
+                            onChange={(e) => setPiPartner(e.target.value)}
                             required/>
 
                         <label className='label'>
                             Titre du projet
                         </label>
-                        <textarea
+                        <input
                             placeholder='Emplacement du laboratoire origine'
-                            className='projectTitle'
-                            name="projectTitle"
-                            id="projectTitle"
+                            className='input-container'
                             value={projectTitle}
-                            onChange={(e) => setprojectTitle(e.target.value)}
+                            onChange={(e) => setProjectTitle(e.target.value)}
                             required/>
 
                         <label className='label'>
                             Financement associé
                         </label>
-                        <textarea
+                        <input
                             placeholder='Nom du Sponsor '
-                            className='associatedFunding'
-                            name="associatedFunding"
-                            id="associatedFunding"
+                            className='input-container'
                             value={associatedFunding}
-                            onChange={(e) => setassociatedFunding(e.target.value)}
+                            onChange={(e) => setAssociatedFunding(e.target.value)}
                             required/>
                         <label className='label'>
                             Référence de la publication
                         </label>
-                        <textarea
+                        <input
                             placeholder='Référence de la publication'
-                            className='publicationReference'
-                            name="publicationReference"
-                            id="publicationReference"
+                            className='input-container'
                             value={publicationReference}
-                            onChange={(e) => setpublicationReference(e.target.value)}
+                            onChange={(e) => setPublicationReference(e.target.value)}
                             required/>
 
                         <label className='label'>
                             Collaboration stratégique récurrente ?
                         </label>
-                        <textarea
-                            placeholder='Collaboration stratégique récurrente ? (true/false)'
-                            className='strategicRecurringCollab'
-                            name="strategicRecurringCollab"
-                            id="strategicRecurringCollab"
-                            value={strategicRecurringCollab}
-                            onChange={(e) => setstrategicRecurringCollab(e.target.value)}
+                        <input
+                            type="checkbox"
+                            className='input-container'
+                            onChange={e => setStrategicRecurringCollab(e.target.checked)}
                             required/>
+
                         <label className='label'>
                             Projet actif ?
                         </label>
-                        <textarea
-                            placeholder=' Projet actif ? (true/false)'
-                            className='activeProject'
-                            name="activeProject"
-                            id="activeProject"
-                            value={activeProject}
-                            onChange={(e) => setactiveProject(e.target.value)}
+                        <input
+                            type="checkbox"
+                            className='input-container'
+                            onChange={e => setActiveProject(e.target.checked)}
                             required/>
+
                         <label className='label'>
                             Cordonné UMR ?
                         </label>
-                        <textarea
-                            placeholder='Cordonné UMR ? (true/false)'
-                            className='umrCoordinated'
-                            name="umrCoordinated"
-                            id="umrCoordinated"
-                            value={umrCoordinated}
-                            onChange={(e) => setumrCoordinated(e.target.value)}
+                        <input
+                            type="checkbox"
+                            className='input-container'
+                            onChange={e => setUmrCoordinated(e.target.checked)}
                             required/>
 
                         <label className='label'>
                             Accord signé ?
                         </label>
-                        <textarea
-                            placeholder='Accord signé ? (true/false)'
-                            className='agreementSigned'
-                            name="agreementSigned"
-                            id="agreementSigned"
-                            value={agreementSigned}
-                            onChange={(e) => setagreementSigned(e.target.value)}
+                        <input
+                            type="checkbox"
+                            className='input-container'
+                            onChange={e => setAgreementSigned(e.target.checked)}
                             required/>
+
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={handleClose}>

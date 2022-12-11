@@ -30,6 +30,7 @@ const Login = (props) => {
     const navigate = useNavigate();
 
     const validateUser = (event) => {
+        event.preventDefault();
         authToken('');
         dispatch(authenticateUser(user.login, user.password))
             .then((response) => {
@@ -54,7 +55,7 @@ const Login = (props) => {
 
     return (
         <div className="login fadeInDown">
-            <form className="login_form">
+            <form className="login_form" onSubmit={validateUser}>
                 <div className="header_login">
                     <img src={Logo} alt="Logo" width="100" className={"fadeIn first"}/>
                     <h1 className={"fadeIn first"}> Connexion </h1>
@@ -72,7 +73,7 @@ const Login = (props) => {
                 </label>
                 {errorLogin && <Alert className={"alert-danger"} dismissible={true} onClose={()=>setErrorLogin('')}>{errorLogin}</Alert>}
                 <Button variant={"primary"} className={"btn-primary fadeIn fourth"} value={"connection"}
-                        onClick={validateUser}> Connexion</Button>
+                        type={"submit"}> Connexion</Button>
             </form>
         </div>
     );

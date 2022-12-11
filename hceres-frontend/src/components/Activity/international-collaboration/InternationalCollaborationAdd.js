@@ -1,5 +1,4 @@
 import React from 'react';
-import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
@@ -30,14 +29,14 @@ function InternationalCollaborationAdd(props) {
     const [CountryStateCity, setCountryStateCity] = React.useState("");
     const [PiPartners, setPiPartners] = React.useState("");
     const [MailPartners, setMailPartners] = React.useState(null);
-    const [ProjetcTitle, setProjetcTitle] = React.useState("");
-    const [StrategicRecurringCollab, setStrategicRecurringCollab] = React.useState("");
-    const [ActiveProject, setActiveProject] = React.useState("");
+    const [ProjectTitle, setProjectTitle] = React.useState("");
+    const [StrategicRecurringCollab, setStrategicRecurringCollab] = React.useState(false);
+    const [ActiveProject, setActiveProject] = React.useState(false);
     const [AssociatedFunding, setAssociatedFunding] = React.useState("");
     const [NumberResultingPublications, setNumberResultingPublications] = React.useState("");
     const [RefJointPublication, setRefJointPublication] = React.useState("");
-    const [UmrCoordinated, setUmrCoordinated] = React.useState("");
-    const [AgreementSigned, setAgreementSigned] = React.useState("");
+    const [UmrCoordinated, setUmrCoordinated] = React.useState(false);
+    const [AgreementSigned, setAgreementSigned] = React.useState(false);
     const [NameChoice, setNameChoice] = React.useState("");
 
 
@@ -68,7 +67,7 @@ function InternationalCollaborationAdd(props) {
             AssociatedFunding: AssociatedFunding,
             ActiveProject: ActiveProject,
             StrategicRecurringCollab: StrategicRecurringCollab,
-            ProjetcTitle: ProjetcTitle,
+            ProjectTitle: ProjectTitle,
             MailPartners: MailPartners,
             PiPartners: PiPartners,
             CountryStateCity: CountryStateCity,
@@ -122,11 +121,8 @@ function InternationalCollaborationAdd(props) {
                             Date Project Start
                         </label>
                         <input
-                            placeholder='Date Project Start'
-                            className='input-container'
-                            name="DateProjectStart"
                             type="date"
-                            value={DateProjectStart}
+                            className='input-container'
                             onChange={e => setDateProjectStart(e.target.value)}
                             required/>
 
@@ -185,33 +181,25 @@ function InternationalCollaborationAdd(props) {
                         <input
                             placeholder='ProjetcTitle '
                             className='input-container'
-                            name="ProjetcTitle"
-                            type="ProjetcTitle"
-                            value={ProjetcTitle}
-                            onChange={e => setProjetcTitle(e.target.value)}
+                            onChange={e => setProjectTitle(e.target.value)}
                             required/>
 
                         <label className='label'>
                             StrategicRecurringCollab
                         </label>
                         <input
-                            placeholder='StrategicRecurringCollab '
+                            type="checkbox"
                             className='input-container'
-                            name="boolean-parameter" type="checkbox"
-                            value={StrategicRecurringCollab}
-                            onChange={e => setStrategicRecurringCollab(e.target.value)}
+                            onChange={e => setStrategicRecurringCollab(e.target.checked)}
                             required/>
 
                         <label className='label'>
                             Active Project
                         </label>
                         <input
-                            placeholder='ActiveProject '
-                            className='input-container'
-                            name="ActiveProject"
                             type="checkbox"
-                            value={ActiveProject}
-                            onChange={e => setActiveProject(e.target.value)}
+                            className='input-container'
+                            onChange={e => setActiveProject(e.target.checked)}
                             required/>
 
                         <label className='label'>
@@ -230,10 +218,9 @@ function InternationalCollaborationAdd(props) {
                             Number Resulting Publications
                         </label>
                         <input
+                            type="number"
                             placeholder='NumberResultingPublications '
                             className='input-container'
-                            name="NumberResultingPublications"
-                            type="number"
                             value={NumberResultingPublications}
                             onChange={e => setNumberResultingPublications(e.target.value)}
                             required/>
@@ -254,24 +241,18 @@ function InternationalCollaborationAdd(props) {
                             Umr Coordinated
                         </label>
                         <input
-                            placeholder='UmrCoordinated '
-                            className='input-container'
-                            name="UmrCoordinated"
                             type="checkbox"
-                            value={UmrCoordinated}
-                            onChange={e => setUmrCoordinated(e.target.value)}
+                            className='input-container'
+                            onChange={e => setUmrCoordinated(e.target.checked)}
                             required/>
 
                         <label className='label'>
                             Agreement Signed
                         </label>
                         <input
-                            placeholder='AgreementSigned '
-                            className='input-container'
-                            name="AgreementSigned"
                             type="checkbox"
-                            value={AgreementSigned}
-                            onChange={e => setAgreementSigned(e.target.value)}
+                            className='input-container'
+                            onChange={e => setAgreementSigned(e.target.checked)}
                             required/>
 
                         <label className='label'>

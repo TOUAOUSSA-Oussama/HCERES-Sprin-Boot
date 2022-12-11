@@ -117,7 +117,7 @@ function InternationalCollaborationList(props) {
                 </div>)
             }
         }, {
-            dataField: 'internationalCollaboration.projetcTitle',
+            dataField: 'internationalCollaboration.projectTitle',
             text: 'Titre de projet',
             sort: true,
         }, {

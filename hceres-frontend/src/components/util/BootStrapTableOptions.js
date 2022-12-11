@@ -25,7 +25,8 @@ export const filterByResearcherList = (filterVal, data) => {
         filterVal = filterVal.toLowerCase()
         return data.filter(activity => activity.researcherList
             .map(res => res.researcherName.toLowerCase().includes(filterVal)
-                || res.researcherSurname.toLowerCase().includes(filterVal)).includes(true));
+                || res.researcherSurname.toLowerCase().includes(filterVal)
+                || res.researcherId.toString().includes(filterVal)).includes(true));
     }
     return data;
 }

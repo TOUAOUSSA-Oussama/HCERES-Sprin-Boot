@@ -1,6 +1,4 @@
 import React, {useState} from 'react';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import {ListGroup} from "react-bootstrap";
@@ -23,10 +21,10 @@ function ScientificExpertiseAdd(props) {
 
     // Form state (Add Template)
     const [researcherId, setResearcherId] = React.useState(targetResearcher ? targetResearcher.researcherId : "");
-    const [typeName, settypeName] = useState("");
-    const [startDate, setstartDate] = useState(null);
-    const [endDate, setendDate] = useState(null);
-    const [description, setdescription] = useState("");
+    const [typeName, setTypeName] = useState("");
+    const [startDate, setStartDate] = useState(null);
+    const [endDate, setEndDate] = useState(null);
+    const [description, setDescription] = useState("");
 
 
     const handleClose = (msg = null) => {
@@ -69,22 +67,6 @@ function ScientificExpertiseAdd(props) {
         })
     }
 
-    const handleDate1 = (event) => {
-        let startDate = `${event.getFullYear()}-${
-            event.getMonth() + 1
-        }-${event.getDate()}`;
-        setstartDate(startDate);
-        setstartDate(event);
-    }
-
-    const handleDate2 = (event) => {
-        let endDate = `${event.getFullYear()}-${
-            event.getMonth() + 1
-        }-${event.getDate()}`;
-        setendDate(endDate);
-        setendDate(event);
-    }
-
     const onReseacherSelection = id => setResearcherId(id.target.value);
 
     return (
@@ -120,26 +102,25 @@ function ScientificExpertiseAdd(props) {
                             name="typeName"
                             id="typeName"
                             value={typeName}
-                            onChange={(e) => settypeName(e.target.value)}
+                            onChange={(e) => setTypeName(e.target.value)}
                             required/>
                         <label className='label'>
                             Date de début
                         </label>
-                        <DatePicker
-                            className='datePicker'
-                            selected={startDate}
-                            onChange={handleDate1}
-                            withPortal
-                            placeholderText="Choix de date de début"/>
+                        <input
+                            type="date"
+                            className='input-container'
+                            onChange={e => setStartDate(e.target.value)}
+                            required/>
+
                         <label className='label'>
                             Date de fin
                         </label>
-                        <DatePicker
-                            className='datePicker'
-                            selected={endDate}
-                            onChange={handleDate2}
-                            withPortal
-                            placeholderText="Choix de date de fin"/>
+                        <input
+                            type="date"
+                            className='input-container'
+                            onChange={e => setEndDate(e.target.value)}
+                            required/>
 
                         <label className='label'>
                             description
@@ -150,7 +131,7 @@ function ScientificExpertiseAdd(props) {
                             name="description"
                             id="description"
                             value={description}
-                            onChange={(e) => setdescription(e.target.value)}
+                            onChange={(e) => setDescription(e.target.value)}
                             required/>
                     </Modal.Body>
                     <Modal.Footer>

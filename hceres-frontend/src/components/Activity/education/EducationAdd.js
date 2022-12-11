@@ -1,6 +1,4 @@
 import React from 'react';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import {ListGroup} from "react-bootstrap";
@@ -26,10 +24,9 @@ function EducationAdd(props) {
     const [educationCourseName, setEducationCourseName] = React.useState("");
     const [educationFormation, setEducationFormation] = React.useState("");
     const [educationDescription, setEducationDescription] = React.useState("");
-    const [educationInvolvmentText, setEducationInvolvmentText] = React.useState("");
+    const [educationInvolvementText, setEducationInvolvementText] = React.useState("");
     const [educationLevelText, setEducationLevelText] = React.useState("");
-    const [date, setDate] = React.useState(null);
-    const [formattedDate, setFormatted] = React.useState("");
+    const [educationCompletionDate, setEducationCompletionDate] = React.useState(null);
 
 
     const handleClose = (msg = null) => {
@@ -54,9 +51,9 @@ function EducationAdd(props) {
             educationCourseName: educationCourseName,
             educationFormation: educationFormation,
             educationDescription: educationDescription,
-            educationInvolvmentText: educationInvolvmentText,
+            educationInvolvmentText: educationInvolvementText,
             educationLevelText: educationLevelText,
-            educationCompletion: formattedDate
+            educationCompletion: educationCompletionDate
         };
 
         addEducation(data).then(response => {
@@ -72,14 +69,6 @@ function EducationAdd(props) {
             }
             handleClose(msg);
         })
-    }
-
-    const handleDate = (event) => {
-        let formattedDate = `${event.getFullYear()}-${
-            event.getMonth() + 1
-        }-${event.getDate()}`;
-        setFormatted(formattedDate);
-        setDate(event);
     }
 
     const onReseacherSelection = id => setResearcherId(id.target.value);
@@ -152,8 +141,8 @@ function EducationAdd(props) {
                             className='input-container'
                             name="educationInvolvmentText"
                             type="educationInvolvmentText"
-                            value={educationInvolvmentText}
-                            onChange={e => setEducationInvolvmentText(e.target.value)}
+                            value={educationInvolvementText}
+                            onChange={e => setEducationInvolvementText(e.target.value)}
                             required/>
 
                         <label className='label'>
@@ -171,12 +160,11 @@ function EducationAdd(props) {
                         <label className='label'>
                             Achèvement de l'éducation
                         </label>
-                        <DatePicker
-                            className='datePicker'
-                            selected={date}
-                            onChange={handleDate}
-                            withPortal
-                            placeholderText="Choix de date"/>
+                        <input
+                            type="date"
+                            className='input-container'
+                            onChange={e => setEducationCompletionDate(e.target.value)}
+                            required/>
 
                     </Modal.Body>
                     <Modal.Footer>

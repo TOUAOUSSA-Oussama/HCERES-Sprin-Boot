@@ -1,6 +1,4 @@
 import React from 'react';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import {ListGroup} from "react-bootstrap";
@@ -23,13 +21,11 @@ function EditorialActivityAdd(props) {
 
     // Form state (Add Template)
     const [researcherId, setResearcherId] = React.useState(targetResearcher ? targetResearcher.researcherId : "");
-    const [impactFactor, setImpactFactor] = React.useState("");
+    const [impactFactor, setImpactFactor] = React.useState(""); // number
     const [startDate, setStartDate] = React.useState(null);
     const [endDate, setEndDate] = React.useState(null);
     const [journalName, setJournalName] = React.useState("");
     const [functionName, setFunctionName] = React.useState("");
-    const [formattedStartDate, setFormattedStartDate] = React.useState(null);
-    const [formattedEndDate, setFormattedEndDate] = React.useState(null);
 
     const handleClose = (msg = null) => {
         setShowModal(false);
@@ -51,9 +47,9 @@ function EditorialActivityAdd(props) {
         let data = {
             researcherId: researcherId,
             impactFactor: impactFactor,
-            startDate: formattedStartDate,
-            endDate: formattedEndDate,
-            journalName: "monde",
+            startDate: startDate,
+            endDate: endDate,
+            journalName: journalName,
             functionName: functionName
         };
 
@@ -70,20 +66,6 @@ function EditorialActivityAdd(props) {
             }
             handleClose(msg);
         })
-    }
-
-    const handleStartDate = (event) => {
-        let formattedDate = `${event.getFullYear()}-${event.getMonth() + 1
-        }-${event.getDate()}`;
-        setFormattedStartDate(formattedDate);
-        setStartDate(event);
-    }
-
-    const handleEndDate = (event) => {
-        let formattedDate = `${event.getFullYear()}-${event.getMonth() + 1
-        }-${event.getDate()}`;
-        setFormattedEndDate(formattedDate);
-        setEndDate(event);
     }
 
     const onReseacherSelection = id => setResearcherId(id.target.value);
@@ -117,33 +99,29 @@ function EditorialActivityAdd(props) {
                             Facteur d'impact
                         </label>
                         <input
+                            type="number"
                             placeholder="Facteur d'impact"
                             className='input-container'
-                            name="impactFactor"
-                            type="impactFactor"
-                            value={impactFactor}
                             onChange={e => setImpactFactor(e.target.value)}
                             required/>
 
                         <label className='label'>
                             Date de départ
                         </label>
-                        <DatePicker
-                            className='datePicker'
-                            selected={startDate}
-                            onChange={handleStartDate}
-                            withPortal
-                            placeholderText="Choix de date"/>
+                        <input
+                            type="date"
+                            className='input-container'
+                            onChange={e => setStartDate(e.target.value)}
+                            required/>
 
                         <label className='label'>
                             Date de fin
                         </label>
-                        <DatePicker
-                            className='datePicker'
-                            selected={endDate}
-                            onChange={handleEndDate}
-                            withPortal
-                            placeholderText="Choix de date"/>
+                        <input
+                            type="date"
+                            className='input-container'
+                            onChange={e => setEndDate(e.target.value)}
+                            required/>
 
                         <label className='label'>
                             Nom du journal

@@ -1,7 +1,5 @@
 import React from 'react';
 import './Production.css';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
 
 function Production() {
     const [chercheur, setChercheur] = React.useState("");

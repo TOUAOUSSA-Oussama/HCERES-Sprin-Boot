@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
@@ -24,14 +23,14 @@ function SeiClinicalTrialAdd(props) {
     // Form state (Add Template)
     const [researcherId, setResearcherId] = React.useState(targetResearcher ? targetResearcher.researcherId : "");
     const [startDate, setStartDate] = useState(null);
-    const [partenaireCoordinateur, setPartenaireCoordinateur] = useState("");
+    const [partenaireCoordinateur, setPartenaireCoordinateur] = useState(false);
     const [titreEssaiClinique, setTitreEssaiClinique] = useState("");
     const [endDate, setEndDate] = useState(null);
-    const [nbEnregistrement, setNbEnregistrement] = useState("");
+    const [nbEnregistrement, setNbEnregistrement] = useState(""); // number
     const [nomSponsor, setNomSponsor] = useState("");
-    const [nbPatients, setNbPatients] = useState("");
+    const [nbPatients, setNbPatients] = useState(""); // number
     const [financement, setFinancement] = useState("");
-    const [montantFinancement, setMontantFinancement] = useState("");
+    const [montantFinancement, setMontantFinancement] = useState(""); // number
 
     const handleClose = (msg = null) => {
         setShowModal(false);
@@ -78,22 +77,6 @@ function SeiClinicalTrialAdd(props) {
         })
     }
 
-    const handleDate1 = (event) => {
-        let startDate = `${event.getFullYear()}-${
-            event.getMonth() + 1
-        }-${event.getDate()}`;
-        setStartDate(startDate);
-        setStartDate(event);
-    }
-
-    const handleDate2 = (event) => {
-        let endDate = `${event.getFullYear()}-${
-            event.getMonth() + 1
-        }-${event.getDate()}`;
-        setEndDate(endDate);
-        setEndDate(event);
-    }
-
     const onReseacherSelection = id => setResearcherId(id.target.value);
 
     return (
@@ -123,23 +106,19 @@ function SeiClinicalTrialAdd(props) {
                         <label className='label'>
                             Date de début
                         </label>
-                        <DatePicker
-                            className='datePicker'
-                            selected={startDate}
-                            onChange={handleDate1}
-                            withPortal
-                            placeholderText="Choix de date de début"/>
+                        <input
+                            type="date"
+                            className='input-container'
+                            onChange={e => setStartDate(e.target.value)}
+                            required/>
 
                         <label className='label'>
-                            Partenaire Coordinateur
+                            Partenaire Coordinateur ?
                         </label>
                         <input
-                            placeholder='partenaire coordinateur'
+                            type="checkbox"
                             className='input-container'
-                            name="partenaireCoordinateur"
-                            id="partenaireCoordinateur"
-                            value={partenaireCoordinateur}
-                            onChange={(e) => setPartenaireCoordinateur(e.target.value)}
+                            onChange={e => setPartenaireCoordinateur(e.target.checked)}
                             required/>
 
                         <label className='label'>
@@ -157,68 +136,65 @@ function SeiClinicalTrialAdd(props) {
                         <label className='label'>
                             Date de fin
                         </label>
-                        <DatePicker
-                            className='datePicker'
-                            selected={endDate}
-                            onChange={handleDate2}
-                            withPortal
-                            placeholderText="Choix de date de fin"/>
+                        <input
+                            type="date"
+                            className='input-container'
+                            onChange={e => setEndDate(e.target.value)}
+                            required/>
 
                         <label className='label'>
                             Nombre d'enregistrement
                         </label>
-                        <textarea
+                        <input
+                            type={"number"}
+                            className='input-container'
                             placeholder='Nombre Enregistrement '
-                            className='nbEnregistrement'
-                            name="nbEnregistrement"
-                            id="nbEnregistrement"
                             value={nbEnregistrement}
                             onChange={(e) => setNbEnregistrement(e.target.value)}
                             required/>
                         <label className='label'>
                             Nom du Sponsor
                         </label>
-                        <textarea
+                        <input
+                            type={"text"}
                             placeholder='Nom du Sponsor '
-                            className='nomSponsor'
-                            name="nomSponsor"
-                            id="nomSponsor"
+                            className='input-container'
                             value={nomSponsor}
                             onChange={(e) => setNomSponsor(e.target.value)}
                             required/>
+
                         <label className='label'>
                             Nombre de patients
                         </label>
-                        <textarea
-                            placeholder='Nom du Sponsor '
-                            className='nbPatients'
-                            name="nbPatients"
-                            id="nbPatients"
+                        <input
+                            type={"number"}
+                            placeholder='Nombre de patients'
+                            className='input-container'
                             value={nbPatients}
                             onChange={(e) => setNbPatients(e.target.value)}
                             required/>
                         <label className='label'>
                             Financement
                         </label>
-                        <textarea
+                        <input
+                            type={"text"}
                             placeholder='financement'
-                            className='financement'
-                            name="financement"
-                            id="financement"
+                            className='input-container'
                             value={financement}
                             onChange={(e) => setFinancement(e.target.value)}
                             required/>
+
                         <label className='label'>
                             Montant de financement
                         </label>
-                        <textarea
-                            placeholder='Nom du Sponsor '
-                            className='montantFinancement'
-                            name="montantFinancement"
-                            id="montantFinancement"
+                        <input
+                            type={"number"}
+                            placeholder='Montant de financement'
+                            className='input-container'
                             value={montantFinancement}
                             onChange={(e) => setMontantFinancement(e.target.value)}
                             required/>
+
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={handleClose}>

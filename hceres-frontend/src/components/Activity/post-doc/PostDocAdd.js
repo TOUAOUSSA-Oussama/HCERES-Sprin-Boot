@@ -1,6 +1,4 @@
 import React from 'react';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import {ListGroup} from "react-bootstrap";
@@ -25,7 +23,7 @@ function PostDocAdd(props) {
     const [researcherId, setResearcherId] = React.useState(targetResearcher ? targetResearcher.researcherId : "");
     const [superviseur, setSuperviseur] = React.useState("");
     const [titre, setTitre] = React.useState("");
-    const [duree, setDuree] = React.useState("");
+    const [duree, setDuree] = React.useState(""); // number
     const [nationality, setNationality] = React.useState("");
     const [labo, setLabo] = React.useState("");
     const [associatedFunding, setAssociatedFunding] = React.useState("");
@@ -60,7 +58,7 @@ function PostDocAdd(props) {
             duration: duree,
             nationality: nationality,
             originalLab: labo,
-            associationFunding: associatedFunding,
+            associatedFunding: associatedFunding,
             associatedPubliRef: associatedPubliRef,
         };
 
@@ -109,22 +107,18 @@ function PostDocAdd(props) {
                             Titre du post-doctorat
                         </label>
                         <input
-                            placeholder='Titre'
+                            placeholder='Titre du post-doctorat'
                             className='input-container'
-                            name="titre"
-                            type="titre"
                             value={titre}
                             onChange={e => setTitre(e.target.value)}
                             required/>
 
                         <label className='label'>
-                            Superviseur
+                            Nom du Superviseur
                         </label>
                         <input
-                            placeholder='Nom'
+                            placeholder='Nom du Superviseur'
                             className='input-container'
-                            name="superviseur"
-                            type="superviseur"
                             value={superviseur}
                             onChange={e => setSuperviseur(e.target.value)}
                             required/>
@@ -134,9 +128,8 @@ function PostDocAdd(props) {
                             Date d'arrivé
                         </label>
                         <input
-                            placeholder="Date d'arrivé"
-                            className='input-container'
                             type="date"
+                            className='input-container'
                             onChange={e => setArrivalDate(e.target.value)}
                             required/>
 
@@ -144,9 +137,8 @@ function PostDocAdd(props) {
                             Date de départ
                         </label>
                         <input
-                            placeholder="Date de départ"
-                            className='input-container'
                             type="date"
+                            className='input-container'
                             onChange={e => setDepartureDate(e.target.value)}
                             required/>
 
@@ -155,10 +147,9 @@ function PostDocAdd(props) {
                             Durée
                         </label>
                         <input
-                            placeholder='Formation'
-                            className='input-container'
-                            name="duree"
                             type="number"
+                            placeholder='Durée'
+                            className='input-container'
                             value={duree}
                             onChange={e => setDuree(e.target.value)}
                             required/>
@@ -170,8 +161,6 @@ function PostDocAdd(props) {
                         <input
                             placeholder='Nationalité'
                             className='input-container'
-                            name="nationalite"
-                            type="nationalite"
                             value={nationality}
                             onChange={e => setNationality(e.target.value)}
                             required/>
@@ -182,8 +171,6 @@ function PostDocAdd(props) {
                         <input
                             placeholder='Nom du laboratoire'
                             className='input-container'
-                            name="labo"
-                            type="labo"
                             value={labo}
                             onChange={e => setLabo(e.target.value)}
                             required/>
@@ -194,8 +181,6 @@ function PostDocAdd(props) {
                         <input
                             placeholder='Nom du laboratoire'
                             className='input-container'
-                            name="associatedFunding"
-                            type="associatedFunding"
                             value={associatedFunding}
                             onChange={e => setAssociatedFunding(e.target.value)}
                             required/>
@@ -206,8 +191,6 @@ function PostDocAdd(props) {
                         <input
                             placeholder='Nom du laboratoire'
                             className='input-container'
-                            name="labo"
-                            type="labo"
                             value={associatedPubliRef}
                             onChange={e => setAssociatedPubliRef(e.target.value)}
                             required/>

@@ -1,6 +1,4 @@
 import React from 'react';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import {ListGroup} from "react-bootstrap";
@@ -111,10 +109,9 @@ function ReviewArticleAdd(props) {
                             Facteur d'impact
                         </label>
                         <input
+                            type="number"
                             placeholder="Facteur d'impact"
                             className='input-container'
-                            name="impactFactor"
-                            type="number"
                             value={impactFactor}
                             onChange={e => setImpactFactor(e.target.value)}
                             required/>
@@ -135,10 +132,9 @@ function ReviewArticleAdd(props) {
                             Nombre d'article revues
                         </label>
                         <input
+                            type="number"
                             placeholder='Nom de la fonction'
                             className='input-container'
-                            name="nbReviewedArticles"
-                            type="number"
                             value={nbReviewedArticles}
                             onChange={e => setNbReviewedArticles(e.target.value)}
                             required/>

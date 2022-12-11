@@ -1,6 +1,4 @@
 import React from 'react';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import {ListGroup} from "react-bootstrap";
@@ -27,9 +25,8 @@ function PlatformAdd(props) {
     const [description, setDescription] = React.useState("");
     const [managers, setManagers] = React.useState("");
     const [affiliation, setAffiliation] = React.useState("");
-    const [date, setDate] = React.useState(null);
-    const [checkbox, setCheckBox] = React.useState(false);
-    const [formattedDate, setFormatted] = React.useState("")
+    const [creationDate, setCreationDate] = React.useState(null);
+    const [isOpenPrivateResearchers, setIsOpenPrivateResearchers] = React.useState(false);
 
 
     const handleClose = (msg = null) => {
@@ -55,8 +52,8 @@ function PlatformAdd(props) {
             description: description,
             managers: managers,
             affiliation: affiliation,
-            creationDate: formattedDate,
-            openPrivateResearchers: checkbox
+            creationDate: creationDate,
+            openPrivateResearchers: isOpenPrivateResearchers
         };
 
         addPlatform(data).then(response => {
@@ -72,14 +69,6 @@ function PlatformAdd(props) {
             }
             handleClose(msg);
         })
-    }
-
-    const handleDate = (event) => {
-        let formattedDate = `${event.getFullYear()}-${
-            event.getMonth() + 1
-        }-${event.getDate()}`;
-        setFormatted(formattedDate);
-        setDate(event);
     }
 
     const onReseacherSelection = id => setResearcherId(id.target.value);
@@ -111,12 +100,11 @@ function PlatformAdd(props) {
                         <label className='label'>
                             Date de création
                         </label>
-                        <DatePicker
-                            className='datePicker'
-                            selected={date}
-                            onChange={handleDate}
-                            withPortal
-                            placeholderText="Choix de date"/>
+                        <input
+                            type="date"
+                            className='input-container'
+                            onChange={e => setCreationDate(e.target.value)}
+                            required/>
 
                         <label className='label'>
                             Description
@@ -171,10 +159,8 @@ function PlatformAdd(props) {
                         </label>
                         <input
                             type="checkbox"
-                            placeholder='Yes'
-                            name='checkbox'
-                            value={checkbox}
-                            onChange={e => setCheckBox(e.target.value)}
+                            className='input-container'
+                            onChange={e => setIsOpenPrivateResearchers(e.target.checked)}
                             required/>
 
                     </Modal.Body>

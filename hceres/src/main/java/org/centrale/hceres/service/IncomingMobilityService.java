@@ -110,16 +110,16 @@ public class IncomingMobilityService {
         IncomingMobilityTosave.setPublicationReference(RequestParser.getAsString(request.get("publicationReference")));
 
         // setStrategicRecurringCollab :
-        IncomingMobilityTosave.setStrategicRecurringCollab(Boolean.parseBoolean(RequestParser.getAsString(request.get("strategicRecurringCollab"))));
+        IncomingMobilityTosave.setStrategicRecurringCollab(RequestParser.getAsBoolean(request.get("strategicRecurringCollab")));
 
         // setActiveProject :
-        IncomingMobilityTosave.setActiveProject(Boolean.parseBoolean(RequestParser.getAsString(request.get("activeProject"))));
+        IncomingMobilityTosave.setActiveProject(RequestParser.getAsBoolean(request.get("activeProject")));
 
         // setUmrCoordinated :
-        IncomingMobilityTosave.setUmrCoordinated(Boolean.parseBoolean(RequestParser.getAsString(request.get("umrCoordinated"))));
+        IncomingMobilityTosave.setUmrCoordinated(RequestParser.getAsBoolean(request.get("umrCoordinated")));
 
         // setAgreementSigned :
-        IncomingMobilityTosave.setAgreementSigned(Boolean.parseBoolean(RequestParser.getAsString(request.get("agreementSigned"))));
+        IncomingMobilityTosave.setAgreementSigned(RequestParser.getAsBoolean(request.get("agreementSigned")));
 
         // Activity :
         Activity activity = new Activity();

@@ -1,6 +1,4 @@
 import React from 'react';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import {ListGroup} from "react-bootstrap";
@@ -25,7 +23,7 @@ function SrAwardAdd(props) {
     const [researcherId, setResearcherId] = React.useState(targetResearcher ? targetResearcher.researcherId : "");
     const [awardeeName, setAwardeeName] = React.useState("");
     const [description, setDescritption] = React.useState("");
-    const [awardDate, setDate] = React.useState("");
+    const [awardDate, setAwardDate] = React.useState("");
 
 
     const handleClose = (msg = null) => {
@@ -68,14 +66,6 @@ function SrAwardAdd(props) {
         })
     }
 
-    const handleDate = (event) => {
-        let awardDate = `${event.getFullYear()}-${
-            event.getMonth() + 1
-        }-${event.getDate()}`;
-        setDate(awardDate);
-        setDate(event);
-    }
-
     const onReseacherSelection = id => setResearcherId(id.target.value);
 
     return (
@@ -116,14 +106,13 @@ function SrAwardAdd(props) {
                             required/>
 
                         <label className='label'>
-                            Date d'optention
+                            Date d'obtention
                         </label>
-                        <DatePicker
-                            className='datePicker'
-                            selected={awardDate}
-                            onChange={handleDate}
-                            withPortal
-                            placeholderText="Choix de date"/>
+                        <input
+                            type="date"
+                            className='input-container'
+                            onChange={e => setAwardDate(e.target.value)}
+                            required/>
 
 
                         <label className='label'>

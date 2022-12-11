@@ -1,6 +1,4 @@
 import React from 'react';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import {ListGroup} from "react-bootstrap";
@@ -122,11 +120,8 @@ function OralCommunicationAdd(props) {
                             Oral Communication Date
                         </label>
                         <input
-                            placeholder='OralCommunicationDate'
-                            className='input-container'
-                            name="OralCommunicationDate"
                             type="date"
-                            value={OralCommunicationDate}
+                            className='input-container'
                             onChange={e => setOralCommunicationDate(e.target.value)}
                             required/>
 
@@ -159,10 +154,9 @@ function OralCommunicationAdd(props) {
                             Meeting Year
                         </label>
                         <input
+                            type="number"
                             placeholder='MeetingYear'
                             className='input-container'
-                            name="MeetingYear"
-                            type="number"
                             value={MeetingYear}
                             onChange={e => setMeetingYear(e.target.value)}
                             required/>
@@ -183,11 +177,8 @@ function OralCommunicationAdd(props) {
                             Meeting Start
                         </label>
                         <input
-                            placeholder='MeetingStart '
-                            className='input-container'
-                            name="MeetingStart"
                             type="date"
-                            value={MeetingStart}
+                            className='input-container'
                             onChange={e => setMeetingStart(e.target.value)}
                             required/>
 
@@ -195,11 +186,8 @@ function OralCommunicationAdd(props) {
                             Meeting End
                         </label>
                         <input
-                            placeholder='MeetingEnd '
-                            className='input-container'
-                            name="MeetingEnd"
                             type="date"
-                            value={MeetingEnd}
+                            className='input-container'
                             onChange={e => setMeetingEnd(e.target.value)}
                             required/>
 

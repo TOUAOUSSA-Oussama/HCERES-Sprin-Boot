@@ -5,7 +5,7 @@ import 'react-bootstrap-table2-filter/dist/react-bootstrap-table2-filter.min.css
 import BootstrapTable from 'react-bootstrap-table-next';
 import ToolkitProvider, {Search} from 'react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit';
 import paginationFactory from 'react-bootstrap-table2-paginator';
-import filterFactory, {dateFilter} from 'react-bootstrap-table2-filter';
+import filterFactory from 'react-bootstrap-table2-filter';
 import {Alert} from "react-bootstrap";
 
 import 'react-datepicker/dist/react-datepicker.css';
@@ -34,7 +34,7 @@ function ReviewArticleList(props) {
     const [successActivityAlert, setSuccessActivityAlert] = React.useState('');
     const [errorActivityAlert, setErrorActivityAlert] = React.useState('');
     const [showFilter, setShowFilter] = React.useState(false);
-    const {SearchBar, ClearSearchButton} = Search;
+    const {SearchBar} = Search;
 
 
     // Form state (List Template)
@@ -79,7 +79,7 @@ function ReviewArticleList(props) {
                 .then(list => {
                     setReviewArticleList(list.filter(a => a.idTypeActivity === ActivityTypes.REVIEWING_JOURNAL_ARTICLES));
                 })
-    }, [listChangeCount]);
+    }, [listChangeCount, targetResearcher]);
 
 
     if (!reviewArticleList) {

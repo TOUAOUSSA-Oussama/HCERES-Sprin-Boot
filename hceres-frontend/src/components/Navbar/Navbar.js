@@ -1,11 +1,10 @@
 // Cette component est pour definir la barre de navigation
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {FaBars, FaHome, FaTimes, FaUserGraduate} from 'react-icons/fa';
 import {
     Nav,
     NavbarContainer,
     NavLogo,
-    NavIcon,
     MobileIcon,
     NavMenu,
     NavItem,
@@ -19,7 +18,6 @@ import Logo from '../../assets/logo.png';
 import {useDispatch} from "react-redux";
 import {logoutUser} from "../../services";
 import {BiLogOut, BiTask} from "react-icons/bi";
-import {MdAddTask} from "react-icons/md";
 
 const Navbar = () => {
     const [click, setClick] = useState(false);
@@ -37,7 +35,7 @@ const Navbar = () => {
             <NavbarContainer>
                 {/* Logo + icone */}
                 <NavLogo to="/Home" onClick={closeMobileMenu}>
-                    <img src={Logo} width="60"/>
+                    <img src={Logo} width="60" alt={"Hecers Logo"}/>
                 </NavLogo>
                 {/* Les trois lignes qui apparaitre lorsqu'on reduit la page (pour les telephones par exemple) */}
                 <MobileIcon onClick={handleClick}>

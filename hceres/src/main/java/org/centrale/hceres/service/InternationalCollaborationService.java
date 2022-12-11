@@ -1,11 +1,8 @@
 package org.centrale.hceres.service;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
-import java.util.Date;
 import java.util.Optional;
 
 import org.centrale.hceres.items.Activity;
@@ -93,8 +90,8 @@ public class InternationalCollaborationService {
         // MailPartners
         InternationalCollaborationTosave.setMailPartners(RequestParser.getAsString(request.get("MailPartners")));
 
-        // setProjetcTitle
-        InternationalCollaborationTosave.setProjetcTitle(RequestParser.getAsString(request.get("ProjetcTitle")));
+        // setProjectTitle
+        InternationalCollaborationTosave.setProjectTitle(RequestParser.getAsString(request.get("ProjectTitle")));
 
         // StrategicRecurringCollab : probleme => boolean n'est pas de type bit
         InternationalCollaborationTosave.setStrategicRecurringCollab(Boolean.valueOf(RequestParser.getAsString(request.get("StrategicRecurringCollab"))));

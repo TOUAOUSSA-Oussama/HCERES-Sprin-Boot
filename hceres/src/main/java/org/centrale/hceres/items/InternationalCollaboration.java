@@ -46,7 +46,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
     @NamedQuery(name = "InternationalCollaboration.findByCountryStateCity", query = "SELECT n FROM InternationalCollaboration n WHERE n.countryStateCity = :countryStateCity"),
     @NamedQuery(name = "InternationalCollaboration.findByPiPartners", query = "SELECT n FROM InternationalCollaboration n WHERE n.piPartners = :piPartners"),
     @NamedQuery(name = "InternationalCollaboration.findByMailPartners", query = "SELECT n FROM InternationalCollaboration n WHERE n.mailPartners = :mailPartners"),
-    @NamedQuery(name = "InternationalCollaboration.findByProjetcTitle", query = "SELECT n FROM InternationalCollaboration n WHERE n.projetcTitle = :projetcTitle"),
+    @NamedQuery(name = "InternationalCollaboration.findByProjetcTitle", query = "SELECT n FROM InternationalCollaboration n WHERE n.projectTitle = :projetcTitle"),
     @NamedQuery(name = "InternationalCollaboration.findByStrategicRecurringCollab", query = "SELECT n FROM InternationalCollaboration n WHERE n.strategicRecurringCollab = :strategicRecurringCollab"),
     @NamedQuery(name = "InternationalCollaboration.findByActiveProject", query = "SELECT n FROM InternationalCollaboration n WHERE n.activeProject = :activeProject"),
     @NamedQuery(name = "InternationalCollaboration.findByAssociatedFunding", query = "SELECT n FROM InternationalCollaboration n WHERE n.associatedFunding = :associatedFunding"),
@@ -89,7 +89,7 @@ public class InternationalCollaboration implements Serializable {
     
     @Size(max = 256)
     @Column(name = "projetc_title")
-    private String projetcTitle;
+    private String projectTitle;
     
     @Column(name = "strategic_recurring_collab")
     private Boolean strategicRecurringCollab;

@@ -84,7 +84,7 @@ public class SeiClinicalTrialService {
         SeiClinicalTrialTosave.setEndDate(RequestParser.getAsDate(request.get("endDate")));
 
         // setCoordinatorPartner :
-        SeiClinicalTrialTosave.setCoordinatorPartner(Boolean.parseBoolean(RequestParser.getAsString(request.get("coordinatorPartner"))));
+        SeiClinicalTrialTosave.setCoordinatorPartner(RequestParser.getAsBoolean(request.get("coordinatorPartner")));
 
         // setTitleClinicalTrial :
         SeiClinicalTrialTosave.setTitleClinicalTrial(RequestParser.getAsString(request.get("titleClinicalTrial")));
