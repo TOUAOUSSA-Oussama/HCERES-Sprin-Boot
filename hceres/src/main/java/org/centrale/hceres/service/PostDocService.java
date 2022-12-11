@@ -29,21 +29,27 @@ public class PostDocService {
     @Autowired
     private TypeActivityRepository typeActivityLevelRepo;
 
-    public Iterable<PostDoc> getPostDocs(){
-        return postDocRepository.findAll();
-    }
-
-
     public Optional<PostDoc> getPostDoc(final Integer id) {
         return postDocRepository.findById(id);
     }
 
+
+    /**
+     * permet de retourner la liste
+     */
+    public List<Activity> getPostDocs(){
+        return activityRepo.findByIdTypeActivity(TypeActivity.IdTypeActivity.POST_DOC.getId());
+    }
+
+    /**
+     * supprimer l'elmt selon son id
+     * @param id : id de l'elmt
+     */
     public void deletePostDoc(final Integer id) {
         postDocRepository.deleteById(id);
     }
 
-
-    public PostDoc savePostDoc(@RequestBody Map<String, Object> request) {
+    public Activity savePostDoc(@RequestBody Map<String, Object> request) {
         PostDoc postDocToSave = new PostDoc();
 
         // PostDocName :
@@ -77,7 +83,7 @@ public class PostDocService {
 
         // Activity :
         Activity activity = new Activity();
-        TypeActivity typeActivity = typeActivityLevelRepo.getById(21);
+        TypeActivity typeActivity = typeActivityLevelRepo.getById(TypeActivity.IdTypeActivity.POST_DOC.getId());
         activity.setTypeActivity(typeActivity);
 
         // Add activity to researchers list :
@@ -110,7 +116,8 @@ public class PostDocService {
         // Persist PostDoc object to the data base :
         PostDoc savePostDoc = postDocRepository.save(postDocToSave);
 
-        return savePostDoc;
+        savedActivity.setPostDoc(savePostDoc);
+        return savedActivity;
     }
 
     // Util function to convert string to date

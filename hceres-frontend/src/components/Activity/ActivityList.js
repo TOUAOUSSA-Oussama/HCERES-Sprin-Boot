@@ -4,7 +4,6 @@ import Navbar from '../Navbar/Navbar';
 
 import EducationAdd from './education/EducationAdd';
 import BootstrapTable from 'react-bootstrap-table-next';
-import PostDoctorat from './PostDoctorat';
 import {Alert, ButtonGroup, Card, Col, Container, ListGroup, Table} from "react-bootstrap";
 import Collapse from 'react-bootstrap/Collapse';
 import {BiShow, BiHide} from "react-icons/bi";
@@ -25,6 +24,7 @@ import SeiClinicalTrialList from "./sei-clinical-trial/SeiClinicalTrialList";
 import IncomingMobilityList from "./incoming-mobility/IncomingMobilityList";
 import EditorialActivityList from "./editorial-activity/EditorialActivityList";
 import ReviewArticleList from "./review-article/ReviewArticleList";
+import PostDocList from "./post-doc/PostDocList";
 
 
 // if target researcher is set in props will show only related information of target researcher
@@ -281,7 +281,7 @@ export default function ActivityList(props) {
                         </Collapse>
 
                         <Collapse in={showPostDoctoratList}>
-                            <div>{showPostDoctoratList && <div>import the file to showPostDoctoratList here</div>}</div>
+                            <div>{showPostDoctoratList && <PostDocList targetResearcher={targetResearcher}/>}</div>
                         </Collapse>
 
                         <Collapse in={showPatentList}>

@@ -12,6 +12,7 @@ class MyClass {
         this.listeIncomingMobilitys = null;
         this.listeEditorialActivities = null;
         this.listeReviewArticle = null;
+        this.listePostDocs = null;
     }
 
     deleteActivity(activityList, idActivity) {

@@ -122,7 +122,6 @@ public class Activity implements Serializable {
     @JsonIgnore
     private ToolProduct toolProduct;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "activity")
-    @JsonIgnore
     private PostDoc postDoc;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "activity")
     @JsonIgnore
