@@ -8,6 +8,7 @@
  * L LETERTRE, S LIMOUX, JY MARTIN
  * -------------------------------------------------------------------------------- */
 package org.centrale.hceres.items;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -41,7 +42,7 @@ import javax.validation.constraints.Size;
 @NamedQueries({
     @NamedQuery(name = "Meeting.findAll", query = "SELECT m FROM Meeting m"),
     @NamedQuery(name = "Meeting.findByMeetingId", query = "SELECT m FROM Meeting m WHERE m.meetingId = :meetingId"),
-    @NamedQuery(name = "Meeting.findByNeetingName", query = "SELECT m FROM Meeting m WHERE m.neetingName = :neetingName"),
+    @NamedQuery(name = "Meeting.findByNeetingName", query = "SELECT m FROM Meeting m WHERE m.meetingName = :neetingName"),
     @NamedQuery(name = "Meeting.findByMeetingYear", query = "SELECT m FROM Meeting m WHERE m.meetingYear = :meetingYear"),
     @NamedQuery(name = "Meeting.findByMeetingLocation", query = "SELECT m FROM Meeting m WHERE m.meetingLocation = :meetingLocation"),
     @NamedQuery(name = "Meeting.findByMeetingStart", query = "SELECT m FROM Meeting m WHERE m.meetingStart = :meetingStart"),
@@ -63,7 +64,7 @@ public class Meeting implements Serializable {
     @NotNull
     @Size(min = 1, max = 256)
     @Column(name = "neeting_name")
-    private String neetingName;
+    private String meetingName;
     
     @Basic(optional = false)
     @NotNull
@@ -83,10 +84,12 @@ public class Meeting implements Serializable {
     @Column(name = "meeting_end")
     @Temporal(TemporalType.DATE)
     private Date meetingEnd;
-    
+
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "meetingId")
     private List<MeetingCongressOrg> meetingCongressOrgList;
-    
+
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "meetingId")
     private List<OralCommunication> oralCommunicationList;
 

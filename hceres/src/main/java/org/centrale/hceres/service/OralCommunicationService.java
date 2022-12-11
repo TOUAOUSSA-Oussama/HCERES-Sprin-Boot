@@ -1,11 +1,8 @@
 package org.centrale.hceres.service;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
-import java.util.Date;
 import java.util.Optional;
 
 import org.centrale.hceres.items.Activity;
@@ -95,7 +92,7 @@ public class OralCommunicationService {
 
         // Meeting
         Meeting meeting = new Meeting();
-        meeting.setNeetingName(RequestParser.getAsString(request.get("MeetingName")));
+        meeting.setMeetingName(RequestParser.getAsString(request.get("MeetingName")));
         meeting.setMeetingYear(RequestParser.getAsInteger(request.get("MeetingYear")));
         meeting.setMeetingLocation(RequestParser.getAsString(request.get("MeetingLocation")));
         meeting.setMeetingStart(RequestParser.getAsDate(request.get("MeetingStart")));
