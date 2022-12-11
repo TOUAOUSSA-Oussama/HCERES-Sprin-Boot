@@ -24,7 +24,7 @@ import java.util.Optional;
 // Controller permet de receptionner la requete http depuis le client, envoyer cette requete a service pour la traiter, puis retouner la reponse
 // la reponse sera sous format JSON (il s'agit d'une REST API)
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(originPatterns = "*")
 public class ResearchController {
 	
 	/**

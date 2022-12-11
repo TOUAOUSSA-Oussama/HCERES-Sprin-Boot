@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @RequestMapping("/user")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(originPatterns = "*")
 public class UserResourceImpl {
 
     private static final Logger log = LoggerFactory.getLogger(UserResourceImpl.class);
