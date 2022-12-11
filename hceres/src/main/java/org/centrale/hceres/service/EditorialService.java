@@ -15,7 +15,7 @@ import java.util.*;
 @Service
 public class EditorialService {
     @Autowired
-    EditorialRepository  editorialRepository;
+    EditorialRepository editorialRepository;
     @Autowired
     private ResearchRepository researchRepo;
     @Autowired
@@ -23,7 +23,7 @@ public class EditorialService {
     @Autowired
     private TypeActivityRepository typeActivityLevelRepo;
     @Autowired
-    private  JournalRepository journalRepository;
+    private JournalRepository journalRepository;
     @Autowired
     private FunctionEditorialActivityRepository functionEditorialActivityRepository;
 
@@ -34,12 +34,13 @@ public class EditorialService {
     /**
      * permet de retourner la liste
      */
-    public List<Activity> getEditorialActivities(){
+    public List<Activity> getEditorialActivities() {
         return activityRepo.findByIdTypeActivity(TypeActivity.IdTypeActivity.EDITORIAL_ACTIVITY.getId());
     }
 
     /**
      * supprimer l'elmt selon son id
+     *
      * @param id : id de l'elmt
      */
     public void deleteEditorialActivity(final Integer id) {
@@ -66,19 +67,13 @@ public class EditorialService {
         TypeActivity typeActivity = typeActivityLevelRepo.getById(TypeActivity.IdTypeActivity.EDITORIAL_ACTIVITY.getId());
         activity.setTypeActivity(typeActivity);
 
-        // Add this activity to the researcher activity list :
+
+        // get list of researcher doing this activity - currently only one is sent
         Integer researcherId = RequestParser.getAsInteger(request.get("researcherId"));
         Optional<Researcher> researcherOp = researchRepo.findById(researcherId);
         Researcher researcher = researcherOp.get();
-        List<Activity> activityList = researcher.getActivityList();
-        activityList.add(activity);
-        researcher.setActivityList(activityList);
 
-        // Add this activity to the reasearcher :
-        List<Researcher> activityResearch = activity.getResearcherList();
-        if (activityResearch == null) {
-            activityResearch = new ArrayList<Researcher>();
-        }
+        List<Researcher> activityResearch = new ArrayList<>();
         activityResearch.add(researcher);
         activity.setResearcherList(activityResearch);
 
@@ -90,14 +85,13 @@ public class EditorialService {
         editorialToSave.setIdActivity(idEditorial);
 
         // Creating journal object with given name in form (must include in future the possibility to select among the existing journals)
-        String journalName = RequestParser.getAsString(request.get("journalName")) ;
+        String journalName = RequestParser.getAsString(request.get("journalName"));
 
-        if (journalRepository.findByName(journalName)==null){
+        if (journalRepository.findByName(journalName) == null) {
             Journal journal = new Journal();
             journal.setJournalName(journalName);
             editorialToSave.setJournalId(journal);
-        }
-        else {
+        } else {
             Journal journal = journalRepository.findByName(journalName);
             editorialToSave.setJournalId(journal);
         }
@@ -106,7 +100,7 @@ public class EditorialService {
         //Creating an editing function
         // Search in dataBase by function name if it doesn't exist create It
         String functionName = RequestParser.getAsString(request.get("functionName"));
-        if (functionEditorialActivityRepository.findByName(functionName)==null){
+        if (functionEditorialActivityRepository.findByName(functionName) == null) {
             FunctionEditorialActivity functionEditorialActivity = new FunctionEditorialActivity();
 
             // Setting the function Name
@@ -127,9 +121,7 @@ public class EditorialService {
 
             // Adding id to editorial activity
             editorialToSave.setFunctionEditorialActivityId(functionEditorialActivity);
-        }
-
-        else{
+        } else {
             FunctionEditorialActivity functionEditorialActivity = functionEditorialActivityRepository.findByName(functionName);
 
             // Getting existing List of editorial activities

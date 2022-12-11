@@ -16,26 +16,26 @@ import java.util.List;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-	@Autowired
-	private ResearchRepository researchRepository;
+    @Autowired
+    private ResearchRepository researchRepository;
 
-	@Override
-	public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-		Researcher user = researchRepository.findByLogin(login);
-		if (user == null) {
-			throw new UsernameNotFoundException("User Login:  " + login + " not found");
-		}
-		return new org.springframework.security.core.userdetails.User(user.getResearcherLogin(), user.getResearcherPassword(),
-				getGrantedAuthority(user));
-	}
+    @Override
+    public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
+        Researcher user = researchRepository.findByLogin(login);
+        if (user == null) {
+            throw new UsernameNotFoundException("User Login:  " + login + " not found");
+        }
+        return new org.springframework.security.core.userdetails.User(user.getResearcherLogin(), user.getResearcherPassword(),
+                getGrantedAuthority(user));
+    }
 
-	private List<GrantedAuthority> getGrantedAuthority(Researcher user) {
-		List<GrantedAuthority> authorities = new ArrayList<>();
-		if (user.getAdmin() != null) {
-			authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
-		}
-		authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
-		return authorities;
-	}
+    private List<GrantedAuthority> getGrantedAuthority(Researcher user) {
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        if (user.getAdmin() != null) {
+            authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        }
+        authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+        return authorities;
+    }
 
 }

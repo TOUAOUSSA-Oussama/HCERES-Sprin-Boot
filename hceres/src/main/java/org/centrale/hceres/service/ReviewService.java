@@ -27,12 +27,13 @@ public class ReviewService {
     /**
      * permet de retourner la liste
      */
-    public List<Activity> getReviewArticle(){
+    public List<Activity> getReviewArticle() {
         return activityRepo.findByIdTypeActivity(TypeActivity.IdTypeActivity.REVIEWING_JOURNAL_ARTICLES.getId());
     }
 
     /**
      * supprimer l'elmt selon son id
+     *
      * @param id : id de l'elmt
      */
     public void deleteReviewArticle(final Integer id) {
@@ -62,19 +63,13 @@ public class ReviewService {
         TypeActivity typeActivity = typeActivityLevelRepo.getById(TypeActivity.IdTypeActivity.REVIEWING_JOURNAL_ARTICLES.getId());
         activity.setTypeActivity(typeActivity);
 
-        // Add this activity to the researcher activity list :
+
+        // get list of researcher doing this activity - currently only one is sent
         Integer researcherId = RequestParser.getAsInteger(request.get("researcherId"));
         Optional<Researcher> researcherOp = researchRepo.findById(researcherId);
         Researcher researcher = researcherOp.get();
-        List<Activity> activityList = researcher.getActivityList();
-        activityList.add(activity);
-        researcher.setActivityList(activityList);
 
-        // Add this activity to the reasearcher :
-        List<Researcher> activityResearch = activity.getResearcherList();
-        if (activityResearch == null) {
-            activityResearch = new ArrayList<Researcher>();
-        }
+        List<Researcher> activityResearch = new ArrayList<>();
         activityResearch.add(researcher);
         activity.setResearcherList(activityResearch);
 

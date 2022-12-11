@@ -33,99 +33,92 @@ import lombok.Data;
 @Data
 @Service
 public class ScientificExpertiseService {
-	
-	/**
-	 * Instanciation
-	 */
-	@Autowired
-	private ResearchRepository researchRepo;
-	@Autowired
-	private ScientificExpertiseRepository scientificExpertiseRepo;
-	@Autowired
-	private ScientificExpertiseTypeRepository scientificExpertiseTypeRepository;
-	@Autowired
-	private ActivityRepository activityRepo;
-	@Autowired
-	private TypeActivityRepository typeActivityLevelRepo;
 
-	/**
-	 * permet de retourner la liste
-	 */
-	public List<Activity> getScientificExpertises(){
-		return activityRepo.findByIdTypeActivity(TypeActivity.IdTypeActivity.SCIENTIFIC_EXPERTISE.getId());
-	}
+    /**
+     * Instanciation
+     */
+    @Autowired
+    private ResearchRepository researchRepo;
+    @Autowired
+    private ScientificExpertiseRepository scientificExpertiseRepo;
+    @Autowired
+    private ScientificExpertiseTypeRepository scientificExpertiseTypeRepository;
+    @Autowired
+    private ActivityRepository activityRepo;
+    @Autowired
+    private TypeActivityRepository typeActivityLevelRepo;
 
-	/**
-	 * supprimer l'elmt selon son id
-	 * @param id : id de l'elmt
-	 */
-	public void deleteScientificExpertise(final Integer id) {
-		scientificExpertiseRepo.deleteById(id);
-	}
+    /**
+     * permet de retourner la liste
+     */
+    public List<Activity> getScientificExpertises() {
+        return activityRepo.findByIdTypeActivity(TypeActivity.IdTypeActivity.SCIENTIFIC_EXPERTISE.getId());
+    }
 
-	/**
-	 * permet d'ajouter un elmt
-	 * @return : l'elemt ajouter a la base de donnees
-	 */
-	@Transactional
-	public Activity saveScientificExpertise(@RequestBody Map<String, Object> request) throws ParseException {
-		
-		ScientificExpertise ScientificExpertiseTosave = new ScientificExpertise();
-		
-		// setStartDate :
+    /**
+     * supprimer l'elmt selon son id
+     *
+     * @param id : id de l'elmt
+     */
+    public void deleteScientificExpertise(final Integer id) {
+        scientificExpertiseRepo.deleteById(id);
+    }
+
+    /**
+     * permet d'ajouter un elmt
+     *
+     * @return : l'elemt ajouter a la base de donnees
+     */
+    @Transactional
+    public Activity saveScientificExpertise(@RequestBody Map<String, Object> request) throws ParseException {
+
+        ScientificExpertise ScientificExpertiseTosave = new ScientificExpertise();
+
+        // setStartDate :
         ScientificExpertiseTosave.setStartDate(RequestParser.getAsDate(request.get("ScientificExpertiseStartDate")));
 
-		// setEndDate :
-		ScientificExpertiseTosave.setEndDate(RequestParser.getAsDate(request.get("ScientificExpertiseEndDate")));
+        // setEndDate :
+        ScientificExpertiseTosave.setEndDate(RequestParser.getAsDate(request.get("ScientificExpertiseEndDate")));
 
-		// setDescription :
-		ScientificExpertiseTosave.setDescription(RequestParser.getAsString(request.get("ScientificExpertiseDescription")));
-		
-		
-		// ScientificExpertiseType : 
-		ScientificExpertiseType ScientificExpertiseType = new ScientificExpertiseType();
-		ScientificExpertiseType.setNameChoice(RequestParser.getAsString(request.get("ScientificExpertiseTypeName")));
-		ScientificExpertiseType saveScientificExpertiseType = scientificExpertiseTypeRepository.save(ScientificExpertiseType);
-		ScientificExpertiseTosave.setScientificExpertiseTypeId(saveScientificExpertiseType);
-		
-		// Activity : 
-		Activity activity = new Activity();
-		TypeActivity typeActivity = typeActivityLevelRepo.getById(TypeActivity.IdTypeActivity.SCIENTIFIC_EXPERTISE.getId());
-		activity.setTypeActivity(typeActivity);
-		//Activity savedActivity = activityRepo.save(activity);
-		//ScientificExpertiseTosave.setActivity(savedActivity);
-		
-		// ajouter cette activité à la liste de ce chercheur :
+        // setDescription :
+        ScientificExpertiseTosave.setDescription(RequestParser.getAsString(request.get("ScientificExpertiseDescription")));
 
-		Integer researcherId = RequestParser.getAsInteger(request.get("researcherId"));
+
+        // ScientificExpertiseType :
+        ScientificExpertiseType ScientificExpertiseType = new ScientificExpertiseType();
+        ScientificExpertiseType.setNameChoice(RequestParser.getAsString(request.get("ScientificExpertiseTypeName")));
+        ScientificExpertiseType saveScientificExpertiseType = scientificExpertiseTypeRepository.save(ScientificExpertiseType);
+        ScientificExpertiseTosave.setScientificExpertiseTypeId(saveScientificExpertiseType);
+
+        // Activity :
+        Activity activity = new Activity();
+        TypeActivity typeActivity = typeActivityLevelRepo.getById(TypeActivity.IdTypeActivity.SCIENTIFIC_EXPERTISE.getId());
+        activity.setTypeActivity(typeActivity);
+        //Activity savedActivity = activityRepo.save(activity);
+        //ScientificExpertiseTosave.setActivity(savedActivity);
+
+
+        // get list of researcher doing this activity - currently only one is sent
+        Integer researcherId = RequestParser.getAsInteger(request.get("researcherId"));
         Optional<Researcher> researcherOp = researchRepo.findById(researcherId);
         Researcher researcher = researcherOp.get();
 
-		List<Activity> activityList = researcher.getActivityList();
-        activityList.add(activity);
-        researcher.setActivityList(activityList);
+        List<Researcher> activityResearch = new ArrayList<>();
+        activityResearch.add(researcher);
+        activity.setResearcherList(activityResearch);
 
+        Activity savedActivity = activityRepo.save(activity);
+        ScientificExpertiseTosave.setActivity(savedActivity);
+        // Created platform id :
+        Integer idSE = activity.getIdActivity();
+        ScientificExpertiseTosave.setIdActivity(idSE);
+        // Enregistrer ScientificExpertise dans la base de données :
+        ScientificExpertise saveScientificExpertise = scientificExpertiseRepo.save(ScientificExpertiseTosave);
 
-		 // Add this activity to the reasearcher :
-		 List<Researcher> activityResearch = activity.getResearcherList();
-		 if (activityResearch == null) {
-			 activityResearch = new ArrayList<Researcher>();
-		 }
-		 activityResearch.add(researcher);
-		 activity.setResearcherList(activityResearch);
- 
-		 Activity savedActivity = activityRepo.save(activity);
-		 ScientificExpertiseTosave.setActivity(savedActivity);
-		  // Created platform id :
-		  Integer idSE = activity.getIdActivity();
-		  ScientificExpertiseTosave.setIdActivity(idSE);
-		// Enregistrer ScientificExpertise dans la base de données :
-		ScientificExpertise saveScientificExpertise = scientificExpertiseRepo.save(ScientificExpertiseTosave);
+        savedActivity.setScientificExpertise(saveScientificExpertise);
+        return savedActivity;
+    }
 
-		savedActivity.setScientificExpertise(saveScientificExpertise);
-		return savedActivity;
-	}
-	
 
 }
 

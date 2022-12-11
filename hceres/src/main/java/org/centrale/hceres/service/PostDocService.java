@@ -36,12 +36,13 @@ public class PostDocService {
     /**
      * permet de retourner la liste
      */
-    public List<Activity> getPostDocs(){
+    public List<Activity> getPostDocs() {
         return activityRepo.findByIdTypeActivity(TypeActivity.IdTypeActivity.POST_DOC.getId());
     }
 
     /**
      * supprimer l'elmt selon son id
+     *
      * @param id : id de l'elmt
      */
     public void deletePostDoc(final Integer id) {
@@ -83,21 +84,13 @@ public class PostDocService {
         TypeActivity typeActivity = typeActivityLevelRepo.getById(TypeActivity.IdTypeActivity.POST_DOC.getId());
         activity.setTypeActivity(typeActivity);
 
-        // Add activity to researchers list :
-        Integer researcherId = RequestParser.getAsInteger(request.get("researcherId"));
 
+        // get list of researcher doing this activity - currently only one is sent
+        Integer researcherId = RequestParser.getAsInteger(request.get("researcherId"));
         Optional<Researcher> researcherOp = researchRepo.findById(researcherId);
         Researcher researcher = researcherOp.get();
 
-        List<Activity> activityList = researcher.getActivityList();
-        activityList.add(activity);
-        researcher.setActivityList(activityList);
-
-        // Add Post Doc to Researcher activities :
-        List<Researcher> activityResearch = activity.getResearcherList();
-        if (activityResearch == null) {
-            activityResearch = new ArrayList<Researcher>();
-        }
+        List<Researcher> activityResearch = new ArrayList<>();
         activityResearch.add(researcher);
         activity.setResearcherList(activityResearch);
 

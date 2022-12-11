@@ -23,140 +23,137 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.Data;
+
 import javax.transaction.Transactional;
+
 import org.springframework.web.bind.annotation.RequestBody;
+
 import java.util.Map;
 
 @Data
 @Service
 public class InternationalCollaborationService {
 
-	/**
-	 * Instanciation
-	 */
-	@Autowired
-	private ResearchRepository researchRepo;
-	
-	@Autowired
-	private ActivityRepository activityRepo;
-	
-	@Autowired
-	private TypeActivityRepository typeActivityLevelRepo;
-	
-	@Autowired
-	private InternationalCollaborationRepository internationalCollaborationRepo;
-	
-	@Autowired
-	private TypeCollabRepository typeCollabRepo;
+    /**
+     * Instanciation
+     */
+    @Autowired
+    private ResearchRepository researchRepo;
 
-	/**
-	 * permet de retourner la liste
-	 */
-	public List<Activity> getInternationalCollaborations(){
-		return activityRepo.findByIdTypeActivity(TypeActivity.IdTypeActivity.NATIONAL_INTERNATIONAL_COLLABORATION.getId());
-	}
+    @Autowired
+    private ActivityRepository activityRepo;
 
-	/**
-	 * supprimer l'elmt selon son id
-	 * @param id : id de l'elmt
-	 */
-	public void deleteInternationalCollaboration(final Integer id) {
-		internationalCollaborationRepo.deleteById(id);
-	}
-	
-	/**
-	 * permet d'ajouter un elmt
-	 * @return : l'elemt ajouter a la base de donnees
-	 */
-	@Transactional
-	public Activity saveInternationalCollaboration(@RequestBody Map<String, Object> request) throws ParseException {
-		
-		InternationalCollaboration InternationalCollaborationTosave = new InternationalCollaboration();
-		
-		// DateProjectStart :
-		InternationalCollaborationTosave.setDateProjectStart(RequestParser.getAsDate(request.get("DateProjectStart")));
-		
-		// PartnerEntity :
-		InternationalCollaborationTosave.setPartnerEntity(RequestParser.getAsString(request.get("PartnerEntity")));
-		
-		// CountryStateCity :
-		InternationalCollaborationTosave.setCountryStateCity(RequestParser.getAsString(request.get("CountryStateCity")));
-		
-		// setPiPartners :
-		InternationalCollaborationTosave.setPiPartners(RequestParser.getAsString(request.get("PiPartners")));
-		
-		// MailPartners
-		InternationalCollaborationTosave.setMailPartners(RequestParser.getAsString(request.get("MailPartners")));
-		
-		// setProjetcTitle
-		InternationalCollaborationTosave.setProjetcTitle(RequestParser.getAsString(request.get("ProjetcTitle")));
-		
-		// StrategicRecurringCollab : probleme => boolean n'est pas de type bit
-		InternationalCollaborationTosave.setStrategicRecurringCollab(Boolean.valueOf(RequestParser.getAsString(request.get("StrategicRecurringCollab"))));
-		
-		// ActiveProject
-		InternationalCollaborationTosave.setActiveProject(Boolean.valueOf(RequestParser.getAsString(request.get("ActiveProject"))));
-		
-		// AssociatedFunding
-		InternationalCollaborationTosave.setAssociatedFunding(RequestParser.getAsString(request.get("AssociatedFunding")));
+    @Autowired
+    private TypeActivityRepository typeActivityLevelRepo;
 
-		// NumberResultingPublications
-		InternationalCollaborationTosave.setNumberResultingPublications(RequestParser.getAsInteger(request.get("NumberResultingPublications")));
-		
-		// RefJointPublication
-		InternationalCollaborationTosave.setRefJointPublication(RequestParser.getAsString(request.get("RefJointPublication")));
+    @Autowired
+    private InternationalCollaborationRepository internationalCollaborationRepo;
 
-		// UmrCoordinated
-		InternationalCollaborationTosave.setUmrCoordinated(Boolean.valueOf(RequestParser.getAsString(request.get("UmrCoordinated"))));
-		
-		
-		// AgreementSigned
-		InternationalCollaborationTosave.setAgreementSigned(Boolean.valueOf(RequestParser.getAsString(request.get("AgreementSigned"))));
-		
-		
-		// TypeCollab :
-		TypeCollab typeCollab = new TypeCollab();
-		typeCollab.setNameChoice(RequestParser.getAsString(request.get("NameChoice")));
-		TypeCollab savedTypeCollab = typeCollabRepo.save(typeCollab);
-		InternationalCollaborationTosave.setTypeCollabId(savedTypeCollab);
-		
-		// Activity : 
-		Activity activity = new Activity();
-		TypeActivity typeActivity = typeActivityLevelRepo.getById(TypeActivity.IdTypeActivity.NATIONAL_INTERNATIONAL_COLLABORATION.getId());
-		activity.setTypeActivity(typeActivity);
-		
-		// ajouter cette activité à la liste de ce chercheur :
-		Integer researcherId = RequestParser.getAsInteger(request.get("researcherId"));
-		Optional<Researcher> researcherOp = researchRepo.findById(researcherId);
-		Researcher researcher = researcherOp.get();
-		
-		List<Activity> activityList = researcher.getActivityList();
-		activityList.add(activity);
-		researcher.setActivityList(activityList);
-		
-		// Ajouter cette activité au chercheur :
-		List<Researcher> activityResearch = activity.getResearcherList();
-		if (activityResearch == null) {
-			activityResearch = new ArrayList<Researcher>();
-		}
-		activityResearch.add(researcher);
-		activity.setResearcherList(activityResearch);
-		
-		Activity savedActivity = activityRepo.save(activity);
-		InternationalCollaborationTosave.setActivity(savedActivity);
-		
-		
-		// Id de l'internationalCollaboration :
-		Integer idInternationalCollaboration = activity.getIdActivity();
-		InternationalCollaborationTosave.setIdActivity(idInternationalCollaboration);
-				
-		// Enregistrer InternationalCollaboration dans la base de données :
-		InternationalCollaboration InternationalCollaborationSaved = internationalCollaborationRepo.save(InternationalCollaborationTosave);
+    @Autowired
+    private TypeCollabRepository typeCollabRepo;
 
-		savedActivity.setInternationalCollaboration(InternationalCollaborationSaved);
-		return savedActivity;
-	}
-	
+    /**
+     * permet de retourner la liste
+     */
+    public List<Activity> getInternationalCollaborations() {
+        return activityRepo.findByIdTypeActivity(TypeActivity.IdTypeActivity.NATIONAL_INTERNATIONAL_COLLABORATION.getId());
+    }
 
-	
+    /**
+     * supprimer l'elmt selon son id
+     *
+     * @param id : id de l'elmt
+     */
+    public void deleteInternationalCollaboration(final Integer id) {
+        internationalCollaborationRepo.deleteById(id);
+    }
+
+    /**
+     * permet d'ajouter un elmt
+     *
+     * @return : l'elemt ajouter a la base de donnees
+     */
+    @Transactional
+    public Activity saveInternationalCollaboration(@RequestBody Map<String, Object> request) throws ParseException {
+
+        InternationalCollaboration InternationalCollaborationTosave = new InternationalCollaboration();
+
+        // DateProjectStart :
+        InternationalCollaborationTosave.setDateProjectStart(RequestParser.getAsDate(request.get("DateProjectStart")));
+
+        // PartnerEntity :
+        InternationalCollaborationTosave.setPartnerEntity(RequestParser.getAsString(request.get("PartnerEntity")));
+
+        // CountryStateCity :
+        InternationalCollaborationTosave.setCountryStateCity(RequestParser.getAsString(request.get("CountryStateCity")));
+
+        // setPiPartners :
+        InternationalCollaborationTosave.setPiPartners(RequestParser.getAsString(request.get("PiPartners")));
+
+        // MailPartners
+        InternationalCollaborationTosave.setMailPartners(RequestParser.getAsString(request.get("MailPartners")));
+
+        // setProjetcTitle
+        InternationalCollaborationTosave.setProjetcTitle(RequestParser.getAsString(request.get("ProjetcTitle")));
+
+        // StrategicRecurringCollab : probleme => boolean n'est pas de type bit
+        InternationalCollaborationTosave.setStrategicRecurringCollab(Boolean.valueOf(RequestParser.getAsString(request.get("StrategicRecurringCollab"))));
+
+        // ActiveProject
+        InternationalCollaborationTosave.setActiveProject(Boolean.valueOf(RequestParser.getAsString(request.get("ActiveProject"))));
+
+        // AssociatedFunding
+        InternationalCollaborationTosave.setAssociatedFunding(RequestParser.getAsString(request.get("AssociatedFunding")));
+
+        // NumberResultingPublications
+        InternationalCollaborationTosave.setNumberResultingPublications(RequestParser.getAsInteger(request.get("NumberResultingPublications")));
+
+        // RefJointPublication
+        InternationalCollaborationTosave.setRefJointPublication(RequestParser.getAsString(request.get("RefJointPublication")));
+
+        // UmrCoordinated
+        InternationalCollaborationTosave.setUmrCoordinated(Boolean.valueOf(RequestParser.getAsString(request.get("UmrCoordinated"))));
+
+
+        // AgreementSigned
+        InternationalCollaborationTosave.setAgreementSigned(Boolean.valueOf(RequestParser.getAsString(request.get("AgreementSigned"))));
+
+
+        // TypeCollab :
+        TypeCollab typeCollab = new TypeCollab();
+        typeCollab.setNameChoice(RequestParser.getAsString(request.get("NameChoice")));
+        TypeCollab savedTypeCollab = typeCollabRepo.save(typeCollab);
+        InternationalCollaborationTosave.setTypeCollabId(savedTypeCollab);
+
+        // Activity :
+        Activity activity = new Activity();
+        TypeActivity typeActivity = typeActivityLevelRepo.getById(TypeActivity.IdTypeActivity.NATIONAL_INTERNATIONAL_COLLABORATION.getId());
+        activity.setTypeActivity(typeActivity);
+
+
+        // get list of researcher doing this activity - currently only one is sent
+        Integer researcherId = RequestParser.getAsInteger(request.get("researcherId"));
+        Optional<Researcher> researcherOp = researchRepo.findById(researcherId);
+        Researcher researcher = researcherOp.get();
+
+        List<Researcher> activityResearch = new ArrayList<>();
+        activityResearch.add(researcher);
+        activity.setResearcherList(activityResearch);
+
+        Activity savedActivity = activityRepo.save(activity);
+        InternationalCollaborationTosave.setActivity(savedActivity);
+
+
+        // Id de l'internationalCollaboration :
+        Integer idInternationalCollaboration = activity.getIdActivity();
+        InternationalCollaborationTosave.setIdActivity(idInternationalCollaboration);
+
+        // Enregistrer InternationalCollaboration dans la base de données :
+        InternationalCollaboration InternationalCollaborationSaved = internationalCollaborationRepo.save(InternationalCollaborationTosave);
+
+        savedActivity.setInternationalCollaboration(InternationalCollaborationSaved);
+        return savedActivity;
+    }
+
+
 }
