@@ -68,25 +68,23 @@ public class ScientificExpertiseService {
 	 * @return : l'elemt ajouter a la base de donnees
 	 */
 	@Transactional
-	public Activity saveScientificExpertise(@RequestBody Map<String, Object> request) {
+	public Activity saveScientificExpertise(@RequestBody Map<String, Object> request) throws ParseException {
 		
 		ScientificExpertise ScientificExpertiseTosave = new ScientificExpertise();
 		
 		// setStartDate :
-		String dateString = (String)request.get("ScientificExpertiseStartDate");
-		ScientificExpertiseTosave.setStartDate(getDateFromString(dateString, "yyyy-MM-dd"));
+        ScientificExpertiseTosave.setStartDate(RequestParser.getAsDate(request.get("ScientificExpertiseStartDate")));
 
 		// setEndDate :
-		String dateString2 = (String)request.get("ScientificExpertiseEndDate");
-		ScientificExpertiseTosave.setEndDate(getDateFromString(dateString2, "yyyy-MM-dd"));
+		ScientificExpertiseTosave.setEndDate(RequestParser.getAsDate(request.get("ScientificExpertiseEndDate")));
 
 		// setDescription :
-		ScientificExpertiseTosave.setDescription((String)request.get("ScientificExpertiseDescription"));
+		ScientificExpertiseTosave.setDescription(RequestParser.getAsString(request.get("ScientificExpertiseDescription")));
 		
 		
 		// ScientificExpertiseType : 
 		ScientificExpertiseType ScientificExpertiseType = new ScientificExpertiseType();
-		ScientificExpertiseType.setNameChoice((String)request.get("ScientificExpertiseTypeName"));
+		ScientificExpertiseType.setNameChoice(RequestParser.getAsString(request.get("ScientificExpertiseTypeName")));
 		ScientificExpertiseType saveScientificExpertiseType = scientificExpertiseTypeRepository.save(ScientificExpertiseType);
 		ScientificExpertiseTosave.setScientificExpertiseTypeId(saveScientificExpertiseType);
 		
@@ -99,7 +97,7 @@ public class ScientificExpertiseService {
 		
 		// ajouter cette activité à la liste de ce chercheur :
 
-		Integer researcherId = RequestParser.parseInt(request.get("researcherId"));
+		Integer researcherId = RequestParser.getAsInteger(request.get("researcherId"));
         Optional<Researcher> researcherOp = researchRepo.findById(researcherId);
         Researcher researcher = researcherOp.get();
 
@@ -128,22 +126,7 @@ public class ScientificExpertiseService {
 		return savedActivity;
 	}
 	
-	// Convertir une date string en Date
-	public Date getDateFromString(String aDate, String format) {
-        Date returnedValue = null;
-        try {
-            // try to convert
-            SimpleDateFormat aFormater = new SimpleDateFormat(format);
-            returnedValue = aFormater.parse(aDate);
-        } catch (ParseException ex) {
-        }
-        
-        if (returnedValue != null) {
-            Calendar aCalendar = Calendar.getInstance();
-            aCalendar.setTime(returnedValue);
-        }
-        return returnedValue;
-    }
+
 }
 
 

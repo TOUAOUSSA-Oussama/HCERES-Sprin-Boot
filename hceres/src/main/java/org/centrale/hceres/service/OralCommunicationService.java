@@ -8,8 +8,6 @@ import java.util.List;
 import java.util.Date;
 import java.util.Optional;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.centrale.hceres.items.Activity;
 import org.centrale.hceres.items.OralCommunication;
 import org.centrale.hceres.items.Meeting;
@@ -73,19 +71,18 @@ public class OralCommunicationService {
 	 * @return : l'elemt ajouter a la base de donnees
 	 */
 	@Transactional
-	public Activity saveOralCommunication(@RequestBody Map<String, Object> request) {
+	public Activity saveOralCommunication(@RequestBody Map<String, Object> request) throws ParseException {
 		
 		OralCommunication oralCommunicationTosave = new OralCommunication();
 		
 		// OralCommunicationTitle :
-		oralCommunicationTosave.setOralCommunicationTitle((String)request.get("OralCommunicationTitle"));
+		oralCommunicationTosave.setOralCommunicationTitle(RequestParser.getAsString(request.get("OralCommunicationTitle")));
 		
 		// OralCommunicationDat :
-		String dateString = (String)request.get("OralCommunicationDate");
-		oralCommunicationTosave.setOralCommunicationDat(getDateFromString(dateString, "yyyy-MM-dd"));
+        oralCommunicationTosave.setOralCommunicationDat(RequestParser.getAsDate(request.get("OralCommunicationDate")));
 		
 		// Authors :
-		oralCommunicationTosave.setAuthors((String)request.get("Authors"));
+		oralCommunicationTosave.setAuthors(RequestParser.getAsString(request.get("Authors")));
 		
 		// Activity : 
 		Activity activity = new Activity();
@@ -94,14 +91,11 @@ public class OralCommunicationService {
 		
 		// Meeting
 		Meeting meeting = new Meeting();
-		meeting.setNeetingName((String)request.get("MeetingName"));
-		String meetingYearString = (String)request.get("MeetingYear");
-		meeting.setMeetingYear(Integer.parseInt(meetingYearString));
-		meeting.setMeetingLocation((String)request.get("MeetingLocation"));
-		String dateStringStart = (String)request.get("MeetingStart");
-		meeting.setMeetingStart(getDateFromString(dateStringStart, "yyyy-MM-dd"));
-		String dateStringEnd = (String)request.get("MeetingEnd");
-		meeting.setMeetingEnd(getDateFromString(dateStringEnd, "yyyy-MM-dd"));
+		meeting.setNeetingName(RequestParser.getAsString(request.get("MeetingName")));
+		meeting.setMeetingYear(RequestParser.getAsInteger(request.get("MeetingYear")));
+		meeting.setMeetingLocation(RequestParser.getAsString(request.get("MeetingLocation")));
+		meeting.setMeetingStart(RequestParser.getAsDate(request.get("MeetingStart")));
+		meeting.setMeetingEnd(RequestParser.getAsDate(request.get("MeetingEnd")));
 		
 		Meeting savedMeeting = meetingRepo.save(meeting);
 		oralCommunicationTosave.setMeetingId(savedMeeting);
@@ -109,12 +103,12 @@ public class OralCommunicationService {
 		
 		// TypeOralCommunication : 
 		TypeOralCommunication typeOralCommunication = new TypeOralCommunication();
-		typeOralCommunication.setTypeOralCommunicationName((String)request.get("TypeOralCommunicationName"));
+		typeOralCommunication.setTypeOralCommunicationName(RequestParser.getAsString(request.get("TypeOralCommunicationName")));
 		TypeOralCommunication savetypeOralCommunication = typeOralCommunicationRepo.save(typeOralCommunication);
 		oralCommunicationTosave.setTypeOralCommunicationId(savetypeOralCommunication);
 		
 		// ajouter cette activité à la liste de ce chercheur :
-		Integer researcherId = RequestParser.parseInt(request.get("researcherId"));
+		Integer researcherId = RequestParser.getAsInteger(request.get("researcherId"));
 		Optional<Researcher> researcherOp = researchRepo.findById(researcherId);
 		Researcher researcher = researcherOp.get();
 		
@@ -145,21 +139,6 @@ public class OralCommunicationService {
 		return savedActivity;
 	}
 	
-	// Convertir une date string en Date
-	public Date getDateFromString(String aDate, String format) {
-        Date returnedValue = null;
-        try {
-            // try to convert
-            SimpleDateFormat aFormater = new SimpleDateFormat(format);
-            returnedValue = aFormater.parse(aDate);
-        } catch (ParseException ex) {
-        }
-        
-        if (returnedValue != null) {
-            Calendar aCalendar = Calendar.getInstance();
-            aCalendar.setTime(returnedValue);
-        }
-        return returnedValue;
-    }
+
 
 }

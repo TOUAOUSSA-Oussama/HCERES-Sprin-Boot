@@ -7,9 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -48,18 +46,18 @@ public class EditorialService {
         editorialRepository.deleteById(id);
     }
 
-    public Activity saveEditorial(@RequestBody Map<String, Object> request) {
+    public Activity saveEditorial(@RequestBody Map<String, Object> request) throws ParseException {
 
         EditorialActivity editorialToSave = new EditorialActivity();
 
         // Start Date
-        editorialToSave.setStartDate(getDateFromString((String)request.get("startDate"), "yyyy-MM-dd"));
+        editorialToSave.setStartDate(RequestParser.getAsDate(request.get("startDate")));
 
         // Start Date
-        editorialToSave.setEndDate(getDateFromString((String)request.get("endDate"), "yyyy-MM-dd"));
+        editorialToSave.setEndDate(RequestParser.getAsDate(request.get("endDate")));
 
         // Impact Factor
-        String impactFactor = (String)request.get("impactFactor");
+        String impactFactor = RequestParser.getAsString(request.get("impactFactor"));
         BigDecimal impactFactorInt = new BigDecimal(impactFactor);
         editorialToSave.setImpactFactor(impactFactorInt);
 
@@ -69,7 +67,7 @@ public class EditorialService {
         activity.setTypeActivity(typeActivity);
 
         // Add this activity to the researcher activity list :
-        Integer researcherId = RequestParser.parseInt(request.get("researcherId"));
+        Integer researcherId = RequestParser.getAsInteger(request.get("researcherId"));
         Optional<Researcher> researcherOp = researchRepo.findById(researcherId);
         Researcher researcher = researcherOp.get();
         List<Activity> activityList = researcher.getActivityList();
@@ -92,7 +90,7 @@ public class EditorialService {
         editorialToSave.setIdActivity(idEditorial);
 
         // Creating journal object with given name in form (must include in future the possibility to select among the existing journals)
-        String journalName = (String)request.get("journalName") ;
+        String journalName = RequestParser.getAsString(request.get("journalName")) ;
 
         if (journalRepository.findByName(journalName)==null){
             Journal journal = new Journal();
@@ -107,7 +105,7 @@ public class EditorialService {
 
         //Creating an editing function
         // Search in dataBase by function name if it doesn't exist create It
-        String functionName = (String)request.get("functionName");
+        String functionName = RequestParser.getAsString(request.get("functionName"));
         if (functionEditorialActivityRepository.findByName(functionName)==null){
             FunctionEditorialActivity functionEditorialActivity = new FunctionEditorialActivity();
 
@@ -155,24 +153,5 @@ public class EditorialService {
         //Wrap all saved objects in activity
         savedActivity.setEditorialActivity(saveEditorial);
         return savedActivity;
-
-
-    }
-
-    // Date to String
-    public Date getDateFromString(String aDate, String format) {
-        Date returnedValue = null;
-        try {
-            // try to convert
-            SimpleDateFormat aFormater = new SimpleDateFormat(format);
-            returnedValue = aFormater.parse(aDate);
-        } catch (ParseException ex) {
-        }
-
-        if (returnedValue != null) {
-            Calendar aCalendar = Calendar.getInstance();
-            aCalendar.setTime(returnedValue);
-        }
-        return returnedValue;
     }
 }

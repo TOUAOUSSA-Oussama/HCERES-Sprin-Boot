@@ -45,16 +45,16 @@ public class ReviewService {
         ReviewArticle reviewToSave = new ReviewArticle();
 
         // Year
-        Integer year = Integer.parseInt((String) request.get("year"));
+        Integer year = RequestParser.getAsInteger(request.get("year"));
         reviewToSave.setYear(year);
 
         // nb_reviewed_articles
-        Integer nbReviewedArticles = Integer.parseInt((String) request.get("nbReviewedArticles"));
+        Integer nbReviewedArticles = RequestParser.getAsInteger(request.get("nbReviewedArticles"));
         reviewToSave.setNbReviewedArticles(nbReviewedArticles);
 
         // impact_factor
 
-        BigDecimal impactFactor = new BigDecimal((String) request.get("impactFactor"));
+        BigDecimal impactFactor = new BigDecimal(RequestParser.getAsString(request.get("impactFactor")));
         reviewToSave.setImpactFactor(impactFactor);
 
         // Activity :
@@ -63,7 +63,7 @@ public class ReviewService {
         activity.setTypeActivity(typeActivity);
 
         // Add this activity to the researcher activity list :
-        Integer researcherId = RequestParser.parseInt(request.get("researcherId"));
+        Integer researcherId = RequestParser.getAsInteger(request.get("researcherId"));
         Optional<Researcher> researcherOp = researchRepo.findById(researcherId);
         Researcher researcher = researcherOp.get();
         List<Activity> activityList = researcher.getActivityList();
@@ -86,7 +86,7 @@ public class ReviewService {
         reviewToSave.setIdActivity(idReview);
 
         // Creating journal object with given name in form (must include in future the possibility to select among the existing journals)
-        String journalName = (String) request.get("journalName");
+        String journalName = RequestParser.getAsString(request.get("journalName"));
 
         if (journalRepository.findByName(journalName) == null) {
             Journal journal = new Journal();

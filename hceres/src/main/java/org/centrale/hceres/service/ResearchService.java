@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 
 import org.centrale.hceres.items.Researcher;
 import org.centrale.hceres.repository.ResearchRepository;
+import org.centrale.hceres.util.RequestParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -56,13 +57,13 @@ public class ResearchService {
 		Researcher researcherTosave = new Researcher();
 		
 		// researcherSurname :
-		researcherTosave.setResearcherSurname((String)request.get("researcherSurname"));
+		researcherTosave.setResearcherSurname(RequestParser.getAsString(request.get("researcherSurname")));
 		
 		// researcherName :
-		researcherTosave.setResearcherName((String)request.get("researcherName"));
+		researcherTosave.setResearcherName(RequestParser.getAsString(request.get("researcherName")));
 		
 		// researcherEmail :
-		researcherTosave.setResearcherEmail((String)request.get("researcherEmail"));
+		researcherTosave.setResearcherEmail(RequestParser.getAsString(request.get("researcherEmail")));
 				
 		// Enregistrer Education dans la base de données :
 		Researcher saveResearcher = researchRepo.save(researcherTosave);

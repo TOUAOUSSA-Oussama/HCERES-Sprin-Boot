@@ -69,55 +69,54 @@ public class InternationalCollaborationService {
 	 * @return : l'elemt ajouter a la base de donnees
 	 */
 	@Transactional
-	public Activity saveInternationalCollaboration(@RequestBody Map<String, Object> request) {
+	public Activity saveInternationalCollaboration(@RequestBody Map<String, Object> request) throws ParseException {
 		
 		InternationalCollaboration InternationalCollaborationTosave = new InternationalCollaboration();
 		
 		// DateProjectStart :
-		String dateProjectStart = (String)request.get("DateProjectStart");
-		InternationalCollaborationTosave.setDateProjectStart(getDateFromString(dateProjectStart, "yyyy-MM-dd"));
+		InternationalCollaborationTosave.setDateProjectStart(RequestParser.getAsDate(request.get("DateProjectStart")));
 		
 		// PartnerEntity :
-		InternationalCollaborationTosave.setPartnerEntity((String)request.get("PartnerEntity"));
+		InternationalCollaborationTosave.setPartnerEntity(RequestParser.getAsString(request.get("PartnerEntity")));
 		
 		// CountryStateCity :
-		InternationalCollaborationTosave.setCountryStateCity((String)request.get("CountryStateCity"));
+		InternationalCollaborationTosave.setCountryStateCity(RequestParser.getAsString(request.get("CountryStateCity")));
 		
 		// setPiPartners :
-		InternationalCollaborationTosave.setPiPartners((String)request.get("PiPartners"));
+		InternationalCollaborationTosave.setPiPartners(RequestParser.getAsString(request.get("PiPartners")));
 		
 		// MailPartners
-		InternationalCollaborationTosave.setMailPartners((String)request.get("MailPartners"));
+		InternationalCollaborationTosave.setMailPartners(RequestParser.getAsString(request.get("MailPartners")));
 		
 		// setProjetcTitle
-		InternationalCollaborationTosave.setProjetcTitle((String)request.get("ProjetcTitle"));
+		InternationalCollaborationTosave.setProjetcTitle(RequestParser.getAsString(request.get("ProjetcTitle")));
 		
 		// StrategicRecurringCollab : probleme => boolean n'est pas de type bit
-		InternationalCollaborationTosave.setStrategicRecurringCollab(Boolean.valueOf((String)request.get("StrategicRecurringCollab")));
+		InternationalCollaborationTosave.setStrategicRecurringCollab(Boolean.valueOf(RequestParser.getAsString(request.get("StrategicRecurringCollab"))));
 		
 		// ActiveProject
-		InternationalCollaborationTosave.setActiveProject(Boolean.valueOf((String)request.get("ActiveProject")));
+		InternationalCollaborationTosave.setActiveProject(Boolean.valueOf(RequestParser.getAsString(request.get("ActiveProject"))));
 		
 		// AssociatedFunding
-		InternationalCollaborationTosave.setAssociatedFunding((String)request.get("AssociatedFunding"));
+		InternationalCollaborationTosave.setAssociatedFunding(RequestParser.getAsString(request.get("AssociatedFunding")));
 
 		// NumberResultingPublications
-		InternationalCollaborationTosave.setNumberResultingPublications(Integer.parseInt((String)request.get("NumberResultingPublications")));
+		InternationalCollaborationTosave.setNumberResultingPublications(RequestParser.getAsInteger(request.get("NumberResultingPublications")));
 		
 		// RefJointPublication
-		InternationalCollaborationTosave.setRefJointPublication((String)request.get("RefJointPublication"));
+		InternationalCollaborationTosave.setRefJointPublication(RequestParser.getAsString(request.get("RefJointPublication")));
 
 		// UmrCoordinated
-		InternationalCollaborationTosave.setUmrCoordinated(Boolean.valueOf((String)request.get("UmrCoordinated")));
+		InternationalCollaborationTosave.setUmrCoordinated(Boolean.valueOf(RequestParser.getAsString(request.get("UmrCoordinated"))));
 		
 		
 		// AgreementSigned
-		InternationalCollaborationTosave.setAgreementSigned(Boolean.valueOf((String)request.get("AgreementSigned")));
+		InternationalCollaborationTosave.setAgreementSigned(Boolean.valueOf(RequestParser.getAsString(request.get("AgreementSigned"))));
 		
 		
 		// TypeCollab :
 		TypeCollab typeCollab = new TypeCollab();
-		typeCollab.setNameChoice((String)request.get("NameChoice"));
+		typeCollab.setNameChoice(RequestParser.getAsString(request.get("NameChoice")));
 		TypeCollab savedTypeCollab = typeCollabRepo.save(typeCollab);
 		InternationalCollaborationTosave.setTypeCollabId(savedTypeCollab);
 		
@@ -127,7 +126,7 @@ public class InternationalCollaborationService {
 		activity.setTypeActivity(typeActivity);
 		
 		// ajouter cette activité à la liste de ce chercheur :
-		Integer researcherId = RequestParser.parseInt(request.get("researcherId"));
+		Integer researcherId = RequestParser.getAsInteger(request.get("researcherId"));
 		Optional<Researcher> researcherOp = researchRepo.findById(researcherId);
 		Researcher researcher = researcherOp.get();
 		
@@ -158,21 +157,6 @@ public class InternationalCollaborationService {
 		return savedActivity;
 	}
 	
-	// Convertir une date string en Date
-	public Date getDateFromString(String aDate, String format) {
-        Date returnedValue = null;
-        try {
-            // try to convert
-            SimpleDateFormat aFormater = new SimpleDateFormat(format);
-            returnedValue = aFormater.parse(aDate);
-        } catch (ParseException ex) {
-        }
-        
-        if (returnedValue != null) {
-            Calendar aCalendar = Calendar.getInstance();
-            aCalendar.setTime(returnedValue);
-        }
-        return returnedValue;
-    }
+
 	
 }

@@ -7,6 +7,7 @@ import org.centrale.hceres.service.SeiClinicalTrialService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -32,7 +33,7 @@ public class SeiClinicalTrialController {
      * @return Activity
      */
     @PostMapping(value = "/SeiClinicalTrial/Create")
-    public Activity createSeiClinicalTrial(@RequestBody Map<String, Object> request) {
+    public Activity createSeiClinicalTrial(@RequestBody Map<String, Object> request) throws ParseException {
         return SeiClinicalTrialService.saveSeiClinicalTrial(request);
     }
 

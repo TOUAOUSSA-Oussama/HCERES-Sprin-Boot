@@ -68,39 +68,37 @@ public class SeiClinicalTrialService {
 	 * permet d'ajouter un elmt
 	 * @return : l'elemt ajouter a la base de donnees
 	 */
-	public Activity saveSeiClinicalTrial(@RequestBody Map<String, Object> request) {
+	public Activity saveSeiClinicalTrial(@RequestBody Map<String, Object> request) throws ParseException {
 		
 		SeiClinicalTrial SeiClinicalTrialTosave = new SeiClinicalTrial();
 		
 		
 		// setStartDate :
-		String dateString = (String)request.get("startDate");
-		SeiClinicalTrialTosave.setStartDate(getDateFromString(dateString, "yyyy-MM-dd"));
+        SeiClinicalTrialTosave.setStartDate(RequestParser.getAsDate(request.get("startDate")));
 
         // setEndDate :
-		String dateString2 = (String)request.get("endDate");
-		SeiClinicalTrialTosave.setEndDate(getDateFromString(dateString2, "yyyy-MM-dd"));
+		SeiClinicalTrialTosave.setEndDate(RequestParser.getAsDate(request.get("endDate")));
 		
 		// setCoordinatorPartner :
-		SeiClinicalTrialTosave.setCoordinatorPartner(Boolean.parseBoolean((String)request.get("coordinatorPartner")));
+		SeiClinicalTrialTosave.setCoordinatorPartner(Boolean.parseBoolean(RequestParser.getAsString(request.get("coordinatorPartner"))));
 		
         // setTitleClinicalTrial :
-		SeiClinicalTrialTosave.setTitleClinicalTrial((String)request.get("titleClinicalTrial"));
+		SeiClinicalTrialTosave.setTitleClinicalTrial(RequestParser.getAsString(request.get("titleClinicalTrial")));
 
          // setRegistrationNb :
-		SeiClinicalTrialTosave.setRegistrationNb((String)request.get("registrationNb"));
+		SeiClinicalTrialTosave.setRegistrationNb(RequestParser.getAsString(request.get("registrationNb")));
           
         // setSponsorName :
-		SeiClinicalTrialTosave.setSponsorName((String)request.get("sponsorName"));
+		SeiClinicalTrialTosave.setSponsorName(RequestParser.getAsString(request.get("sponsorName")));
 
         // setIncludedPatientsNb :
-		SeiClinicalTrialTosave.setIncludedPatientsNb(Integer.parseInt((String)request.get("includedPatientsNb")));
+		SeiClinicalTrialTosave.setIncludedPatientsNb(RequestParser.getAsInteger(request.get("includedPatientsNb")));
 
         // setFunding :
-		SeiClinicalTrialTosave.setFunding((String)request.get("funding"));
+		SeiClinicalTrialTosave.setFunding(RequestParser.getAsString(request.get("funding")));
 
         // setFundingAmount :
-		SeiClinicalTrialTosave.setFundingAmount(Integer.parseInt((String)request.get("fundingAmount")));
+		SeiClinicalTrialTosave.setFundingAmount(RequestParser.getAsInteger(request.get("fundingAmount")));
 
 	    // Activity : 
 		Activity activity = new Activity();
@@ -108,7 +106,7 @@ public class SeiClinicalTrialService {
 		activity.setTypeActivity(typeActivity);
 		
 		// ajouter cette activité à la liste de ce chercheur :
-		Integer researcherId = RequestParser.parseInt(request.get("researcherId"));
+		Integer researcherId = RequestParser.getAsInteger(request.get("researcherId"));
 		Optional<Researcher> researcherOp = researchRepo.findById(researcherId);
 		Researcher researcher = researcherOp.get();
 		
@@ -139,20 +137,5 @@ public class SeiClinicalTrialService {
 		return activity;
 	}
 	
-	// Convertir une date string en Date
-	public Date getDateFromString(String aDate, String format) {
-        Date returnedValue = null;
-        try {
-            // try to convert
-            SimpleDateFormat aFormater = new SimpleDateFormat(format);
-            returnedValue = aFormater.parse(aDate);
-        } catch (ParseException ex) {
-        }
-        
-        if (returnedValue != null) {
-            Calendar aCalendar = Calendar.getInstance();
-            aCalendar.setTime(returnedValue);
-        }
-        return returnedValue;
-    }
+
 }

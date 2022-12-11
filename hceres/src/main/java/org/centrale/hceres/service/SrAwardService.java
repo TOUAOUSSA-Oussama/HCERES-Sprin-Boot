@@ -68,19 +68,18 @@ public class SrAwardService {
 	 * permet d'ajouter un elmt
 	 * @return : l'elemt ajouter a la base de donnees
 	 */
-	public Activity saveSrAward(@RequestBody Map<String, Object>  request) {
+	public Activity saveSrAward(@RequestBody Map<String, Object>  request) throws ParseException {
 		
 		SrAward SrAwardTosave = new SrAward();
 		
 		// SrAwardCourseName :
-		SrAwardTosave.setAwardeeName((String)request.get("awardeeName"));
+		SrAwardTosave.setAwardeeName(RequestParser.getAsString(request.get("awardeeName")));
 		
 		// SrAwardCompletion :
-		String dateString = (String)request.get("awardDate");
-		SrAwardTosave.setAwardDate(getDateFromString(dateString, "yyyy-MM-dd"));
+        SrAwardTosave.setAwardDate(RequestParser.getAsDate(request.get("awardDate")));
 		
 		// SrAwardDescription :
-		SrAwardTosave.setDescription((String)request.get("description"));
+		SrAwardTosave.setDescription(RequestParser.getAsString(request.get("description")));
 		
 	    // Activity : 
 		Activity activity = new Activity();
@@ -88,7 +87,7 @@ public class SrAwardService {
 		activity.setTypeActivity(typeActivity);
 		
 		// ajouter cette activité à la liste de ce chercheur :
-		Integer researcherId = RequestParser.parseInt(request.get("researcherId"));
+		Integer researcherId = RequestParser.getAsInteger(request.get("researcherId"));
 		Optional<Researcher> researcherOp = researchRepo.findById(researcherId);
 		Researcher researcher = researcherOp.get();
 		
@@ -117,22 +116,7 @@ public class SrAwardService {
 		return savedActivity;
 	}
 	
-	// Convertir une date string en Date
-	public Date getDateFromString(String aDate, String format) {
-        Date returnedValue = null;
-        try {
-            // try to convert
-            SimpleDateFormat aFormater = new SimpleDateFormat(format);
-            returnedValue = aFormater.parse(aDate);
-        } catch (ParseException ex) {
-        }
-        
-        if (returnedValue != null) {
-            Calendar aCalendar = Calendar.getInstance();
-            aCalendar.setTime(returnedValue);
-        }
-        return returnedValue;
-    }
+
 }
 
 

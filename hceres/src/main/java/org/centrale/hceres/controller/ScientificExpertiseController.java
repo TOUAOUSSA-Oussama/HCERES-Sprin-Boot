@@ -6,6 +6,7 @@ import org.centrale.hceres.service.ScientificExpertiseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 
@@ -30,7 +31,7 @@ public class ScientificExpertiseController {
      * @return Activity
      */
     @PostMapping(value = "/ScientificExpertise/Create")
-    public Activity createScientificExpertise(@RequestBody Map<String, Object> request) {
+    public Activity createScientificExpertise(@RequestBody Map<String, Object> request) throws ParseException {
         return scientificExpertiseService.saveScientificExpertise(request);
     }
 

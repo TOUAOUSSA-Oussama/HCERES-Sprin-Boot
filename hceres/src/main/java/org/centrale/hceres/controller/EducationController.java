@@ -1,5 +1,6 @@
 package org.centrale.hceres.controller;
 
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -42,7 +43,7 @@ public class EducationController {
      * @return Activity
      */
     @PostMapping(value = "/Education/Create")
-    public Activity createEducation(@RequestBody Map<String, Object> request) {
+    public Activity createEducation(@RequestBody Map<String, Object> request) throws ParseException {
         return eduService.saveEducation(request);
     }
 

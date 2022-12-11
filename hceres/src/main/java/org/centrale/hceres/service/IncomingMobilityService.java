@@ -70,56 +70,53 @@ public class IncomingMobilityService {
 	 * permet d'ajouter un elmt
 	 * @return : l'elemt ajouter a la base de donnees
 	 */
-	public Activity saveIncomingMobility(@RequestBody Map<String, Object> request) {
-		
+	public Activity saveIncomingMobility(@RequestBody Map<String, Object> request) throws ParseException {
 		IncomingMobility IncomingMobilityTosave = new IncomingMobility();
 		
 		// setNameSeniorScientist :
-		IncomingMobilityTosave.setNameSeniorScientist((String)request.get("nameSeniorScientist"));
+		IncomingMobilityTosave.setNameSeniorScientist(RequestParser.getAsString(request.get("nameSeniorScientist")));
 		
 		// setArrivalDate :
-		String dateString = (String)request.get("arrivalDate");
-		IncomingMobilityTosave.setArrivalDate(getDateFromString(dateString, "yyyy-MM-dd"));
+        IncomingMobilityTosave.setArrivalDate(RequestParser.getAsDate(request.get("arrivalDate")));
 
         // setArrivalDate :
-		String dateString2 = (String)request.get("departureDate");
-		IncomingMobilityTosave.setDepartureDate(getDateFromString(dateString2, "yyyy-MM-dd"));
+		IncomingMobilityTosave.setDepartureDate(RequestParser.getAsDate(request.get("departureDate")));
 		
 		// setDuration :
-		IncomingMobilityTosave.setDuration(Integer.parseInt((String)request.get("duration")));
+		IncomingMobilityTosave.setDuration(RequestParser.getAsInteger(request.get("duration")));
 		
         // setNationality :
-		IncomingMobilityTosave.setNationality((String)request.get("nationality"));
+		IncomingMobilityTosave.setNationality(RequestParser.getAsString(request.get("nationality")));
 
         // setOriginalLabName :
-		IncomingMobilityTosave.setOriginalLabName((String)request.get("originalLabName"));
+		IncomingMobilityTosave.setOriginalLabName(RequestParser.getAsString(request.get("originalLabName")));
 
         // setOriginaLabLocation :
-		IncomingMobilityTosave.setOriginaLabLocation((String)request.get("originaLabLocation"));
+		IncomingMobilityTosave.setOriginaLabLocation(RequestParser.getAsString(request.get("originaLabLocation")));
 
         // setPiPartner :
-		IncomingMobilityTosave.setPiPartner((String)request.get("piPartner"));
+		IncomingMobilityTosave.setPiPartner(RequestParser.getAsString(request.get("piPartner")));
 
         // setProjectTitle :
-		IncomingMobilityTosave.setProjectTitle((String)request.get("projectTitle"));
+		IncomingMobilityTosave.setProjectTitle(RequestParser.getAsString(request.get("projectTitle")));
 
         // setAssociatedFunding :
-		IncomingMobilityTosave.setAssociatedFunding((String)request.get("associatedFunding"));
+		IncomingMobilityTosave.setAssociatedFunding(RequestParser.getAsString(request.get("associatedFunding")));
 
         // setPublicationReference :
-		IncomingMobilityTosave.setPublicationReference((String)request.get("publicationReference"));
+		IncomingMobilityTosave.setPublicationReference(RequestParser.getAsString(request.get("publicationReference")));
 
         // setStrategicRecurringCollab :
-		IncomingMobilityTosave.setStrategicRecurringCollab(Boolean.parseBoolean((String)request.get("strategicRecurringCollab")));
+		IncomingMobilityTosave.setStrategicRecurringCollab(Boolean.parseBoolean(RequestParser.getAsString(request.get("strategicRecurringCollab"))));
 
         // setActiveProject :
-		IncomingMobilityTosave.setActiveProject(Boolean.parseBoolean((String)request.get("activeProject")));
+		IncomingMobilityTosave.setActiveProject(Boolean.parseBoolean(RequestParser.getAsString(request.get("activeProject"))));
 
         // setUmrCoordinated :
-		IncomingMobilityTosave.setUmrCoordinated(Boolean.parseBoolean((String)request.get("umrCoordinated")));
+		IncomingMobilityTosave.setUmrCoordinated(Boolean.parseBoolean(RequestParser.getAsString(request.get("umrCoordinated"))));
 
         // setAgreementSigned :
-		IncomingMobilityTosave.setAgreementSigned(Boolean.parseBoolean((String)request.get("agreementSigned")));
+		IncomingMobilityTosave.setAgreementSigned(Boolean.parseBoolean(RequestParser.getAsString(request.get("agreementSigned"))));
 
 	    // Activity : 
 		Activity activity = new Activity();
@@ -127,7 +124,7 @@ public class IncomingMobilityService {
 		activity.setTypeActivity(typeActivity);
 		
 		// ajouter cette activité à la liste de ce chercheur :
-		Integer researcherId = RequestParser.parseInt(request.get("researcherId"));
+		Integer researcherId = RequestParser.getAsInteger(request.get("researcherId"));
 		Optional<Researcher> researcherOp = researchRepo.findById(researcherId);
 		Researcher researcher = researcherOp.get();
 		
@@ -158,21 +155,6 @@ public class IncomingMobilityService {
 		return savedActivity;
 	}
 	
-	// Convertir une date string en Date
-	public Date getDateFromString(String aDate, String format) {
-        Date returnedValue = null;
-        try {
-            // try to convert
-            SimpleDateFormat aFormater = new SimpleDateFormat(format);
-            returnedValue = aFormater.parse(aDate);
-        } catch (ParseException ex) {
-        }
-        
-        if (returnedValue != null) {
-            Calendar aCalendar = Calendar.getInstance();
-            aCalendar.setTime(returnedValue);
-        }
-        return returnedValue;
-    }
+
 }
 

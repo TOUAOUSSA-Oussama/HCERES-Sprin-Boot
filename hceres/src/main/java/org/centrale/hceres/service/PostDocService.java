@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -49,37 +48,35 @@ public class PostDocService {
         postDocRepository.deleteById(id);
     }
 
-    public Activity savePostDoc(@RequestBody Map<String, Object> request) {
+    public Activity savePostDoc(@RequestBody Map<String, Object> request) throws ParseException {
         PostDoc postDocToSave = new PostDoc();
 
         // PostDocName :
-        postDocToSave.setNamePostDoc((String)request.get("postDocName"));
+        postDocToSave.setNamePostDoc(RequestParser.getAsString(request.get("postDocName")));
 
         // Supervisor Name
-        postDocToSave.setNameSupervisor((String)request.get("supervisorName"));
+        postDocToSave.setNameSupervisor(RequestParser.getAsString(request.get("supervisorName")));
 
         // Arrival Date :
-        String arrivalDate = (String)request.get("arrivalDate");
-        postDocToSave.setArrivalDate(getDateFromString(arrivalDate, "yyyy-MM-dd"));
+        postDocToSave.setArrivalDate(RequestParser.getAsDate(request.get("arrivalDate")));
 
         // Departure Date :
-        String departureDate = (String)request.get("departureDate");
-        postDocToSave.setDepartureDate(getDateFromString(departureDate, "yyyy-MM-dd"));
+        postDocToSave.setDepartureDate(RequestParser.getAsDate(request.get("departureDate")));
 
         // Duration:
-        postDocToSave.setDuration(Integer.parseInt((String)request.get("duration")));
+        postDocToSave.setDuration(RequestParser.getAsInteger(request.get("duration")));
 
         // Nationality:
-        postDocToSave.setNationality((String)request.get("nationality"));
+        postDocToSave.setNationality(RequestParser.getAsString(request.get("nationality")));
 
         // Original Lab:
-        postDocToSave.setOriginalLab((String)request.get("originalLab"));
+        postDocToSave.setOriginalLab(RequestParser.getAsString(request.get("originalLab")));
 
         // Associated Funding:
-        postDocToSave.setAssociatedFunding((String)request.get("associatedFunding"));
+        postDocToSave.setAssociatedFunding(RequestParser.getAsString(request.get("associatedFunding")));
 
         // Associated Publication Ref:
-        postDocToSave.setAssociatedPubliRef((String)request.get("associatedPubliRef"));
+        postDocToSave.setAssociatedPubliRef(RequestParser.getAsString(request.get("associatedPubliRef")));
 
         // Activity :
         Activity activity = new Activity();
@@ -87,7 +84,7 @@ public class PostDocService {
         activity.setTypeActivity(typeActivity);
 
         // Add activity to researchers list :
-        Integer researcherId = RequestParser.parseInt(request.get("researcherId"));
+        Integer researcherId = RequestParser.getAsInteger(request.get("researcherId"));
 
         Optional<Researcher> researcherOp = researchRepo.findById(researcherId);
         Researcher researcher = researcherOp.get();
@@ -118,22 +115,5 @@ public class PostDocService {
 
         savedActivity.setPostDoc(savePostDoc);
         return savedActivity;
-    }
-
-    // Util function to convert string to date
-    public Date getDateFromString(String aDate, String format) {
-        Date returnedValue = null;
-        try {
-            // try to convert
-            SimpleDateFormat aFormater = new SimpleDateFormat(format);
-            returnedValue = aFormater.parse(aDate);
-        } catch (ParseException ex) {
-        }
-
-        if (returnedValue != null) {
-            Calendar aCalendar = Calendar.getInstance();
-            aCalendar.setTime(returnedValue);
-        }
-        return returnedValue;
     }
 }

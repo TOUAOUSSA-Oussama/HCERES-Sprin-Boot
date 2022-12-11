@@ -6,6 +6,7 @@ import org.centrale.hceres.service.IncomingMobilityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 
@@ -30,7 +31,7 @@ public class IncomingMobilityController {
      * @return Activity
      */
     @PostMapping(value = "/IncomingMobility/Create")
-    public Activity createIncomingMobility(@RequestBody Map<String, Object> request) {
+    public Activity createIncomingMobility(@RequestBody Map<String, Object> request) throws ParseException {
         return incomingMobilityService.saveIncomingMobility(request);
     }
 

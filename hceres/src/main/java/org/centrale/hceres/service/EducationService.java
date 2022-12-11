@@ -79,34 +79,33 @@ public class EducationService {
 	 * @return : l'elemt ajouter a la base de donnees
 	 */
 	@Transactional
-	public Activity saveEducation(@RequestBody Map<String, Object> request) {
+	public Activity saveEducation(@RequestBody Map<String, Object> request) throws ParseException {
 		
 		Education educationTosave = new Education();
 		
 		// EducationCourseName :
-		educationTosave.setEducationCourseName((String)request.get("educationCourseName"));
+		educationTosave.setEducationCourseName(RequestParser.getAsString(request.get("educationCourseName")));
 		
 		// EducationCompletion :
-		String dateString = (String)request.get("educationCompletion");
-		educationTosave.setEducationCompletion(getDateFromString(dateString, "yyyy-MM-dd"));
-		
+        educationTosave.setEducationCompletion(RequestParser.getAsDate(request.get("educationCompletion")));
+
 		// EducationDescription :
-		educationTosave.setEducationDescription((String)request.get("educationDescription"));
+		educationTosave.setEducationDescription(RequestParser.getAsString(request.get("educationDescription")));
 		
 		// EducationFormation :
-		educationTosave.setEducationFormation((String)request.get("educationFormation"));
+		educationTosave.setEducationFormation(RequestParser.getAsString(request.get("educationFormation")));
 		
 				
 		// EducationInvolvment
 		EducationInvolvment educationInvolvment = new EducationInvolvment();
-		educationInvolvment.setEducationInvolvmentName((String)request.get("educationInvolvmentText"));
+		educationInvolvment.setEducationInvolvmentName(RequestParser.getAsString(request.get("educationInvolvmentText")));
 		EducationInvolvment savedEducationInvolvment = educationInvolvmentRepo.save(educationInvolvment);
 		educationTosave.setEducationInvolvmentId(savedEducationInvolvment);
 		
 		
 		// EducationLevel : 
 		EducationLevel educationLevel = new EducationLevel();
-		educationLevel.setEducationLevelName((String)request.get("educationLevelText"));
+		educationLevel.setEducationLevelName(RequestParser.getAsString(request.get("educationLevelText")));
 		EducationLevel saveEducationLevel = educationLevelRepo.save(educationLevel);
 		educationTosave.setEducationLevelId(saveEducationLevel);
 		
@@ -116,7 +115,7 @@ public class EducationService {
 		activity.setTypeActivity(typeActivity);
 		
 		// ajouter cette activité à la liste de ce chercheur :
-		Integer researcherId = RequestParser.parseInt(request.get("researcherId"));
+		Integer researcherId = RequestParser.getAsInteger(request.get("researcherId"));
 		Optional<Researcher> researcherOp = researchRepo.findById(researcherId);
 		Researcher researcher = researcherOp.get();
 		
@@ -147,23 +146,6 @@ public class EducationService {
 		savedActivity.setEducation(saveEducation);
 		return savedActivity;
 	}
-	
-	// Convertir une date string en Date
-	public Date getDateFromString(String aDate, String format) {
-        Date returnedValue = null;
-        try {
-            // try to convert
-            SimpleDateFormat aFormater = new SimpleDateFormat(format);
-            returnedValue = aFormater.parse(aDate);
-        } catch (ParseException ex) {
-        }
-        
-        if (returnedValue != null) {
-            Calendar aCalendar = Calendar.getInstance();
-            aCalendar.setTime(returnedValue);
-        }
-        return returnedValue;
-    }
 }
 
 

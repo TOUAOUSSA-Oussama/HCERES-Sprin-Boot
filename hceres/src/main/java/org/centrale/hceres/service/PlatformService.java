@@ -38,31 +38,27 @@ public class PlatformService {
         platformRepository.deleteById(id);
     }
 
-    public Activity savePlatform(@RequestBody Map<String, Object> request) {
+    public Activity savePlatform(@RequestBody Map<String, Object> request) throws ParseException {
 
         Platform platfomToSave = new Platform();
 
         // Creation Date
-        try {
-        platfomToSave.setCreationDate(getDateFromString((String)request.get("creationDate"), "yyyy-MM-dd"));}
-        catch (Exception e){
-            platfomToSave.setCreationDate(getDateFromString("2022-03-05", "yyyy-MM-dd"));
-        }
+        platfomToSave.setCreationDate(RequestParser.getAsDate(request.get("creationDate")));
 
         // Description
-        platfomToSave.setDescription((String)request.get("description"));
+        platfomToSave.setDescription(RequestParser.getAsString(request.get("description")));
 
         // Managers
-        platfomToSave.setManagers((String)request.get("managers"));
+        platfomToSave.setManagers(RequestParser.getAsString(request.get("managers")));
 
         // Affiliation
-        platfomToSave.setAffiliation((String)request.get("affiliation"));
+        platfomToSave.setAffiliation(RequestParser.getAsString(request.get("affiliation")));
 
         // Labellisation
-        platfomToSave.setLabellisation((String)request.get("labellisation"));
+        platfomToSave.setLabellisation(RequestParser.getAsString(request.get("labellisation")));
 
         // Open Private Researches
-        platfomToSave.setOpenPrivateResearchers(Boolean.valueOf((String)request.get("openPrivateResearchers")));
+        platfomToSave.setOpenPrivateResearchers(RequestParser.getAsBoolean(request.get("openPrivateResearchers")));
 
 
         // Activity :
@@ -71,7 +67,7 @@ public class PlatformService {
         activity.setTypeActivity(typeActivity);
 
         // Add this activity to the researcher activity list :
-        Integer researcherId = RequestParser.parseInt(request.get("researcherId"));
+        Integer researcherId = RequestParser.getAsInteger(request.get("researcherId"));
         Optional<Researcher> researcherOp = researchRepo.findById(researcherId);
         Researcher researcher = researcherOp.get();
 
@@ -100,22 +96,4 @@ public class PlatformService {
         savedActivity.setPlatform(savePlatform);
         return savedActivity;
     }
-
-    // Date to String
-    public Date getDateFromString(String aDate, String format) {
-        Date returnedValue = null;
-        try {
-            // try to convert
-            SimpleDateFormat aFormater = new SimpleDateFormat(format);
-            returnedValue = aFormater.parse(aDate);
-        } catch (ParseException ex) {
-        }
-
-        if (returnedValue != null) {
-            Calendar aCalendar = Calendar.getInstance();
-            aCalendar.setTime(returnedValue);
-        }
-        return returnedValue;
-    }
-
 }

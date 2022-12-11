@@ -9,6 +9,7 @@ import org.centrale.hceres.items.Activity;
 import org.centrale.hceres.items.Researcher;
 import org.centrale.hceres.repository.ResearchRepository;
 import org.centrale.hceres.service.ResearchService;
+import org.centrale.hceres.util.RequestParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -93,17 +94,17 @@ public class ResearchController {
 		if(e.isPresent()) {
 			Researcher currentResearcher = e.get();
 			
-			String researcherSurname = (String)request.get("researcherSurname");
+			String researcherSurname = RequestParser.getAsString(request.get("researcherSurname"));
 			if(researcherSurname != null) {
 				currentResearcher.setResearcherSurname(researcherSurname);
 			}
 			
-			String researcherName = (String)request.get("researcherName");
+			String researcherName = RequestParser.getAsString(request.get("researcherName"));
 			if(researcherName != null) {
 				currentResearcher.setResearcherName(researcherName);
 			}
 			
-			String researcherEmail = (String)request.get("researcherEmail");
+			String researcherEmail = RequestParser.getAsString(request.get("researcherEmail"));
 			if(researcherEmail != null) {
 				currentResearcher.setResearcherEmail(researcherEmail);
 			}

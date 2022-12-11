@@ -1,5 +1,6 @@
 package org.centrale.hceres.controller;
 
+import java.text.ParseException;
 import java.util.Date;
 import java.util.Map;
 import java.util.Optional;
@@ -57,7 +58,7 @@ public class ProductionController {
 	 * @return l'elmt ajoute
 	 */
 	@PostMapping("/AddProduction")
-	public ToolProduct createToolProduct(@RequestBody Map<String, Object> request) {
+	public ToolProduct createToolProduct(@RequestBody Map<String, Object> request) throws ParseException {
 		return productService.saveToolProduct(request);
 	}
 	

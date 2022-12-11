@@ -8,8 +8,6 @@ import java.util.List;
 import java.util.Date;
 import java.util.Optional;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.centrale.hceres.items.Activity;
 import org.centrale.hceres.items.Researcher;
 import org.centrale.hceres.items.SeiIndustrialRDContract;
@@ -66,29 +64,27 @@ public class SeiIndustrialRDContractService {
 	 * @return : l'elemt ajouter a la base de donnees
 	 */
 	@Transactional
-	public Activity saveIndustrialContract(@RequestBody Map<String, Object> request) {
+	public Activity saveIndustrialContract(@RequestBody Map<String, Object> request) throws ParseException {
 		
 		SeiIndustrialRDContract seiIndustrialRDContractToSave = new SeiIndustrialRDContract();
 		
 		// StartDate :
-		String startDate = (String)request.get("StartDate");
-		seiIndustrialRDContractToSave.setStartDate(getDateFromString(startDate, "yyyy-MM-dd"));
+		seiIndustrialRDContractToSave.setStartDate(RequestParser.getAsDate(request.get("StartDate")));
 		
 		// NameCompanyInvolved :
-		seiIndustrialRDContractToSave.setNameCompanyInvolved((String)request.get("NameCompanyInvolved"));
+		seiIndustrialRDContractToSave.setNameCompanyInvolved(RequestParser.getAsString(request.get("NameCompanyInvolved")));
 		
 		// ProjectTitle :
-		seiIndustrialRDContractToSave.setProjectTitle((String)request.get("ProjectTitle"));
+		seiIndustrialRDContractToSave.setProjectTitle(RequestParser.getAsString(request.get("ProjectTitle")));
 		
 		// AgreementAmount :
-		seiIndustrialRDContractToSave.setAgreementAmount(Integer.parseInt((String)request.get("AgreementAmount")));
+		seiIndustrialRDContractToSave.setAgreementAmount(RequestParser.getAsInteger(request.get("AgreementAmount")));
 		
 		// EndDate :
-		String endDate = (String)request.get("EndDate");
-		seiIndustrialRDContractToSave.setEndDate(getDateFromString(endDate, "yyyy-MM-dd"));
+		seiIndustrialRDContractToSave.setEndDate(RequestParser.getAsDate(request.get("EndDate")));
 		
 		// AssociatedPubliRef
-		seiIndustrialRDContractToSave.setAssociatedPubliRef((String)request.get("AssociatedPubliRef"));
+		seiIndustrialRDContractToSave.setAssociatedPubliRef(RequestParser.getAsString(request.get("AssociatedPubliRef")));
 		
 		// Activity : 
 		Activity activity = new Activity();
@@ -96,7 +92,7 @@ public class SeiIndustrialRDContractService {
 		activity.setTypeActivity(typeActivity);
 		
 		// ajouter cette activité à la liste de ce chercheur :
-		Integer researcherId = RequestParser.parseInt(request.get("researcherId"));
+		Integer researcherId = RequestParser.getAsInteger(request.get("researcherId"));
 		Optional<Researcher> researcherOp = researchRepo.findById(researcherId);
 		Researcher researcher = researcherOp.get();
 		
@@ -127,20 +123,5 @@ public class SeiIndustrialRDContractService {
 		return savedActivity;
 	}
 	
-	// Convertir une date string en Date
-	public Date getDateFromString(String aDate, String format) {
-        Date returnedValue = null;
-        try {
-            // try to convert
-            SimpleDateFormat aFormater = new SimpleDateFormat(format);
-            returnedValue = aFormater.parse(aDate);
-        } catch (ParseException ex) {
-        }
-        
-        if (returnedValue != null) {
-            Calendar aCalendar = Calendar.getInstance();
-            aCalendar.setTime(returnedValue);
-        }
-        return returnedValue;
-    }
+
 }

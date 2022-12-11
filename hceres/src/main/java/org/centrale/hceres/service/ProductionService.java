@@ -13,6 +13,7 @@ import org.centrale.hceres.items.TypeActivity;
 import org.centrale.hceres.repository.ActivityRepository;
 import org.centrale.hceres.repository.ResearchRepository;
 import org.centrale.hceres.repository.TypeActivityRepository;
+import org.centrale.hceres.util.RequestParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import lombok.Data;
@@ -83,28 +84,27 @@ public class ProductionService {
 	 * @return : l'elemt ajouter a la base de donnees
 	 */
 	@Transactional
-	public ToolProduct saveToolProduct(@RequestBody Map<String, Object> request) {
+	public ToolProduct saveToolProduct(@RequestBody Map<String, Object> request) throws ParseException {
 		
 		ToolProduct productionTosave = new ToolProduct();
 
 		ToolProductInvolvment productInvolvmentTosave =new ToolProductInvolvment();
 		
 		// toolProductNam :
-		productionTosave.setToolProductNam((String) request.get("toolProductNam"));
+		productionTosave.setToolProductNam(RequestParser.getAsString(request.get("toolProductNam")));
 
 		// toolProductCreation
-		String dateString = (String) request.get("toolProductCreation");
-		productionTosave.setToolProductCreation(getDateFromString(dateString, "yyyy-MM-dd"));
+        productionTosave.setToolProductCreation(RequestParser.getAsDate(request.get("toolProductCreation")));
 
 		// toolProductAuthors
-		productionTosave.setToolProductAuthors((String) request.get("toolProductAuthors"));
+		productionTosave.setToolProductAuthors(RequestParser.getAsString(request.get("toolProductAuthors")));
 
 		// toolProductDescription
-		productionTosave.setToolProductDescription((String) request.get("toolProductDescription"));
+		productionTosave.setToolProductDescription(RequestParser.getAsString(request.get("toolProductDescription")));
 
 		// ToolProductType
 		ToolProductType productType = new ToolProductType();
-		productType.setToolProductTypeName((String) request.get("toolProductTypeName"));
+		productType.setToolProductTypeName(RequestParser.getAsString(request.get("toolProductTypeName")));
 		ToolProductType saveproductType = prodTypeRepo.save(productType);
 		productionTosave.setToolProductTypeId(saveproductType);
 		
@@ -114,9 +114,7 @@ public class ProductionService {
 		activity.setTypeActivity(typeActivity);
 		
 		// ajouter cette activité à la liste de ce chercheur :
-		String researcherIdStr = (String) request.get("researcherId");
-		int researcherId = -1;
-		researcherId = Integer.parseInt(researcherIdStr);
+		int researcherId = RequestParser.getAsInteger(request.get("researcherId"));
 		Optional<Researcher> researcherOp = researchRepo.findById(researcherId);
 		Researcher researcher = researcherOp.get();
 		
@@ -140,14 +138,14 @@ public class ProductionService {
 		productionTosave.setIdActivity(idProduction);
 
 		//toolProductInvolvmentResearchers
-		productInvolvmentTosave.setToolProductInvolvmentResearchers((String) request.get("toolProductInvolvmentResearchers"));
+		productInvolvmentTosave.setToolProductInvolvmentResearchers(RequestParser.getAsString(request.get("toolProductInvolvmentResearchers")));
 
 		//Add id_activity of ToolProduct
 		productInvolvmentTosave.setToolProduct(productionTosave);
 
 		//Add ToolProductRole
 		ToolProductRole toolProductRole = new ToolProductRole();
-		toolProductRole.setToolProductRoleName((String) request.get("toolProductRoleName"));
+		toolProductRole.setToolProductRoleName(RequestParser.getAsString(request.get("toolProductRoleName")));
 		ToolProductRole saveToolProductRole = prodRoleRepo.save(toolProductRole);
 		ToolProductInvolvmentPK saveProdInvoPK = new ToolProductInvolvmentPK();
 		saveProdInvoPK.setToolProductRoleId(saveToolProductRole.getToolProductRoleId());
@@ -158,24 +156,6 @@ public class ProductionService {
 		
 		return saveProduction;
 	}
-	
-	// Convertir une date string en Date
-	public Date getDateFromString(String aDate, String format) {
-        Date returnedValue = null;
-        try {
-            // try to convert
-            SimpleDateFormat aFormater = new SimpleDateFormat(format);
-            returnedValue = aFormater.parse(aDate);
-        } catch (ParseException ex) {
-
-        }
-        
-        if (returnedValue != null) {
-            Calendar aCalendar = Calendar.getInstance();
-            aCalendar.setTime(returnedValue);
-        }
-        return returnedValue;
-    }
 }
 
 
