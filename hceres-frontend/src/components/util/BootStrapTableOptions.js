@@ -44,6 +44,11 @@ export const chercheursColumnOfActivity = {
             </ListGroup>;
         else return ""
     },
+    csvFormatter: (cell, row, rowIndex) => {
+        if (row.researcherList)
+            return row.researcherList.map(res => res.researcherId +"."+ res.researcherName + " " + res.researcherSurname).join(" --- ");
+        else return ""
+    },
     filter: textFilter({
         onFilter: filterByResearcherList
     })

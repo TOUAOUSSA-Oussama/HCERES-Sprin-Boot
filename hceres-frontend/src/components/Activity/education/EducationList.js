@@ -14,6 +14,7 @@ import {Audio} from "react-loading-icons";
 import {chercheursColumnOfActivity, paginationOptions} from "../../util/BootStrapTableOptions";
 import {ImFilter} from "react-icons/im";
 import {AiFillDelete, AiOutlinePlusCircle} from "react-icons/ai";
+import {GrDocumentCsv} from "react-icons/gr";
 import EducationAdd from "./EducationAdd";
 
 import ActivityTypes from "../../../const/ActivityTypes";
@@ -34,7 +35,7 @@ function EducationList(props) {
     const [successActivityAlert, setSuccessActivityAlert] = React.useState('');
     const [errorActivityAlert, setErrorActivityAlert] = React.useState('');
     const [showFilter, setShowFilter] = React.useState(false);
-    const {SearchBar, ClearSearchButton} = Search;
+    const {SearchBar} = Search;
 
 
     // Form state (List Template)
@@ -79,7 +80,7 @@ function EducationList(props) {
                 .then(list => {
                     setEducationList(list.filter(a => a.idTypeActivity === ActivityTypes.EDUCATIONAL_OUTPUT));
                 })
-    }, [listChangeCount]);
+    }, [listChangeCount, targetResearcher]);
 
 
     if (!educationList) {
@@ -147,6 +148,18 @@ function EducationList(props) {
                 </button>
             </h3>
         </div>
+
+        const MyExportCSV = (props) => {
+            const handleClick = () => {
+                props.onExport();
+            };
+            return (
+                <button className={"border-0"}
+                        onClick={handleClick}>{
+                    <GrDocumentCsv/>}
+                </button>
+            );
+        };
         return (
             <div>
                 <ToolkitProvider
@@ -154,6 +167,10 @@ function EducationList(props) {
                     keyField="idActivity"
                     data={educationList}
                     columns={columns}
+                    exportCSV={ {
+                        fileName: 'educationList.csv',
+                        onlyExportFiltered: true,
+                        exportAll: false } }
                     search
                 >
                     {
@@ -178,8 +195,11 @@ function EducationList(props) {
                                     </div>
                                 </div>
                                 <div className={"row"}>
-                                    <div className={"col-8"}>
+                                    <div className={"col-4"}>
                                         {showFilter && <SearchBar {...props.searchProps} />}
+                                    </div>
+                                    <div className={"col-4"}>
+                                        <h3>{showFilter && <MyExportCSV  { ...props.csvProps }/>}</h3>
                                     </div>
                                     <div className={"col-4"}>
                                         {successActivityAlert && <Alert variant={"success"}

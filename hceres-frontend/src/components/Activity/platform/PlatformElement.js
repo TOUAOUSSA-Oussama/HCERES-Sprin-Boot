@@ -7,7 +7,7 @@ const PlatformElement = (props) =>
         <ListGroup.Item>Description : {props.targetPlatform.platform.description}</ListGroup.Item>
         <ListGroup.Item>Affiliation : {props.targetPlatform.platform.affiliation}</ListGroup.Item>
         <ListGroup.Item>Labellisation : {props.targetPlatform.platform.labellisation}</ListGroup.Item>
-        <ListGroup.Item>Open Private Researchers : {props.targetPlatform.platform.openPrivateResearchers}</ListGroup.Item>
+        <ListGroup.Item>Open Private Researchers : {props.targetPlatform.platform.openPrivateResearchers? "Oui": "Non"}</ListGroup.Item>
     </ListGroup> : "Target platform is not send as props!"
 
 

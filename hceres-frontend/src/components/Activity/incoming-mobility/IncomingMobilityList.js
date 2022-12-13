@@ -14,6 +14,7 @@ import {Rings} from "react-loading-icons";
 import {chercheursColumnOfActivity, paginationOptions} from "../../util/BootStrapTableOptions";
 import {ImFilter} from "react-icons/im";
 import {AiFillDelete, AiOutlinePlusCircle} from "react-icons/ai";
+import {GrDocumentCsv} from "react-icons/gr";
 import IncomingMobilityAdd from "./IncomingMobilityAdd";
 
 import ActivityTypes from "../../../const/ActivityTypes";
@@ -34,7 +35,7 @@ function IncomingMobilityList(props) {
     const [successActivityAlert, setSuccessActivityAlert] = React.useState('');
     const [errorActivityAlert, setErrorActivityAlert] = React.useState('');
     const [showFilter, setShowFilter] = React.useState(false);
-    const {SearchBar, ClearSearchButton} = Search;
+    const {SearchBar} = Search;
 
 
     // Form state (List Template)
@@ -79,7 +80,7 @@ function IncomingMobilityList(props) {
                 .then(list => {
                     setIncomingMobilityList(list.filter(a => a.idTypeActivity === ActivityTypes.INCOMING_MOBILITY));
                 })
-    }, [listChangeCount]);
+    }, [listChangeCount, targetResearcher]);
 
 
     if (!incomingMobilityList) {
@@ -157,6 +158,18 @@ function IncomingMobilityList(props) {
                 </button>
             </h3>
         </div>
+
+        const MyExportCSV = (props) => {
+            const handleClick = () => {
+                props.onExport();
+            };
+            return (
+                <button className={"border-0"}
+                        onClick={handleClick}>{
+                    <GrDocumentCsv/>}
+                </button>
+            );
+        };
         return (
             <div>
                 <ToolkitProvider
@@ -164,6 +177,10 @@ function IncomingMobilityList(props) {
                     keyField="idActivity"
                     data={incomingMobilityList}
                     columns={columns}
+                    exportCSV={ {
+                        fileName: 'incomingMobilityList.csv',
+                        onlyExportFiltered: true,
+                        exportAll: false } }
                     search
                 >
                     {
@@ -188,8 +205,11 @@ function IncomingMobilityList(props) {
                                     </div>
                                 </div>
                                 <div className={"row"}>
-                                    <div className={"col-8"}>
+                                    <div className={"col-4"}>
                                         {showFilter && <SearchBar {...props.searchProps} />}
+                                    </div>
+                                    <div className={"col-4"}>
+                                        <h3>{showFilter && <MyExportCSV  { ...props.csvProps }/>}</h3>
                                     </div>
                                     <div className={"col-4"}>
                                         {successActivityAlert && <Alert variant={"success"}

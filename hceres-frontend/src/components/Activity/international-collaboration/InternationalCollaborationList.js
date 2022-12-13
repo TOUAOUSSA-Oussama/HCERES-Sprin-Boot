@@ -14,6 +14,7 @@ import {Hearts} from "react-loading-icons";
 import {chercheursColumnOfActivity, paginationOptions} from "../../util/BootStrapTableOptions";
 import {ImFilter} from "react-icons/im";
 import {AiFillDelete, AiOutlinePlusCircle} from "react-icons/ai";
+import {GrDocumentCsv} from "react-icons/gr";
 import InternationalCollaborationAdd from "./InternationalCollaborationAdd";
 
 import ActivityTypes from "../../../const/ActivityTypes";
@@ -34,7 +35,7 @@ function InternationalCollaborationList(props) {
     const [successActivityAlert, setSuccessActivityAlert] = React.useState('');
     const [errorActivityAlert, setErrorActivityAlert] = React.useState('');
     const [showFilter, setShowFilter] = React.useState(false);
-    const {SearchBar, ClearSearchButton} = Search;
+    const {SearchBar} = Search;
 
 
     // Form state (List Template)
@@ -79,7 +80,7 @@ function InternationalCollaborationList(props) {
                 .then(list => {
                     setInternationalCollaborationList(list.filter(a => a.idTypeActivity === ActivityTypes.NATIONAL_INTERNATIONAL_COLLABORATION));
                 })
-    }, [listChangeCount]);
+    }, [listChangeCount, targetResearcher]);
 
 
     if (!internationalCollaborationList) {
@@ -152,6 +153,18 @@ function InternationalCollaborationList(props) {
                 </button>
             </h3>
         </div>
+
+        const MyExportCSV = (props) => {
+            const handleClick = () => {
+                props.onExport();
+            };
+            return (
+                <button className={"border-0"}
+                        onClick={handleClick}>{
+                    <GrDocumentCsv/>}
+                </button>
+            );
+        };
         return (
             <div>
                 <ToolkitProvider
@@ -159,6 +172,10 @@ function InternationalCollaborationList(props) {
                     keyField="idActivity"
                     data={internationalCollaborationList}
                     columns={columns}
+                    exportCSV={ {
+                        fileName: 'internationalCollaborationList.csv',
+                        onlyExportFiltered: true,
+                        exportAll: false } }
                     search
                 >
                     {
@@ -183,8 +200,11 @@ function InternationalCollaborationList(props) {
                                     </div>
                                 </div>
                                 <div className={"row"}>
-                                    <div className={"col-8"}>
+                                    <div className={"col-4"}>
                                         {showFilter && <SearchBar {...props.searchProps} />}
+                                    </div>
+                                    <div className={"col-4"}>
+                                        <h3>{showFilter && <MyExportCSV  { ...props.csvProps }/>}</h3>
                                     </div>
                                     <div className={"col-4"}>
                                         {successActivityAlert && <Alert variant={"success"}

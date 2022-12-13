@@ -14,6 +14,7 @@ import {Grid} from "react-loading-icons";
 import {chercheursColumnOfActivity, paginationOptions} from "../../util/BootStrapTableOptions";
 import {ImFilter} from "react-icons/im";
 import {AiFillDelete, AiOutlinePlusCircle} from "react-icons/ai";
+import {GrDocumentCsv} from "react-icons/gr";
 import IndustrialContractAdd from "./IndustrialContractAdd";
 
 import ActivityTypes from "../../../const/ActivityTypes";
@@ -34,7 +35,7 @@ function IndustrialContractList(props) {
     const [successActivityAlert, setSuccessActivityAlert] = React.useState('');
     const [errorActivityAlert, setErrorActivityAlert] = React.useState('');
     const [showFilter, setShowFilter] = React.useState(false);
-    const {SearchBar, ClearSearchButton} = Search;
+    const {SearchBar} = Search;
 
 
     // Form state (List Template)
@@ -79,7 +80,7 @@ function IndustrialContractList(props) {
                 .then(list => {
                     setIndustrialContractList(list.filter(a => a.idTypeActivity === ActivityTypes.SEI_INDUSTRIAL_R_D_CONTRACT));
                 })
-    }, [listChangeCount]);
+    }, [listChangeCount, targetResearcher]);
 
 
     if (!industrialContractList) {
@@ -158,6 +159,18 @@ function IndustrialContractList(props) {
                 </button>
             </h3>
         </div>
+
+        const MyExportCSV = (props) => {
+            const handleClick = () => {
+                props.onExport();
+            };
+            return (
+                <button className={"border-0"}
+                        onClick={handleClick}>{
+                    <GrDocumentCsv/>}
+                </button>
+            );
+        };
         return (
             <div>
                 <ToolkitProvider
@@ -165,6 +178,10 @@ function IndustrialContractList(props) {
                     keyField="idActivity"
                     data={industrialContractList}
                     columns={columns}
+                    exportCSV={ {
+                        fileName: 'industrialContractList.csv',
+                        onlyExportFiltered: true,
+                        exportAll: false } }
                     search
                 >
                     {
@@ -190,8 +207,11 @@ function IndustrialContractList(props) {
                                     </div>
                                 </div>
                                 <div className={"row"}>
-                                    <div className={"col-8"}>
+                                    <div className={"col-4"}>
                                         {showFilter && <SearchBar {...props.searchProps} />}
+                                    </div>
+                                    <div className={"col-4"}>
+                                        <h3>{showFilter && <MyExportCSV  { ...props.csvProps }/>}</h3>
                                     </div>
                                     <div className={"col-4"}>
                                         {successActivityAlert && <Alert variant={"success"}

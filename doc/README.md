@@ -12,3 +12,4 @@
 |-----------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Ajout des Activités selon la convention | [Youtube Private Video - HCERES Activity List Transformation With Commentary](https://youtu.be/e-voo9vu7IQ)                                             |
 | Système d'authentification              | [Youtube React And Spring Boot: Integrate JWT for Authentication & Authorization](https://youtu.be/c6mzMJY_2b4?list=PLZdfbI_OZWAMvhSl32tFcD6M9x_Pqtkwb) |
+| Table react Bootstrap                   | [Next Generation of react-bootstrap-table](https://react-bootstrap-table.github.io/react-bootstrap-table2/)                                             |

@@ -14,6 +14,7 @@ import {Puff} from "react-loading-icons";
 import {chercheursColumnOfActivity, paginationOptions} from "../../util/BootStrapTableOptions";
 import {ImFilter} from "react-icons/im";
 import {AiFillDelete, AiOutlinePlusCircle} from "react-icons/ai";
+import {GrDocumentCsv} from "react-icons/gr";
 import SeiClinicalTrialAdd from "./SeiClinicalTrialAdd";
 
 import ActivityTypes from "../../../const/ActivityTypes";
@@ -34,7 +35,7 @@ function SeiClinicalTrialList(props) {
     const [successActivityAlert, setSuccessActivityAlert] = React.useState('');
     const [errorActivityAlert, setErrorActivityAlert] = React.useState('');
     const [showFilter, setShowFilter] = React.useState(false);
-    const {SearchBar, ClearSearchButton} = Search;
+    const {SearchBar} = Search;
 
 
     // Form state (List Template)
@@ -79,7 +80,7 @@ function SeiClinicalTrialList(props) {
                 .then(list => {
                     setSeiClinicalTrialList(list.filter(a => a.idTypeActivity === ActivityTypes.SEI_CLINICAL_TRIAL));
                 })
-    }, [listChangeCount]);
+    }, [listChangeCount, targetResearcher]);
 
 
     if (!seiClinicalTrialList) {
@@ -156,6 +157,18 @@ function SeiClinicalTrialList(props) {
                 </button>
             </h3>
         </div>
+
+        const MyExportCSV = (props) => {
+            const handleClick = () => {
+                props.onExport();
+            };
+            return (
+                <button className={"border-0"}
+                        onClick={handleClick}>{
+                    <GrDocumentCsv/>}
+                </button>
+            );
+        };
         return (
             <div>
                 <ToolkitProvider
@@ -163,6 +176,10 @@ function SeiClinicalTrialList(props) {
                     keyField="idActivity"
                     data={seiClinicalTrialList}
                     columns={columns}
+                    exportCSV={ {
+                        fileName: 'seiClinicalTrialList.csv',
+                        onlyExportFiltered: true,
+                        exportAll: false } }
                     search
                 >
                     {
@@ -187,8 +204,11 @@ function SeiClinicalTrialList(props) {
                                     </div>
                                 </div>
                                 <div className={"row"}>
-                                    <div className={"col-8"}>
+                                    <div className={"col-4"}>
                                         {showFilter && <SearchBar {...props.searchProps} />}
+                                    </div>
+                                    <div className={"col-4"}>
+                                        <h3>{showFilter && <MyExportCSV  { ...props.csvProps }/>}</h3>
                                     </div>
                                     <div className={"col-4"}>
                                         {successActivityAlert && <Alert variant={"success"}
