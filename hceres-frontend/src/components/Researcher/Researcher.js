@@ -14,7 +14,7 @@ import {GrDocumentCsv} from "react-icons/gr";
 import {ImFilter} from "react-icons/im";
 import {Oval} from 'react-loading-icons'
 import AddResearcher from "./AddResearcher";
-import {Alert, Dropdown} from "react-bootstrap";
+import {Alert} from "react-bootstrap";
 import DeleteResearcher from "./DeleteResearcher";
 import {MdPendingActions} from "react-icons/md";
 import {paginationOptions} from "../util/BootStrapTableOptions";
