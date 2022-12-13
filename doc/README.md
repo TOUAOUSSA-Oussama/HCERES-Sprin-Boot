@@ -1,10 +1,11 @@
 # List de tous les docs
 
-| Titre        | Description                                       | Link                             |
-|--------------|---------------------------------------------------|----------------------------------|
-| Installation | Installation du projets et des outils principales | [Installation doc](../README.md) |
-| Postman      | Requester l'API directement sans navigateur web   | [Postman doc](postman/README.MD) |
-|              |                                                   |                                  |
+| Titre        | Description                                           | Link                             |
+|--------------|-------------------------------------------------------|----------------------------------|
+| Installation | Installation du projets et des outils principales     | [Installation doc](../README.md) |
+| Postman      | Requester l'API directement sans navigateur web       | [Postman doc](postman/README.MD) |
+| Regex        | Remplacer les textes efficacement                     | [Regex doc](regex/README.md)     |
+|              |                                                       |                                  |
 
 # Autres sources externes aidant à comprendre le projet
 
