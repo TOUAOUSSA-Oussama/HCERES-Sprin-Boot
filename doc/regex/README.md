@@ -2,6 +2,24 @@
 
 [Liste de tous les doc](../README.md)
 
+## Tableau de contenu
+<!-- TOC -->
+* [Regex Trucs et astuces](#regex-trucs-et-astuces)
+  * [Tableau de contenu](#tableau-de-contenu)
+  * [Motivation](#motivation)
+  * [Important](#important)
+  * [Learn regex](#learn-regex)
+  * [Intellij](#intellij)
+  * [Exercice 1 : Fix broken links](#exercice-1--fix-broken-links)
+    * [Question Q1](#question-q1)
+    * [Solution Q1](#solution-q1)
+    * [Explanation Q1](#explanation-q1)
+  * [Exercice 2 : Add CSV Feature](#exercice-2--add-csv-feature)
+    * [Question Q2](#question-q2)
+    * [Solution Q2](#solution-q2)
+    * [Explanation Q2](#explanation-q2)
+<!-- TOC -->
+
 ```text
 Editor note: don't format this file with auto-formatter as it breaks example used in regex, if so auto-format based on selected text only.
 Make selection => (Ctrl + Alt + Shift + L)
@@ -23,7 +41,7 @@ Sometimes direct replacements x by y works, other times a variant part depending
 
 This doc aims to learn how regex can do the job in such case!
 
-## Important !
+## Important
 
 The structure and functionality of the activity pages in the project should be aligned across all activities.
 Recommendation when updating for activities: do not modify the structure of activity files individually unless related
@@ -85,7 +103,7 @@ But it should be
 
 Imagine we have 50+ occurrence of such fault, so it is painful to find them, and it is more painful to correct each one.
 
-### Question
+### Question Q1
 Use regex to replace parenthesis with brackets and fix it all at once!
 
 Given sample 
@@ -108,7 +126,7 @@ Expected replacement:
 
 [Expected solution dataset see exercice_1_sol.txt](exercice_1_sol.txt):
 
-### Solution :
+### Solution Q1
 
 search for:
 ```regexp
@@ -120,7 +138,7 @@ replace with:
 [$1] ($2)
 ```
 
-### Explanation
+### Explanation Q1
 
 - Use backslash to escape parenthesis / brackets in search: \( and \[
 - Capture first and second group with (.*)
@@ -165,7 +183,7 @@ Replace with
                 >
 ```
 
-### Question
+### Question Q2
 
 Notice that original code was as below, containing field data = {actvitylist}, find regex to replace below block and use
 same name as variable list for the csv file.
@@ -194,7 +212,7 @@ Expected replacement:
 [Expected solution dataset see exercice_2_sol.txt](exercice_2_sol.txt)
 
 
-### Solution
+### Solution Q2
 
 Search for:
 ```regexp
@@ -213,7 +231,7 @@ replace with:
                 >
 ```
 
-### Explanation
+### Explanation Q2
 
 * Do not start your regex from zero, counting line and white spaces isn't the way to go
 * First quick solution is to make selection of the target then Ctrl+R while regex is turned on
