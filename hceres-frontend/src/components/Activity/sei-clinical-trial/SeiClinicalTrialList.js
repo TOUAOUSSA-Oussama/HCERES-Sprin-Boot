@@ -129,20 +129,32 @@ function SeiClinicalTrialList(props) {
             text: 'Date de début',
             sort: true,
             filter: showFilter ? dateFilter() : null,
-        }, {
-            dataField: 'seiClinicalTrial.registrationNb',
-            text: 'N° d\'enregistrement',
-            sort: true,
-        }, {
+        },{
             dataField: 'seiClinicalTrial.endDate',
             text: 'Date de fin',
             sort: true,
             filter: showFilter ? dateFilter() : null,
         }, {
+            dataField: 'seiClinicalTrial.registrationNb',
+            text: 'N° d\'enregistrement',
+            sort: true,
+        }, {
             dataField: 'seiClinicalTrial.sponsorName',
             text: 'Nom du sponsor',
             sort: true,
-        }];
+        }, {
+            dataField: 'seiClinicalTrial.includedPatientsNb',
+            text: 'inclus Patients Nb',
+            hidden: true, // for csv only
+        }, {
+            dataField: 'seiClinicalTrial.funding',
+            text: 'financement',
+            hidden: true, // for csv only
+        }, {
+            dataField: 'seiClinicalTrial.fundingAmount',
+            text: 'Montant du financement',
+            hidden: true, // for csv only
+        },];
 
         let title = "SeiClinicalTrial"
         if (!targetResearcher) {

@@ -134,11 +134,43 @@ function InternationalCollaborationList(props) {
             text: 'date de début',
             sort: true,
             filter: showFilter ? dateFilter() : null,
-        }, {
+        },  {
+            dataField: 'internationalCollaboration.piPartners',
+            text: 'Les partenaires pi',
+            hidden: true, // for csv only
+        },   {
+            dataField: 'internationalCollaboration.mailPartners',
+            text: 'Messagerie de Partenaires',
+            hidden: true, // for csv only
+        },   {
+            dataField: 'internationalCollaboration.strategicRecurringCollab',
+            text: 'Collaboration stratégique récurrente',
+            hidden: true, // for csv only
+        },   {
             dataField: 'internationalCollaboration.activeProject',
             text: 'Projet actif',
-            sort: true,
-        }];
+            hidden: true, // for csv only
+        },   {
+            dataField: 'internationalCollaboration.associatedFunding',
+            text: 'Financement associé',
+            hidden: true, // for csv only
+        },   {
+            dataField: 'internationalCollaboration.numberResultingPublications',
+            text: 'nombre Publications résultantes',
+            hidden: true, // for csv only
+        },   {
+            dataField: 'internationalCollaboration.refJointPublication',
+            text: 'réf Publication conjointe',
+            hidden: true, // for csv only
+        },   {
+            dataField: 'internationalCollaboration.umrCoordinated',
+            text: 'umr Coordonné',
+            hidden: true, // for csv only
+        },   {
+            dataField: 'internationalCollaboration.agreementSigned',
+            text: 'accord signé',
+            hidden: true, // for csv only
+        }, ];
 
         let title = "InternationalCollaboration"
         if (!targetResearcher) {

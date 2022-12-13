@@ -5,7 +5,7 @@ import 'react-bootstrap-table2-filter/dist/react-bootstrap-table2-filter.min.css
 import BootstrapTable from 'react-bootstrap-table-next';
 import ToolkitProvider, {Search} from 'react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit';
 import paginationFactory from 'react-bootstrap-table2-paginator';
-import filterFactory, {dateFilter} from 'react-bootstrap-table2-filter';
+import filterFactory from 'react-bootstrap-table2-filter';
 import {Alert} from "react-bootstrap";
 
 import 'react-datepicker/dist/react-datepicker.css';
@@ -128,7 +128,31 @@ function OralCommunicationList(props) {
             dataField: 'oralCommunication.oralCommunicationDat',
             text: 'Date',
             sort: true,
-        }];
+        },  {
+            dataField: 'oralCommunication.meetingId.meetingId',
+            text: 'Identifiant de la réunion',
+            hidden: true, // for csv only
+        },  {
+            dataField: 'oralCommunication.meetingId.meetingName',
+            text: 'Nom de la réunion',
+            hidden: true, // for csv only
+        },  {
+            dataField: 'oralCommunication.meetingId.meetingYear',
+            text: 'Année de réunion',
+            hidden: true, // for csv only
+        },  {
+            dataField: 'oralCommunication.meetingId.meetingLocation',
+            text: 'Lieu de réunion',
+            hidden: true, // for csv only
+        },  {
+            dataField: 'oralCommunication.meetingId.meetingStart',
+            text: 'Date de début de la réunion',
+            hidden: true, // for csv only
+        },  {
+            dataField: 'oralCommunication.meetingId.meetingEnd',
+            text: 'Date de fin de réunion',
+            hidden: true, // for csv only
+        },];
 
         let title = "OralCommunication"
         if (!targetResearcher) {

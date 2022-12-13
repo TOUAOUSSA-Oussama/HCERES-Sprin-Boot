@@ -122,10 +122,6 @@ function IncomingMobilityList(props) {
             text: 'nom Scientifique principal',
             sort: true,
         }, {
-            dataField: 'incomingMobility.nationality',
-            text: 'Nationalité',
-            sort: true,
-        }, {
             dataField: 'incomingMobility.departureDate',
             text: 'Date de départ',
             sort: true,
@@ -140,10 +136,50 @@ function IncomingMobilityList(props) {
             sort: true,
             filter: showFilter ? dateFilter() : null,
         }, {
+            dataField: 'incomingMobility.nationality',
+            text: 'Nationalité',
+            sort: true,
+        }, {
+            dataField: 'incomingMobility.originalLabName',
+            text: 'Nom du laboratoire d\'origine',
+            hidden: true, // for csv only
+        }, {
+            dataField: 'incomingMobility.originaLabLocation',
+            text: 'Emplacement du laboratoire d\'origine',
+            hidden: true, // for csv only
+        }, {
+            dataField: 'incomingMobility.piPartner',
+            text: 'Partenaire pi',
+            hidden: true, // for csv only
+        }, {
             dataField: 'incomingMobility.projectTitle',
             text: 'Titre du projet',
             sort: true
-        }];
+        }, {
+            dataField: 'incomingMobility.associatedFunding',
+            text: 'Financement associé',
+            hidden: true, // for csv only
+        }, {
+            dataField: 'incomingMobility.publicationReference',
+            text: 'Publication Référence',
+            hidden: true, // for csv only
+        }, {
+            dataField: 'incomingMobility.strategicRecurringCollab',
+            text: 'Collaboration stratégique récurrente',
+            hidden: true, // for csv only
+        }, {
+            dataField: 'incomingMobility.activeProject',
+            text: 'Projet actif',
+            hidden: true, // for csv only
+        }, {
+            dataField: 'incomingMobility.umrCoordinated',
+            text: 'umr Coordonné',
+            hidden: true, // for csv only
+        }, {
+            dataField: 'incomingMobility.agreementSigned',
+            text: 'Accord signé',
+            hidden: true, // for csv only
+        },];
 
         let title = "IncomingMobility"
         if (!targetResearcher) {

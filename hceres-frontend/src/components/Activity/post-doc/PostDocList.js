@@ -126,6 +126,10 @@ function PostDocList(props) {
             text: 'Superviseur',
             sort: true,
         }, {
+            dataField: 'postDoc.arrivalDate',
+            text: 'Date d\'arrivée',
+            hidden: true, // for csv only
+        }, {
             dataField: 'postDoc.departureDate',
             text: 'Date de départ',
             sort: true,
@@ -142,6 +146,14 @@ function PostDocList(props) {
             dataField: 'postDoc.originalLab',
             text: 'Laboratoire d\'origine',
             sort: true,
+        }, {
+            dataField: 'postDoc.associatedFunding',
+            text: 'Financement associé',
+            hidden: true, // for csv only
+        }, {
+            dataField: 'postDoc.associatedPubliRef',
+            text: 'Réf Publi associée',
+            hidden: true, // for csv only
         }];
 
         let title = "PostDoc"
