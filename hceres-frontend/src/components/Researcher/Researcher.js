@@ -3,12 +3,14 @@ import React, {Component} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import 'react-bootstrap-table2-filter/dist/react-bootstrap-table2-filter.min.css';
+import ToolkitProvider from 'react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import filterFactory, {textFilter} from 'react-bootstrap-table2-filter';
 
 import {FaEdit} from "react-icons/fa";
 import {AiFillDelete, AiOutlinePlusCircle} from "react-icons/ai";
+import {GrDocumentCsv} from "react-icons/gr";
 import {ImFilter} from "react-icons/im";
 import {Oval} from 'react-loading-icons'
 import AddResearcher from "./AddResearcher";
@@ -143,6 +145,7 @@ class Researcher extends Component {
                 dataField: 'actionColumn',
                 isDummyField: true,
                 text: 'Edit',
+                csvExport: false,
                 formatter: (cell, row) => {
                     return (
                         <div className="btn-group" role="group">
@@ -190,7 +193,7 @@ class Researcher extends Component {
                 order: 'asc' // desc or asc
             }];
 
-            const CaptionElement = () => (
+            const CaptionElement = (props) => (
 
                 <div className={"container text-center"}>
                     <div className="row">
@@ -206,6 +209,7 @@ class Researcher extends Component {
                                         onClick={(e) => this.setState({showFilter: !this.state.showFilter})}>{
                                     <ImFilter/>}
                                 </button>
+                                {this.state.showFilter && <div><MyExportCSV  { ...props.tableProps.csvProps }/> </div>}
                             </h3>
                         </div>
                         <div className="col-4">
@@ -234,6 +238,18 @@ class Researcher extends Component {
                 </div>
             );
 
+            const MyExportCSV = (props) => {
+                const handleClick = () => {
+                    props.onExport();
+                };
+                return (
+                    <button className={"border-0"}
+                            onClick={handleClick}>{
+                        <GrDocumentCsv/>}
+                    </button>
+                );
+            };
+
             return (
                 <div className="container">
                     {this.state.showAddResearcher && (<AddResearcher targetResearcher={this.state.targetResearcher}
@@ -242,19 +258,33 @@ class Researcher extends Component {
                         <DeleteResearcher targetResearcher={this.state.targetResearcher}
                                           onHideAction={this.onHideModalResearcher}/>)}
 
-                    <BootstrapTable
+                    <ToolkitProvider
                         bootstrap4
                         keyField="researcherId"
                         data={this.state.researchers}
                         columns={columns}
-                        defaultSorted={defaultSorted}
-                        pagination={paginationFactory(paginationOptions(this.state.researchers.length))}
-                        filter={filterFactory()}
-                        caption={<CaptionElement/>}
-                        striped
-                        hover
-                        condensed
-                    />
+                        exportCSV={ {
+                            fileName: 'researcherList.csv',
+                            onlyExportFiltered: true,
+                            exportAll: false
+                        }}
+                        search
+                    >
+                        {
+                            props => (
+                                <BootstrapTable
+                                    defaultSorted={defaultSorted}
+                                    pagination={paginationFactory(paginationOptions(this.state.researchers.length))}
+                                    filter={filterFactory()}
+                                    caption={<CaptionElement tableProps={props}/>}
+                                    striped
+                                    hover
+                                    condensed
+                                    {...props.baseProps} />
+                            )
+                        }
+                    < /ToolkitProvider>
+
                     <Collapse in={this.state.showActivities}>
                         <div>
                             <Button onClick={() => this.setState({showActivities: false})}><VscEyeClosed/></Button>
