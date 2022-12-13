@@ -10,14 +10,14 @@
   * [Important](#important)
   * [Learn regex](#learn-regex)
   * [Intellij](#intellij)
-  * [Exercice 1 : Fix broken links](#exercice-1--fix-broken-links)
-    * [Question Q1](#question-q1)
-    * [Solution Q1](#solution-q1)
-    * [Explanation Q1](#explanation-q1)
-  * [Exercice 2 : Add CSV Feature](#exercice-2--add-csv-feature)
-    * [Question Q2](#question-q2)
-    * [Solution Q2](#solution-q2)
-    * [Explanation Q2](#explanation-q2)
+* [Exercice 1 : Fix broken links](#exercice-1--fix-broken-links)
+  * [Question Q1](#question-q1)
+  * [Solution Q1](#solution-q1)
+  * [Explanation Q1](#explanation-q1)
+* [Exercice 2 : Add CSV Feature](#exercice-2--add-csv-feature)
+  * [Question Q2](#question-q2)
+  * [Solution Q2](#solution-q2)
+  * [Explanation Q2](#explanation-q2)
 <!-- TOC -->
 
 ```text
@@ -85,7 +85,7 @@ General workflow:
 5. Use .* instead of (variant) => (.*)
 6. Replace your text by new the new text as normal text and use $1 to refer the first captured group.
 
-## Exercice 1 : Fix broken links
+# Exercice 1 : Fix broken links
 Challenge: Grouping and capturing replacement
 
 Coder has replaced usage of parenthesis and brackets as follows
@@ -103,7 +103,7 @@ But it should be
 
 Imagine we have 50+ occurrence of such fault, so it is painful to find them, and it is more painful to correct each one.
 
-### Question Q1
+## Question Q1
 Use regex to replace parenthesis with brackets and fix it all at once!
 
 Given sample 
@@ -126,7 +126,7 @@ Expected replacement:
 
 [Expected solution dataset see exercice_1_sol.txt](exercice_1_sol.txt):
 
-### Solution Q1
+## Solution Q1
 
 search for:
 ```regexp
@@ -138,14 +138,14 @@ replace with:
 [$1] ($2)
 ```
 
-### Explanation Q1
+## Explanation Q1
 
 - Use backslash to escape parenthesis / brackets in search: \( and \[
 - Capture first and second group with (.*)
 - Refer to captured group with $1 and $2 while placing them in right closing things.
 
 
-## Exercice 2 : Add CSV Feature
+# Exercice 2 : Add CSV Feature
 Challenge: Multiline and White space replacement
 
 Our developers team has decided to add csv feature, so after making change to one activity and agreed on changement to
@@ -183,7 +183,7 @@ Replace with
                 >
 ```
 
-### Question Q2
+## Question Q2
 
 Notice that original code was as below, containing field data = {actvitylist}, find regex to replace below block and use
 same name as variable list for the csv file.
@@ -212,7 +212,7 @@ Expected replacement:
 [Expected solution dataset see exercice_2_sol.txt](exercice_2_sol.txt)
 
 
-### Solution Q2
+## Solution Q2
 
 Search for:
 ```regexp
@@ -231,7 +231,7 @@ replace with:
                 >
 ```
 
-### Explanation Q2
+## Explanation Q2
 
 * Do not start your regex from zero, counting line and white spaces isn't the way to go
 * First quick solution is to make selection of the target then Ctrl+R while regex is turned on
