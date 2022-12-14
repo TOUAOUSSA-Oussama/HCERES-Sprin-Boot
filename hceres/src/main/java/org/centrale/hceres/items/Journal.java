@@ -8,9 +8,14 @@
  * L LETERTRE, S LIMOUX, JY MARTIN
  * -------------------------------------------------------------------------------- */
 package org.centrale.hceres.items;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -35,6 +40,10 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Journal.findAll", query = "SELECT j FROM Journal j"),
     @NamedQuery(name = "Journal.findByJournalId", query = "SELECT j FROM Journal j WHERE j.journalId = :journalId"),
     @NamedQuery(name = "Journal.findByJournalName", query = "SELECT j FROM Journal j WHERE j.journalName = :journalName")})
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Journal implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -48,135 +57,12 @@ public class Journal implements Serializable {
     @Size(min = 1, max = 256)
     @Column(name = "journal_name")
     private String journalName;
+
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "journalId")
-    private Collection<ReviewingJournalArticles> reviewingJournalArticlesCollection;
+    private List<ReviewArticle> ReviewArticleList;
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "journalId")
-    private Collection<EditorialActivity> editorialActivityCollection;
+    private List<EditorialActivity> editorialActivityList;
 
-    /**
-     *
-     */
-    public Journal() {
-    }
-
-    /**
-     *
-     * @param journalId
-     */
-    public Journal(Integer journalId) {
-        this.journalId = journalId;
-    }
-
-    /**
-     *
-     * @param journalId
-     * @param journalName
-     */
-    public Journal(Integer journalId, String journalName) {
-        this.journalId = journalId;
-        this.journalName = journalName;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Integer getJournalId() {
-        return journalId;
-    }
-
-    /**
-     *
-     * @param journalId
-     */
-    public void setJournalId(Integer journalId) {
-        this.journalId = journalId;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getJournalName() {
-        return journalName;
-    }
-
-    /**
-     *
-     * @param journalName
-     */
-    public void setJournalName(String journalName) {
-        this.journalName = journalName;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Collection<ReviewingJournalArticles> getReviewingJournalArticlesCollection() {
-        return reviewingJournalArticlesCollection;
-    }
-
-    /**
-     *
-     * @param reviewingJournalArticlesCollection
-     */
-    public void setReviewingJournalArticlesCollection(Collection<ReviewingJournalArticles> reviewingJournalArticlesCollection) {
-        this.reviewingJournalArticlesCollection = reviewingJournalArticlesCollection;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Collection<EditorialActivity> getEditorialActivityCollection() {
-        return editorialActivityCollection;
-    }
-
-    /**
-     *
-     * @param editorialActivityCollection
-     */
-    public void setEditorialActivityCollection(Collection<EditorialActivity> editorialActivityCollection) {
-        this.editorialActivityCollection = editorialActivityCollection;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (journalId != null ? journalId.hashCode() : 0);
-        return hash;
-    }
-
-    /**
-     *
-     * @param object
-     * @return
-     */
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Journal)) {
-            return false;
-        }
-        Journal other = (Journal) object;
-        if ((this.journalId == null && other.journalId != null) || (this.journalId != null && !this.journalId.equals(other.journalId))) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public String toString() {
-        return "org.centrale.hceres.items.Journal[ journalId=" + journalId + " ]";
-    }
-    
 }

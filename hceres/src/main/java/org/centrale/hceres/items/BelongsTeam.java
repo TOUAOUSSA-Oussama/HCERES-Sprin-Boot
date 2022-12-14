@@ -8,6 +8,10 @@
  * L LETERTRE, S LIMOUX, JY MARTIN
  * -------------------------------------------------------------------------------- */
 package org.centrale.hceres.items;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -36,6 +40,10 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "BelongsTeam.findByIdBelongsTeam", query = "SELECT b FROM BelongsTeam b WHERE b.idBelongsTeam = :idBelongsTeam"),
     @NamedQuery(name = "BelongsTeam.findByOnboardingDate", query = "SELECT b FROM BelongsTeam b WHERE b.onboardingDate = :onboardingDate"),
     @NamedQuery(name = "BelongsTeam.findByLeavingDate", query = "SELECT b FROM BelongsTeam b WHERE b.leavingDate = :leavingDate")})
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class BelongsTeam implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -57,136 +65,4 @@ public class BelongsTeam implements Serializable {
     @ManyToOne(optional = false)
     private Team teamId;
 
-    /**
-     *
-     */
-    public BelongsTeam() {
-    }
-
-    /**
-     *
-     * @param idBelongsTeam
-     */
-    public BelongsTeam(Integer idBelongsTeam) {
-        this.idBelongsTeam = idBelongsTeam;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Integer getIdBelongsTeam() {
-        return idBelongsTeam;
-    }
-
-    /**
-     *
-     * @param idBelongsTeam
-     */
-    public void setIdBelongsTeam(Integer idBelongsTeam) {
-        this.idBelongsTeam = idBelongsTeam;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Date getOnboardingDate() {
-        return onboardingDate;
-    }
-
-    /**
-     *
-     * @param onboardingDate
-     */
-    public void setOnboardingDate(Date onboardingDate) {
-        this.onboardingDate = onboardingDate;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Date getLeavingDate() {
-        return leavingDate;
-    }
-
-    /**
-     *
-     * @param leavingDate
-     */
-    public void setLeavingDate(Date leavingDate) {
-        this.leavingDate = leavingDate;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Researcher getResearcherId() {
-        return researcherId;
-    }
-
-    /**
-     *
-     * @param researcherId
-     */
-    public void setResearcherId(Researcher researcherId) {
-        this.researcherId = researcherId;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Team getTeamId() {
-        return teamId;
-    }
-
-    /**
-     *
-     * @param teamId
-     */
-    public void setTeamId(Team teamId) {
-        this.teamId = teamId;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idBelongsTeam != null ? idBelongsTeam.hashCode() : 0);
-        return hash;
-    }
-
-    /**
-     *
-     * @param object
-     * @return
-     */
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof BelongsTeam)) {
-            return false;
-        }
-        BelongsTeam other = (BelongsTeam) object;
-        if ((this.idBelongsTeam == null && other.idBelongsTeam != null) || (this.idBelongsTeam != null && !this.idBelongsTeam.equals(other.idBelongsTeam))) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public String toString() {
-        return "org.centrale.hceres.items.BelongsTeam[ idBelongsTeam=" + idBelongsTeam + " ]";
-    }
-    
 }

@@ -8,6 +8,10 @@
  * L LETERTRE, S LIMOUX, JY MARTIN
  * -------------------------------------------------------------------------------- */
 package org.centrale.hceres.items;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -42,6 +46,10 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "BookChapter.findByNbPage", query = "SELECT b FROM BookChapter b WHERE b.nbPage = :nbPage"),
     @NamedQuery(name = "BookChapter.findByAuthors", query = "SELECT b FROM BookChapter b WHERE b.authors = :authors"),
     @NamedQuery(name = "BookChapter.findByAdditionalInfo", query = "SELECT b FROM BookChapter b WHERE b.additionalInfo = :additionalInfo")})
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class BookChapter implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -79,226 +87,4 @@ public class BookChapter implements Serializable {
     @ManyToOne(optional = false)
     private Language languageId;
 
-    /**
-     *
-     */
-    public BookChapter() {
-    }
-
-    /**
-     *
-     * @param idActivity
-     */
-    public BookChapter(Integer idActivity) {
-        this.idActivity = idActivity;
-    }
-
-    /**
-     *
-     * @param idActivity
-     * @param authors
-     */
-    public BookChapter(Integer idActivity, String authors) {
-        this.idActivity = idActivity;
-        this.authors = authors;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Integer getIdActivity() {
-        return idActivity;
-    }
-
-    /**
-     *
-     * @param idActivity
-     */
-    public void setIdActivity(Integer idActivity) {
-        this.idActivity = idActivity;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Date getPublicationDate() {
-        return publicationDate;
-    }
-
-    /**
-     *
-     * @param publicationDate
-     */
-    public void setPublicationDate(Date publicationDate) {
-        this.publicationDate = publicationDate;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getBookTitle() {
-        return bookTitle;
-    }
-
-    /**
-     *
-     * @param bookTitle
-     */
-    public void setBookTitle(String bookTitle) {
-        this.bookTitle = bookTitle;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getChapterTitle() {
-        return chapterTitle;
-    }
-
-    /**
-     *
-     * @param chapterTitle
-     */
-    public void setChapterTitle(String chapterTitle) {
-        this.chapterTitle = chapterTitle;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getEditor() {
-        return editor;
-    }
-
-    /**
-     *
-     * @param editor
-     */
-    public void setEditor(String editor) {
-        this.editor = editor;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Integer getNbPage() {
-        return nbPage;
-    }
-
-    /**
-     *
-     * @param nbPage
-     */
-    public void setNbPage(Integer nbPage) {
-        this.nbPage = nbPage;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getAuthors() {
-        return authors;
-    }
-
-    /**
-     *
-     * @param authors
-     */
-    public void setAuthors(String authors) {
-        this.authors = authors;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getAdditionalInfo() {
-        return additionalInfo;
-    }
-
-    /**
-     *
-     * @param additionalInfo
-     */
-    public void setAdditionalInfo(String additionalInfo) {
-        this.additionalInfo = additionalInfo;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Activity getActivity() {
-        return activity;
-    }
-
-    /**
-     *
-     * @param activity
-     */
-    public void setActivity(Activity activity) {
-        this.activity = activity;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Language getLanguageId() {
-        return languageId;
-    }
-
-    /**
-     *
-     * @param languageId
-     */
-    public void setLanguageId(Language languageId) {
-        this.languageId = languageId;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idActivity != null ? idActivity.hashCode() : 0);
-        return hash;
-    }
-
-    /**
-     *
-     * @param object
-     * @return
-     */
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof BookChapter)) {
-            return false;
-        }
-        BookChapter other = (BookChapter) object;
-        if ((this.idActivity == null && other.idActivity != null) || (this.idActivity != null && !this.idActivity.equals(other.idActivity))) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public String toString() {
-        return "org.centrale.hceres.items.BookChapter[ idActivity=" + idActivity + " ]";
-    }
-    
 }

@@ -4,29 +4,32 @@ import './About.css';
 import React from 'react';
 import welcomImage from '../../assets/welcomImg.png';
 import Navbar from '../Navbar/Navbar';
-//import { HomeContainer,leftside,rightside } from './HomeElements';
-//style={{ backgroundColor: "#" + `${randomColor}` }}
-//let randomColor = Math.floor(Math.random() * 16777215).toString(16);
-function About(){
+import {Link} from "react-router-dom";
+import {ImBackward} from "react-icons/im";
+function About() {
     return (
         <div>
-            <div class="container2" >
-                <div class="left-side1">
-                  <img class="labo1" src={welcomImage} alt= "Hello" />
+            <div className="container2">
+                <div className="left-side1">
+                    <img className="labo1" src={welcomImage} alt="Hello"/>
                 </div>
-                <div class="right-side1">
-                    <div class="pg1">
-                    <div class="title1">
-                        About !
-                    </div>
-                    Cette application web a été créée par une équipe d'éudiants de l'Ecole Centrale de 
-                    Nantes dans le contexte d'un projet de groupe en option Informatique en 2021.Le suivi de 
-                    l'application a été confiée à la DSI de l'université de Nantes.
+                <div className="right-side1">
+                    <div className="pg1">
+                        <div className="title1">
+                             About !
+                        </div>
+                        Cette application web a été créée par une équipe d'éudiants de l'Ecole Centrale de
+                        Nantes dans le contexte d'un projet de groupe en option Informatique en 2021.Le suivi de
+                        l'application a été confiée à la DSI de l'université de Nantes.
+                        <h1>
+                            <br/>
+                            <Link to={-1}>{<ImBackward color={"white"}/>}</Link>
+                        </h1>
                     </div>
                 </div>
             </div>
         </div>
     );
-};
+}
 
 export default About;

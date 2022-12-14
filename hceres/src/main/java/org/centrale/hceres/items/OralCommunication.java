@@ -8,6 +8,10 @@
  * L LETERTRE, S LIMOUX, JY MARTIN
  * -------------------------------------------------------------------------------- */
 package org.centrale.hceres.items;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -42,6 +46,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
     @NamedQuery(name = "OralCommunication.findByOralCommunicationTitle", query = "SELECT o FROM OralCommunication o WHERE o.oralCommunicationTitle = :oralCommunicationTitle"),
     @NamedQuery(name = "OralCommunication.findByOralCommunicationDat", query = "SELECT o FROM OralCommunication o WHERE o.oralCommunicationDat = :oralCommunicationDat"),
     @NamedQuery(name = "OralCommunication.findByAuthors", query = "SELECT o FROM OralCommunication o WHERE o.authors = :authors")})
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class OralCommunication implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -70,7 +78,7 @@ public class OralCommunication implements Serializable {
     @JoinColumn(name = "id_activity", referencedColumnName = "id_activity", insertable = false, updatable = false)
     @OneToOne(optional = false, cascade = CascadeType.ALL)
     private Activity activity;
-    @JsonIgnore
+
     @JoinColumn(name = "meeting_id", referencedColumnName = "meeting_id")
     @ManyToOne(optional = false)
     private Meeting meetingId;
@@ -79,180 +87,4 @@ public class OralCommunication implements Serializable {
     @ManyToOne(optional = false)
     private TypeOralCommunication typeOralCommunicationId;
 
-    /**
-     *
-     */
-    public OralCommunication() {
-    }
-
-    /**
-     *
-     * @param idActivity
-     */
-    public OralCommunication(Integer idActivity) {
-        this.idActivity = idActivity;
-    }
-
-    /**
-     *
-     * @param idActivity
-     * @param oralCommunicationDat
-     * @param authors
-     */
-    public OralCommunication(Integer idActivity, Date oralCommunicationDat, String authors) {
-        this.idActivity = idActivity;
-        this.oralCommunicationDat = oralCommunicationDat;
-        this.authors = authors;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Integer getIdActivity() {
-        return idActivity;
-    }
-
-    /**
-     *
-     * @param idActivity
-     */
-    public void setIdActivity(Integer idActivity) {
-        this.idActivity = idActivity;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getOralCommunicationTitle() {
-        return oralCommunicationTitle;
-    }
-
-    /**
-     *
-     * @param oralCommunicationTitle
-     */
-    public void setOralCommunicationTitle(String oralCommunicationTitle) {
-        this.oralCommunicationTitle = oralCommunicationTitle;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Date getOralCommunicationDat() {
-        return oralCommunicationDat;
-    }
-
-    /**
-     *
-     * @param oralCommunicationDat
-     */
-    public void setOralCommunicationDat(Date oralCommunicationDat) {
-        this.oralCommunicationDat = oralCommunicationDat;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getAuthors() {
-        return authors;
-    }
-
-    /**
-     *
-     * @param authors
-     */
-    public void setAuthors(String authors) {
-        this.authors = authors;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Activity getActivity() {
-        return activity;
-    }
-
-    /**
-     *
-     * @param activity
-     */
-    public void setActivity(Activity activity) {
-        this.activity = activity;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Meeting getMeetingId() {
-        return meetingId;
-    }
-
-    /**
-     *
-     * @param meetingId
-     */
-    public void setMeetingId(Meeting meetingId) {
-        this.meetingId = meetingId;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public TypeOralCommunication getTypeOralCommunicationId() {
-        return typeOralCommunicationId;
-    }
-
-    /**
-     *
-     * @param typeOralCommunicationId
-     */
-    public void setTypeOralCommunicationId(TypeOralCommunication typeOralCommunicationId) {
-        this.typeOralCommunicationId = typeOralCommunicationId;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idActivity != null ? idActivity.hashCode() : 0);
-        return hash;
-    }
-
-    /**
-     *
-     * @param object
-     * @return
-     */
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof OralCommunication)) {
-            return false;
-        }
-        OralCommunication other = (OralCommunication) object;
-        if ((this.idActivity == null && other.idActivity != null) || (this.idActivity != null && !this.idActivity.equals(other.idActivity))) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public String toString() {
-        return "org.centrale.hceres.items.OralCommunication[ idActivity=" + idActivity + " ]";
-    }
-    
 }

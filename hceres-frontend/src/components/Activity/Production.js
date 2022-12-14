@@ -1,7 +1,5 @@
 import React from 'react';
 import './Production.css';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
 
 function Production() {
     const [chercheur, setChercheur] = React.useState("");
@@ -12,7 +10,6 @@ function Production() {
     const [description, setDescritption] = React.useState("");
 
     const handleSubmit = (event) => {
-        console.log("Submitted");
         event.preventDefault();
     }
 
@@ -31,9 +28,9 @@ function Production() {
                     type="chercheur"
                     value={chercheur}
                     onChange={e => setChercheur(e.target.value)}
-                    required />
+                    required/>
 
-                <label className='label' >
+                <label className='label'>
                     Type d'outil
                 </label>
                 <input
@@ -43,9 +40,9 @@ function Production() {
                     type="type_outil"
                     value={type_outil}
                     onChange={e => setType_outil(e.target.value)}
-                    required />
+                    required/>
 
-                <label className='label' >
+                <label className='label'>
                     Nom d'outil de production
                 </label>
                 <input
@@ -55,7 +52,7 @@ function Production() {
                     type="nom_outil"
                     value={nom_outil}
                     onChange={e => setNom_outil(e.target.value)}
-                    required />
+                    required/>
 
                 <label className='label'>
                     Date d'obtention
@@ -65,9 +62,9 @@ function Production() {
                     selected={date}
                     onChange={date => setDate(date)}
                     withPortal
-                    placeholderText="Choix de date" />
+                    placeholderText="Choix de date"/>
 
-                <label className='label' >
+                <label className='label'>
                     Auteurs
                 </label>
                 <input
@@ -77,9 +74,9 @@ function Production() {
                     type="auteurs"
                     value={auteurs}
                     onChange={e => setAuteurs(e.target.value)}
-                    required />
+                    required/>
 
-                <label className='label' >
+                <label className='label'>
                     Description
                 </label>
                 <textarea
@@ -89,11 +86,12 @@ function Production() {
                     type="description"
                     value={description}
                     onChange={e => setDescritption(e.target.value)}
-                    required />
+                    required/>
 
                 <button className='submit'>Valider</button>
             </form>
         </div>
     );
 }
+
 export default Production;

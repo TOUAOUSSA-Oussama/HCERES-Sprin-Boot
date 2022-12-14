@@ -8,9 +8,13 @@
  * L LETERTRE, S LIMOUX, JY MARTIN
  * -------------------------------------------------------------------------------- */
 package org.centrale.hceres.items;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -34,6 +38,10 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "TypeCollab.findAll", query = "SELECT t FROM TypeCollab t"),
     @NamedQuery(name = "TypeCollab.findByTypeCollabId", query = "SELECT t FROM TypeCollab t WHERE t.typeCollabId = :typeCollabId"),
     @NamedQuery(name = "TypeCollab.findByNameChoice", query = "SELECT t FROM TypeCollab t WHERE t.nameChoice = :nameChoice")})
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class TypeCollab implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -48,106 +56,6 @@ public class TypeCollab implements Serializable {
     private String nameChoice;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "typeCollabId")
-    private Collection<NationalInternationalCollaboration> nationalInternationalCollaborationCollection;
+    private List<InternationalCollaboration> InternationalCollaborationList;
 
-    /**
-     *
-     */
-    public TypeCollab() {
-    }
-
-    /**
-     *
-     * @param typeCollabId
-     */
-    public TypeCollab(Integer typeCollabId) {
-        this.typeCollabId = typeCollabId;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Integer getTypeCollabId() {
-        return typeCollabId;
-    }
-
-    /**
-     *
-     * @param typeCollabId
-     */
-    public void setTypeCollabId(Integer typeCollabId) {
-        this.typeCollabId = typeCollabId;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getNameChoice() {
-        return nameChoice;
-    }
-
-    /**
-     *
-     * @param nameChoice
-     */
-    public void setNameChoice(String nameChoice) {
-        this.nameChoice = nameChoice;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Collection<NationalInternationalCollaboration> getNationalInternationalCollaborationCollection() {
-        return nationalInternationalCollaborationCollection;
-    }
-
-    /**
-     *
-     * @param nationalInternationalCollaborationCollection
-     */
-    public void setNationalInternationalCollaborationCollection(Collection<NationalInternationalCollaboration> nationalInternationalCollaborationCollection) {
-        this.nationalInternationalCollaborationCollection = nationalInternationalCollaborationCollection;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (typeCollabId != null ? typeCollabId.hashCode() : 0);
-        return hash;
-    }
-
-    /**
-     *
-     * @param object
-     * @return
-     */
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof TypeCollab)) {
-            return false;
-        }
-        TypeCollab other = (TypeCollab) object;
-        if ((this.typeCollabId == null && other.typeCollabId != null) || (this.typeCollabId != null && !this.typeCollabId.equals(other.typeCollabId))) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public String toString() {
-        return "org.centrale.hceres.items.TypeCollab[ typeCollabId=" + typeCollabId + " ]";
-    }
-    
 }

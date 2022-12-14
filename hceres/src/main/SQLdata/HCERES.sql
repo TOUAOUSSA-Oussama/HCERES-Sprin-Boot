@@ -194,7 +194,7 @@ CREATE TABLE public.company_creation (
     id_activity integer NOT NULL,
     company_creation_name character varying(256),
     company_creation_date date,
-    company_creation_active boolean DEFAULT true NOT NULL
+    company_creation_active bool DEFAULT true NOT NULL
 );
 
 
@@ -434,10 +434,10 @@ CREATE TABLE public.incoming_mobility (
     project_title character varying(256),
     associated_funding character varying(256),
     publication_reference character varying(256),
-    strategic_recurring_collab boolean,
-    active_project boolean,
-    umr_coordinated boolean,
-    agreement_signed boolean
+    strategic_recurring_collab bool,
+    active_project bool,
+    umr_coordinated bool,
+    agreement_signed bool
 );
 
 
@@ -676,13 +676,13 @@ CREATE TABLE public.national_international_collaboration (
     pi_partners character varying(256),
     mail_partners character varying(256),
     projetc_title character varying(256),
-    strategic_recurring_collab boolean,
-    active_project boolean,
+    strategic_recurring_collab bool,
+    active_project bool,
     associated_funding character varying(256),
     number_resulting_publications integer,
     ref_joint_publication character varying(256),
-    umr_coordinated boolean,
-    agreement_signed boolean
+    umr_coordinated bool,
+    agreement_signed bool
 );
 
 
@@ -710,12 +710,12 @@ CREATE TABLE public.network (
     id_activity integer NOT NULL,
     start_date date,
     name_network character varying(256),
-    active_network boolean,
+    active_network bool,
     associated_funding character varying(256),
     nb_resulting_publications integer,
     ref_resulting_publications character varying(256),
-    umr_coordinated boolean,
-    agreement_signed boolean
+    umr_coordinated bool,
+    agreement_signed bool
 );
 
 
@@ -759,7 +759,7 @@ CREATE TABLE public.outgoing_mobility (
     strategic_recurring_collab bit(1),
     active_project bit(1),
     umr_coordinated bit(1),
-    agreement_signed boolean
+    agreement_signed bool
 );
 
 
@@ -799,11 +799,11 @@ CREATE TABLE public.patent (
     publication_number character varying(256),
     publication_date date,
     inpi_link character varying(256),
-    status boolean DEFAULT false NOT NULL,
-    pct_extension_obtained boolean DEFAULT false NOT NULL,
+    status bool DEFAULT false NOT NULL,
+    pct_extension_obtained bool DEFAULT false NOT NULL,
     publication_number_pct_extension character varying(256),
     publication_date_pct_extension date,
-    international_extension boolean DEFAULT false NOT NULL,
+    international_extension bool DEFAULT false NOT NULL,
     publication_number_international_extension character varying(256),
     publication_date_international_extension date,
     ref_transfer_contract character varying(256),
@@ -872,7 +872,7 @@ CREATE TABLE public.platform (
     managers character varying(256),
     affiliation character varying(256),
     labellisation character varying(256),
-    open_private_researchers boolean
+    open_private_researchers bool
 );
 
 
@@ -1163,7 +1163,7 @@ ALTER TABLE public.sei_cifre_fellowship OWNER TO hceres;
 CREATE TABLE public.sei_clinical_trial (
     id_activity integer NOT NULL,
     start_date date,
-    coordinator_partner boolean,
+    coordinator_partner bool,
     title_clinical_trial character varying(256),
     end_date date,
     registration_nb character varying(256),
@@ -5829,8 +5829,10 @@ INSERT INTO public.publication_type (publication_type_id, publication_type_name)
 -- Data for Name: researcher; Type: TABLE DATA; Schema: public; Owner: hceres
 --
 
-INSERT INTO public.researcher (researcher_id, researcher_surname, researcher_name, researcher_email, researcher_orcid, researcher_login, researcher_password) VALUES (1, 'Ahmil', 'Ghenima', 'Ghemina.Ahmil@univ-nantes.fr', NULL, NULL, NULL);
-INSERT INTO public.researcher (researcher_id, researcher_surname, researcher_name, researcher_email, researcher_orcid, researcher_login, researcher_password) VALUES (2, 'Anegon', 'Ignacio', 'Ignacio.Anegon@univ-nantes.fr', NULL, NULL, NULL);
+INSERT INTO public.researcher (researcher_id, researcher_surname, researcher_name, researcher_email, researcher_orcid, researcher_login, researcher_password)
+VALUES (1, 'Ahmil', 'Ghenima', 'Ghemina.Ahmil@univ-nantes.fr', NULL, 'admin', '$2a$10$tR4NMaRiVG.QZdXoCsmEUuDltA7Siy0kisCbUwT3p3P3s9wQWdySi');
+INSERT INTO public.researcher (researcher_id, researcher_surname, researcher_name, researcher_email, researcher_orcid, researcher_login, researcher_password)
+VALUES (2, 'Anegon', 'Ignacio', 'Ignacio.Anegon@univ-nantes.fr', NULL, 'user', '$2a$10$nbNEAKss3/jeNdOPfCqel.cLltnDIfE15jpGFEo7rZw1aY/5nAbzi');
 INSERT INTO public.researcher (researcher_id, researcher_surname, researcher_name, researcher_email, researcher_orcid, researcher_login, researcher_password) VALUES (3, 'Asehnoune', 'K.', '', NULL, NULL, NULL);
 INSERT INTO public.researcher (researcher_id, researcher_surname, researcher_name, researcher_email, researcher_orcid, researcher_login, researcher_password) VALUES (4, 'Ba', 'Rokhaya', 'rokhaya.ba@univ-nantes.fr', NULL, NULL, NULL);
 INSERT INTO public.researcher (researcher_id, researcher_surname, researcher_name, researcher_email, researcher_orcid, researcher_login, researcher_password) VALUES (5, 'Barrière', 'Paul', '', NULL, NULL, NULL);
@@ -6294,7 +6296,7 @@ INSERT INTO public.type_activity (id_type_activity, name_type) VALUES (4, 'Paten
 INSERT INTO public.type_activity (id_type_activity, name_type) VALUES (5, 'Editorial Activity');
 INSERT INTO public.type_activity (id_type_activity, name_type) VALUES (6, 'Platform');
 INSERT INTO public.type_activity (id_type_activity, name_type) VALUES (7, 'Tool Product Decision Support Tool');
-INSERT INTO public.type_activity (id_type_activity, name_type) VALUES (8, 'Tool Product Biocollection');
+INSERT INTO public.type_activity (id_type_activity, name_type) VALUES (8, 'Tool Product BioList');
 INSERT INTO public.type_activity (id_type_activity, name_type) VALUES (9, 'Tool Product Software');
 INSERT INTO public.type_activity (id_type_activity, name_type) VALUES (10, 'Tool Product Database');
 INSERT INTO public.type_activity (id_type_activity, name_type) VALUES (11, 'Tool Product Cohort');

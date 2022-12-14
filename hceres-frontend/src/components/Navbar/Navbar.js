@@ -1,86 +1,70 @@
 // Cette component est pour definir la barre de navigation
-import React, {useState, useEffect} from 'react';
-import { FaBars, FaTimes } from 'react-icons/fa';
+import React, {useState} from 'react';
+import {FaBars, FaHome, FaTimes, FaUserGraduate} from 'react-icons/fa';
 import {
-    Nav, 
+    Nav,
     NavbarContainer,
-    NavLogo, 
-    NavIcon, 
-    MobileIcon, 
+    NavLogo,
+    MobileIcon,
     NavMenu,
     NavItem,
     NavLinks,
     NavItemBtn,
     NavBtnLink
-} 
+}
     from './NavbarElements';
 import {Button} from '../../AppElements';
 import Logo from '../../assets/logo.png';
+import {useDispatch} from "react-redux";
+import {logoutUser} from "../../services";
+import {BiLogOut, BiTask} from "react-icons/bi";
 
 const Navbar = () => {
     const [click, setClick] = useState(false);
-    const [button, setButton] = useState(true);    
     const closeMobileMenu = () => setClick(false);
 
-    const handleClick = () => setClick(!click);
-
-    // pour n'afficher le grand boutton que pour les garndes ecrans
-    const showButton = () => {
-        if (window.innerWidth <= 960) {
-            setButton(false);
-        } else {
-            setButton(true);
-        }
+    const dispatch = useDispatch();
+    const logout = () => {
+        dispatch(logoutUser());
     };
-
-    useEffect(() => {
-        showButton();
-    }, []);
+    const handleClick = () => setClick(!click);
 
     return (
         // Nav, NavbarContainer, ... sont des styles qu'on a definti dans Navbar.elements.js
         <Nav>
             <NavbarContainer>
                 {/* Logo + icone */}
-                <NavLogo to="/Home" onClick={closeMobileMenu}> 
-                    <img src={Logo} width="60"/>
-                </NavLogo> 
+                <NavLogo to="/Home" onClick={closeMobileMenu}>
+                    <img src={Logo} width="60" alt={"Hecers Logo"}/>
+                </NavLogo>
                 {/* Les trois lignes qui apparaitre lorsqu'on reduit la page (pour les telephones par exemple) */}
                 <MobileIcon onClick={handleClick}>
                     {/* si le menu est cliquer => la component FaTimes */}
                     {/* sinon => la component FaBars */}
-                    {click ? <FaTimes /> : <FaBars />}
+                    {click ? <FaTimes/> : <FaBars/>}
                 </MobileIcon>
                 {/* Le menu que va contenir le Navbar */}
                 <NavMenu onClick={handleClick} click={click}>
                     <NavItem>
-                        <NavLinks to="/Home">
-                            Accueil
+                        <NavLinks to="/Home" className={(nav) => nav.isActive() ? "active" : ""}>
+                            <FaHome/> Accueil
                         </NavLinks>
                     </NavItem>
                     <NavItem>
                         <NavLinks to="/Researcher">
-                            Chercheurs
+                            <FaUserGraduate/> Chercheurs
                         </NavLinks>
                     </NavItem>
                     <NavItem>
                         <NavLinks to="/Activity">
-                            Ajout d'activités
+                            <BiTask/> Activités
                         </NavLinks>
                     </NavItem>
                     {/* ajouter bouton de deconnexion */}
                     <NavItemBtn>
-                        {button ? (
-                            <NavBtnLink to='/'>
-                                <Button primary>Deconnexion</Button>
+                            <NavBtnLink to='/' onClick={logout}>
+                                <Button primary><BiLogOut/> Deconnexion</Button>
                             </NavBtnLink>
-                        ) : (
-                            <NavBtnLink to='/'>
-                                <Button fontBig primary>
-                                    Deconnexion
-                                </Button>
-                            </NavBtnLink>
-                        )}
                     </NavItemBtn>
                 </NavMenu>
             </NavbarContainer>

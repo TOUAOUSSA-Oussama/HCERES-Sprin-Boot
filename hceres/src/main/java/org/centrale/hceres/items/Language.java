@@ -8,9 +8,13 @@
  * L LETERTRE, S LIMOUX, JY MARTIN
  * -------------------------------------------------------------------------------- */
 package org.centrale.hceres.items;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -35,6 +39,10 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Language.findAll", query = "SELECT l FROM Language l"),
     @NamedQuery(name = "Language.findByLanguageId", query = "SELECT l FROM Language l WHERE l.languageId = :languageId"),
     @NamedQuery(name = "Language.findByLanguageName", query = "SELECT l FROM Language l WHERE l.languageName = :languageName")})
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Language implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -49,134 +57,8 @@ public class Language implements Serializable {
     @Column(name = "language_name")
     private String languageName;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "languageId")
-    private Collection<Book> bookCollection;
+    private List<Book> bookList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "languageId")
-    private Collection<BookChapter> bookChapterCollection;
+    private List<BookChapter> bookChapterList;
 
-    /**
-     *
-     */
-    public Language() {
-    }
-
-    /**
-     *
-     * @param languageId
-     */
-    public Language(Integer languageId) {
-        this.languageId = languageId;
-    }
-
-    /**
-     *
-     * @param languageId
-     * @param languageName
-     */
-    public Language(Integer languageId, String languageName) {
-        this.languageId = languageId;
-        this.languageName = languageName;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Integer getLanguageId() {
-        return languageId;
-    }
-
-    /**
-     *
-     * @param languageId
-     */
-    public void setLanguageId(Integer languageId) {
-        this.languageId = languageId;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getLanguageName() {
-        return languageName;
-    }
-
-    /**
-     *
-     * @param languageName
-     */
-    public void setLanguageName(String languageName) {
-        this.languageName = languageName;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Collection<Book> getBookCollection() {
-        return bookCollection;
-    }
-
-    /**
-     *
-     * @param bookCollection
-     */
-    public void setBookCollection(Collection<Book> bookCollection) {
-        this.bookCollection = bookCollection;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Collection<BookChapter> getBookChapterCollection() {
-        return bookChapterCollection;
-    }
-
-    /**
-     *
-     * @param bookChapterCollection
-     */
-    public void setBookChapterCollection(Collection<BookChapter> bookChapterCollection) {
-        this.bookChapterCollection = bookChapterCollection;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (languageId != null ? languageId.hashCode() : 0);
-        return hash;
-    }
-
-    /**
-     *
-     * @param object
-     * @return
-     */
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Language)) {
-            return false;
-        }
-        Language other = (Language) object;
-        if ((this.languageId == null && other.languageId != null) || (this.languageId != null && !this.languageId.equals(other.languageId))) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public String toString() {
-        return "org.centrale.hceres.items.Language[ languageId=" + languageId + " ]";
-    }
-    
 }

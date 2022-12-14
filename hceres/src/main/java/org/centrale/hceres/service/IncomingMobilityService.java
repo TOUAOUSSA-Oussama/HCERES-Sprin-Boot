@@ -4,7 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
+import java.util.List;
 import java.util.Date;
 import java.util.Map;
 import java.util.Optional;
@@ -17,6 +17,7 @@ import org.centrale.hceres.repository.ActivityRepository;
 import org.centrale.hceres.repository.IncomingMobilityRepository;
 import org.centrale.hceres.repository.ResearchRepository;
 import org.centrale.hceres.repository.TypeActivityRepository;
+import org.centrale.hceres.util.RequestParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,150 +28,129 @@ import lombok.Data;
 @Data
 @Service
 public class IncomingMobilityService {
-	
-	/**
-	 * Instanciation
-	 */
-	@Autowired
-	private ResearchRepository researchRepo;
-	@Autowired
-	private IncomingMobilityRepository IncomingMobilityRepo;
-	@Autowired
-	private ActivityRepository activityRepo;
-	@Autowired
-	private TypeActivityRepository typeActivityLevelRepo;
-	
-	/**
-	 * permet de retourner la liste
-	 */
-	public Iterable<IncomingMobility> getIncomingMobilitys(){
-		return IncomingMobilityRepo.findAll();
-	}
-	
-	/**
-	 * retourner l'elmt selon son id
-	 * @param id : id de l'elmt
-	 * @return : elmt a retourner
-	 */
-	public Optional<IncomingMobility> getIncomingMobility(final Integer id) { 
-		return IncomingMobilityRepo.findById(id); 
-	}
-	
-	/**
-	 * supprimer l'elmt selon son id
-	 * @param id : id de l'elmt
-	 */
-	public void deleteIncomingMobility(final Integer id) {
-		IncomingMobilityRepo.deleteById(id);
-	}
-	
-	/**
-	 * permet d'ajouter un elmt
-	 * @return : l'elemt ajouter a la base de donnees
-	 */
-	public IncomingMobility saveIncomingMobility(@RequestBody Map<String, Object> request) {
-		
-		IncomingMobility IncomingMobilityTosave = new IncomingMobility();
-		
-		// setNameSeniorScientist :
-		IncomingMobilityTosave.setNameSeniorScientist((String)request.get("nameSeniorScientist"));
-		
-		// setArrivalDate :
-		String dateString = (String)request.get("arrivalDate");
-		IncomingMobilityTosave.setArrivalDate(getDateFromString(dateString, "yyyy-MM-dd"));
+
+    /**
+     * Instanciation
+     */
+    @Autowired
+    private ResearchRepository researchRepo;
+    @Autowired
+    private IncomingMobilityRepository incomingMobilityRepo;
+    @Autowired
+    private ActivityRepository activityRepo;
+    @Autowired
+    private TypeActivityRepository typeActivityLevelRepo;
+
+    /**
+     * retourner l'elmt selon son id
+     *
+     * @param id : id de l'elmt
+     * @return : elmt a retourner
+     */
+    public Optional<IncomingMobility> getIncomingMobility(final Integer id) {
+        return incomingMobilityRepo.findById(id);
+    }
+
+
+    /**
+     * permet de retourner la liste
+     */
+    public List<Activity> getIncomingMobilitys() {
+        return activityRepo.findByIdTypeActivity(TypeActivity.IdTypeActivity.INCOMING_MOBILITY.getId());
+    }
+
+    /**
+     * supprimer l'elmt selon son id
+     *
+     * @param id : id de l'elmt
+     */
+    public void deleteIncomingMobility(final Integer id) {
+        incomingMobilityRepo.deleteById(id);
+    }
+
+    /**
+     * permet d'ajouter un elmt
+     *
+     * @return : l'elemt ajouter a la base de donnees
+     */
+    public Activity saveIncomingMobility(@RequestBody Map<String, Object> request) throws ParseException {
+        IncomingMobility IncomingMobilityTosave = new IncomingMobility();
+
+        // setNameSeniorScientist :
+        IncomingMobilityTosave.setNameSeniorScientist(RequestParser.getAsString(request.get("nameSeniorScientist")));
 
         // setArrivalDate :
-		String dateString2 = (String)request.get("departureDate");
-		IncomingMobilityTosave.setDepartureDate(getDateFromString(dateString2, "yyyy-MM-dd"));
-		
-		// setDuration :
-		IncomingMobilityTosave.setDuration(Integer.parseInt((String)request.get("duration")));
-		
+        IncomingMobilityTosave.setArrivalDate(RequestParser.getAsDate(request.get("arrivalDate")));
+
+        // setArrivalDate :
+        IncomingMobilityTosave.setDepartureDate(RequestParser.getAsDate(request.get("departureDate")));
+
+        // setDuration :
+        IncomingMobilityTosave.setDuration(RequestParser.getAsInteger(request.get("duration")));
+
         // setNationality :
-		IncomingMobilityTosave.setNationality((String)request.get("nationality"));
+        IncomingMobilityTosave.setNationality(RequestParser.getAsString(request.get("nationality")));
 
         // setOriginalLabName :
-		IncomingMobilityTosave.setOriginalLabName((String)request.get("originalLabName"));
+        IncomingMobilityTosave.setOriginalLabName(RequestParser.getAsString(request.get("originalLabName")));
 
         // setOriginaLabLocation :
-		IncomingMobilityTosave.setOriginaLabLocation((String)request.get("originaLabLocation"));
+        IncomingMobilityTosave.setOriginaLabLocation(RequestParser.getAsString(request.get("originaLabLocation")));
 
         // setPiPartner :
-		IncomingMobilityTosave.setPiPartner((String)request.get("piPartner"));
+        IncomingMobilityTosave.setPiPartner(RequestParser.getAsString(request.get("piPartner")));
 
         // setProjectTitle :
-		IncomingMobilityTosave.setProjectTitle((String)request.get("projectTitle"));
+        IncomingMobilityTosave.setProjectTitle(RequestParser.getAsString(request.get("projectTitle")));
 
         // setAssociatedFunding :
-		IncomingMobilityTosave.setAssociatedFunding((String)request.get("associatedFunding"));
+        IncomingMobilityTosave.setAssociatedFunding(RequestParser.getAsString(request.get("associatedFunding")));
 
         // setPublicationReference :
-		IncomingMobilityTosave.setPublicationReference((String)request.get("publicationReference"));
+        IncomingMobilityTosave.setPublicationReference(RequestParser.getAsString(request.get("publicationReference")));
 
         // setStrategicRecurringCollab :
-		IncomingMobilityTosave.setStrategicRecurringCollab(Boolean.parseBoolean((String)request.get("strategicRecurringCollab")));
+        IncomingMobilityTosave.setStrategicRecurringCollab(RequestParser.getAsBoolean(request.get("strategicRecurringCollab")));
 
         // setActiveProject :
-		IncomingMobilityTosave.setActiveProject(Boolean.parseBoolean((String)request.get("activeProject")));
+        IncomingMobilityTosave.setActiveProject(RequestParser.getAsBoolean(request.get("activeProject")));
 
         // setUmrCoordinated :
-		IncomingMobilityTosave.setUmrCoordinated(Boolean.parseBoolean((String)request.get("umrCoordinated")));
+        IncomingMobilityTosave.setUmrCoordinated(RequestParser.getAsBoolean(request.get("umrCoordinated")));
 
         // setAgreementSigned :
-		IncomingMobilityTosave.setAgreementSigned(Boolean.parseBoolean((String)request.get("agreementSigned")));
+        IncomingMobilityTosave.setAgreementSigned(RequestParser.getAsBoolean(request.get("agreementSigned")));
 
-	    // Activity : 
-		Activity activity = new Activity();
-		TypeActivity typeActivity = typeActivityLevelRepo.getById(34);
-		activity.setIdTypeActivity(typeActivity);
-		
-		// ajouter cette activité à la liste de ce chercheur :
-		String researcherIdStr = (String)request.get("researcherId");
-		int researcherId = -1;
-		researcherId = Integer.parseInt(researcherIdStr);
-		Optional<Researcher> researcherOp = researchRepo.findById(researcherId);
-		Researcher researcher = researcherOp.get();
-		
-		Collection<Activity> activityCollection = researcher.getActivityCollection();
-		activityCollection.add(activity);
-		researcher.setActivityCollection(activityCollection);
-		
-		// Ajouter cette activité au chercheur :
-		Collection<Researcher> activityResearch = activity.getResearcherCollection();
-		if (activityResearch == null) {
-			activityResearch = new ArrayList<Researcher>();
-		}
-		activityResearch.add(researcher);
-		activity.setResearcherCollection(activityResearch);
-		
-		Activity savedActivity = activityRepo.save(activity);
-		IncomingMobilityTosave.setActivity(savedActivity);
-		
-		// Id de l'IncomingMobility :
-		Integer idIncomingMobility = activity.getIdActivity();
-		IncomingMobilityTosave.setIdActivity(idIncomingMobility);
-				
-		// Enregistrer IncomingMobility dans la base de données :
-		IncomingMobility saveIncomingMobility = IncomingMobilityRepo.save(IncomingMobilityTosave);
-		
-		return saveIncomingMobility;
-	}
-	
-	// Convertir une date string en Date
-	public Date getDateFromString(String aDate, String format) {
-        Date returnedValue = null;
-        try {
-            // try to convert
-            SimpleDateFormat aFormater = new SimpleDateFormat(format);
-            returnedValue = aFormater.parse(aDate);
-        } catch (ParseException ex) {
-        }
-        
-        if (returnedValue != null) {
-            Calendar aCalendar = Calendar.getInstance();
-            aCalendar.setTime(returnedValue);
-        }
-        return returnedValue;
+        // Activity :
+        Activity activity = new Activity();
+        TypeActivity typeActivity = typeActivityLevelRepo.getById(TypeActivity.IdTypeActivity.INCOMING_MOBILITY.getId());
+        activity.setTypeActivity(typeActivity);
+
+
+        // get list of researcher doing this activity - currently only one is sent
+        Integer researcherId = RequestParser.getAsInteger(request.get("researcherId"));
+        Optional<Researcher> researcherOp = researchRepo.findById(researcherId);
+        Researcher researcher = researcherOp.get();
+
+        List<Researcher> activityResearch = new ArrayList<>();
+        activityResearch.add(researcher);
+        activity.setResearcherList(activityResearch);
+
+        Activity savedActivity = activityRepo.save(activity);
+        IncomingMobilityTosave.setActivity(savedActivity);
+
+        // Id de l'IncomingMobility :
+        Integer idIncomingMobility = activity.getIdActivity();
+        IncomingMobilityTosave.setIdActivity(idIncomingMobility);
+
+        // Enregistrer IncomingMobility dans la base de données :
+        IncomingMobility saveIncomingMobility = incomingMobilityRepo.save(IncomingMobilityTosave);
+
+        // wrap all saved objects in activity
+        savedActivity.setIncomingMobility(saveIncomingMobility);
+        return savedActivity;
     }
+
+
 }
 

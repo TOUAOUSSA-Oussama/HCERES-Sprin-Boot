@@ -8,9 +8,13 @@
  * L LETERTRE, S LIMOUX, JY MARTIN
  * -------------------------------------------------------------------------------- */
 package org.centrale.hceres.items;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -35,6 +39,10 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "ContractType.findAll", query = "SELECT c FROM ContractType c"),
     @NamedQuery(name = "ContractType.findByIdContractType", query = "SELECT c FROM ContractType c WHERE c.idContractType = :idContractType"),
     @NamedQuery(name = "ContractType.findByNameContractType", query = "SELECT c FROM ContractType c WHERE c.nameContractType = :nameContractType")})
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class ContractType implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -49,116 +57,6 @@ public class ContractType implements Serializable {
     @Column(name = "name_contract_type")
     private String nameContractType;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idContractType")
-    private Collection<Contract> contractCollection;
+    private List<Contract> contractList;
 
-    /**
-     *
-     */
-    public ContractType() {
-    }
-
-    /**
-     *
-     * @param idContractType
-     */
-    public ContractType(Integer idContractType) {
-        this.idContractType = idContractType;
-    }
-
-    /**
-     *
-     * @param idContractType
-     * @param nameContractType
-     */
-    public ContractType(Integer idContractType, String nameContractType) {
-        this.idContractType = idContractType;
-        this.nameContractType = nameContractType;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Integer getIdContractType() {
-        return idContractType;
-    }
-
-    /**
-     *
-     * @param idContractType
-     */
-    public void setIdContractType(Integer idContractType) {
-        this.idContractType = idContractType;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getNameContractType() {
-        return nameContractType;
-    }
-
-    /**
-     *
-     * @param nameContractType
-     */
-    public void setNameContractType(String nameContractType) {
-        this.nameContractType = nameContractType;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Collection<Contract> getContractCollection() {
-        return contractCollection;
-    }
-
-    /**
-     *
-     * @param contractCollection
-     */
-    public void setContractCollection(Collection<Contract> contractCollection) {
-        this.contractCollection = contractCollection;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idContractType != null ? idContractType.hashCode() : 0);
-        return hash;
-    }
-
-    /**
-     *
-     * @param object
-     * @return
-     */
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof ContractType)) {
-            return false;
-        }
-        ContractType other = (ContractType) object;
-        if ((this.idContractType == null && other.idContractType != null) || (this.idContractType != null && !this.idContractType.equals(other.idContractType))) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public String toString() {
-        return "org.centrale.hceres.items.ContractType[ idContractType=" + idContractType + " ]";
-    }
-    
 }

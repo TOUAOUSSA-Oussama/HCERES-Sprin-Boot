@@ -8,9 +8,13 @@
  * L LETERTRE, S LIMOUX, JY MARTIN
  * -------------------------------------------------------------------------------- */
 package org.centrale.hceres.items;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -35,6 +39,10 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Funder.findAll", query = "SELECT f FROM Funder f"),
     @NamedQuery(name = "Funder.findByFunderId", query = "SELECT f FROM Funder f WHERE f.funderId = :funderId"),
     @NamedQuery(name = "Funder.findByFunderName", query = "SELECT f FROM Funder f WHERE f.funderName = :funderName")})
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Funder implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -50,116 +58,6 @@ public class Funder implements Serializable {
     @Column(name = "funder_name")
     private String funderName;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "funderId")
-    private Collection<ProjectEvaluation> projectEvaluationCollection;
+    private List<ProjectEvaluation> projectEvaluationList;
 
-    /**
-     *
-     */
-    public Funder() {
-    }
-
-    /**
-     *
-     * @param funderId
-     */
-    public Funder(String funderId) {
-        this.funderId = funderId;
-    }
-
-    /**
-     *
-     * @param funderId
-     * @param funderName
-     */
-    public Funder(String funderId, String funderName) {
-        this.funderId = funderId;
-        this.funderName = funderName;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getFunderId() {
-        return funderId;
-    }
-
-    /**
-     *
-     * @param funderId
-     */
-    public void setFunderId(String funderId) {
-        this.funderId = funderId;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getFunderName() {
-        return funderName;
-    }
-
-    /**
-     *
-     * @param funderName
-     */
-    public void setFunderName(String funderName) {
-        this.funderName = funderName;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Collection<ProjectEvaluation> getProjectEvaluationCollection() {
-        return projectEvaluationCollection;
-    }
-
-    /**
-     *
-     * @param projectEvaluationCollection
-     */
-    public void setProjectEvaluationCollection(Collection<ProjectEvaluation> projectEvaluationCollection) {
-        this.projectEvaluationCollection = projectEvaluationCollection;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (funderId != null ? funderId.hashCode() : 0);
-        return hash;
-    }
-
-    /**
-     *
-     * @param object
-     * @return
-     */
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Funder)) {
-            return false;
-        }
-        Funder other = (Funder) object;
-        if ((this.funderId == null && other.funderId != null) || (this.funderId != null && !this.funderId.equals(other.funderId))) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public String toString() {
-        return "org.centrale.hceres.items.Funder[ funderId=" + funderId + " ]";
-    }
-    
 }

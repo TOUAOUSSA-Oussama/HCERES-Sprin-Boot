@@ -13,6 +13,7 @@ import org.centrale.hceres.items.TypeActivity;
 import org.centrale.hceres.repository.ActivityRepository;
 import org.centrale.hceres.repository.ResearchRepository;
 import org.centrale.hceres.repository.TypeActivityRepository;
+import org.centrale.hceres.util.RequestParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import lombok.Data;
@@ -35,16 +36,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 @Data
 @Service
 public class ProductionService {
-	
-	/**
-	 * Instanciation
-	 */
-	@Autowired
-	private ResearchRepository researchRepo;
-	@Autowired
-	private ActivityRepository activityRepo;
-	@Autowired
-	private TypeActivityRepository typeActivityLevelRepo;
+
+    /**
+     * Instanciation
+     */
+    @Autowired
+    private ResearchRepository researchRepo;
+    @Autowired
+    private ActivityRepository activityRepo;
+    @Autowired
+    private TypeActivityRepository typeActivityLevelRepo;
     @Autowired
     private ProductionRepository prodRepo;
     @Autowired
@@ -55,126 +56,101 @@ public class ProductionService {
     private ProductTypeRepository prodTypeRepo;
 
     /**
-	 * permet de retourner la liste
-	 */
-	public Iterable<ToolProduct> getToolProduct(){
-		return prodRepo.findAll();
-	}
+     * permet de retourner la liste
+     */
+    public Iterable<ToolProduct> getToolProduct() {
+        return prodRepo.findAll();
+    }
 
-	/**
-	 * retourner l'elmt selon son id
-	 * @param id : id de l'elmt
-	 * @return : elmt a retourner
-	 */
-	public Optional<ToolProduct> getToolProduct(final Integer id) { 
-		return prodRepo.findById(id); 
-	}
+    /**
+     * retourner l'elmt selon son id
+     *
+     * @param id : id de l'elmt
+     * @return : elmt a retourner
+     */
+    public Optional<ToolProduct> getToolProduct(final Integer id) {
+        return prodRepo.findById(id);
+    }
 
-	/**
-	 * supprimer l'elmt selon son id
-	 * @param id : id de l'elmt
-	 */
-	public void deleteToolProduct(final Integer id) {
-		prodRepo.deleteById(id);
-	}
-	
-	/**
-	 * permet d'ajouter un elmt
-	 * @return : l'elemt ajouter a la base de donnees
-	 */
-	@Transactional
-	public ToolProduct saveToolProduct(@RequestBody Map<String, Object> request) {
-		
-		ToolProduct productionTosave = new ToolProduct();
+    /**
+     * supprimer l'elmt selon son id
+     *
+     * @param id : id de l'elmt
+     */
+    public void deleteToolProduct(final Integer id) {
+        prodRepo.deleteById(id);
+    }
 
-		ToolProductInvolvment productInvolvmentTosave =new ToolProductInvolvment();
-		
-		// toolProductNam :
-		productionTosave.setToolProductNam((String) request.get("toolProductNam"));
+    /**
+     * permet d'ajouter un elmt
+     *
+     * @return : l'elemt ajouter a la base de donnees
+     */
+    @Transactional
+    public ToolProduct saveToolProduct(@RequestBody Map<String, Object> request) throws ParseException {
 
-		// toolProductCreation
-		String dateString = (String) request.get("toolProductCreation");
-		productionTosave.setToolProductCreation(getDateFromString(dateString, "yyyy-MM-dd"));
+        ToolProduct productionTosave = new ToolProduct();
 
-		// toolProductAuthors
-		productionTosave.setToolProductAuthors((String) request.get("toolProductAuthors"));
+        ToolProductInvolvment productInvolvmentTosave = new ToolProductInvolvment();
 
-		// toolProductDescription
-		productionTosave.setToolProductDescription((String) request.get("toolProductDescription"));
+        // toolProductNam :
+        productionTosave.setToolProductNam(RequestParser.getAsString(request.get("toolProductNam")));
 
-		// ToolProductType
-		ToolProductType productType = new ToolProductType();
-		productType.setToolProductTypeName((String) request.get("toolProductTypeName"));
-		ToolProductType saveproductType = prodTypeRepo.save(productType);
-		productionTosave.setToolProductTypeId(saveproductType);
-		
-		// Activity :
-		Activity activity = new Activity();
-		TypeActivity typeActivity = typeActivityLevelRepo.getById(9);
-		activity.setIdTypeActivity(typeActivity);
-		
-		// ajouter cette activité à la liste de ce chercheur :
-		String researcherIdStr = (String) request.get("researcherId");
-		int researcherId = -1;
-		researcherId = Integer.parseInt(researcherIdStr);
-		Optional<Researcher> researcherOp = researchRepo.findById(researcherId);
-		Researcher researcher = researcherOp.get();
-		
-		Collection<Activity> activityCollection = researcher.getActivityCollection();
-		activityCollection.add(activity);
-		researcher.setActivityCollection(activityCollection);
-		
-		// Ajouter cette activité au chercheur :
-		Collection<Researcher> activityResearch = activity.getResearcherCollection();
-		if (activityResearch == null) {
-			activityResearch = new ArrayList<Researcher>();
-		}
-		activityResearch.add(researcher);
-		activity.setResearcherCollection(activityResearch);
-		
-		Activity savedActivity = activityRepo.save(activity);
-		productionTosave.setActivity(savedActivity);
+        // toolProductCreation
+        productionTosave.setToolProductCreation(RequestParser.getAsDate(request.get("toolProductCreation")));
 
-		// Id de la production :
-		Integer idProduction = activity.getIdActivity();
-		productionTosave.setIdActivity(idProduction);
+        // toolProductAuthors
+        productionTosave.setToolProductAuthors(RequestParser.getAsString(request.get("toolProductAuthors")));
 
-		//toolProductInvolvmentResearchers
-		productInvolvmentTosave.setToolProductInvolvmentResearchers((String) request.get("toolProductInvolvmentResearchers"));
+        // toolProductDescription
+        productionTosave.setToolProductDescription(RequestParser.getAsString(request.get("toolProductDescription")));
 
-		//Add id_activity of ToolProduct
-		productInvolvmentTosave.setToolProduct(productionTosave);
+        // ToolProductType
+        ToolProductType productType = new ToolProductType();
+        productType.setToolProductTypeName(RequestParser.getAsString(request.get("toolProductTypeName")));
+        ToolProductType saveproductType = prodTypeRepo.save(productType);
+        productionTosave.setToolProductTypeId(saveproductType);
 
-		//Add ToolProductRole
-		ToolProductRole toolProductRole = new ToolProductRole();
-		toolProductRole.setToolProductRoleName((String) request.get("toolProductRoleName"));
-		ToolProductRole saveToolProductRole = prodRoleRepo.save(toolProductRole);
-		ToolProductInvolvmentPK saveProdInvoPK = new ToolProductInvolvmentPK();
-		saveProdInvoPK.setToolProductRoleId(saveToolProductRole.getToolProductRoleId());
-		productInvolvmentTosave.setToolProductInvolvmentPK(saveProdInvoPK);
+        // Activity :
+        Activity activity = new Activity();
+        TypeActivity typeActivity = typeActivityLevelRepo.getById(9);
+        activity.setTypeActivity(typeActivity);
 
-		// Persist Production to database :
-		ToolProduct saveProduction = prodRepo.save(productionTosave);
-		
-		return saveProduction;
-	}
-	
-	// Convertir une date string en Date
-	public Date getDateFromString(String aDate, String format) {
-        Date returnedValue = null;
-        try {
-            // try to convert
-            SimpleDateFormat aFormater = new SimpleDateFormat(format);
-            returnedValue = aFormater.parse(aDate);
-        } catch (ParseException ex) {
 
-        }
-        
-        if (returnedValue != null) {
-            Calendar aCalendar = Calendar.getInstance();
-            aCalendar.setTime(returnedValue);
-        }
-        return returnedValue;
+        // get list of researcher doing this activity - currently only one is sent
+        Integer researcherId = RequestParser.getAsInteger(request.get("researcherId"));
+        Optional<Researcher> researcherOp = researchRepo.findById(researcherId);
+        Researcher researcher = researcherOp.get();
+
+        List<Researcher> activityResearch = new ArrayList<>();
+        activityResearch.add(researcher);
+        activity.setResearcherList(activityResearch);
+
+        Activity savedActivity = activityRepo.save(activity);
+        productionTosave.setActivity(savedActivity);
+
+        // Id de la production :
+        Integer idProduction = activity.getIdActivity();
+        productionTosave.setIdActivity(idProduction);
+
+        //toolProductInvolvmentResearchers
+        productInvolvmentTosave.setToolProductInvolvmentResearchers(RequestParser.getAsString(request.get("toolProductInvolvmentResearchers")));
+
+        //Add id_activity of ToolProduct
+        productInvolvmentTosave.setToolProduct(productionTosave);
+
+        //Add ToolProductRole
+        ToolProductRole toolProductRole = new ToolProductRole();
+        toolProductRole.setToolProductRoleName(RequestParser.getAsString(request.get("toolProductRoleName")));
+        ToolProductRole saveToolProductRole = prodRoleRepo.save(toolProductRole);
+        ToolProductInvolvmentPK saveProdInvoPK = new ToolProductInvolvmentPK();
+        saveProdInvoPK.setToolProductRoleId(saveToolProductRole.getToolProductRoleId());
+        productInvolvmentTosave.setToolProductInvolvmentPK(saveProdInvoPK);
+
+        // Persist Production to database :
+        ToolProduct saveProduction = prodRepo.save(productionTosave);
+
+        return saveProduction;
     }
 }
 

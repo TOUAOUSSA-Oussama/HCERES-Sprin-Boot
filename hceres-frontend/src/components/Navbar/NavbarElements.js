@@ -1,10 +1,8 @@
 // Cette component est pour definir les styles liees a Navbar
 
-import styled  from 'styled-components';
-import { Link } from 'react-router-dom';
-import { Container } from '../../AppElements'
-
-
+import styled from 'styled-components';
+import {Link} from 'react-router-dom';
+import {Container} from '../../AppElements'
 
 
 // style pour le nav bar
@@ -83,22 +81,7 @@ text-align: center;
 `
 
 // styles de NavItem avec styled.li
-export const NavItem = styled.li`
-    height: 80px;
-    border-bottom: 2px solid transparent;
-
-    &:hover {
-        border-bottom: 2px solid #A7A7A7;
-    }
-
-    @media screen and (max-width: 960px) {
-        width: 100%;
-
-        &:hover {
-            border: none;
-        }
-    }
-`
+export const NavItem = styled.li``
 // styles de NavLinks 
 export const NavLinks = styled(Link)`
     color: white;

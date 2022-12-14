@@ -8,9 +8,13 @@
  * L LETERTRE, S LIMOUX, JY MARTIN
  * -------------------------------------------------------------------------------- */
 package org.centrale.hceres.items;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -43,6 +47,10 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Team.findByTeamCreation", query = "SELECT t FROM Team t WHERE t.teamCreation = :teamCreation"),
     @NamedQuery(name = "Team.findByTeamEnd", query = "SELECT t FROM Team t WHERE t.teamEnd = :teamEnd"),
     @NamedQuery(name = "Team.findByTeamLastReport", query = "SELECT t FROM Team t WHERE t.teamLastReport = :teamLastReport")})
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Team implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -63,228 +71,16 @@ public class Team implements Serializable {
     @Column(name = "team_last_report")
     @Temporal(TemporalType.DATE)
     private Date teamLastReport;
-    @ManyToMany(mappedBy = "teamCollection")
-    private Collection<Activity> activityCollection;
+    @ManyToMany(mappedBy = "teamList")
+    private List<Activity> activityList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "teamId")
-    private Collection<TeamReferent> teamReferentCollection;
+    private List<TeamReferent> teamReferentList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "team")
-    private Collection<PublicationStatistics> publicationStatisticsCollection;
+    private List<PublicationStatistics> publicationStatisticsList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "teamId")
-    private Collection<BelongsTeam> belongsTeamCollection;
+    private List<BelongsTeam> belongsTeamList;
     @JoinColumn(name = "laboratory_id", referencedColumnName = "laboratory_id")
     @ManyToOne(optional = false)
     private Laboratory laboratoryId;
 
-    /**
-     *
-     */
-    public Team() {
-    }
-
-    /**
-     *
-     * @param teamId
-     */
-    public Team(Integer teamId) {
-        this.teamId = teamId;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Integer getTeamId() {
-        return teamId;
-    }
-
-    /**
-     *
-     * @param teamId
-     */
-    public void setTeamId(Integer teamId) {
-        this.teamId = teamId;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getTeamName() {
-        return teamName;
-    }
-
-    /**
-     *
-     * @param teamName
-     */
-    public void setTeamName(String teamName) {
-        this.teamName = teamName;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Date getTeamCreation() {
-        return teamCreation;
-    }
-
-    /**
-     *
-     * @param teamCreation
-     */
-    public void setTeamCreation(Date teamCreation) {
-        this.teamCreation = teamCreation;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Date getTeamEnd() {
-        return teamEnd;
-    }
-
-    /**
-     *
-     * @param teamEnd
-     */
-    public void setTeamEnd(Date teamEnd) {
-        this.teamEnd = teamEnd;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Date getTeamLastReport() {
-        return teamLastReport;
-    }
-
-    /**
-     *
-     * @param teamLastReport
-     */
-    public void setTeamLastReport(Date teamLastReport) {
-        this.teamLastReport = teamLastReport;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Collection<Activity> getActivityCollection() {
-        return activityCollection;
-    }
-
-    /**
-     *
-     * @param activityCollection
-     */
-    public void setActivityCollection(Collection<Activity> activityCollection) {
-        this.activityCollection = activityCollection;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Collection<TeamReferent> getTeamReferentCollection() {
-        return teamReferentCollection;
-    }
-
-    /**
-     *
-     * @param teamReferentCollection
-     */
-    public void setTeamReferentCollection(Collection<TeamReferent> teamReferentCollection) {
-        this.teamReferentCollection = teamReferentCollection;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Collection<PublicationStatistics> getPublicationStatisticsCollection() {
-        return publicationStatisticsCollection;
-    }
-
-    /**
-     *
-     * @param publicationStatisticsCollection
-     */
-    public void setPublicationStatisticsCollection(Collection<PublicationStatistics> publicationStatisticsCollection) {
-        this.publicationStatisticsCollection = publicationStatisticsCollection;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Collection<BelongsTeam> getBelongsTeamCollection() {
-        return belongsTeamCollection;
-    }
-
-    /**
-     *
-     * @param belongsTeamCollection
-     */
-    public void setBelongsTeamCollection(Collection<BelongsTeam> belongsTeamCollection) {
-        this.belongsTeamCollection = belongsTeamCollection;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Laboratory getLaboratoryId() {
-        return laboratoryId;
-    }
-
-    /**
-     *
-     * @param laboratoryId
-     */
-    public void setLaboratoryId(Laboratory laboratoryId) {
-        this.laboratoryId = laboratoryId;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (teamId != null ? teamId.hashCode() : 0);
-        return hash;
-    }
-
-    /**
-     *
-     * @param object
-     * @return
-     */
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Team)) {
-            return false;
-        }
-        Team other = (Team) object;
-        if ((this.teamId == null && other.teamId != null) || (this.teamId != null && !this.teamId.equals(other.teamId))) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public String toString() {
-        return "org.centrale.hceres.items.Team[ teamId=" + teamId + " ]";
-    }
-    
 }

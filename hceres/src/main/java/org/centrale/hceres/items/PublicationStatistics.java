@@ -8,6 +8,10 @@
  * L LETERTRE, S LIMOUX, JY MARTIN
  * -------------------------------------------------------------------------------- */
 package org.centrale.hceres.items;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
@@ -34,6 +38,10 @@ import javax.validation.constraints.NotNull;
     @NamedQuery(name = "PublicationStatistics.findByPublicationStatisticsPdc", query = "SELECT p FROM PublicationStatistics p WHERE p.publicationStatisticsPdc = :publicationStatisticsPdc"),
     @NamedQuery(name = "PublicationStatistics.findByPublicationStatisticsCollabInt", query = "SELECT p FROM PublicationStatistics p WHERE p.publicationStatisticsCollabInt = :publicationStatisticsCollabInt"),
     @NamedQuery(name = "PublicationStatistics.findByPublicationStatisticsCollabLabo", query = "SELECT p FROM PublicationStatistics p WHERE p.publicationStatisticsCollabLabo = :publicationStatisticsCollabLabo")})
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class PublicationStatistics implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -59,159 +67,4 @@ public class PublicationStatistics implements Serializable {
     @ManyToOne(optional = false)
     private Team team;
 
-    /**
-     *
-     */
-    public PublicationStatistics() {
-    }
-
-    /**
-     *
-     * @param publicationStatisticsPK
-     */
-    public PublicationStatistics(PublicationStatisticsPK publicationStatisticsPK) {
-        this.publicationStatisticsPK = publicationStatisticsPK;
-    }
-
-    /**
-     *
-     * @param publicationStatisticsPK
-     * @param publicationStatisticsPdc
-     * @param publicationStatisticsCollabInt
-     * @param publicationStatisticsCollabLabo
-     */
-    public PublicationStatistics(PublicationStatisticsPK publicationStatisticsPK, int publicationStatisticsPdc, int publicationStatisticsCollabInt, int publicationStatisticsCollabLabo) {
-        this.publicationStatisticsPK = publicationStatisticsPK;
-        this.publicationStatisticsPdc = publicationStatisticsPdc;
-        this.publicationStatisticsCollabInt = publicationStatisticsCollabInt;
-        this.publicationStatisticsCollabLabo = publicationStatisticsCollabLabo;
-    }
-
-    /**
-     *
-     * @param teamId
-     * @param publicationStatisticsYear
-     */
-    public PublicationStatistics(int teamId, int publicationStatisticsYear) {
-        this.publicationStatisticsPK = new PublicationStatisticsPK(teamId, publicationStatisticsYear);
-    }
-
-    /**
-     *
-     * @return
-     */
-    public PublicationStatisticsPK getPublicationStatisticsPK() {
-        return publicationStatisticsPK;
-    }
-
-    /**
-     *
-     * @param publicationStatisticsPK
-     */
-    public void setPublicationStatisticsPK(PublicationStatisticsPK publicationStatisticsPK) {
-        this.publicationStatisticsPK = publicationStatisticsPK;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public int getPublicationStatisticsPdc() {
-        return publicationStatisticsPdc;
-    }
-
-    /**
-     *
-     * @param publicationStatisticsPdc
-     */
-    public void setPublicationStatisticsPdc(int publicationStatisticsPdc) {
-        this.publicationStatisticsPdc = publicationStatisticsPdc;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public int getPublicationStatisticsCollabInt() {
-        return publicationStatisticsCollabInt;
-    }
-
-    /**
-     *
-     * @param publicationStatisticsCollabInt
-     */
-    public void setPublicationStatisticsCollabInt(int publicationStatisticsCollabInt) {
-        this.publicationStatisticsCollabInt = publicationStatisticsCollabInt;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public int getPublicationStatisticsCollabLabo() {
-        return publicationStatisticsCollabLabo;
-    }
-
-    /**
-     *
-     * @param publicationStatisticsCollabLabo
-     */
-    public void setPublicationStatisticsCollabLabo(int publicationStatisticsCollabLabo) {
-        this.publicationStatisticsCollabLabo = publicationStatisticsCollabLabo;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Team getTeam() {
-        return team;
-    }
-
-    /**
-     *
-     * @param team
-     */
-    public void setTeam(Team team) {
-        this.team = team;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (publicationStatisticsPK != null ? publicationStatisticsPK.hashCode() : 0);
-        return hash;
-    }
-
-    /**
-     *
-     * @param object
-     * @return
-     */
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof PublicationStatistics)) {
-            return false;
-        }
-        PublicationStatistics other = (PublicationStatistics) object;
-        if ((this.publicationStatisticsPK == null && other.publicationStatisticsPK != null) || (this.publicationStatisticsPK != null && !this.publicationStatisticsPK.equals(other.publicationStatisticsPK))) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public String toString() {
-        return "org.centrale.hceres.items.PublicationStatistics[ publicationStatisticsPK=" + publicationStatisticsPK + " ]";
-    }
-    
 }

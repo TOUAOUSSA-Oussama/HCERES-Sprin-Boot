@@ -8,6 +8,10 @@
  * L LETERTRE, S LIMOUX, JY MARTIN
  * -------------------------------------------------------------------------------- */
 package org.centrale.hceres.items;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
@@ -34,6 +38,10 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "InstitutionalComitee.findByIdActivity", query = "SELECT i FROM InstitutionalComitee i WHERE i.idActivity = :idActivity"),
     @NamedQuery(name = "InstitutionalComitee.findByInstitutionalComiteeName", query = "SELECT i FROM InstitutionalComitee i WHERE i.institutionalComiteeName = :institutionalComiteeName"),
     @NamedQuery(name = "InstitutionalComitee.findByYear", query = "SELECT i FROM InstitutionalComitee i WHERE i.year = :year")})
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class InstitutionalComitee implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -54,136 +62,4 @@ public class InstitutionalComitee implements Serializable {
     @ManyToOne(optional = false)
     private LaboratoryEvaluationRole laboratoryEvaluationRoleId;
 
-    /**
-     *
-     */
-    public InstitutionalComitee() {
-    }
-
-    /**
-     *
-     * @param idActivity
-     */
-    public InstitutionalComitee(Integer idActivity) {
-        this.idActivity = idActivity;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Integer getIdActivity() {
-        return idActivity;
-    }
-
-    /**
-     *
-     * @param idActivity
-     */
-    public void setIdActivity(Integer idActivity) {
-        this.idActivity = idActivity;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getInstitutionalComiteeName() {
-        return institutionalComiteeName;
-    }
-
-    /**
-     *
-     * @param institutionalComiteeName
-     */
-    public void setInstitutionalComiteeName(String institutionalComiteeName) {
-        this.institutionalComiteeName = institutionalComiteeName;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Integer getYear() {
-        return year;
-    }
-
-    /**
-     *
-     * @param year
-     */
-    public void setYear(Integer year) {
-        this.year = year;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Activity getActivity() {
-        return activity;
-    }
-
-    /**
-     *
-     * @param activity
-     */
-    public void setActivity(Activity activity) {
-        this.activity = activity;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public LaboratoryEvaluationRole getLaboratoryEvaluationRoleId() {
-        return laboratoryEvaluationRoleId;
-    }
-
-    /**
-     *
-     * @param laboratoryEvaluationRoleId
-     */
-    public void setLaboratoryEvaluationRoleId(LaboratoryEvaluationRole laboratoryEvaluationRoleId) {
-        this.laboratoryEvaluationRoleId = laboratoryEvaluationRoleId;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idActivity != null ? idActivity.hashCode() : 0);
-        return hash;
-    }
-
-    /**
-     *
-     * @param object
-     * @return
-     */
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof InstitutionalComitee)) {
-            return false;
-        }
-        InstitutionalComitee other = (InstitutionalComitee) object;
-        if ((this.idActivity == null && other.idActivity != null) || (this.idActivity != null && !this.idActivity.equals(other.idActivity))) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public String toString() {
-        return "org.centrale.hceres.items.InstitutionalComitee[ idActivity=" + idActivity + " ]";
-    }
-    
 }

@@ -8,9 +8,13 @@
  * L LETERTRE, S LIMOUX, JY MARTIN
  * -------------------------------------------------------------------------------- */
 package org.centrale.hceres.items;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -34,6 +38,10 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "ProjectEvaluationCategory.findAll", query = "SELECT p FROM ProjectEvaluationCategory p"),
     @NamedQuery(name = "ProjectEvaluationCategory.findByProjectEvaluationCategoryId", query = "SELECT p FROM ProjectEvaluationCategory p WHERE p.projectEvaluationCategoryId = :projectEvaluationCategoryId"),
     @NamedQuery(name = "ProjectEvaluationCategory.findByProjectEvaluationCategoryName", query = "SELECT p FROM ProjectEvaluationCategory p WHERE p.projectEvaluationCategoryName = :projectEvaluationCategoryName")})
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class ProjectEvaluationCategory implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -46,106 +54,6 @@ public class ProjectEvaluationCategory implements Serializable {
     @Column(name = "project_evaluation_category_name")
     private String projectEvaluationCategoryName;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "projectEvaluationCategoryId")
-    private Collection<ProjectEvaluation> projectEvaluationCollection;
+    private List<ProjectEvaluation> projectEvaluationList;
 
-    /**
-     *
-     */
-    public ProjectEvaluationCategory() {
-    }
-
-    /**
-     *
-     * @param projectEvaluationCategoryId
-     */
-    public ProjectEvaluationCategory(Integer projectEvaluationCategoryId) {
-        this.projectEvaluationCategoryId = projectEvaluationCategoryId;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Integer getProjectEvaluationCategoryId() {
-        return projectEvaluationCategoryId;
-    }
-
-    /**
-     *
-     * @param projectEvaluationCategoryId
-     */
-    public void setProjectEvaluationCategoryId(Integer projectEvaluationCategoryId) {
-        this.projectEvaluationCategoryId = projectEvaluationCategoryId;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getProjectEvaluationCategoryName() {
-        return projectEvaluationCategoryName;
-    }
-
-    /**
-     *
-     * @param projectEvaluationCategoryName
-     */
-    public void setProjectEvaluationCategoryName(String projectEvaluationCategoryName) {
-        this.projectEvaluationCategoryName = projectEvaluationCategoryName;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Collection<ProjectEvaluation> getProjectEvaluationCollection() {
-        return projectEvaluationCollection;
-    }
-
-    /**
-     *
-     * @param projectEvaluationCollection
-     */
-    public void setProjectEvaluationCollection(Collection<ProjectEvaluation> projectEvaluationCollection) {
-        this.projectEvaluationCollection = projectEvaluationCollection;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (projectEvaluationCategoryId != null ? projectEvaluationCategoryId.hashCode() : 0);
-        return hash;
-    }
-
-    /**
-     *
-     * @param object
-     * @return
-     */
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof ProjectEvaluationCategory)) {
-            return false;
-        }
-        ProjectEvaluationCategory other = (ProjectEvaluationCategory) object;
-        if ((this.projectEvaluationCategoryId == null && other.projectEvaluationCategoryId != null) || (this.projectEvaluationCategoryId != null && !this.projectEvaluationCategoryId.equals(other.projectEvaluationCategoryId))) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public String toString() {
-        return "org.centrale.hceres.items.ProjectEvaluationCategory[ projectEvaluationCategoryId=" + projectEvaluationCategoryId + " ]";
-    }
-    
 }

@@ -8,9 +8,13 @@
  * L LETERTRE, S LIMOUX, JY MARTIN
  * -------------------------------------------------------------------------------- */
 package org.centrale.hceres.items;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -36,6 +40,10 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "MailTemplate.findByMailTemplateId", query = "SELECT m FROM MailTemplate m WHERE m.mailTemplateId = :mailTemplateId"),
     @NamedQuery(name = "MailTemplate.findByMailTemplateTitle", query = "SELECT m FROM MailTemplate m WHERE m.mailTemplateTitle = :mailTemplateTitle"),
     @NamedQuery(name = "MailTemplate.findByMailTemplateContent", query = "SELECT m FROM MailTemplate m WHERE m.mailTemplateContent = :mailTemplateContent")})
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class MailTemplate implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -55,134 +63,6 @@ public class MailTemplate implements Serializable {
     @Column(name = "mail_template_content")
     private String mailTemplateContent;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "mailTemplateId")
-    private Collection<MailActivity> mailActivityCollection;
+    private List<MailActivity> mailActivityList;
 
-    /**
-     *
-     */
-    public MailTemplate() {
-    }
-
-    /**
-     *
-     * @param mailTemplateId
-     */
-    public MailTemplate(Integer mailTemplateId) {
-        this.mailTemplateId = mailTemplateId;
-    }
-
-    /**
-     *
-     * @param mailTemplateId
-     * @param mailTemplateTitle
-     * @param mailTemplateContent
-     */
-    public MailTemplate(Integer mailTemplateId, String mailTemplateTitle, String mailTemplateContent) {
-        this.mailTemplateId = mailTemplateId;
-        this.mailTemplateTitle = mailTemplateTitle;
-        this.mailTemplateContent = mailTemplateContent;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Integer getMailTemplateId() {
-        return mailTemplateId;
-    }
-
-    /**
-     *
-     * @param mailTemplateId
-     */
-    public void setMailTemplateId(Integer mailTemplateId) {
-        this.mailTemplateId = mailTemplateId;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getMailTemplateTitle() {
-        return mailTemplateTitle;
-    }
-
-    /**
-     *
-     * @param mailTemplateTitle
-     */
-    public void setMailTemplateTitle(String mailTemplateTitle) {
-        this.mailTemplateTitle = mailTemplateTitle;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getMailTemplateContent() {
-        return mailTemplateContent;
-    }
-
-    /**
-     *
-     * @param mailTemplateContent
-     */
-    public void setMailTemplateContent(String mailTemplateContent) {
-        this.mailTemplateContent = mailTemplateContent;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Collection<MailActivity> getMailActivityCollection() {
-        return mailActivityCollection;
-    }
-
-    /**
-     *
-     * @param mailActivityCollection
-     */
-    public void setMailActivityCollection(Collection<MailActivity> mailActivityCollection) {
-        this.mailActivityCollection = mailActivityCollection;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (mailTemplateId != null ? mailTemplateId.hashCode() : 0);
-        return hash;
-    }
-
-    /**
-     *
-     * @param object
-     * @return
-     */
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof MailTemplate)) {
-            return false;
-        }
-        MailTemplate other = (MailTemplate) object;
-        if ((this.mailTemplateId == null && other.mailTemplateId != null) || (this.mailTemplateId != null && !this.mailTemplateId.equals(other.mailTemplateId))) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public String toString() {
-        return "org.centrale.hceres.items.MailTemplate[ mailTemplateId=" + mailTemplateId + " ]";
-    }
-    
 }

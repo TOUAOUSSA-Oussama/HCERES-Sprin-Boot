@@ -8,9 +8,13 @@
  * L LETERTRE, S LIMOUX, JY MARTIN
  * -------------------------------------------------------------------------------- */
 package org.centrale.hceres.items;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -35,6 +39,10 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "EducationLevel.findAll", query = "SELECT e FROM EducationLevel e"),
     @NamedQuery(name = "EducationLevel.findByEducationLevelId", query = "SELECT e FROM EducationLevel e WHERE e.educationLevelId = :educationLevelId"),
     @NamedQuery(name = "EducationLevel.findByEducationLevelName", query = "SELECT e FROM EducationLevel e WHERE e.educationLevelName = :educationLevelName")})
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class EducationLevel implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -49,116 +57,6 @@ public class EducationLevel implements Serializable {
     @Column(name = "education_level_name")
     private String educationLevelName;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "educationLevelId")
-    private Collection<Education> educationCollection;
+    private List<Education> educationList;
 
-    /**
-     *
-     */
-    public EducationLevel() {
-    }
-
-    /**
-     *
-     * @param educationLevelId
-     */
-    public EducationLevel(Integer educationLevelId) {
-        this.educationLevelId = educationLevelId;
-    }
-
-    /**
-     *
-     * @param educationLevelId
-     * @param educationLevelName
-     */
-    public EducationLevel(Integer educationLevelId, String educationLevelName) {
-        this.educationLevelId = educationLevelId;
-        this.educationLevelName = educationLevelName;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Integer getEducationLevelId() {
-        return educationLevelId;
-    }
-
-    /**
-     *
-     * @param educationLevelId
-     */
-    public void setEducationLevelId(Integer educationLevelId) {
-        this.educationLevelId = educationLevelId;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getEducationLevelName() {
-        return educationLevelName;
-    }
-
-    /**
-     *
-     * @param educationLevelName
-     */
-    public void setEducationLevelName(String educationLevelName) {
-        this.educationLevelName = educationLevelName;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Collection<Education> getEducationCollection() {
-        return educationCollection;
-    }
-
-    /**
-     *
-     * @param educationCollection
-     */
-    public void setEducationCollection(Collection<Education> educationCollection) {
-        this.educationCollection = educationCollection;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (educationLevelId != null ? educationLevelId.hashCode() : 0);
-        return hash;
-    }
-
-    /**
-     *
-     * @param object
-     * @return
-     */
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof EducationLevel)) {
-            return false;
-        }
-        EducationLevel other = (EducationLevel) object;
-        if ((this.educationLevelId == null && other.educationLevelId != null) || (this.educationLevelId != null && !this.educationLevelId.equals(other.educationLevelId))) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public String toString() {
-        return "org.centrale.hceres.items.EducationLevel[ educationLevelId=" + educationLevelId + " ]";
-    }
-    
 }

@@ -3,28 +3,28 @@
 import './Home.css';
 import React from 'react';
 import welcomImage from '../../assets/welcomImg.png';
-import Navbar from '../Navbar/Navbar';
+import authToken from "../../utils/authToken";
+import {useSelector} from "react-redux";
 //import { HomeContainer,leftside,rightside } from './HomeElements';
 //style={{ backgroundColor: "#" + `${randomColor}` }}
 //let randomColor = Math.floor(Math.random() * 16777215).toString(16);
-function Home(){
+function Home() {
+    const auth = useSelector((state) => state.auth);
     return (
         <div>
-            <div class="container1" >
-                <div class="left-side">
-                    <div class="title">
-                        Bienvenue !
-                    </div>
-                    <div class="pg">
-                    Serveur d'administration des données pour les enquêtes HCERES
+            <div className="container1">
+                <div className="left-side">
+                    <div className="pg">
+                        <h1>Bienvenue {auth.username} !</h1>
+                        Serveur d'administration des données pour les enquêtes HCERES
                     </div>
                 </div>
-                <div class="right-side">
-                    <img class="labo" src={welcomImage} alt= "Hello" />
+                <div className="right-side">
+                    <img className="labo" src={welcomImage} alt="Hello"/>
                 </div>
             </div>
         </div>
     );
-};
+}
 
 export default Home;

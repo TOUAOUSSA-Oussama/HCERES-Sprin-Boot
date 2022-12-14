@@ -8,6 +8,10 @@
  * L LETERTRE, S LIMOUX, JY MARTIN
  * -------------------------------------------------------------------------------- */
 package org.centrale.hceres.items;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -40,6 +44,10 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "SeiNetworkUnitCreation.findByTitleProject", query = "SELECT s FROM SeiNetworkUnitCreation s WHERE s.titleProject = :titleProject"),
     @NamedQuery(name = "SeiNetworkUnitCreation.findByNetworkEndDate", query = "SELECT s FROM SeiNetworkUnitCreation s WHERE s.networkEndDate = :networkEndDate"),
     @NamedQuery(name = "SeiNetworkUnitCreation.findByAssociatedPubliRef", query = "SELECT s FROM SeiNetworkUnitCreation s WHERE s.associatedPubliRef = :associatedPubliRef")})
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class SeiNetworkUnitCreation implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -70,184 +78,4 @@ public class SeiNetworkUnitCreation implements Serializable {
     @OneToOne(optional = false)
     private Activity activity;
 
-    /**
-     *
-     */
-    public SeiNetworkUnitCreation() {
-    }
-
-    /**
-     *
-     * @param idActivity
-     */
-    public SeiNetworkUnitCreation(Integer idActivity) {
-        this.idActivity = idActivity;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Integer getIdActivity() {
-        return idActivity;
-    }
-
-    /**
-     *
-     * @param idActivity
-     */
-    public void setIdActivity(Integer idActivity) {
-        this.idActivity = idActivity;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Date getNetworkStartDate() {
-        return networkStartDate;
-    }
-
-    /**
-     *
-     * @param networkStartDate
-     */
-    public void setNetworkStartDate(Date networkStartDate) {
-        this.networkStartDate = networkStartDate;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getNameNetwork() {
-        return nameNetwork;
-    }
-
-    /**
-     *
-     * @param nameNetwork
-     */
-    public void setNameNetwork(String nameNetwork) {
-        this.nameNetwork = nameNetwork;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getNamePartner() {
-        return namePartner;
-    }
-
-    /**
-     *
-     * @param namePartner
-     */
-    public void setNamePartner(String namePartner) {
-        this.namePartner = namePartner;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getTitleProject() {
-        return titleProject;
-    }
-
-    /**
-     *
-     * @param titleProject
-     */
-    public void setTitleProject(String titleProject) {
-        this.titleProject = titleProject;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Date getNetworkEndDate() {
-        return networkEndDate;
-    }
-
-    /**
-     *
-     * @param networkEndDate
-     */
-    public void setNetworkEndDate(Date networkEndDate) {
-        this.networkEndDate = networkEndDate;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getAssociatedPubliRef() {
-        return associatedPubliRef;
-    }
-
-    /**
-     *
-     * @param associatedPubliRef
-     */
-    public void setAssociatedPubliRef(String associatedPubliRef) {
-        this.associatedPubliRef = associatedPubliRef;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Activity getActivity() {
-        return activity;
-    }
-
-    /**
-     *
-     * @param activity
-     */
-    public void setActivity(Activity activity) {
-        this.activity = activity;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idActivity != null ? idActivity.hashCode() : 0);
-        return hash;
-    }
-
-    /**
-     *
-     * @param object
-     * @return
-     */
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof SeiNetworkUnitCreation)) {
-            return false;
-        }
-        SeiNetworkUnitCreation other = (SeiNetworkUnitCreation) object;
-        if ((this.idActivity == null && other.idActivity != null) || (this.idActivity != null && !this.idActivity.equals(other.idActivity))) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public String toString() {
-        return "org.centrale.hceres.items.SeiNetworkUnitCreation[ idActivity=" + idActivity + " ]";
-    }
-    
 }

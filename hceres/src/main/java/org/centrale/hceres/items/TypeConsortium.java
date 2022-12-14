@@ -8,9 +8,13 @@
  * L LETERTRE, S LIMOUX, JY MARTIN
  * -------------------------------------------------------------------------------- */
 package org.centrale.hceres.items;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -34,6 +38,10 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "TypeConsortium.findAll", query = "SELECT t FROM TypeConsortium t"),
     @NamedQuery(name = "TypeConsortium.findByTypeConsortiumId", query = "SELECT t FROM TypeConsortium t WHERE t.typeConsortiumId = :typeConsortiumId"),
     @NamedQuery(name = "TypeConsortium.findByTypeConsortiumName", query = "SELECT t FROM TypeConsortium t WHERE t.typeConsortiumName = :typeConsortiumName")})
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class TypeConsortium implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -46,106 +54,6 @@ public class TypeConsortium implements Serializable {
     @Column(name = "type_consortium_name")
     private String typeConsortiumName;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "typeConsortiumId")
-    private Collection<SeiLeadConsortiumIndustry> seiLeadConsortiumIndustryCollection;
+    private List<SeiLeadConsortiumIndustry> seiLeadConsortiumIndustryList;
 
-    /**
-     *
-     */
-    public TypeConsortium() {
-    }
-
-    /**
-     *
-     * @param typeConsortiumId
-     */
-    public TypeConsortium(Integer typeConsortiumId) {
-        this.typeConsortiumId = typeConsortiumId;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Integer getTypeConsortiumId() {
-        return typeConsortiumId;
-    }
-
-    /**
-     *
-     * @param typeConsortiumId
-     */
-    public void setTypeConsortiumId(Integer typeConsortiumId) {
-        this.typeConsortiumId = typeConsortiumId;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getTypeConsortiumName() {
-        return typeConsortiumName;
-    }
-
-    /**
-     *
-     * @param typeConsortiumName
-     */
-    public void setTypeConsortiumName(String typeConsortiumName) {
-        this.typeConsortiumName = typeConsortiumName;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Collection<SeiLeadConsortiumIndustry> getSeiLeadConsortiumIndustryCollection() {
-        return seiLeadConsortiumIndustryCollection;
-    }
-
-    /**
-     *
-     * @param seiLeadConsortiumIndustryCollection
-     */
-    public void setSeiLeadConsortiumIndustryCollection(Collection<SeiLeadConsortiumIndustry> seiLeadConsortiumIndustryCollection) {
-        this.seiLeadConsortiumIndustryCollection = seiLeadConsortiumIndustryCollection;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (typeConsortiumId != null ? typeConsortiumId.hashCode() : 0);
-        return hash;
-    }
-
-    /**
-     *
-     * @param object
-     * @return
-     */
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof TypeConsortium)) {
-            return false;
-        }
-        TypeConsortium other = (TypeConsortium) object;
-        if ((this.typeConsortiumId == null && other.typeConsortiumId != null) || (this.typeConsortiumId != null && !this.typeConsortiumId.equals(other.typeConsortiumId))) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public String toString() {
-        return "org.centrale.hceres.items.TypeConsortium[ typeConsortiumId=" + typeConsortiumId + " ]";
-    }
-    
 }
