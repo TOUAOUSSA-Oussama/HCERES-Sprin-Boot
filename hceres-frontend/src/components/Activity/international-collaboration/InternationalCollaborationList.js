@@ -90,7 +90,7 @@ function InternationalCollaborationList(props) {
             return <div className={"row"}>
                 <br/>
                 <div className={"col-8"}>
-                    <h3>Aucun InternationalCollaboration est enregistre</h3>
+                    <h3>Aucune  collaboration internationale est enregistrée</h3>
                 </div>
                 <div className={"col-4"}>
                     {showInternationalCollaborationAdd &&

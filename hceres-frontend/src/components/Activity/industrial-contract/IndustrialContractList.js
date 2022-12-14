@@ -90,7 +90,7 @@ function IndustrialContractList(props) {
             return <div className={"row"}>
                 <br/>
                 <div className={"col-8"}>
-                    <h3>Aucun IndustrialContract est enregistre</h3>
+                    <h3>Aucun contrat industriel n'est enregistré</h3>
                 </div>
                 <div className={"col-4"}>
                     {showIndustrialContractAdd &&

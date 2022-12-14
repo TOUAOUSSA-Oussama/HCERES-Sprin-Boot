@@ -90,7 +90,7 @@ function PostDocList(props) {
             return <div className={"row"}>
                 <br/>
                 <div className={"col-8"}>
-                    <h3>Aucun PostDoc est enregistre</h3>
+                    <h3>Aucun Post doctoral n'est enregistré</h3>
                 </div>
                 <div className={"col-4"}>
                     {showPostDocAdd &&

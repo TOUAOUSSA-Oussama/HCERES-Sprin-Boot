@@ -91,7 +91,7 @@ function PlatformList(props) {
             return <div className={"row"}>
                 <br/>
                 <div className={"col-8"}>
-                    <h3>Aucun Platform est enregistre</h3>
+                    <h3>Aucune platforme n'est enregistrée</h3>
                 </div>
                 <div className={"col-4"}>
                     {showPlatformAdd &&

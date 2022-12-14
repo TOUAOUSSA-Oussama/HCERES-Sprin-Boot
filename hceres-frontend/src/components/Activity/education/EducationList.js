@@ -90,7 +90,7 @@ function EducationList(props) {
             return <div className={"row"}>
                 <br/>
                 <div className={"col-8"}>
-                    <h3>Aucun Education est enregistre</h3>
+                    <h3>Aucune Education n'est enregistrée</h3>
                 </div>
                 <div className={"col-4"}>
                     {showEducationAdd &&

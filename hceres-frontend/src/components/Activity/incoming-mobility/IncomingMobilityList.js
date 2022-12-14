@@ -90,7 +90,7 @@ function IncomingMobilityList(props) {
             return <div className={"row"}>
                 <br/>
                 <div className={"col-8"}>
-                    <h3>Aucun IncomingMobility est enregistre</h3>
+                    <h3>Aucune mobilié entrantes n'est enregistrée</h3>
                 </div>
                 <div className={"col-4"}>
                     {showIncomingMobilityAdd &&

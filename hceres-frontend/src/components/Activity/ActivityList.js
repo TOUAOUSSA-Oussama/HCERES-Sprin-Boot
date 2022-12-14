@@ -99,8 +99,8 @@ export default function ActivityList(props) {
                     <div className={"list_container"} role={"button"}>
                         <ListGroup horizontal={true}>
                             <ButtonGroup>
-                                <Button onClick={showAllList} variant={"outline-primary"} id={"showAllActivityListBtn"}>Voyer tous</Button>
-                                <Button onClick={hideAllList} variant={"outline-secondary"}>Cacher tous</Button>
+                                <Button onClick={showAllList} variant={"outline-primary"} id={"showAllActivityListBtn"}>Voir tout</Button>
+                                <Button onClick={hideAllList} variant={"outline-secondary"}>Cacher tout</Button>
                             </ButtonGroup>
                         </ListGroup>
                         {targetResearcher && <ResearcherElement targetResearcher={targetResearcher} horizontal/>}

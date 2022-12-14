@@ -90,7 +90,7 @@ function OralCommunicationList(props) {
             return <div className={"row"}>
                 <br/>
                 <div className={"col-8"}>
-                    <h3>Aucun Communication Oral est enregistre</h3>
+                    <h3>Aucune Communication Orale est enregistrée</h3>
                 </div>
                 <div className={"col-4"}>
                     {showOralCommunicationAdd &&
